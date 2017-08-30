@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.co.web.mapper.BoardMapper">
+
+<!-- 게시판 -->
+	<select id="selectBoardCount" parameterType="PageVO" resultType="int">
+    	select count(*)
+          from tbl_board 
+	         where (((#{email} = "null") AND (bTitle like concat('%', #{searchName}, '%') or bContent like concat('%', #{searchName}, '%')))
+ 								     or (email like concat('%', #{email}, '%')))
+    </select> 
+
+	<select id="selectBoardList" resultType="boardVO" parameterType="SearchVO">
+		select *
+		  from tbl_board
+	         where (((#{email} = "null") AND (bTitle like concat('%', #{searchName}, '%') or bContent like concat('%', #{searchName}, '%')))
+ 								     or (email like concat('%', #{email}, '%')))
+			   order by isNotice desc, bNo desc
+			   limit  ${begin-1}, 10
+	</select>
+	
+	<update id="updateBoardHit" parameterType="boardVO">
+        UPDATE tbl_board
+           SET bHit = bHit + 1 
+         WHERE bNO=#{bNo}
+	</update>
+
+	<select id="selectBoardOne" resultType="boardVO">
+		select *
+		from tbl_board
+		where bNo=#{bNo}
+	</select>
+
+	<insert id="insertBoard">
+		insert into tbl_board(
+		 bTitle, bContent, email, isNotice, isSecret
+		) values (
+		#{bTitle}, #{bContent}, #{email}, #{isNotice}, #{isSecret}
+		)
+	</insert>
+
+	<update id="updateBoard" parameterType="boardVO">
+		update tbl_board
+		set bTitle = #{bTitle},
+		    bContent = #{bContent},
+		    isNotice = #{isNotice},
+		    isSecret = #{isSecret}
+		where bNo = #{bNo}
+	</update>
+
+	<delete id="deleteBoard" parameterType="boardVO">
+		delete
+		from tbl_board
+		where bNo=#{bNo}
+	</delete>
+
+<!-- 댓글 -->
+
+   <select id="replyList" resultType="replyVO">    	 
+    	 select *
+		   from tbl_reply
+		  where bNo = #{bNo}
+    </select>
+    
+    <select id="selectReplyCount" parameterType="replyVO" resultType="int">
+    	select count(*)
+          from tbl_reply
+         where bNo = #{bNo}
+    </select> 
+    
+    <insert id="insertReply" parameterType="replyVO">
+    	insert into tbl_reply(
+    		bNo, rContent
+    	) values (
+    		#{bNo}, #{rContent}
+    	)
+    </insert>
+    
+    <update id="updateReply" parameterType="replyVO">
+    	update tbl_reply
+    	   set rContent = #{rContent}
+    	 where rNo = #{rNo}
+    </update>
+    
+   	<update id="updateReplyCount" parameterType="boardVO">
+        UPDATE tbl_board
+           SET bReply = 1
+         WHERE bNo=#{bNo}
+	</update>
+	
+   	<update id="deleteReplyCount" parameterType="boardVO">
+        UPDATE tbl_board
+           SET bReply = 0
+         WHERE bNo=#{bNo}
+	</update>
+    
+    <delete id="deleteReply" parameterType="replyVO">
+    	delete
+    	  from tbl_reply
+    	 where rNo = #{rNo}
+    </delete>
+
+
+
+
+
+</mapper>

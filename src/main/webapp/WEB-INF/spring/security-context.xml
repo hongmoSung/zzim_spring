@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
+
+	<http auto-config="true" >
+		<intercept-url pattern="/" access="permitAll"/>
+		<intercept-url pattern="/user/join" access="permitAll"/>
+		<intercept-url pattern="/user/loginForm" access="permitAll"/>
+		<intercept-url pattern="/user/joinForm" access="permitAll"/>
+		<intercept-url pattern="/user/emailCheck" access="permitAll"/>
+		<intercept-url pattern="/resources/**" access="permitAll"/>
+		<intercept-url pattern="/**" access="hasRole('ROLE_USER')"/>
+ 		<form-login
+			login-page="/user/loginForm"
+			authentication-failure-url="/user/loginForm?error=1"
+			authentication-success-handler-ref="LoginSuccessHandler"
+			default-target-url="/"
+		/>
+		
+		<logout invalidate-session="true" logout-url="/logout" logout-success-url="/user/loginForm?logout"/>
+		<csrf/>
+	</http>
+	
+	<beans:bean id="LoginSuccessHandler" class="kr.co.web.security.LoginSuccessHandler">
+		<beans:property name="defaultUrl" value="/"/>
+	</beans:bean>
+	
+<!-- 	<beans:bean id="loginService" class="kr.co.web.service.LoginService"> -->
+<!--    	</beans:bean> -->
+	
+	<jdbc-user-service data-source-ref="dataSource" id="loginService"
+	users-by-username-query="select email, password , enabled from tbl_user where email=?"
+	authorities-by-username-query="select email as username ,authority as authority from tbl_user where email=?"/>
+	
+	<authentication-manager>
+		<authentication-provider user-service-ref="loginService">
+			<password-encoder base64="true" hash="bcrypt" />
+		</authentication-provider> 
+	</authentication-manager>
+	
+	
+</beans:beans>
