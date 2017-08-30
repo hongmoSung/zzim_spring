@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.co.web.mapper.TrackingBoardMapper">
+
+<resultMap type="TrackingBoardVO" id="Trackingmap">
+		<result column="no" property="no" />
+		<result column="writer" property="writer" />
+		<result column="title" property="title" />
+		<result column="content" property="content" />
+		<result column="reg_date" property="regDate" />
+	</resultMap>
+
+
+	<select id="selectBoard" resultMap="Trackingmap">
+		select p.*, t.notifyPrice, t.email
+		from tbl_product p 
+		inner join tbl_tracking t
+		on p.pNo = t.pNo 
+        where t.email = #{email}
+		order by pNo desc 
+		limit 0, 10;
+	</select>
+
+	<select id="infiniteScrollDown" resultMap="Trackingmap">
+	<![CDATA[
+		select p.*, t.notifyPrice, t.email
+		from tbl_product p 
+		inner join tbl_tracking t
+		on p.pNo = t.pNo 
+        where t.email = #{email}
+		order by pNo desc 
+		limit #{begin}, 10;
+	]]>
+	</select>
+
+	<select id="priceList" resultType="int">
+		select currPrice
+		from
+		tbl_price_history
+		where pNo = #{pNo}
+	</select>
+
+	<update id="priceUpdate">
+		update tbl_tracking
+		set notifyPrice = #{notifyPrice}
+		where pNo = #{pNo}
+	</update>
+
+	<delete id="delete" >
+		delete from tbl_product
+		where pNo in
+		<foreach item="pno" collection="list" open="("
+			separator="," close=")">
+			#{pno}
+		</foreach>
+	</delete>
+
+
+</mapper>

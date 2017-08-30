@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="kr.co.web.mapper.UserMapper">
+	
+	<insert id="insertUser">
+		insert into tbl_user
+		(email, password)
+		values
+		(#{email}, #{password})
+	</insert>
+	
+	<select id="selectEmail" resultType="String">
+		select email
+		from tbl_user
+		where email = #{email}
+	</select>
+	
+	<select id="selectUser" resultType="UserVO">
+		select *
+		from tbl_user
+		where email = #{email}
+	</select>
+	
+
+	<select id="selectMasterList" resultType="UserMasterVO">
+		select *
+		from tbl_loginData
+		where email=#{email}
+		order by website
+	</select>
+	
+	<delete id="deleteMaster" parameterType="UserMasterVO">
+		delete
+		from tbl_loginData
+		where email=#{email} and website=#{website} and websiteId=#{websiteId}
+	</delete>
+	
+	<insert id="insertMaster" parameterType="UserMasterVO">
+    	insert into tbl_loginData(
+    		email, website, websiteId, websitePassword
+    	) values (
+    		#{email}, #{website}, #{websiteId}, #{websitePassword}
+    	)
+    </insert>
+    
+   	<update id="updateMaster" parameterType="UserMasterVO">
+		update tbl_loginData
+		set websiteId = #{reWebsiteId},
+		    website = #{reWebsite},
+		    websitePassword = #{reWebsitePassword}
+		where email = #{email} and websiteId = #{websiteId} and website = #{website}
+			
+	</update>
+
+</mapper>
