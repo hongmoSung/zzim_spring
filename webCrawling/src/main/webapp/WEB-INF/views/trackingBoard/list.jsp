@@ -40,9 +40,7 @@ body {
 	        <th>제목</th> 
 	        <th>희망가</th> 
 	        <th>현재가</th> 
-	        <th>차이</th> 
 	        <th>체크</th> 
-	        <th >더보기</th> 
 	    </thead> 
 	    <tbody id="listStart"></tbody> 
 	</table>
@@ -56,9 +54,7 @@ body {
             <td>{{pName}}</td> 
             <td>{{notifyPrice}}</td>  
             <td>{{pLowest}}</td> 
-            <td>{{tt notifyPrice pLowest}}</td> 
-            <td>{{cc notifyPrice pLowest}}</td> 
-            <td><button class="chartBtn" id="popbutton" data-pNo="{{pNo}}" data-nitify="{{notifyPrice}}" >더보기</button></td> 
+            <td style="color:#0000FF">{{check notifyPrice pLowest}}</td> 
         </tr>
         {{/list}}
 </script>
@@ -71,12 +67,9 @@ function handle(result){
 	var source = $("#entry-template").html(); 
 	//핸들바 템플릿 컴파일
 	var template = Handlebars.compile(source); 
-	//헬퍼 notifyPrice - pLowest 차이 표시 
-	Handlebars.registerHelper('tt', function (notifyPrice, pLowest) {
-	  return notifyPrice-pLowest;
-	});
-	Handlebars.registerHelper('cc', function (notifyPrice, pLowest) {
-	  return (notifyPrice > pLowest)? '체크':'미체크';
+	//헬퍼  pLowest 차이 표시 
+	Handlebars.registerHelper('check', function (notifyPrice, pLowest) {
+	  return (notifyPrice > pLowest)? '√':'ⓧ';
 	});
 	//핸들바 템플릿에 데이터를 바인딩해서 HTML 생성
 	var html = template(result);
@@ -112,7 +105,6 @@ function handle(result){
 				handle(result)
 				}
 				else{
-					alert("게시물이 없습니다.");
 					$("body").scrollTop($(window).scrollTop()-20);
 				}
 			})
@@ -181,7 +173,8 @@ $("#delete").click(function(){
 		url:getContextPath()+"/trackingBoard/delete",
 		data:{arrr:arrr}
 	}).done(function(result){
-		if(result > 1){
+		console.log("aa "+result)
+		if(result >= 1){
 			alert("삭제했습니다.");
 			location.href = getContextPath()+"/trackingBoard/list"
 		}
