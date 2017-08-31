@@ -116,15 +116,15 @@ public class BoardController {
 	@ResponseBody
 	@Transactional
 	public void commentRegist(ReplyVO reply, UserVO user) throws UnsupportedEncodingException {
-		String email = uService.checkEmail(user.getEmail());
 		bService.insertReply(reply);
+		String email = uService.checkEmail(user.getEmail());
+		String to = email;
 
 		// 이메일
 		String host = "smtp.naver.com";
 		final String adminEmail = "comboy5419@naver.com";
-		final String password = "fbehdrl0)";
+		final String password = "";
 
-		String to = email;
 
 		// Get the session object
 		Properties props = new Properties();

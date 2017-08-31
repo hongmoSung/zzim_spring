@@ -11,7 +11,7 @@
 <section>
 	<!-- 리스트 -->
 	<div>
-	<span id="loginEmail">${user.email}</span>
+<%-- 	<span id="loginEmail" style="display:hidden;">${user.email}</span> --%>
 	<hr>
 	<div>
 		<c:if test="${not empty masterList}">
@@ -41,7 +41,7 @@
 							  <option value="gmarket" id="opGmarket${status.index}">gmarket</option>
 							  <option value="auction" id="opAuction${status.index}">auction</option>
 							  <option value="interpark" id="opInterpark${status.index}">interpark</option>
-							  <option value="etc" id="opEtc">직접 입력</option>
+							  <option value="etc" id="opEtc${status.index}">직접 입력</option>
 				  		    </select>
 				  		 	<input type="text" value="${list.website}" name="website${status.index}" class="c"></input></td>
 						
@@ -86,233 +86,244 @@
 </section>
 
 <script>
-
-var token = $("meta[name='_csrf']").attr("content");
-var header = $("meta[name='_csrf_header']").attr("content");
- 
-$(function() {
-    $(document).ajaxSend(function(e, xhr, options) {
-        xhr.setRequestHeader(header, token);
-    });
-});
-
-// hide
-window.onload = function(){
-	var a = $(".a");
-	var b = $(".b");
-	b.hide();
-	$("#insertWebsite").hide();
-}
-
-// 전체 체크/해제
-function checkAll() {
-	var param = $("#th_checkAll").is(":checked");
-	var arrcheck = document.getElementsByName("checkRow");
-	for (i = 0; i < arrcheck.length; i++) {
-		arrcheck.item(i).checked = param;
-	}
-}
-
-// 개별 체크시 전체 체크 해제
-function check(){
-	var chk = $("#th_checkAll").is(":checked");
-	var arrcheck = document.getElementsByName("checkRow");
-	var j = 0;
-	if(chk){
-		$("#th_checkAll").attr("checked", false);
-	}
-	for (i = 0; i < arrcheck.length; i++) {
-		if(arrcheck.item(i).checked) {
-			j++;
-			if(j == arrcheck.length){
-				$("#th_checkAll").attr("checked", true);
-			}
-		}
-	}
-}
-
-// 삭제
-$("#deleteMaster").on("click", function() {
-	var chk = document.getElementsByName("checkRow");
-	var len = chk.length;    
-	var checkRow = '';      
-	var valueArray = new Array();            
-
-	for(var i = 0; i < len; i++){
-		if(chk[i].checked == true){ 
-			checkRow = chk[i].value;
-			valueArray.push(checkRow); 
-			}
-		}
-	$.ajaxSettings.traditional = true; // 배열로 controller에 주기 위해
-	$.ajax({
-		url: "masterDelete",
-		type: "POST",
-		data: {
-			'valueArray' : valueArray,
-		}
-		}).done(function (result){
-			alert("삭제 완료");
-			window.location.reload();
+	// 토큰
+	var token = $("meta[name='_csrf']").attr("content");
+	var header = $("meta[name='_csrf_header']").attr("content");
+	$(function() {
+	    $(document).ajaxSend(function(e, xhr, options) {
+	        xhr.setRequestHeader(header, token);
+	    });
 	});
-})
-
-// 등록 select박스 이벤트
-function innerSelect(value){
-	if(value == 'etc'){
-		$("#insertWebsite").show(); 
-	}
-	if(value != 'etc'){
+	
+	// hide
+	window.onload = function(){
+		var a = $(".a");
+		var b = $(".b");
+		b.hide();
 		$("#insertWebsite").hide();
 	}
-}
-// 등록
-$("button[name='masterRegist']").on("click", function() {
-	var email = $("#loginEmail").text();
-	var websiteId = $("#masterId").val();
-	var websitePw = $("#masterPassword").val();
-	var websiteType =  $("#websiteType option:selected").text();
-
-	if(websiteType == '선택'){
-		alert('사이트 입력할 것');
-	}else if(websiteId == ''){
-		alert('아이디 입력할 것');
-		$("#masterId").focus();
-	}else if(websitePw == ''){
-		alert('비밀번호 입력할 것');
-		$("#masterPassword").focus();
-	}else{
-		console.log(websiteType);
-		if(websiteType =='직접 입력'){
-			$.ajax({
-				url: "masterInsert",
-				type: "POST", 
-				data: {
-					email : email,
-					website : $("#insertWebsite").val(),
-					websiteId : websiteId,
-					websitePw : websitePw
-				}
-				}).done(function (result){
-					alert(result);
-					window.location.reload();
-				})
-		} else {
-			$.ajax({
-				url: "masterInsert",
-				type: "POST", 
-				data: {
-					email : email,
-					website : websiteType,
-					websiteId : websiteId,
-					websitePw : websitePw
-				}
-				}).done(function (result){
-					alert(result);
-					window.location.reload();
-				})
+	
+	// 전체 체크/해제
+	function checkAll() {
+		var param = $("#th_checkAll").is(":checked");
+		var arrcheck = document.getElementsByName("checkRow");
+		for (i = 0; i < arrcheck.length; i++) {
+			arrcheck.item(i).checked = param;
 		}
 	}
-})
-
-// 편집
-$(".updateBtn").on("click", function(){
-	var dataNo = $(this).attr('data-no');
-	var website = $("span[name='website" + dataNo + "']").text();
-  // 편집 폼 중복 방지
-  	var a = $(".a");
-  	var b = $(".b");
-	var c = $(".c");
-	a.show();
-	b.hide();
-  	c.hide();
-  	
-  	switch(website){
-  		case '11st' : $("#op11st"+dataNo).attr("selected", "selected"); break;
-  		case 'gmarket' : $("#opGmarket"+dataNo).attr("selected", "selected"); break;
-  		case 'auction' : $("#opAuction"+dataNo).attr("selected", "selected"); break;
-  		case 'interpark' : $("#opInterpark"+dataNo).attr("selected", "selected"); break;
-  		case 'etc' : $("#opEtc"+dataNo).attr("selected", "selected"); c.show(); break;
-  	}
-	  	
-	// 컨텐트 숨기기
-	$("#first"+dataNo).hide();
-	$("#second"+dataNo).hide();
-	$("#third"+dataNo).hide();
-	// 편집 버튼 숨기기
-	$("#updateMaster"+dataNo).hide();
-	// 입력 창 보이기
-	$("#website"+dataNo).show();
-	$("#websiteId"+dataNo).show();
-	$("#websitePw"+dataNo).show();
-	// 수정 버튼 보이기
-	$("#updateGo"+dataNo).show();
-})
-
-function innerSelectUp(value){
-	console.log(value);
-	var c = $(".c");
-	if(value == 'etc'){
-		c.show();
-	}
-	if(value != 'etc'){
-		c.hide();
-	}
-}
-
-// 수정
-$("Button[name='updateSubmit']").on("click", function(){
-	var dataNo = $(this).attr('data-no');
-	var email = $("#loginEmail").text();
-	var website = $("span[name='website" + dataNo + "']").text();
-	var websiteId = $("span[name='websiteId" + dataNo + "']").text();
-	var websitePw = $("span[name='websitePw" + dataNo + "']").text();
-	var reWebsite = $("#websiteTypeUp"+dataNo+" option:selected").text();
-	var reWebsiteId = $("input[name='websiteId" + dataNo + "']").val();
-	var reWebsitePw = $("input[name='websitePw" + dataNo + "']").val();
 	
-	 $.ajax({
-			url: "masterUpdate",
-			type: "POST", 
+	// 개별 체크시 전체 체크 해제
+	function check(){
+		var chk = $("#th_checkAll").is(":checked");
+		var arrcheck = document.getElementsByName("checkRow");
+		var j = 0;
+		if(chk){
+			$("#th_checkAll").attr("checked", false);
+		}
+		for (i = 0; i < arrcheck.length; i++) {
+			if(arrcheck.item(i).checked) {
+				j++;
+				if(j == arrcheck.length){
+					$("#th_checkAll").attr("checked", true);
+				}
+			}
+		}
+	}
+	
+	// 삭제
+	$("#deleteMaster").on("click", function() {
+		var chk = document.getElementsByName("checkRow");
+		var len = chk.length;    
+		var checkRow = '';      
+		var valueArray = new Array();            
+	
+		for(var i = 0; i < len; i++){
+			if(chk[i].checked == true){ 
+				checkRow = chk[i].value;
+				valueArray.push(checkRow); 
+				}
+			}
+		$.ajaxSettings.traditional = true; // 배열로 controller에 주기 위해
+		$.ajax({
+			url: "masterDelete",
+			type: "POST",
 			data: {
-				email : email,
-				website : website,
-				websiteId : websiteId,
-				websitePw : websitePw,
-				reWebsite : reWebsite,
-				reWebsiteId : reWebsiteId,
-				reWebsitePw : reWebsitePw
-				
+				'valueArray' : valueArray,
 			}
 			}).done(function (result){
-				alert(result);
+				alert("삭제 완료");
 				window.location.reload();
-			})
-})
-
-// 수정 취소
-$("Button[name='updateCancel']").on("click", function(){
-	var dataNo = $(this).attr('data-no');
-	var website = $("span[name='website" + dataNo + "']").text();
-	var websiteId = $("span[name='websiteId" + dataNo + "']").text();
-	var websitePw = $("span[name='websitePw" + dataNo + "']").text();
-// 	$("input[name='website" + dataNo + "']").val(website);
-  	switch(website){
-		case '11st' : $("#op11st"+dataNo).attr("selected", "selected"); break;
-		case 'gmarket' : $("#opGmarket"+dataNo).attr("selected", "selected"); break;
-		case 'auction' : $("#opAuction"+dataNo).attr("selected", "selected"); break;
-		case 'interpark' : $("#opInterpark"+dataNo).attr("selected", "selected"); break;
-		case 'etc' : $("#opEtc"+dataNo).attr("selected", "selected"); break;
-//	case '11st' : $("#op11st"+dataNo).attr("selected", "selected"); break;
-	}
-	$("input[name='websiteId" + dataNo + "']").val(websiteId);
-	$("input[name='websitePw" + dataNo + "']").val(websitePw);
+		});
+	})
 	
-	var a = $(".a");
-	var b = $(".b");
-	a.show();
-	b.hide();
-})
+	// 등록 select박스 이벤트
+	function innerSelect(value){
+		if(value == 'etc'){
+			$("#insertWebsite").show(); 
+		}
+		if(value != 'etc'){
+			$("#insertWebsite").hide();
+		}
+	}
+	console.log("${user.email}");
+	// 등록
+	$("button[name='masterRegist']").on("click", function() {
+		var email = "${user.email}";
+		var websiteId = $("#masterId").val();
+		var websitePw = $("#masterPassword").val();
+		var websiteType =  $("#websiteType option:selected").text();
+	
+		if(websiteType == '선택'){
+			alert('사이트 입력할 것');
+		}else if(websiteId == ''){
+			alert('아이디 입력할 것');
+			$("#masterId").focus();
+		}else if(websitePw == ''){
+			alert('비밀번호 입력할 것');
+			$("#masterPassword").focus();
+		}else{
+			console.log(websiteType);
+			if(websiteType =='직접 입력'){
+				$.ajax({
+					url: "masterInsert",
+					type: "POST", 
+					data: {
+						email : email,
+						website : $("#insertWebsite").val(),
+						websiteId : websiteId,
+						websitePw : websitePw
+					}
+					}).done(function (result){
+						alert(result);
+						window.location.reload();
+					})
+			} else {
+				$.ajax({
+					url: "masterInsert",
+					type: "POST", 
+					data: {
+						email : email,
+						website : websiteType,
+						websiteId : websiteId,
+						websitePw : websitePw
+					}
+					}).done(function (result){
+						alert(result);
+						window.location.reload();
+					})
+			}
+		}
+	})
+	
+	// 편집
+	$(".updateBtn").on("click", function(){
+		var dataNo = $(this).attr('data-no');
+		var website = $("span[name='website" + dataNo + "']").text();
+	  // 편집 폼 중복 방지
+	  	var a = $(".a");
+	  	var b = $(".b");
+		var c = $(".c");
+		a.show();
+		b.hide();
+		if(website == 'etc'){
+			c.show();
+		}else{
+			c.hide();
+		}
+	//   	c.hide();
+	  	console.log(website);
+	  	switch(website){
+	  		case '11st' : $("#op11st"+dataNo).attr("selected", "selected"); break;
+	  		case 'gmarket' : $("#opGmarket"+dataNo).attr("selected", "selected"); break;
+	  		case 'auction' : $("#opAuction"+dataNo).attr("selected", "selected"); break;
+	  		case 'interpark' : $("#opInterpark"+dataNo).attr("selected", "selected"); console.log("dho"); break;
+	  		default : $("#opEtc"+dataNo).attr("selected", "selected"); c.show(); break;
+	  	}
+		  	
+		// 컨텐트 숨기기
+		$("#first"+dataNo).hide();
+		$("#second"+dataNo).hide();
+		$("#third"+dataNo).hide();
+		// 편집 버튼 숨기기
+		$("#updateMaster"+dataNo).hide();
+		// 입력 창 보이기
+		$("#website"+dataNo).show();
+		$("#websiteId"+dataNo).show();
+		$("#websitePw"+dataNo).show();
+		// 수정 버튼 보이기
+		$("#updateGo"+dataNo).show();
+	})
+	
+	function innerSelectUp(value){
+		console.log(value);
+		var c = $(".c");
+		if(value == 'etc'){
+			c.show();
+		}
+		if(value != 'etc'){
+			c.hide();
+		}
+	}
+	
+	// 수정
+	$("Button[name='updateSubmit']").on("click", function(){
+		var dataNo = $(this).attr('data-no');
+		var email = $("#loginEmail").text();
+		var website = $("span[name='website" + dataNo + "']").text();
+		var websiteId = $("span[name='websiteId" + dataNo + "']").text();
+		var websitePw = $("span[name='websitePw" + dataNo + "']").text();
+		var reWebsite = $("#websiteTypeUp"+dataNo+" option:selected").text();
+		var reWebsiteId = $("input[name='websiteId" + dataNo + "']").val();
+		var reWebsitePw = $("input[name='websitePw" + dataNo + "']").val();
+		
+		 $.ajax({
+				url: "masterUpdate",
+				type: "POST", 
+				data: {
+					email : email,
+					website : website,
+					websiteId : websiteId,
+					websitePw : websitePw,
+					reWebsite : reWebsite,
+					reWebsiteId : reWebsiteId,
+					reWebsitePw : reWebsitePw
+					
+				}
+				}).done(function (result){
+					alert(result);
+					window.location.reload();
+				})
+	})
+	
+	// 수정 취소
+	$("Button[name='updateCancel']").on("click", function(){
+		var dataNo = $(this).attr('data-no');
+		var website = $("span[name='website" + dataNo + "']").text();
+		var websiteId = $("span[name='websiteId" + dataNo + "']").text();
+		var websitePw = $("span[name='websitePw" + dataNo + "']").text();
+		var a = $(".a");
+		var b = $(".b");
+		var c = $(".c");
+		
+		console.log("수정취소 dataNO : " + dataNo);
+	
+	// 	$("input[name='website" + dataNo + "']").val(website);
+		$("input[name='websiteId" + dataNo + "']").val(websiteId);
+		$("input[name='websitePw" + dataNo + "']").val(websitePw);
+		console.log("수정 취소 website: " + website);
+	//   switch(website){
+	// 		case '11st' : $("#op11st"+dataNo).attr("selected", "selected"); console.log(1); break;
+	// 		case 'gmarket' : $("#opGmarket"+dataNo).attr("selected", "selected"); console.log(2); break;
+	// 		case 'auction' : $("#opAuction"+dataNo).attr("selected", "selected"); console.log(3); break;
+	// 		case 'interpark' : $("#opInterpark"+dataNo).attr("selected", "selected"); console.log(4); break;
+	// 		default : $("#opEtc"+dataNo).attr("selected", "selected"); console.log(5); break;
+	//		case '11st' : $("#op11st"+dataNo).attr("selected", "selected"); break;
+	// 	}
+		
+		a.show();
+		b.hide();
+		c.hide();
+	})
 </script>
 
 

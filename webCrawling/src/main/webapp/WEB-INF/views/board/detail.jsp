@@ -4,13 +4,6 @@
 <meta id="_csrf" name="_csrf" content="${_csrf.token}"/>
 <meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}"/>
 <%@include file="../include/header.jsp"%>
-<script>
-// 	Handlebars.registerHelper('prettyDate', function(regDate) {
-// 		var date = new Date(regDate);
-// 		return date.getFullYear() + "-" + (date.getMonth() + 1) + "-"
-// 				+ date.getDate();
-// 	});
-</script>
 
 <section>
 <!-- 전체 -->
@@ -109,12 +102,9 @@
 	//파라미터 얻어오기
 	var getParameters = function(paramName) {
 		var returnValue;
-	
 		var url = location.href;
-	
 		var parameters = (url.slice(url.indexOf('?') + 1, url.length))
 				.split('&');
-	
 		for (var i = 0; i < parameters.length; i++) {
 			var varName = parameters[i].split('=')[0];
 			if (varName.toUpperCase() == paramName.toUpperCase()) {
@@ -129,20 +119,20 @@
 	// 수정
 	$("button[name='update']").click(function () {
 		var pageNo = getParameters('pageNo');
-		location.href="${pageContext.request.contextPath}/board/updateForm?bNo=" + getParameters('bNo') + "&pageNo=" + pageNo;
+		location.href=getContextPath()+"/board/updateForm?bNo=" + getParameters('bNo') + "&pageNo=" + pageNo;
 	});
 		
 	// 삭제
 	$("button[name='delete']").on("click", function () {
 		$.ajax({
-			url: "${pageContext.request.contextPath}/board/delete",
+			url: getContextPath()+"/board/delete",
 			data: {
 				"bNo": getParameters('bNo')
 			},
 		})
 		.done(function (result) {
 			alert(result);
-			location.href="${pageContext.request.contextPath}/board/list";
+			location.href=getContextPath()+"/board/list";
 		});
 	});
 		
@@ -151,22 +141,22 @@
 		var sName = getParameters('searchName');
 		var pageNo = getParameters('pageNo');
 		if(sName != undefined){
-			location.href="${pageContext.request.contextPath}/board/list?pageNo=" + pageNo + "&searchName=" + sName;
+			location.href = getContextPath()+"/board/list?pageNo=" + pageNo + "&searchName=" + sName;
 		}
 		else {
-			location.href="${pageContext.request.contextPath}/board/list?pageNo=" + pageNo;
+			location.href = getContextPath()+"/board/list?pageNo=" + pageNo;
 		}
 	});
 	
 // 답변
 	// 입력폼
 	$("button[name='reRegister']").click(function () {
-		document.getElementById("answerForm").style.display = "block";
+		$("#answerForm").show();
 	});
 	// 입력
 	$("button[name='answerSubmit']").click(function(){
 		$.ajax({
-			url: "commentRegist",
+			url: getContextPath()+"/board/commentRegist",
 			type: "POST",
 			data: {
 				bNo: getParameters('bNo'),
@@ -180,13 +170,13 @@
 	 });
 	// 입력 취소
 	 $("button[name='answerCancel']").click(function () {
-			document.getElementById("answerForm").style.display = "none";
+			$("#answerForm").hide();
 		 })
 	
 	// 수정 폼
 	$("button[name='reUpdate']").click(function () {
-		document.getElementById("reContent").style.display = "none";
-		document.getElementById("updateReContent").style.display = "block";
+		$("#reContent").hide();
+		$("#updateReContent").show();
 	 })
 	 
  	// 수정 완료 
@@ -194,7 +184,7 @@
  		var reUpContent = $("textarea[name='reUpContent']").val();
  		var rNo = $("#rNo").text();
 		$.ajax({
-				url: "commentUpdate",
+				url: getContextPath()+"/board/commentUpdate",
 				type: "POST", 
 				data: {
 					bNo : getParameters('bNo'),
@@ -209,15 +199,15 @@
 	
 	 // 수정 취소
 	 $("button[name='canSubmit']").click(function () {
-		document.getElementById("reContent").style.display = "block";
-		document.getElementById("updateReContent").style.display = "none";
+		$("#reContent").show();
+		$("#updateReContent").hide();
 	 })
 	 
 	// 삭제
 	 $("button[name='reDelete']").click(function () {
 		 var rNo = $("#rNo").text();
 		 $.ajax({
-			 url:"commentDelete",
+			 url:getContextPath()+"/board/commentDelete",
 			 data:{
 				bNo : getParameters('bNo'),
 				rNo : rNo
