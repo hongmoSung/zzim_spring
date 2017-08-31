@@ -41,112 +41,87 @@
 </script>
 
 <script>
-	$(document).ready(
-			function() {
+	$(document).ready(function() {
 
-				Handlebars.registerHelper("makeDelivery", function(cDelivery) {
-					if (cDelivery != null) {
-						var lastCh = cDelivery.charAt(cDelivery.length - 1);
-						var regNumber = /^[0-9]*$/;
+		Handlebars.registerHelper("makeDelivery", function(cDelivery) {
+			if (cDelivery != null) {
+				var lastCh = cDelivery.charAt(cDelivery.length - 1);
+				var regNumber = /^[0-9]*$/;
 
-						if (regNumber.test(lastCh)) {
-							return cDelivery + "원";
-						} else {
-							return cDelivery;
-						}
+				if (regNumber.test(lastCh)) {
+					return cDelivery + "원";
+				} else {
+					return cDelivery;
+				}
 
-					} else {
-						return "";
-					}
-				});
-				Handlebars.registerHelper("makeName", function(cName) {
-					cName = cName.replace(/(^\s*)|(\s*$)/g, ""); 
-					return cName;
-				});
-				Handlebars.registerHelper("makeCount", function(cCount) {
-					if (cCount != null) {
-						var firstCh = cCount.charAt(0);
-						var regNumber = /^[0-9]*$/;
-						if (regNumber.test(firstCh)) {
-							return cCount + "개";
-						} else {
-							return cCount;
-						}
-					} else {
-						return "";
-					}
-				});
+			} else {
+				return "";
+			}
+		});
+		Handlebars.registerHelper("makeName", function(cName) {
+			cName = cName.replace(/(^\s*)|(\s*$)/g, "");
+			return cName;
+		});
+		Handlebars.registerHelper("makeCount", function(cCount) {
+			if (cCount != null) {
+				cCount += cCount+"";
+				var firstCh = cCount.charAt(0);
+				var regNumber = /^[0-9]*$/;
+				if (regNumber.test(firstCh)) {
+					return cCount + "개";
+				} else {
+					return cCount;
+				}
+			} else {
+				return "";
+			}
+		});
 
-				var email = '${user.email}';
+		var email = '${user.email}';
 
-				$.ajax({
-					url : "http://192.168.0.36:3003/cart",
-					type : "post",
-					data : {
-						"email" : email
-					}
-				}).done(
-						function(result) {
-							for (var i = 0; i < result.length; i++) {
-								var resultObj = result[i];
-								console.log(resultObj);
-								var source = $("#cart-template").html();
-								var template = Handlebars.compile(source);
+		$.ajax({
+			url : "http://192.168.0.36:3003/cart",
+			type : "post",
+			data : {
+				"email" : email
+			}
+		}).done(function(result) {
+			for (var i = 0; i < result.length; i++) {
+				var resultObj = result[i];
+				console.log(resultObj);
+				var source = $("#cart-template").html();
+				var template = Handlebars.compile(source);
 
-								if (resultObj['11st'] != null) {
-									
-									var a = fuxx(resultObj['11st']);
-									var elevenCart = JSON.parse(a);
+				if (resultObj['11st'] != null) {
 
-									var html = template(elevenCart);
-									$("#11st").append(html);
+					var elevenObj = resultObj['11st'];
+					var html = template(elevenObj);
+					$("#11st").append(html);
 
-								}
-								if (resultObj['gmarket'] != null) {
-									
-									var a = fuxx(resultObj['gmarket']);
-									var gmarketCart = JSON.parse(a);
-									
+				}
+				if (resultObj['gmarket'] != null) {
 
-									var html = template(gmarketCart);
-									$("#gmarket").append(html);
-								}
-								if (resultObj['auction'] != null) {
-									
-									var a = fuxx(resultObj['auction']);
-									var auctionCart = JSON.parse(a);
+					var gmarketObj = resultObj['gmarket'];
+					var html = template(gmarketObj);
+					$("#gmarket").append(html);
+				}
+				if (resultObj['auction'] != null) {
 
-									var html = template(auctionCart);
-									$("#auction").append(html);
-								}
-								if (resultObj['interpark'] != null) {
-									
-									var a = fuxx(resultObj['interpark']);
+					var auctionObj = resultObj['auction'];
+					var html = template(auctionObj);
+					$("#auction").append(html);
+				}
+				if (resultObj['interpark'] != null) {
 
-									var interparkCart = JSON.parse(a);
+					var interparkObj = resultObj['interpark'];
+					var html = template(interparkObj);
+					$("#interpark").append(html);
+				}
 
-									var html = template(interparkCart);
-									$("#interpark").append(html);
-								}
+			}
+		});
 
-							}
-						});
-				
-				function fuxx(data){
-					var a = data
-					.replace(/\\n/g, "\\n")
-					.replace(/\\'/g,"\\'")
-					.replace(/\\"/g, '\\"')
-					.replace(/\\&/g, "\\&")
-					.replace(/\\r/g, "\\r")
-					.replace(/\\t/g, "\\t")
-					.replace(/\\b/g, "\\b")
-					.replace(/\\f/g, "\\f");
-					a = a.replace(/[\u0000-\u0019]+/g, "");
-					a = a.replace(/(^\s*)|(\s*$)/g, ""); 
-					return a;
-				};
-			});
+	});
 </script>
 <%@include file="../include/footer.jsp"%>
 

@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta id="_csrf" name="_csrf" content="${_csrf.token}"/>
-<meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}"/>
 <%@include file="../include/header.jsp" %>
 
 <section>
@@ -11,7 +9,7 @@
 	<hr>
 	<div>
 		<c:if test="${not empty masterList}">
-			<button type="button" name="deleteMaster">선택항목 삭제</button>
+			<button type="button" name="deleteMaster" id="deleteMaster">선택항목 삭제</button>
 		</c:if>
 	</div>
 		<table style="text-align:center; width:80%; margin:auto;">
@@ -23,27 +21,23 @@
 					<th>비밀번호</th>
 					<th></th>
 				</tr>
-			</thead>		
+			</thead>
 			<tbody>
 				<c:forEach items="${masterList}" var="list" varStatus="status">
 					<tr>
-						<td><input type="checkbox" name="checkRow" value="${list.email},${list.website},${list.websiteId}" /></td>
+						<td><input type="checkbox" id="checkRow" name="checkRow" value="${list.email},${list.website},${list.websiteId}" /></td>
 						
 						<td id="first${status.index}" class="a"><span name="website${status.index}">${list.website}</span></td>
 						<td id="website${status.index}" style="display:none;" class="b">
 							<select id="websiteTypeUp" onchange="innerSelectUp(this.value)" >
 							  <option value="empty">선택</option>
-							  <option value="11st">www.11st.co.kr</option>
-							  <option value="gMarket">www.gmarket.co.kr</option>
-							  <option value="auction">www.auction.co.kr</option>
-							  <option value="danawa">www.danawa.com</option>
-							  <option value="enuri">www.enuri.com</option>
-							  <option value="naver">www.naver.com</option>
-							  <option value="daum">www.daum.net</option>
-						  	  <option value="etc">직접입력</option>
-				  		 	 </select>
-				  		 	 <input type="hidden" type="text" id="insertWebsiteUp" ></input></td>
-<%-- 							<input type="text" value="${list.website}" name="website${status.index}"></td> --%>
+							  <option value="11st">11st</option>
+							  <option value="gmarket">gmarket</option>
+							  <option value="auction">auction</option>
+							  <option value="interpark">interpark</option>
+				  		    </select>
+				  		 	<input type="hidden" type="text" id="insertWebsiteUp" ></input></td>
+<%-- 						<input type="text" value="${list.website}" name="website${status.index}"></td> --%>
 						
 						<td id="second${status.index}" class="a"><span name="websiteId${status.index}">${list.websiteId}</span></td>
 						<td id="websiteId${status.index}" style="display:none;" class="b">
@@ -69,18 +63,14 @@
 						<td><button type="button" name="masterRegist">&#43</button></td>
 						<td> <select id="websiteType" onchange="innerSelect(this.value)" >
 							  <option value="empty">선택</option>
-							  <option value="11st">www.11st.co.kr</option>
-							  <option value="gMarket">www.gmarket.co.kr</option>
-							  <option value="auction">www.auction.co.kr</option>
-							  <option value="danawa">www.danawa.com</option>
-							  <option value="enuri">www.enuri.com</option>
-							  <option value="naver">www.naver.com</option>
-							  <option value="daum">www.daum.net</option> 
-						  	  <option value="etc">직접입력</option>
+							  <option value="11st">11st</option>
+							  <option value="gmarket">gmarket</option>
+							  <option value="auction">auction</option>
+							  <option value="interpark">interpark</option>
 				  		 	 </select>
 							<input type="text" id="insertWebsite" style="display:none;"></input></td>
-						<td><input type="text" name="masterId"/></td>
-						<td><input type="text" name="masterPassword"/></td>
+						<td><input type="text" name="masterId" id="masterId"></td>
+						<td><input type="text" name="masterPassword" id="masterPassword"></td>
 					</tr>
 			</tbody>
 		</table>
@@ -102,25 +92,23 @@ $(function() {
 // 전체 체크/해제
 function checkAll() {
 	var param = document.getElementById("th_checkAll").checked;
-	var arrcheck = document.getElementsByName('checkRow');
+	var arrcheck = $("#checkRow");
 	for (i = 0; i < arrcheck.length; i++) {
 		arrcheck.item(i).checked = param;
 	}
 }
 
 // 개별 체크시 전체 체크 해제
-$("input[name='checkRow']").on("click", function(){
-	var chk = document.getElementById("th_checkAll").checked;
-	var arrcheck = document.getElementsByName('checkRow');
+$("#checkRow").on("click", function(){
+	var chk = $("#th_checkAll").checked;
+	var arrcheck = $("#checkRow")
 	var j = 0;
 	if(chk){
 		$("#th_checkAll").attr("checked", false);
 	}
 	for (i = 0; i < arrcheck.length; i++) {
-		console.log(arrcheck.length);
 		if(arrcheck.item(i).checked) {
 			j++;
-			console.log(j);
 			if(j == arrcheck.length){
 				$("#th_checkAll").attr("checked", true);
 			}
@@ -129,8 +117,8 @@ $("input[name='checkRow']").on("click", function(){
 })
 
 // 삭제
-$("button[name='deleteMaster']").on("click", function() {
-	var chk = document.getElementsByName("checkRow");
+$("#deleteMaster").on("click", function() {
+	var chk = $("#checkRow");
 	var len = chk.length;    
 	var checkRow = '';      
 	var valueArray = new Array();            
@@ -158,17 +146,17 @@ $("button[name='deleteMaster']").on("click", function() {
 
 function innerSelect(value){
 	if(value == 'etc'){
-		document.getElementById("insertWebsite").style.display = "";
+		$("#intertWebsite").css("display",""); 
 	}
 	if(value != 'etc'){
-		document.getElementById("insertWebsite").style.display = "none";
+		$("#intertWebsite").css("display","none");
 	}
 }
 // 등록
 $("button[name='masterRegist']").on("click", function() {
 	var email = $("#loginEmail").text();
-	var websiteId = $("input[name='masterId']").val();
-	var websitePassword = $("input[name='masterPassword']").val();
+	var websiteId = $("#masterId").val();
+	var websitePassword = $("#masterPassword").val();
 	
 	var websiteType =  $("#websiteType option:selected").text();
 	if(websiteType =='직접입력'){
@@ -179,10 +167,10 @@ $("button[name='masterRegist']").on("click", function() {
 		alert('사이트 입력할 것');
 	}else if(websiteId == ''){
 		alert('아이디 입력할 것');
-		$("input[name='masterId']").focus();
+		$("#masterId").focus();
 	}else if(websitePassword == ''){
 		alert('비밀번호 입력할 것');
-		$("input[name='masterPassword']").focus();
+		$("#masterPassword").focus();
 	}else{
 	$.ajax({
 		url: "masterInsert",
@@ -204,42 +192,38 @@ $("button[name='masterRegist']").on("click", function() {
 $(".updateBtn").on("click", function(){
 	var dataNo = $(this).attr('data-no');
   // 편집 폼 중복 방지
-	var a = document.getElementsByClassName("a");
-	var b = document.getElementsByClassName("b");
+	var a = $(".a");
+	var b = $(".b");
   	for(var i = 0; i < a.length; i++){
-  		a[i].style.display = "";
+  		a[i].css("display","");
+  		
   	}
   	for(var i = 0; i < b.length; i++){
-  		b[i].style.display = "none";
+  		b[i].css("display","none");
   	}
   
 	// 컨텐트 숨기기
-	document.getElementById("first" + dataNo).style.display = "none";
-	document.getElementById("second" + dataNo).style.display = "none";
-	document.getElementById("third" + dataNo).style.display = "none";
+	$("#first"+dataNo).css("display","none");
+	$("#second"+dataNo).css("display","none");
+	$("#third"+dataNo).css("display","none");
 	// 편집 버튼 숨기기
-	document.getElementById("updateMaster" + dataNo).style.display = "none";
+	$("#updateMaster"+dataNo).css("display","none");
 	// 입력 창 보이기
-	document.getElementById("website" + dataNo).style.display = "";
-	document.getElementById("websiteId" + dataNo).style.display = "";
-	document.getElementById("websitePassword" + dataNo).style.display = "";
+	$("#website"+dataNo).css("display","");
+	$("#websiteId"+dataNo).css("display","");
+	$("#websitePassword"+dataNo).css("display","");
 	// 수정 버튼 보이기
-	document.getElementById("updateGo" + dataNo).style.display = "";
+	$("#updateGo"+dataNo).css("display","");
 })
 
 function innerSelectUp(value){
 	console.log(value);
 	if(value == 'etc'){
-		console.log("ggg");
-		console.log(document.getElementById("insertWebsiteUp").type);
 		$("#insertWebsiteUp").show();
-		console.log()
-		document.getElementById("insertWebsiteUp").type = "";
-		console.log(document.getElementById("insertWebsiteUp").type);
+		$("#insertWebsiteUp").attr("type","");
 	}
 	if(value != 'etc'){
-		console.log("ff");
-		document.getElementById("insertWebsiteUp").style.display = "none";
+		$("insertWebsiteUp").css("display","none");
 	}
 }
 
@@ -284,8 +268,8 @@ $("Button[name='updateCancel']").on("click", function(){
 	$("input[name='websiteId" + dataNo + "']").val(websiteId);
 	$("input[name='websitePassword" + dataNo + "']").val(websitePassword);
 	
-	var a = document.getElementsByClassName("a");
-	var b = document.getElementsByClassName("b");
+	var a = $(".a");
+	var b = $(".b");
   	for(var i = 0; i < a.length; i++){
   		a[i].style.display = "";
   	}
