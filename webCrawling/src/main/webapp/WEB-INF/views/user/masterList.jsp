@@ -31,10 +31,10 @@
 						<td id="website${status.index}" style="display:none;" class="b">
 							<select id="websiteTypeUp" onchange="innerSelectUp(this.value)" >
 							  <option value="empty">선택</option>
-							  <option value="11st">11st</option>
-							  <option value="gmarket">gmarket</option>
-							  <option value="auction">auction</option>
-							  <option value="interpark">interpark</option>
+							  <option value="11st" id="op11st">11st</option>
+							  <option value="gmarket" id="opGmarket">gmarket</option>
+							  <option value="auction" id="opAuction">auction</option>
+							  <option value="interpark" id="opInterpark">interpark</option>
 				  		    </select>
 				  		 	<input type="hidden" type="text" id="insertWebsiteUp" ></input></td>
 <%-- 						<input type="text" value="${list.website}" name="website${status.index}"></td> --%>
@@ -43,9 +43,9 @@
 						<td id="websiteId${status.index}" style="display:none;" class="b">
 							<input type="text" value="${list.websiteId}" name="websiteId${status.index}"></td>
 						
-						<td id="third${status.index}" class="a"><span name="websitePassword${status.index}">${list.websitePassword}</span></td>
-						<td id="websitePassword${status.index}" style="display:none;" class="b">
-							<input type="text" value="${list.websitePassword}" name="websitePassword${status.index}"></td>
+						<td id="third${status.index}" class="a"><span name="websitePw${status.index}">${list.websitePw}</span></td>
+						<td id="websitePw${status.index}" style="display:none;" class="b">
+							<input type="text" value="${list.websitePw}" name="websitePw${status.index}"></td>
 
 						<td colspan="2" id="updateMaster${status.index}" class="a">
 							<button type="button" class="updateBtn" name="updateMaster${status.index}" data-no="${status.index}">편집</button></td>
@@ -156,7 +156,7 @@ function innerSelect(value){
 $("button[name='masterRegist']").on("click", function() {
 	var email = $("#loginEmail").text();
 	var websiteId = $("#masterId").val();
-	var websitePassword = $("#masterPassword").val();
+	var websitePw = $("#masterPassword").val();
 	
 	var websiteType =  $("#websiteType option:selected").text();
 	if(websiteType =='직접입력'){
@@ -168,7 +168,7 @@ $("button[name='masterRegist']").on("click", function() {
 	}else if(websiteId == ''){
 		alert('아이디 입력할 것');
 		$("#masterId").focus();
-	}else if(websitePassword == ''){
+	}else if(websitePw == ''){
 		alert('비밀번호 입력할 것');
 		$("#masterPassword").focus();
 	}else{
@@ -179,7 +179,7 @@ $("button[name='masterRegist']").on("click", function() {
 			email : email,
 			website : websiteType,
 			websiteId : websiteId,
-			websitePassword : websitePassword
+			websitePw : websitePw
 		}
 		}).done(function (result){
 			alert(result);
@@ -194,13 +194,13 @@ $(".updateBtn").on("click", function(){
   // 편집 폼 중복 방지
 	var a = $(".a");
 	var b = $(".b");
-  	for(var i = 0; i < a.length; i++){
-  		a[i].css("display","");
-  		
-  	}
-  	for(var i = 0; i < b.length; i++){
-  		b[i].css("display","none");
-  	}
+	a.each(function(){
+		$(this).css("display","");
+	});
+  	
+	b.each(function(){
+		$(this).css("display","none");
+	});
   
 	// 컨텐트 숨기기
 	$("#first"+dataNo).css("display","none");
@@ -211,7 +211,7 @@ $(".updateBtn").on("click", function(){
 	// 입력 창 보이기
 	$("#website"+dataNo).css("display","");
 	$("#websiteId"+dataNo).css("display","");
-	$("#websitePassword"+dataNo).css("display","");
+	$("#websitePw"+dataNo).css("display","");
 	// 수정 버튼 보이기
 	$("#updateGo"+dataNo).css("display","");
 })
@@ -233,10 +233,13 @@ $("Button[name='updateSubmit']").on("click", function(){
 	var email = $("#loginEmail").text();
 	var website = $("span[name='website" + dataNo + "']").text();
 	var websiteId = $("span[name='websiteId" + dataNo + "']").text();
-	var websitePassword = $("span[name='websitePassword" + dataNo + "']").text();
-	var reWebsite = $("input[name='website" + dataNo + "']").val();
+	var websitePw = $("span[name='websitePw" + dataNo + "']").text();
 	var reWebsiteId = $("input[name='websiteId" + dataNo + "']").val();
-	var reWebsitePassword = $("input[name='websitePassword" + dataNo + "']").val();
+	var reWebsitePw = $("input[name='websitePw" + dataNo + "']").val();
+
+	console.log($("#websiteTypeUp option:selected").text());
+	
+	
 	 $.ajax({
 			url: "masterUpdate",
 			type: "POST", 
@@ -244,10 +247,10 @@ $("Button[name='updateSubmit']").on("click", function(){
 				email : email,
 				website : website,
 				websiteId : websiteId,
-				websitePassword : websitePassword,
+				websitePw : websitePw,
 				reWebsite : reWebsite,
 				reWebsiteId : reWebsiteId,
-				reWebsitePassword : reWebsitePassword
+				reWebsitePw : reWebsitePw
 				
 			}
 			}).done(function (result){
@@ -262,11 +265,11 @@ $("Button[name='updateCancel']").on("click", function(){
 // 	var email = $("#loginEmail").text();
 	var website = $("span[name='website" + dataNo + "']").text();
 	var websiteId = $("span[name='websiteId" + dataNo + "']").text();
-	var websitePassword = $("span[name='websitePassword" + dataNo + "']").text();
+	var websitePw = $("span[name='websitePw" + dataNo + "']").text();
 	
 	$("input[name='website" + dataNo + "']").val(website);
 	$("input[name='websiteId" + dataNo + "']").val(websiteId);
-	$("input[name='websitePassword" + dataNo + "']").val(websitePassword);
+	$("input[name='websitePw" + dataNo + "']").val(websitePw);
 	
 	var a = $(".a");
 	var b = $(".b");
