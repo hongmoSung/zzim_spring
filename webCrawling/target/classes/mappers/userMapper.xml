@@ -39,7 +39,7 @@
 	
 	<insert id="insertMaster" parameterType="UserMasterVO">
     	insert into tbl_loginData(
-    		email, website, websiteId, websitePassword
+    		email, website, websiteId, websitePw
     	) values (
     		#{email}, #{website}, #{websiteId}, #{websitePw}
     	)
@@ -49,7 +49,7 @@
 		update tbl_loginData
 		set websiteId = #{reWebsiteId},
 		    website = #{reWebsite},
-		    websitePassword = #{reWebsitePassword}
+		    websitePw = #{reWebsitePw}
 		where email = #{email} and websiteId = #{websiteId} and website = #{website}
 			
 	</update>
