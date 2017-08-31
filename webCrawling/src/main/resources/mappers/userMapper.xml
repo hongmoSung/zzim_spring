@@ -41,7 +41,7 @@
     	insert into tbl_loginData(
     		email, website, websiteId, websitePassword
     	) values (
-    		#{email}, #{website}, #{websiteId}, #{websitePassword}
+    		#{email}, #{website}, #{websiteId}, #{websitrPw}
     	)
     </insert>
     
