@@ -3,8 +3,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%@include file="include/header.jsp"%>
 
+<body>
 <div class="main-container">
-
 	<section class="cover fullscreen image-bg overlay">
 		<div class=" background-image-holder">
 			<img alt="image" class="background-image" src="/web/resources/img/cover8.jpg" >
@@ -199,8 +199,8 @@
 		</div>
 		<!--end of container-->
 	</section>
-
 </div>
+</body>
 
 <%@include file="include/footer.jsp"%>
 
