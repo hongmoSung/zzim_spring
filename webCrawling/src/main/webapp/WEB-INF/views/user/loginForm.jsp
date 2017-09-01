@@ -7,17 +7,17 @@
 	<div class="row">
 		<div class="col-md-4 col-md-offset-4 col-sm-8 col-sm-offset-2">
 			<div class="feature bordered text-center">
-				<h2 class="uppercase">LOGIN</h2>
+				<h2 class="uppercase">Login</h2>
 				<c:if test="${param.error != null }">
 		        	<h3>Username/Password not corrrect</h3>
 		        	<h3>Reason : ${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message }</h3>
 				</c:if>
 				<c:url var="loginUrl" value="/login" />
 				<form method="POST" action="${loginUrl}" id="loginForm" class="text-left">
-					<input type="text" class="mb0"" id="email" placeholder="이메일 " name="username">
-					<input type="password" class="mb0" id="password" placeholder="비밀번호 " name="password">
+					<input type="text" class="mb0"" id="email" placeholder="Enter email " name="username">
+					<input type="password" class="mb0" id="password" placeholder="Enter password" name="password">
 					<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
-					<input type="submit" id="loginBtn" value="로그인"/>
+					<input type="submit" id="loginBtn" value="LOGIN"/>
 				</form>
 				<p class="mb0">
 					<a href="${pageContext.request.contextPath}/user/joinForm">아직 회원이 아니세요?</a>
@@ -47,4 +47,4 @@
 			});
 		});
 	</script>
-<%@ include file="../include/footer.jsp"%>
+<%-- <%@ include file="../include/footer.jsp"%> --%>

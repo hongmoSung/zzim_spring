@@ -7,28 +7,27 @@
 <section>
 <div class="container">
 	<div class="row">
-		<div class="col-sm-6 col-sm-offset-3">
-			<div class="feature bordered text-center">
-				<h4 class="uppercase">회   원   가   입</h4>
-				<hr>
+			<div class="input-with-label text-center">
 				<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
-				<input type="text" id="email" placeholder="이메일" name="email" style="width:50%;"> @  
-				<span class="select-option">
-					<i class="ti-angle-down"></i>
-					<select id="emailType" onchange="innerSelect(this.value);" style="width:45%;" >
-						<option value="empty">선택</option>
-						<option value="naver">naver.com</option>
-						<option value="daum">daum.net</option>
-						<option value="etc">직접입력</option>
-					</select> 
-				</span>
-				<input type="text" id="insertEmail" style="display:none; width:100%"></input>
+				<span><h5>아이디</h5></span> 
+				<input type="text" id="email" placeholder="이메일" name="email" style="width:200px;"> @  
+				<select id="emailType" onchange="innerSelect(this.value);" style="width:200px;">
+					<option value="empty">선택</option>
+					<option value="naver">naver.com</option>
+					<option value="daum">daum.net</option>
+					<option value="etc">직접입력</option>
+				</select> 
+				<input type="text" id="insertEmail" style="display:none; width:200px;"></input>
 				<a id="idCheckBtn" class="btn btn-sm" style="margin-top:20px;">중복 확인</a>
-				<input type="password" id="password" placeholder="비밀번호" name="password" style="width:400px;"><br> 
-				<input type="password" id="password2" placeholder="비밀번호 확인" style="width:400px;"><br>
-				<input id="joinBtn" type="submit" value="회원가입">
 			</div>
-		</div>
+			<br>
+			<div class="input-with-label text-center"> 
+				<span><h5>비밀번호</h5></span> 
+				<input type="password" id="password" placeholder="비밀번호" name="password" style="width:400px;"><br> 
+				<span><h5>비밀번호 확인</h5></span> 
+				<input type="password" id="password2" placeholder="비밀번호 확인" style="width:400px;"><br>
+				<a id="joinBtn" class="btn btn-sm">회원가입</a>
+			</div>
 	</div>
 </div>
 </section>
@@ -135,4 +134,4 @@
 	});
 </script>
 
-<%@ include file="../include/footer.jsp"%>
+<%-- <%@ include file="../include/footer.jsp"%> --%>

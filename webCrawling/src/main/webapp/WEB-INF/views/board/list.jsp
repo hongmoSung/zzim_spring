@@ -3,25 +3,24 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <%@include file="../include/header.jsp"%>
-<div class="main-container">
-	<section class="page-title page-title-4 bg-secondary">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-6 col-md-offset-5">
-					<h3 class="uppercase mb0"> Q & A</h3>
-				</div>
-			</div>
-		</div>
-	</section>
-	<section>
+<section>
+	
+	<!-- 본문 -->
+	<div class="text-center">
+		<h3 class="uppercase mb0"> Q & A</h3>
+	</div>
+		
+		<!-- 검색/조회 -->
 		<div class="search text-center">
 			<input type="text" id="searchName" style="width:400px; "/>
-			<i class="ti-search icon-sm" id="searchBtn" style="cursor:pointer;"></i>
+			<i class="ti-search icon-sm" id="searchBtn" style="margin-top:30px; cursor:pointer;"></i>
 		</div>
+		
 		<div class="text-center"> 
 			<a id="writeBtn" class="btn btn-sm">문의글 쓰기</a>
 			<a id="myQnA" class="btn btn-sm">나의 문의내역</a>
 		</div><hr>
+		
 		<!-- 게시글 -->	
 		<div class="container">
 			<span style="float:right;">전체 <c:out value="${bCount}"/>개</span>
@@ -46,9 +45,9 @@
 								</c:choose>
 							</div>
 							<ul class="post-meta">
-								<li><i class="ti-user"></i><span>작성자&nbsp<span> ${board.email}</span></span></li>
-								<li><i class="ti-tag"></i><span>작성일<span> <fmt:formatDate value="${board.bRegDate}" pattern="yy/MM/dd" /></span></span></li>
-								<li><i class="ti-comment-alt"></i><span>답글 여부<span>${board.bReply}</span></span></li>
+							<li><i class="ti-user"></i><span>작성자&nbsp<span> ${board.email}</span></span></li>
+							<li><i class="ti-tag"></i><span>작성일<span> <fmt:formatDate value="${board.bRegDate}" pattern="yy/MM/dd" /></span></span></li>
+							<li><i class="ti-comment-alt"></i><span>답글 여부<span>${board.bReply}</span></span></li>
 							</ul>
 							<hr>
 					</c:forEach>
@@ -99,8 +98,7 @@
 		</div>
 		</div>
 	</div>
-	</section>
-</div>
+</section>
 
 	<script>
 		// 파라미터 얻기
