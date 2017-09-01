@@ -86,37 +86,40 @@
 				"email" : email
 			}
 		}).done(function(result) {
+			console.log("result:",result);
 			for (var i = 0; i < result.length; i++) {
 				var resultObj = result[i];
-				console.log(resultObj);
 				var source = $("#cart-template").html();
 				var template = Handlebars.compile(source);
+				if(resultObj != null){
+					console.log(resultObj);
+					if (resultObj['11st'] != null) {
 
-				if (resultObj['11st'] != null) {
+						var elevenObj = resultObj['11st'];
+						var html = template(elevenObj);
+						$("#11st").append(html);
 
-					var elevenObj = resultObj['11st'];
-					var html = template(elevenObj);
-					$("#11st").append(html);
+					}
+					if (resultObj['gmarket'] != null) {
 
+						var gmarketObj = resultObj['gmarket'];
+						var html = template(gmarketObj);
+						$("#gmarket").append(html);
+					}
+					if (resultObj['auction'] != null) {
+
+						var auctionObj = resultObj['auction'];
+						var html = template(auctionObj);
+						$("#auction").append(html);
+					}
+					if (resultObj['interpark'] != null) {
+
+						var interparkObj = resultObj['interpark'];
+						var html = template(interparkObj);
+						$("#interpark").append(html);
+					}
 				}
-				if (resultObj['gmarket'] != null) {
-
-					var gmarketObj = resultObj['gmarket'];
-					var html = template(gmarketObj);
-					$("#gmarket").append(html);
-				}
-				if (resultObj['auction'] != null) {
-
-					var auctionObj = resultObj['auction'];
-					var html = template(auctionObj);
-					$("#auction").append(html);
-				}
-				if (resultObj['interpark'] != null) {
-
-					var interparkObj = resultObj['interpark'];
-					var html = template(interparkObj);
-					$("#interpark").append(html);
-				}
+				
 
 			}
 		});
