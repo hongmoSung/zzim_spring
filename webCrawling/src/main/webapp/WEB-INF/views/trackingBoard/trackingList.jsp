@@ -220,8 +220,8 @@ function handle(result){
 //스크롤 이벤트 -------------------------------------------------------------------------------------------------------
 	var page = 2;
 	$(window).scroll(function(){
-		console.log("스크롤 이벤 트  "+$(window).scrollTop(), $(document).height() , $(window).height());
-		if($(window).scrollTop() == $(document).height() - $(window).height()){
+		console.log("스크롤 이벤 트  "+Math.round($(window).scrollTop()), $(document).height() , $(window).height());
+		if(Math.round($(window).scrollTop()) == $(document).height() - $(window).height()){
 			
 			$.ajax({
 				url : getContextPath()+"/trackingBoard/scroll",
