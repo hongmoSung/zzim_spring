@@ -35,6 +35,14 @@
     <script src="/web/resources/js/ytplayer.min.js"></script>
     <script src="/web/resources/js/countdown.min.js"></script>
     <script src="/web/resources/js/smooth-scroll.min.js"></script>
+    
+    <script src="/web/resources/handlebars-v4.0.10.js"></script>
+	<script src="/web/resources/sb.js"></script>
+    <script>
+		function logout(){
+			$("#logoutForm").submit();
+		}
+	</script>
 </head>
 
 
@@ -44,7 +52,7 @@
     <nav>
         <div class="nav-bar">
             <div class="module left">
-                <a href="index.html">
+                <a href="${pageContext.request.contextPath}/">
                     <img class="logo logo-light" alt="Foundry" src="/web/resources/img/logo-light.png">
                     <img class="logo logo-dark" alt="Foundry" src="/web/resources/img/logo-dark.png">
                 </a>
@@ -57,15 +65,15 @@
                 <div class="module left">
                     <ul class="menu">
                         <li>
-                            <a href="tracking.html">트레킹 리스트</a>
+                            <a href="${pageContext.request.contextPath}/trackingBoard/trackingList">트레킹 리스트</a>
                         </li>
 
                         <li>
-                            <a href="cart.html">메타 장바구니</a>
+                            <a href="${pageContext.request.contextPath}/crawling/cart">메타 장바구니</a>
                         </li>
 
                         <li>
-                            <a href="#">Q & A</a>
+                            <a href="${pageContext.request.contextPath}/board/list">Q & A</a>
                         </li>
 
                     </ul>
@@ -73,12 +81,21 @@
                 </div>
 
                 <div class="module widget-handle left">
-                    <ul class="menu">
-                        <li>
-                            <a href="login.html">로그인</a>
-                        </li>
+                	<ul class="menu">
+               		<sec:authorize access="hasRole('ROLE_USER')"> 
+				<%-- <sec:authentication property="name"/> --%>
+			   			<li><a href="javascript:logout()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+			    		<li><a href="${pageContext.request.contextPath}/user/masterList?email=${user.email}"><span class="glyphicon glyphicon-user"></span>Account</a></li>
+					</sec:authorize>	   
+					<sec:authorize access="!hasRole('ROLE_USER')">
+			    		<li><a href="${pageContext.request.contextPath}/user/joinForm"><span class="glyphicon glyphicon-user"></span> Join</a></li>
+			    		<li><a href="${pageContext.request.contextPath}/user/loginForm"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+					</sec:authorize>
                     </ul>
                 </div>
+                <form action="${pageContext.request.contextPath }/logout" method="post" id="logoutForm">
+					<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
+				</form>
             </div>
 
         </div>

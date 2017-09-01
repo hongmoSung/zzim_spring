@@ -19,274 +19,52 @@
 						</ol>
 					</div>
 				</div>
-				<!--end of row-->
 			</div>
-			<!--end of container-->
 		</section>
 
-
-		<section>
-			<div class="container feature boxed bordered"
-				style="box-shadow: 5px 5px 10px -1px lightgrey">
-				<div class="feature text-center">
-					<img class="product-thumb" src="img/logo/11.png" />
-				</div>
-				<div class="row ">
-					<div class="col-md-12 col-md-offset-0 col-sm-12 col-sm-offset-0">
-						<table class="table cart mb48">
-							<thead>
-								<tr>
-									<th>상품</th>
-									<th>&nbsp;</th>
-									<th>수량</th>
-									<th>가격</th>
-									<th>배송정보</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td><a href="#"> <img alt="Product"
-											class="product-thumb" src="img/shop-product-1.jpg" />
-									</a></td>
-									<td><span>Adrian - Pure Labswool Cap</span></td>
-									<td><span>3</span></td>
-									<td><span>$49.95</span></td>
-									<td><span>무료배송</span></td>
-								</tr>
-								<tr>
-									<td><a href="#"> <img alt="Product"
-											class="product-thumb" src="img/shop-product-2.jpg" />
-									</a></td>
-									<td><span>Stanley - Leather Wallet</span></td>
-									<td><span>1</span></td>
-									<td><span>$69.95</span></td>
-									<td><span>무료배송</span></td>
-								</tr>
-								<tr>
-
-									<td><a href="#"> <img alt="Product"
-											class="product-thumb" src="img/shop-product-4.jpg" />
-									</a></td>
-									<td><span>Logan - Canvas Backpack</span></td>
-									<td><span>1</span></td>
-									<td><span>$119.95</span></td>
-									<td><span>무료배송</span></td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-					<!--end of items-->
-
-				</div>
-				<!--end of row-->
-			</div>
-			<!--end of container-->
-
-
-			<div class="container feature boxed bordered"
-				style="box-shadow: 5px 5px 10px -1px lightgrey">
-				<div class="feature text-center">
-					<!--
-                        <i class="fa fa-shopping-cart fa-2x " aria-hidden="true"></i> 
-                        <span style="font-size: 2em">11번가</span>
--->
-					<img class="product-thumb" src="img/logo/gm.png" />
-				</div>
-				<div class="row ">
-					<div class="col-md-12 col-md-offset-0 col-sm-12 col-sm-offset-0">
-						<table class="table cart mb48">
-							<thead>
-								<tr>
-									<th>상품</th>
-									<th>&nbsp;</th>
-									<th>수량</th>
-									<th>가격</th>
-									<th>배송정보</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td><a href="#"> <img alt="Product"
-											class="product-thumb" src="img/shop-product-1.jpg" />
-									</a></td>
-									<td><span>Adrian - Pure Labswool Cap</span></td>
-									<td><span>3</span></td>
-									<td><span>$49.95</span></td>
-									<td><span>무료배송</span></td>
-								</tr>
-								<tr>
-									<td><a href="#"> <img alt="Product"
-											class="product-thumb" src="img/shop-product-2.jpg" />
-									</a></td>
-									<td><span>Stanley - Leather Wallet</span></td>
-									<td><span>1</span></td>
-									<td><span>$69.95</span></td>
-									<td><span>무료배송</span></td>
-								</tr>
-								<tr>
-
-									<td><a href="#"> <img alt="Product"
-											class="product-thumb" src="img/shop-product-4.jpg" />
-									</a></td>
-									<td><span>Logan - Canvas Backpack</span></td>
-									<td><span>1</span></td>
-									<td><span>$119.95</span></td>
-									<td><span>무료배송</span></td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-					<!--end of items-->
-
-				</div>
-				<!--end of row-->
-			</div>
-			<!--end of container-->
-
-
-
-			<div class="container feature boxed bordered"
-				style="box-shadow: 5px 5px 10px -1px lightgrey">
-				<div class="feature text-center">
-					<!--
-                        <i class="fa fa-shopping-cart fa-2x " aria-hidden="true"></i> 
-                        <span style="font-size: 2em">11번가</span>
--->
-					<img class="product-thumb" src="img/logo/ac.png" />
-				</div>
-				<div class="row ">
-					<div class="col-md-12 col-md-offset-0 col-sm-12 col-sm-offset-0">
-						<table class="table cart mb48">
-							<thead>
-								<tr>
-									<th>상품</th>
-									<th>&nbsp;</th>
-									<th>수량</th>
-									<th>가격</th>
-									<th>배송정보</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td><a href="#"> <img alt="Product"
-											class="product-thumb" src="img/shop-product-1.jpg" />
-									</a></td>
-									<td><span>Adrian - Pure Labswool Cap</span></td>
-									<td><span>3</span></td>
-									<td><span>$49.95</span></td>
-									<td><span>무료배송</span></td>
-								</tr>
-								<tr>
-									<td><a href="#"> <img alt="Product"
-											class="product-thumb" src="img/shop-product-2.jpg" />
-									</a></td>
-									<td><span>Stanley - Leather Wallet</span></td>
-									<td><span>1</span></td>
-									<td><span>$69.95</span></td>
-									<td><span>무료배송</span></td>
-								</tr>
-								<tr>
-
-									<td><a href="#"> <img alt="Product"
-											class="product-thumb" src="img/shop-product-4.jpg" />
-									</a></td>
-									<td><span>Logan - Canvas Backpack</span></td>
-									<td><span>1</span></td>
-									<td><span>$119.95</span></td>
-									<td><span>무료배송</span></td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-					<!--end of items-->
-
-				</div>
-				<!--end of row-->
-			</div>
-			<!--end of container-->
-
-			<div class="container feature boxed bordered"
-				style="box-shadow: 5px 5px 10px -1px lightgrey">
-				<div class="feature text-center">
-					<!--
-                        <i class="fa fa-shopping-cart fa-2x " aria-hidden="true"></i> 
-                        <span style="font-size: 2em">11번가</span>
--->
-					<img class="product-thumb" src="img/logo/int.png" />
-				</div>
-				<div class="row ">
-					<div class="col-md-12 col-md-offset-0 col-sm-12 col-sm-offset-0">
-						<table class="table cart mb48">
-							<thead>
-								<tr>
-									<th>상품</th>
-									<th>&nbsp;</th>
-									<th>수량</th>
-									<th>가격</th>
-									<th>배송정보</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td><a href="#"> <img alt="Product"
-											class="product-thumb" src="img/shop-product-1.jpg" />
-									</a></td>
-									<td><span>Adrian - Pure Labswool Cap</span></td>
-									<td><span>3</span></td>
-									<td><span>$49.95</span></td>
-									<td><span>무료배송</span></td>
-								</tr>
-								<tr>
-									<td><a href="#"> <img alt="Product"
-											class="product-thumb" src="img/shop-product-2.jpg" />
-									</a></td>
-									<td><span>Stanley - Leather Wallet</span></td>
-									<td><span>1</span></td>
-									<td><span>$69.95</span></td>
-									<td><span>무료배송</span></td>
-								</tr>
-								<tr>
-
-									<td><a href="#"> <img alt="Product"
-											class="product-thumb" src="img/shop-product-4.jpg" />
-									</a></td>
-									<td><span>Logan - Canvas Backpack</span></td>
-									<td><span>1</span></td>
-									<td><span>$119.95</span></td>
-									<td><span>무료배송</span></td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-					<!--end of items-->
-
-				</div>
-				<!--end of row-->
-			</div>
-			<!--end of container-->
+		<section id="cartSection">
 		</section>
 
 	</div>
 </body>
 
+
 <script id="cart-template" type="text/x-handlebars-template">
-		<table class="table" style="text-align:left">
-			<tr>
-				<td colspan="2">상품</td>
-				<td>수량</td>
-				<td>가격</td>
-				<td>배송정보</td>
-			<tr>
-			{{#each .}}
-			<tr>
-				<td><img src="{{cPic}}" width="80" height="80"></td>
-				<td><a href="{{cLink}}">{{#makeName cName}}{{/makeName}}</a></td>
-				<td>{{#makeCount cCount}}{{/makeCount}}</td>
-				<td>{{cPrice}}원</td>
-				<td>{{#makeDelivery cDelivery}}{{/makeDelivery}}</td>
-			<tr>
-			{{/each }}
-		</table>
+<div class="container feature boxed bordered"
+	style="box-shadow: 5px 5px 10px -1px lightgrey">
+	<div class="feature text-center">
+		<img class="product-thumb" src="/web/resources/img/logo/{{shop}}.png" />
+	</div>
+	<div class="row ">
+		<div class="col-md-12 col-md-offset-0 col-sm-12 col-sm-offset-0">
+			<table class="table cart mb48">
+				<thead>
+					<tr>
+						<th width="10%">상품</th>
+						<th width="60%">&nbsp;</th>
+						<th>수량</th>
+						<th>가격</th>
+						<th>배송정보</th>
+					</tr>
+				</thead>
+				<tbody>
+				{{# each .}}
+					<tr>
+						<td width="10%"><a href="{{cLink}}"> <img alt="Product" class="product-thumb" src="{{cPic}}" /></a></td>
+						<td width="60%"><a href="{{cLink}}"> <span>{{#makeName cName}}{{/makeName}}</span> </a></td>
+						<td><span>{{#makeCount cCount}}{{/makeCount}}</span></td>
+						<td><span>{{cPrice}}</span></td>
+						<td><span>{{#makeDelivery cDelivery}}{{/makeDelivery}}</span></td>
+					</tr>
+				{{/ each}}
+				</tbody>
+			</table>
+		</div>
+		<!--end of items-->
+
+	</div>
+	<!--end of row-->
+</div>
 </script>
 
 <script>
@@ -300,7 +78,7 @@
 				if (regNumber.test(lastCh)) {
 					return cDelivery + "원";
 				} else {
-					return cDelivery;
+					return "무료배송";
 				}
 
 			} else {
@@ -308,12 +86,33 @@
 			}
 		});
 		Handlebars.registerHelper("makeName", function(cName) {
-			cName = cName.replace(/(^\s*)|(\s*$)/g, "");
+			if(cName != null){
+				cName = cName.replace(/(^\s*)|(\s*$)/g, "");
+								
+			}
 			return cName;
+		});
+		
+		Handlebars.registerHelper("makePrice", function(cPrice) {
+			if(cName != null){
+				cPrice = cPrice.replace(/(^\s*)|(\s*$)/g, "");
+				var lastCh = cDelivery.charAt(cPrice.length - 1);
+				var regNumber = /^[0-9]*$/;
+
+				if (regNumber.test(lastCh)) {
+					return cPrice + "원";
+				} else {
+					return cPrice;
+				}
+			}else{
+				
+				return "";
+			}
+			
 		});
 		Handlebars.registerHelper("makeCount", function(cCount) {
 			if (cCount != null) {
-				cCount += cCount + "";
+				cCount += "";
 				var firstCh = cCount.charAt(0);
 				var regNumber = /^[0-9]*$/;
 				if (regNumber.test(firstCh)) {
@@ -345,27 +144,31 @@
 					if (resultObj['11st'] != null) {
 
 						var elevenObj = resultObj['11st'];
+						elevenObj['shop'] = "11";
 						var html = template(elevenObj);
-						$("#11st").append(html);
+						$("#cartSection").append(html);
 
 					}
 					if (resultObj['gmarket'] != null) {
 
 						var gmarketObj = resultObj['gmarket'];
+						gmarketObj['shop'] = "gm";
 						var html = template(gmarketObj);
-						$("#gmarket").append(html);
+						$("#cartSection").append(html);
 					}
 					if (resultObj['auction'] != null) {
 
 						var auctionObj = resultObj['auction'];
+						auctionObj['shop'] = "ac";
 						var html = template(auctionObj);
-						$("#auction").append(html);
+						$("#cartSection").append(html);
 					}
 					if (resultObj['interpark'] != null) {
 
 						var interparkObj = resultObj['interpark'];
+						interparkObj['shop'] = "int";
 						var html = template(interparkObj);
-						$("#interpark").append(html);
+						$("#cartSection").append(html);
 					}
 				}
 
