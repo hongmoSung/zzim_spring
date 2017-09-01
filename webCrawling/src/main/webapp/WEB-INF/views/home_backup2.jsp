@@ -3,9 +3,118 @@
 
 
 
-<%@include file="include/header.jsp"%>
+<!doctype html>
+<html lang="en">
+    
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/web/resources/css/font-awesome.min.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/web/resources/css/themify-icons.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="/web/resources/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="/web/resources/css/flexslider.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="/web/resources/css/theme-red.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="/web/resources/css/custom.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="/web/resources/css/lightbox.min.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="/web/resources/css/ytplayer.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="/web/resources/css/theme.css" rel="stylesheet" type="text/css" media="all" />
+    <link href='http://fonts.googleapis.com/css?family=Lato:300,400%7CRaleway:100,400,300,500,600,700%7COpen+Sans:400,500,600' rel='stylesheet' type='text/css'>
 
-<html lang="ko">
+        <script src="/web/resources/js/jquery.min.js"></script>
+        <script src="/web/resources/js/bootstrap.min.js"></script>
+        <script src="/web/resources/js/flexslider.min.js"></script>
+        <script src="/web/resources/js/parallax.js"></script>
+        <script src="/web/resources/js/scripts.js"></script>
+
+		<script src="/web/resources/js/lightbox.min.js"></script>
+        <script src="/web/resources/js/masonry.min.js"></script>
+        <script src="/web/resources/js/ytplayer.min.js"></script>
+        <script src="/web/resources/js/countdown.min.js"></script>
+        <script src="/web/resources/js/smooth-scroll.min.js"></script>
+</head>
+
+
+
+
+<div class="nav-container">
+    <nav>
+        <div class="nav-bar">
+            <div class="module left">
+                <a href="index.html">
+                    <img class="logo logo-light" alt="Foundry" src="/web/resources/img/logo-light.png">
+                    <img class="logo logo-dark" alt="Foundry" src="/web/resources/img/logo-dark.png">
+                </a>
+            </div>
+            <div class="module widget-handle mobile-toggle right visible-sm visible-xs">
+                <i class="ti-menu"></i>
+            </div>
+            <div class="module-group right">
+
+                <div class="module left">
+                    <ul class="menu">
+                        <li>
+                            <a href="tracking.html">트레킹 리스트</a>
+                        </li>
+
+                        <li>
+                            <a href="cart.html">메타 장바구니</a>
+                        </li>
+
+                        <li>
+                            <a href="#">Q & A</a>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+                <div class="module widget-handle left">
+                    <ul class="menu">
+                        <li>
+                            <a href="login.html">로그인</a>
+                        </li>
+
+                        <!--
+                                <li class="modal-container">
+                                    <a class="btn-modal" href="#">로그인</a>
+                                    <div class="foundry_modal">
+
+                                        <div class="col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2">   
+                                            <div class="feature bordered text-center">
+                                                <h4 class="uppercase">Login Here</h4>
+                                                <form class="text-left">
+                                                    <input class="mb0" type="text" placeholder="Username" />
+                                                    <input class="mb0" type="password" placeholder="Password" />
+                                                    <input type="submit" value="Login" />
+                                                </form>
+                                                <p class="mb0">Forgot your password?<br>
+                                                    <a href="#">Click Here To Reset</a>
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </li>
+-->
+
+
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </nav>
+</div>
+
+
+
+
+
+
+
+
+
 
 <body>
 
@@ -210,13 +319,32 @@
 
 </body>
 
+<footer class="footer-2 bg-dark text-center-xs">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4">
+                <a href="#"><img class="image-xxs fade-half" alt="Pic" src="/web/resources/img/logo-light.png"></a>
+            </div>
 
+            <div class="col-sm-4 text-center">
+                <span class="fade-half">
+                                © Copyright 2015 Medium Rare - All Rights Reserved
+                            </span>
+            </div>
 
-</html>
-
-
-<%@include file="include/footer.jsp"%>
+            <div class="col-sm-4 text-right text-center-xs">
+                <ul class="list-inline social-list">
+                    <li><a href="#"><i class="ti-twitter-alt"></i></a></li>
+                    <li><a href="#"><i class="ti-facebook"></i></a></li>
+                    <li><a href="#"><i class="ti-dribbble"></i></a></li>
+                    <li><a href="#"><i class="ti-vimeo-alt"></i></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
 
 
     
+</html>
 				
