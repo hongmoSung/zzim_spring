@@ -13,6 +13,6 @@ public interface TrackingBoardMapper {
 	
 	public List<Integer> priceList(int pNo)throws Exception;
 	public int priceUpdate(TrackingBoardVO tboard)throws Exception;
-	public int delete(List<String> arrr) throws Exception;
+	public int delete(int pNo) throws Exception;
 	
 }

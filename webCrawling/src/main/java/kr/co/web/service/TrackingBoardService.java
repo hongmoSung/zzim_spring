@@ -16,6 +16,6 @@ public interface TrackingBoardService {
 	
 	public List<Integer> readChartList(int pNo)throws Exception;
 	public int priceUpdate(TrackingBoardVO tboard)throws Exception;
-	public int deleteTracking(List<String> arrr) throws Exception;
+	public int deleteTracking(int pNo) throws Exception;
 	
 }

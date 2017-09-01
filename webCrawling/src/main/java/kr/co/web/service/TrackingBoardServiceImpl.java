@@ -36,8 +36,8 @@ public class TrackingBoardServiceImpl implements TrackingBoardService {
 	}
 	
 	@Override
-	public int deleteTracking(List<String> arrr) throws Exception {
-		return mapper.delete(arrr);
+	public int deleteTracking(int pNo) throws Exception {
+		return mapper.delete(pNo);
 	}
 	
 }
