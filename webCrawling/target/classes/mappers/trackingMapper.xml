@@ -4,16 +4,8 @@
 
 <mapper namespace="kr.co.web.mapper.TrackingBoardMapper">
 
-<resultMap type="TrackingBoardVO" id="Trackingmap">
-		<result column="no" property="no" />
-		<result column="writer" property="writer" />
-		<result column="title" property="title" />
-		<result column="content" property="content" />
-		<result column="reg_date" property="regDate" />
-	</resultMap>
 
-
-	<select id="selectBoard" resultMap="Trackingmap">
+	<select id="selectBoard" resultType="TrackingBoardVO">
 		select p.*, t.notifyPrice, t.email
 		from tbl_product p 
 		inner join tbl_tracking t
@@ -23,7 +15,7 @@
 		limit 0, 10;
 	</select>
 
-	<select id="infiniteScrollDown" resultMap="Trackingmap">
+	<select id="infiniteScrollDown" resultType="TrackingBoardVO">
 	<![CDATA[
 		select p.*, t.notifyPrice, t.email
 		from tbl_product p 
