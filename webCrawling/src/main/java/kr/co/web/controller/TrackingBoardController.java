@@ -14,7 +14,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import kr.co.web.service.TrackingBoardService;
 import kr.co.web.service.TrackingBoardServiceImpl;
+import kr.co.web.vo.PriceHistoryVO;
 import kr.co.web.vo.TrackingBoardVO;
 
 @Controller
@@ -25,7 +27,7 @@ public class TrackingBoardController {
 	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
 	
 	@Autowired
-	private TrackingBoardServiceImpl tService;
+	private TrackingBoardService tService;
 	
 	
 	@RequestMapping("/trackingList")
@@ -64,5 +66,12 @@ public class TrackingBoardController {
 	@ResponseBody
 	public int delete(TrackingBoardVO tboard) throws Exception {
 		return tService.deleteTracking(tboard.getpNo());
+	}
+	
+	@RequestMapping("/priceHistory")
+	@ResponseBody
+	public List<PriceHistoryVO> priceHistory(int pNo){
+		
+		return tService.getChartData(pNo);
 	}
 }
