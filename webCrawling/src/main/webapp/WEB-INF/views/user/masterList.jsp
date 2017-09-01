@@ -2,12 +2,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%@include file="../include/header.jsp" %>
 
-<style>
-	th {
-		text-align:center;
-	}
-
-</style>
 <section>
 	<!-- 리스트 -->
 	<div>

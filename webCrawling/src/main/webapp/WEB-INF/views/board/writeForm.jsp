@@ -2,24 +2,40 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%@include file="../include/header.jsp" %>
 <section>
-
-	<div>
-		<label>제목 :</label> <input type='text' name='title' /><br>
-		<br> <label>내용 :</label> <br>
-		<textarea name='content' rows='5' cols='70'></textarea>
-		<br>
-		 아이디 : ${user.email}
-		<c:if test="${user.email == 'comboy5419@naver.com'}">
-			<input type="checkbox" id="notice" name="notice" value="notice" />
-			<label for="notice">공지사항 등록</label>
-		</c:if>
-		<input type="checkbox" id="secret" name="secret" value="secret" /> 
-		<label for="secret">비밀글 등록</label>
+<div class="container">
+	<div class="row">
+		<div class="input-with-label text-left">
+			<span><h5>제목</h5></span> 
+				<input type='text' name='title' /><br>
+			
+			<span><h5>내용</h5></span>
+				<textarea name='content' rows='5' cols='70' style="resize:none;"></textarea>
+		</div>
+		<span>
+			<c:if test="${user.email == 'comboy5419@naver.com'}">
+				<span>공지사항</span>
+				<div class="checkbox-option">
+					<div class="inner">
+						<input type= "checkbox" id="notice" name="notice" value="notice" />
+					</div>
+				</div>
+			</c:if>
+		</span>
+		<span>
+			<span>비밀글 </span>
+				<div class="checkbox-option">
+					<div class="inner">
+						<input type= "checkbox" id="secret" name="secret" value="secret"/>
+					</div>
+				</div>
+		</span>
+	
 		<div>
-			<button type='submit'>등록</button>
-			<button name="list">목록</button>
+			<a type='submit' class="btn btn-sm">등록</a>
+			<a name="list" class="btn btn-sm">목록</a>
 		</div>
 	</div>
+</div>
 </section>
 	
 <script>
@@ -39,7 +55,7 @@
 	};
 
 	// 등록
-	$("button[type='submit']").click(function() {
+	$("a[type='submit']").click(function() {
 		var bContent = $("textarea[name=content]").val();
 		var bTitle = $("input[name=title]").val();
 		var email = "${user.email}";
@@ -80,7 +96,7 @@
 	})
 
 	// 목록
-	$("button[name='list']").click(
+	$("a[name='list']").click(
 			function() {
 				var sName = getParameters('searchName');
 				var pageNo = getParameters('pageNo');

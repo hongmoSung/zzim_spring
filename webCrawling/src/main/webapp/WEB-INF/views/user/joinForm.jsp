@@ -3,30 +3,34 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta id="_csrf" name="_csrf" content="${_csrf.token}"/>
 <meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}"/>
-
 <%@ include file="../include/header.jsp"%>
-<form id="join">
-	<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
-	<div style="display: inline;">
-		<label for="email">아이디</label> 
-		<input type="text" id="email" placeholder="이메일" name="email"> <span>@</span> 
-		<select id="emailType" onchange="innerSelect(this.value);">
-			<option value="empty">선택</option>
-			<option value="naver">naver.com</option>
-			<option value="daum">daum.net</option>
-			<option value="etc">직접입력</option>
-		</select> 
-		<input type="text" id="insertEmail" style="display: none;"></input>
-		<button type="button" id="idCheckBtn">중복 확인</button>
+<section>
+<div class="container">
+	<div class="row">
+			<div class="input-with-label text-center">
+				<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
+				<span><h5>아이디</h5></span> 
+				<input type="text" id="email" placeholder="이메일" name="email" style="width:200px;"> @  
+				<select id="emailType" onchange="innerSelect(this.value);" style="width:200px;">
+					<option value="empty">선택</option>
+					<option value="naver">naver.com</option>
+					<option value="daum">daum.net</option>
+					<option value="etc">직접입력</option>
+				</select> 
+				<input type="text" id="insertEmail" style="display:none; width:200px;"></input>
+				<a id="idCheckBtn" class="btn btn-sm" style="margin-top:20px;">중복 확인</a>
+			</div>
+			<br>
+			<div class="input-with-label text-center"> 
+				<span><h5>비밀번호</h5></span> 
+				<input type="password" id="password" placeholder="비밀번호" name="password" style="width:400px;"><br> 
+				<span><h5>비밀번호 확인</h5></span> 
+				<input type="password" id="password2" placeholder="비밀번호 확인" style="width:400px;"><br>
+				<a id="joinBtn" class="btn btn-sm">회원가입</a>
+			</div>
 	</div>
-	<br> 
-	<label for="password">비밀번호</label> 
-	<input type="password" id="password" placeholder="비밀번호" name="password"><br> 
-	<label for="password2">비밀번호 확인</label> 
-	<input type="password" id="password2" placeholder="비밀번호 확인"><br>
-
-	<button id="joinBtn" type="button">회원가입</button>
-</form>
+</div>
+</section>
 
 <script>
 	var token = $("meta[name='_csrf']").attr("content");
@@ -40,11 +44,10 @@
 
 	function innerSelect(value) {
 		if (value == 'etc') {
-			document.getElementById("insertEmail").style.display = "block";
-			document.getElementById("insertEmail").style.display = "inline";
+			$("#insertEmail").show();
 		}
 		if (value != 'etc') {
-			document.getElementById("insertEmail").style.display = "none";
+			$("#insertEmail").hide();
 		}
 
 	}
@@ -117,8 +120,6 @@
 			$("#password").focus().val("");
 			return false;
 		}
-		console.log(email);
-		console.log(password);
 		$.ajax({
 			url : getContextPath() + "/user/join",
 			type : "POST",
@@ -132,4 +133,5 @@
 		});
 	});
 </script>
-<%@ include file="../include/footer.jsp"%>
+
+<%-- <%@ include file="../include/footer.jsp"%> --%>

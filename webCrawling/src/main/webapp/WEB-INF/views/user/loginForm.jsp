@@ -2,30 +2,31 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%@ include file="../include/header.jsp"%>
 <%@ page session="true" %>
-	<div id="form_div">
-		<h2> Login</h2>
-		${param.error}
-		<c:if test="${param.error != null }">
-        	<h3>Username/Password not corrrect</h3>
-        	<h3>Reason : ${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message }</h3>
-		</c:if>
-		<c:if test="${param.logout != null }">
-        	<h3>logout success</h3>
-		</c:if>
-		<c:url var="loginUrl" value="/login" />
-		<form method="POST" action="${loginUrl}" id="loginForm">
-			<div class="form-group">
-				<label for="email">email:</label> 
-				<input type="text" class="form-control" id="email" placeholder="Enter email " name="username">
+<section>
+<div class="container">
+	<div class="row">
+		<div class="col-md-4 col-md-offset-4 col-sm-8 col-sm-offset-2">
+			<div class="feature bordered text-center">
+				<h2 class="uppercase">Login</h2>
+				<c:if test="${param.error != null }">
+		        	<h3>Username/Password not corrrect</h3>
+		        	<h3>Reason : ${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message }</h3>
+				</c:if>
+				<c:url var="loginUrl" value="/login" />
+				<form method="POST" action="${loginUrl}" id="loginForm" class="text-left">
+					<input type="text" class="mb0"" id="email" placeholder="Enter email " name="username">
+					<input type="password" class="mb0" id="password" placeholder="Enter password" name="password">
+					<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
+					<input type="submit" id="loginBtn" value="LOGIN"/>
+				</form>
+				<p class="mb0">
+					<a href="${pageContext.request.contextPath}/user/joinForm">아직 회원이 아니세요?</a>
+				</p>
 			</div>
-			<div class="form-group">
-				<label for="password">Password:</label> 
-				<input type="password" class="form-control" id="password" placeholder="Enter password" name="password">
-			</div>
-			<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
-			<button id="loginBtn" class="btn btn-default" style="float: right;">login</button>
-		</form>
+		</div>
 	</div>
+</div>
+</section>
 	
 	<script>
 		$(document).ready(function(){
@@ -35,13 +36,15 @@
 				if($("#email").val()== ""){
 					alert("로그인 이메일을 입력해주세요");
 					$("#email").focus();
+					return false;
 				}else if($("#password").val()== ""){
 					alert("패스워드를 입력해주세요");
 					$("#password").focus();
+					return false;
 				}else{
 					$("#loginForm").submit();
 				}
 			});
 		});
 	</script>
-<%@ include file="../include/footer.jsp"%>
+<%-- <%@ include file="../include/footer.jsp"%> --%>

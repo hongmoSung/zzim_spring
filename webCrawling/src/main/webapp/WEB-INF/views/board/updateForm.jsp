@@ -3,21 +3,40 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%@include file="../include/header.jsp"%>
 <section>
-			
-					<label>제목</label>
-					<input type='text' name='title' value="${detail.board.bTitle}" /><br>
-					<label>내용</label>
-					<textarea name='content' rows='5' cols='70' >${detail.board.bContent}</textarea><br>
-			
+<div class="container">
+	<div class="row">
+		<div class="input-with-label text-left">
+			<span>제목</span>
+				<input type='text' name='title' value="${detail.board.bTitle}" /><br>
+			<span>내용</span>
+				<textarea name='content' rows='5' cols='70' style="resize:none;">${detail.board.bContent}</textarea><br>
+		</div>
+		<span>
 			<c:if test="${user.email == 'comboy5419@naver.com'}">
-				<input type= "checkbox" id="notice" name="notice" value="notice" /> <label for="notice">공지사항</label>
+				<span>공지사항</span>
+				<div id="noticeChk" class="checkbox-option">
+					<div class="inner">
+						<input type= "checkbox" id="notice" name="notice" value="notice" />
+					</div>
+				</div>
 			</c:if>
-			<input type= "checkbox" id="secret" name="secret" value="secret"/> <label for="secret">비밀글</label>
-			
+		</span>
+		<span>
+			<span >비밀글 </span>
+				<div id="secretChk" class="checkbox-option">
+					<div class="inner">
+						<input type= "checkbox" id="secret" name="secret" value="secret"/>
+					</div>
+				</div>
+		</span>
 			<span id="isSecret" style="display:none;">${detail.board.isSecret}</span>
 			<span id="isNotice" style="display:none;">${detail.board.isNotice}</span><br>
-			<button type='submit'> 수정 </button>
-			<button name="list">목록</button>
+			<div class="text-center">
+				<a type='submit' class="btn btn-sm"> 수정 </a>
+				<a name="list" class="btn btn-sm">목록</a>
+			</div>
+	</div>
+</div>
 </section>
 <script>
 
@@ -38,18 +57,18 @@
 		};
 
 	// 수정
-		$("button[type='submit']").click(function() {
+		$("a[type='submit']").click(function() {
 			var bContent = $("textarea[name=content]").val();
 			var bTitle = $("input[name=title]").val();
 			var bNo = getParameters('bNo');
-			var isNotice = $("#notice").prop("checked");
-			if(isNotice){
+			var isNotice = $("#noticeChk").attr("class");
+			if(isNotice == "checkbox-option checked"){
 				isNotice = 1;
 			}else{
 				isNotice = 0;
 			}
-			var isSecret = $("#secret").prop("checked");
-			if(isSecret){
+			var isSecret = $("#secretChk").attr("class");
+			if(isSecret == "checkbox-option checked"){
 				isSecret = 1;
 			}else{
 				isSecret = 0;
@@ -74,7 +93,7 @@
 			}
 		})
 
-		$("button[name='list']").click(function () {
+		$("a[name='list']").click(function () {
 			var sName = getParameters('searchName');
 			var pageNo = getParameters('pageNo');
 			if(sName != undefined){
@@ -89,10 +108,16 @@
 			var isSecret = $("#isSecret").text();
 			var isNotice = $("#isNotice").text();
 			if(isSecret == 1){
-				$("#secret").attr("checked", true);
+				console.log(isSecret);
+				console.log($("#secretChk").attr("class"));
+				$("#secretChk").attr("class", "checkbox-option checked");
+				console.log($("#secretChk").attr("class"));
+				$("input #secret").attr("checked", true);
 			}
 			if(isNotice == 1){
-				$("#notice").attr("checked", true);
+				console.log(isNotice);
+				$("#noticeChk").attr("class", "checkbox-option checked");
+				$("input #notice").attr("checked", true);
 			}
 		}
 		hiddenChk();
