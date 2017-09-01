@@ -60,20 +60,9 @@ public class TrackingBoardController {
 		return tService.priceUpdate(tboard);
 	}
 
-//	@RequestMapping("/delete1")
-//	@ResponseBody
-//	public int delete1(String[] arrr) throws Exception {
-//		List<String> delList = new ArrayList<String>();
-//		for(String pno : arrr) {
-//			delList.add(pno);
-//		}
-//		return tService.deleteTracking(delList);
-//	}
-	
 	@RequestMapping("/delete")
 	@ResponseBody
 	public int delete(TrackingBoardVO tboard) throws Exception {
-		System.out.println(tboard.getpNo());
 		return tService.deleteTracking(tboard.getpNo());
 	}
 }
