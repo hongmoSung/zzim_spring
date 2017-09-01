@@ -36,7 +36,7 @@
 	    <ul class="nav navbar-nav">
 	      <li><a href="${pageContext.request.contextPath}">Home</a></li>
 	      <li><a href="${pageContext.request.contextPath}/crawling/cart">Cart</a></li>
-	      <li><a href="${pageContext.request.contextPath}/trackingBoard/list">Board</a></li>
+	      <li><a href="${pageContext.request.contextPath}/trackingBoard/trackingList">Board</a></li>
 	      <li><a href="${pageContext.request.contextPath}/board/list">Q&A</a></li>
 	    </ul>
 	    <ul class="nav navbar-nav navbar-right">

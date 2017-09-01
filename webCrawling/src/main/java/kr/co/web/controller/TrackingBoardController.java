@@ -28,8 +28,8 @@ public class TrackingBoardController {
 	private TrackingBoardServiceImpl tService;
 	
 	
-	@RequestMapping("/list")
-	public void list(){
+	@RequestMapping("/trackingList")
+	public void trackingList(){
 	}
 	
 	@RequestMapping("/sList")
