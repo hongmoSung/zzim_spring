@@ -50,10 +50,10 @@
 				<tbody>
 				{{# each .}}
 					<tr>
-						<td width="10%"><a href="{{cLink}}"> <img alt="Product" class="product-thumb" src="{{cPic}}" /></a></td>
+						<td width="10%"><a href="{{cLink}}"> <img alt="Product" class="product-thumb" src="{{cPic}}" width="80" height="80"/></a></td>
 						<td width="60%"><a href="{{cLink}}"> <span>{{#makeName cName}}{{/makeName}}</span> </a></td>
 						<td><span>{{#makeCount cCount}}{{/makeCount}}</span></td>
-						<td><span>{{cPrice}}</span></td>
+						<td><span>{{#makePrice cPrice}}{{/makePrice}}</span></td>
 						<td><span>{{#makeDelivery cDelivery}}{{/makeDelivery}}</span></td>
 					</tr>
 				{{/ each}}
@@ -87,6 +87,7 @@
 		});
 		Handlebars.registerHelper("makeName", function(cName) {
 			if(cName != null){
+				cName += "";
 				cName = cName.replace(/(^\s*)|(\s*$)/g, "");
 								
 			}
@@ -94,9 +95,10 @@
 		});
 		
 		Handlebars.registerHelper("makePrice", function(cPrice) {
-			if(cName != null){
+			if(cPrice != null){
+				cPrice += "";
 				cPrice = cPrice.replace(/(^\s*)|(\s*$)/g, "");
-				var lastCh = cDelivery.charAt(cPrice.length - 1);
+				var lastCh = cPrice.charAt(cPrice.length - 1);
 				var regNumber = /^[0-9]*$/;
 
 				if (regNumber.test(lastCh)) {
