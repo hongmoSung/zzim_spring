@@ -17,4 +17,5 @@ public interface TrackingBoardMapper {
 	public int delete(int pNo) throws Exception;
 	public List<PriceHistoryVO> selectPriceHistory(int pNo);
 	
+	
 }

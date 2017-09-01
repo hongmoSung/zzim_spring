@@ -32,4 +32,5 @@ public class PriceHistoryVO {
 		this.pNo = pNo;
 	}
 
+	
 }

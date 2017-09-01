@@ -20,4 +20,5 @@ public interface TrackingBoardService {
 	public int deleteTracking(int pNo) throws Exception;
 	public List<PriceHistoryVO> getChartData(int pNo);
 	
+	
 }
