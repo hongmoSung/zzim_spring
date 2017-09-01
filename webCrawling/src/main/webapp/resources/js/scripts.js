@@ -615,7 +615,7 @@ $(document).ready(function() {
     // Accordions
     // 원래 코드 = $('.accordion li').click(function()
 //    $('.accordion li .title').click(function() {
-    $("body").on( 'click', '.accordion li .title' , function(){
+/*    $("body").on( 'click', '.accordion li .title' , function(){
         if ($(this).closest('.accordion').hasClass('one-open')) {
             $(this).closest('.accordion').find('li').removeClass('active');
             $(this).addClass('active');
@@ -625,7 +625,7 @@ $(document).ready(function() {
         if(typeof window.mr_parallax !== "undefined"){
             setTimeout(mr_parallax.windowLoad, 500);
         }
-    });
+    });*/
 
     // Tabbed Content
 
