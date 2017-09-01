@@ -21,10 +21,8 @@
 				</div>
 			</div>
 		</section>
-
 		<section id="cartSection">
 		</section>
-
 	</div>
 </body>
 
