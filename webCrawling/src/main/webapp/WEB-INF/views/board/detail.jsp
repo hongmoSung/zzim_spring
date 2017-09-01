@@ -5,10 +5,17 @@
 <meta id="_csrf_header" name="_csrf_header" content="${_csrf.headerName}"/>
 <%@include file="../include/header.jsp"%>
 
-<section>
-<!-- 전체 -->
-	<!-- 머리단 -->
-	<!-- 본문 -->
+<div class="main-container">
+	<section class="page-title page-title-4 bg-secondary">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6 col-md-offset-5">
+					<h3 class="uppercase mb0"> Q & A</h3>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section>
 	<div class="container"> 
 		<div class="row">
 			<div class="col-sm-10 col-sm-offset-1">
@@ -96,6 +103,7 @@
 	</div>
 			
 </section>
+</div>
 <script>	
 	var token = $("meta[name='_csrf']").attr("content");
 	var header = $("meta[name='_csrf_header']").attr("content");

@@ -1,83 +1,101 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%@include file="../include/header.jsp" %>
-
-<section>
+<div class="main-container">
+	<section class="page-title page-title-4 bg-secondary">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6 col-md-offset-4">
+					<h3 class="uppercase mb0">로그인 계정 관리</h3>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section>
 	<!-- 리스트 -->
-	<div>
-<%-- 	<span id="loginEmail" style="display:hidden;">${user.email}</span> --%>
-	<hr>
-	<div>
-		<c:if test="${not empty masterList}">
-			<button type="button" name="deleteMaster" id="deleteMaster">선택항목 삭제</button>
-		</c:if>
-	</div>
-		<table style="text-align:center; width:80%; margin:auto;">
-			<thead >
-				<tr>
-					<th>전체 선택<input type="checkbox" name="checkAll" id="th_checkAll" onclick="checkAll();" /></th>
-					<th>사이트</th>
-					<th>아이디</th>
-					<th>비밀번호</th>
-					<th></th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach items="${masterList}" var="list" varStatus="status">
-					<tr>
-						<td><input type="checkbox" id="checkRow" name="checkRow" value="${list.email},${list.website},${list.websiteId}" onclick="check();" /></td>
-						
-						<td id="first${status.index}" class="a"><span name="website${status.index}">${list.website}</span></td>
-						<td id="website${status.index}" class="b">
-							<select id="websiteTypeUp${status.index}" onchange="innerSelectUp(this.value)"  >
-							  <option value="empty${status.index}">선택</option>
-							  <option value="11st" id="op11st${status.index}">11st</option>
-							  <option value="gmarket" id="opGmarket${status.index}">gmarket</option>
-							  <option value="auction" id="opAuction${status.index}">auction</option>
-							  <option value="interpark" id="opInterpark${status.index}">interpark</option>
-							  <option value="etc" id="opEtc${status.index}">직접 입력</option>
-				  		    </select>
-				  		 	<input type="text" value="${list.website}" name="website${status.index}" class="c"></input></td>
-						
-						<td id="second${status.index}" class="a"><span name="websiteId${status.index}">${list.websiteId}</span></td>
-						<td id="websiteId${status.index}" class="b">
-							<input type="text" value="${list.websiteId}" name="websiteId${status.index}"></td>
-						
-						<td id="third${status.index}" class="a"><span name="websitePw${status.index}">${list.websitePw}</span></td>
-						<td id="websitePw${status.index}" class="b">
-							<input type="text" value="${list.websitePw}" name="websitePw${status.index}"></td>
-
-						<td colspan="2" id="updateMaster${status.index}" class="a">
-							<button type="button" class="updateBtn" name="updateMaster${status.index}" data-no="${status.index}">편집</button></td>
-						<td id="updateGo${status.index}" class="b">
-							<button type="button" name="updateSubmit" data-no="${status.index}">수정</button>
-							<button type="button" name="updateCancel" data-no="${status.index}">취소</button></td>
-					</tr>
-				</c:forEach>
+	<div class="container">
+	<div class="row">
+		<div>
+			<c:if test="${not empty masterList}">
+				<a type="button" name="deleteMaster" id="deleteMaster" class="btn btn-sm">선택항목 삭제</a>
+			</c:if>
+		</div>
+		<div class="col-md-10 col-md-offset-1">
+			<div class="post-snippet mb64">
 				<c:if test="${empty masterList}">
-					<tr>
-						<td colspan='4'> &#187  관리중인 계정이 없습니다.</td>
-					</tr>
+						<span>&#187  관리중인 계정이 없습니다.</span>
 				</c:if>
-					<tr id="masterRegistForm" >
-						<td><button type="button" name="masterRegist">&#43</button></td>
-						<td> <select id="websiteType" onchange="innerSelect(this.value)" >
-							  <option value="empty">선택</option>
-							  <option value="11st">11st</option>
-							  <option value="gmarket">gmarket</option>
-							  <option value="auction">auction</option>
-							  <option value="interpark">interpark</option>
-							  <option value="etc">직접 입력</option>
-				  		 	 </select>
-							<input type="text" id="insertWebsite"></input></td>
-						<td><input type="text" name="masterId" id="masterId"></td>
-						<td><input type="text" name="masterPassword" id="masterPassword"></td>
-					</tr>
-			</tbody>
-		</table>
+				<div>
+					<ul class="post-meta">
+						<li><h6>전체<input type="checkbox" name="checkAll" id="th_checkAll" onclick="checkAll();" /></h6></li>
+						<li><h6>관리 사이트</h6></li>
+						<li><h6>로그인 아이디</h6></li>
+					</ul>
+				</div>
+				<c:forEach items="${masterList}" var="list" varStatus="status">
+					<div>
+						<ul class="post-meta" style="width:280px;">
+							<li><input type="checkbox" id="checkRow" name="checkRow" value="${list.email},${list.website},${list.websiteId}" onclick="check();" /></li>
+							
+							<li id="first${status.index}" class="a">
+								<span name="website${status.index}">${list.website}</span>
+							</li>
+							<li id="website${status.index}" class="b">
+								<select id="websiteTypeUp${status.index}" onchange="innerSelectUp(this.value)" style="width:100px;" >
+									  <option value="empty${status.index}">선택</option>
+									  <option value="11st" id="op11st${status.index}">11st</option>
+									  <option value="gmarket" id="opGmarket${status.index}">gmarket</option>
+									  <option value="auction" id="opAuction${status.index}">auction</option>
+									  <option value="interpark" id="opInterpark${status.index}">interpark</option>
+									  <option value="etc" id="opEtc${status.index}">직접 입력</option>
+					  		    </select>
+					  		    <input type="text" value="${list.website}" name="website${status.index}" class="c" style="width:100px;"></input>
+				  		    </li>
+			  		    </ul>
+			  		    <ul class="post-meta" style="width:150px;">
+			  		    	<li id="second${status.index}" class="a">
+			  		    		<span name="websiteId${status.index}">${list.websiteId}</span>
+		  		    		</li>
+							<li id="websiteId${status.index}" class="b">
+								<input type="text" value="${list.websiteId}" name="websiteId${status.index}">
+							</li>
+						</ul>
+						<ul class="post-meta" style="float:right;">	
+							<li id="updateMaster${status.index}" class="a">
+								<a type="button" class="updateBtn btn btn-sm" name="updateMaster${status.index}" data-no="${status.index}">편집</a></li>
+							<li id="updateGo${status.index}" class="b">
+								<a type="button" name="updateSubmit" data-no="${status.index}" class="btn btn-sm">수정</a>
+								<a type="button" name="updateCancel" data-no="${status.index}" class="btn btn-sm">취소</a>
+							</li>
+						</ul>
+					</div>
+				<hr>
+				</c:forEach>
+				<div class="input-with-label">
+					<a type="button" name="masterRegist" class="btn btn-sm">&#43</a><br>
+					<span><h5>사이트</h5></span>
+					<select id="websiteType" onchange="innerSelect(this.value)" style="width:20%;">
+						<option value="empty">선택</option>
+						<option value="11st">11st</option>
+						<option value="gmarket">gmarket</option>
+						<option value="auction">auction</option>
+						<option value="interpark">interpark</option>
+						<option value="etc">직접 입력</option>
+	  		 	 	</select>
+	  		 	 	
+	  		 	 	<input type="text" id="insertWebsite" style="width:20%;">
+	  		 	 	
+	  		 	 	<span><h5>아이디</h5></span>
+					<input type="text" name="masterId" id="masterId" style="width:20%;">
+					
+					<span><h5>비밀번호</h5></span>
+					<input type="password" name="masterPassword" id="masterPassword" style="width:20%;">
+			</div>
+		</div>
 	</div>
-	
+	</div>
 </section>
+</div>
 
 <script>
 	// 토큰
@@ -160,7 +178,7 @@
 		}
 	}
 	// 등록
-	$("button[name='masterRegist']").on("click", function() {
+	$("a[name='masterRegist']").on("click", function() {
 		var email = "${user.email}";
 		var websiteId = $("#masterId").val();
 		var websitePw = $("#masterPassword").val();
@@ -224,7 +242,6 @@
 		}else{
 			c.hide();
 		}
-		
 	  	console.log("편집 website : " + website);
 	  	switch(website){
 	  		case '11st' : $("#op11st"+dataNo).attr("selected", "selected"); break;
@@ -260,7 +277,7 @@
 	}
 	
 	// 수정
-	$("Button[name='updateSubmit']").on("click", function(){
+	$("a[name='updateSubmit']").on("click", function(){
 		var dataNo = $(this).attr('data-no');
 		var email = "${user.email}";
 		var website = $("span[name='website" + dataNo + "']").text();
@@ -281,7 +298,6 @@
 					reWebsite : reWebsite,
 					reWebsiteId : reWebsiteId,
 					reWebsitePw : reWebsitePw
-					
 				}
 				}).done(function (result){
 					alert(result);
@@ -290,7 +306,7 @@
 	})
 	
 	// 수정 취소
-	$("Button[name='updateCancel']").on("click", function(){
+	$("a[name='updateCancel']").on("click", function(){
 // 		window.location.reload();
 		var dataNo = $(this).attr('data-no');
 		var website = $("span[name='website" + dataNo + "']").text();
