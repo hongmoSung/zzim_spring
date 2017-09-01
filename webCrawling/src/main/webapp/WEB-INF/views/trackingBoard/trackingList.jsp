@@ -7,8 +7,8 @@
 body {
    height:100px; 
 }
-.chartdiv {
-/* 	width		: 100%; */
+#chartdiv {
+	width		: 100%;
 	height		: 500px;
 	font-size	: 11px;
 }																	
@@ -55,7 +55,7 @@ body {
 <script id="entry-template" type="text/x-handlebars-template">
         {{#list}} 
        		 <li>
-                 <div class="title" data-pNo ="{{pNo}}">
+                 <div class="title">
                      <table class="table cart">
                              <tr>
                                  <td rowspan="2">
@@ -84,8 +84,9 @@ body {
                  
                  <div class="content">
                      
-                     <div id="chartdiv{{pNo}}"  class="col-sm-8 col-md-8 chartdiv">
+                     <div id="chartdiv"  class="col-sm-8 col-md-8">
                       	차트    
+                     
                      </div>
                 
                     <div class="col-sm-4 col-md-4" style="text-align: right">
@@ -111,79 +112,6 @@ body {
 
 <script type="text/javascript">
 
-$("body").on( 'click', '.accordion li .title' , function(){
-  if ($(this).closest('.accordion').hasClass('one-open')) {
-      $(this).closest('.accordion').find('li').removeClass('active');
-      $(this).addClass('active');
-  } else {
-      $(this).parent().toggleClass('active'); // parent추가!!!!!!!!!
-  }
-  if(typeof window.mr_parallax !== "undefined"){
-      setTimeout(mr_parallax.windowLoad, 500);
-  }
-  var pNo = $(this).attr("data-pNo");
-  console.log(pNo);
-  
-  $.ajax({
-	  url : getContextPath()+"/trackingBoard/priceHistory",
-	  data : {"pNo":pNo}
-  }).done(function(result){
-	 for(var i = 0 ; i < result.length ; i++){
-		 console.log("result[i].currDate:::",result[i].currDate); 
-		 var date = new Date(result[i].currDate);
-		 var timeStr = date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate() + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
-		 console.log(timeStr); 
-		 result[i].currDate = timeStr;
-	 }
-	 
-	 var chart = AmCharts.makeChart("chartdiv"+pNo, {
-		    "theme": "light",
-		    "type": "serial",
-		    "marginRight": 80,
-		    "autoMarginOffset": 20,
-		    "marginTop":20,
-		    "dataProvider": result,
-		    "valueAxes": [{
-		        "id": "v1",
-		        "axisAlpha": 0.1
-		    }],
-		    "graphs": [{
-		        "useNegativeColorIfDown": true,
-		        "balloonText": "[[category]]<br><b>value: [[value]]</b>",
-		        "bullet": "round",
-		        "bulletBorderAlpha": 1,
-		        "bulletBorderColor": "#FFFFFF",
-		        "hideBulletsCount": 50,
-		        "lineThickness": 2,
-		        "lineColor": "#fdd400",
-		        "negativeLineColor": "#67b7dc",
-		        "valueField": "currPrice"
-		    }],
-		    "chartScrollbar": {
-		        "scrollbarHeight": 5,
-		        "backgroundAlpha": 0.1,
-		        "backgroundColor": "#868686",
-		        "selectedBackgroundColor": "#67b7dc",
-		        "selectedBackgroundAlpha": 1
-		    },
-		    "chartCursor": {
-		        "valueLineEnabled": true,
-		        "valueLineBalloonEnabled": true
-		    },
-		    "categoryField": "currDate",
-		    "categoryAxis": {
-		        "parseDates": true,
-		        "axisAlpha": 0,
-		        "minHorizontalGap": 60
-		    },
-		    "export": {
-		        "enabled": true
-		    }
-	 });
-	 
-  });
-  
-});
 // 핸들바 함수 
 function handle(result){
 	//핸들바 템플릿 가져오기
@@ -272,11 +200,8 @@ $("body").on("click","#delete",function(){
 	
 })
 
-
-
-
 // 차트 코드
-/* var chartData = generatechartData();
+var chartData = generatechartData();
 
 function generatechartData() {
     var chartData = [];
@@ -299,10 +224,10 @@ function generatechartData() {
         });
     }
     return chartData;
-} */
+}
 
 
-	/* var chart = AmCharts.makeChart("chartdiv14", {
+var chart = AmCharts.makeChart("chartdiv", {
     "theme": "light",
     "type": "serial",
     "marginRight": 80,
@@ -345,9 +270,11 @@ function generatechartData() {
     "export": {
         "enabled": true
     }
-}); 
- */
-//chart.addListener("dataUpdated");
+});
+$(body).on("click",".accordion li .title",function(){
+	console.log("차트")
+chart.addListener("dataUpdated");
+})
 
 </script>
 

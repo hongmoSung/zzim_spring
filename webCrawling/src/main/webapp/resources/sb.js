@@ -3,3 +3,4 @@ function getContextPath() {
 			return location.href.substring( hostIndex, location.href.indexOf('/', hostIndex + 1) );
 		};
 		
+

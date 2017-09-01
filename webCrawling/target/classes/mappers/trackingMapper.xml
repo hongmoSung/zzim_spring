@@ -4,10 +4,6 @@
 
 <mapper namespace="kr.co.web.mapper.TrackingBoardMapper">
 
-	<select id="selectPriceHistory" resultType="priceHistoryVO">
-		select * from tbl_price_history
-		where pNo = #{pNo}
-	</select>
 
 	<select id="selectBoard" resultType="TrackingBoardVO">
 		select p.*, t.notifyPrice, t.email
