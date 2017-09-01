@@ -23,7 +23,17 @@
 	 <script src="https://d3js.org/d3.v3.min.js"></script>
 	 <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.js"></script>
 	
-	
+	<!-- 	탬플릿 css -->
+	<link href="/web/resources/css/font-awesome.min.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/web/resources/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="/web/resources/css/themify-icons.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="/web/resources/css/flexslider.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="/web/resources/css/lightbox.min.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="/web/resources/css/ytplayer.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="/web/resources/css/theme.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="/web/resources/css/custom.css" rel="stylesheet" type="text/css" media="all" />
+    <link href='http://fonts.googleapis.com/css?family=Lato:300,400%7CRaleway:100,400,300,500,600,700%7COpen+Sans:400,500,600' rel='stylesheet' type='text/css'>
+        
 	
 </head>
 <body>
