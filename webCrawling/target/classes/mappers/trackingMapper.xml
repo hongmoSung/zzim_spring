@@ -42,11 +42,7 @@
 
 	<delete id="delete" >
 		delete from tbl_product
-		where pNo in
-		<foreach item="pno" collection="list" open="("
-			separator="," close=")">
-			#{pno}
-		</foreach>
+		where pNo = #{pNo}
 	</delete>
 
 
