@@ -57,7 +57,7 @@
 											<img src="/web/resources/img/etc.png" style="height:20px; width:50px; display:inline;">
 										</c:otherwise>
 									</c:choose>
-									<span name="website${status.index}">&nbsp&nbsp${list.website}</span>
+									&nbsp&nbsp&nbsp&nbsp<span name="website${status.index}">${list.website}</span>
 								</li>
 								<li id="website${status.index}" class="b">
 									<select id="websiteTypeUp${status.index}" onchange="innerSelectUp(this.value)" style="width:100px;" >
@@ -264,8 +264,8 @@
 		var c = $(".c");
 		a.show();
 		b.hide();
-		
-		if(website == 'etc'){
+		console.log(website);
+		if(website == "etc"){
 			c.show();
 		}else{
 			c.hide();
