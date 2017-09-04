@@ -3,10 +3,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%@include file="../include/header.jsp"%>
 <div class="main-container">
-	<section class="page-title page-title-4 bg-secondary">
+	<section class="page-title page-title-4 bg-dark" style="height:150px;">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-6 col-md-offset-5">
+				<div class="col-md-6 col-md-offset-1">
 					<h3 class="uppercase mb0"> 문의 글 수정</h3>
 				</div>
 			</div>

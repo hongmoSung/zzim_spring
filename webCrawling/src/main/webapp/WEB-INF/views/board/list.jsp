@@ -48,7 +48,7 @@
 								</c:choose>
 								<c:choose>
 									<c:when test="${board.isSecret == 1 and user.email != 'comboy5419@naver.com' and user.email != board.email}">
-<!-- 										<img src="/web/resources/img/secret.png" style="width:20px; display:inline;"> -->
+										<img src="/web/resources/img/secret.png" style="width:20px; display:inline;">
 										<h5 class="inline-block"><a style="cursor:pointer; color:#C0C0C0; font-weight:lighter;" name="secret">&nbsp비밀글 입니다</a></h5>
 									</c:when>
 									<c:otherwise>

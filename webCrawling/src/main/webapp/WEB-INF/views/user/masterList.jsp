@@ -5,9 +5,16 @@
 	input placeholder {
 		color:#FFFAFA;
 	}
+	input[type='text'], input[type='password'], select {
+		background-color: #F0FFF0;
+		border: 1px solid #DCDCDC;
+	}
+	i.ti-angle-down{
+		margin-top: -15px;
+	}
 </style>
 <div class="main-container">
-	<section class="page-title page-title-4 bg-secondary">
+	<section class="page-title page-title-4 bg-dark" style="height:150px;">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-6 col-md-offset-1">
@@ -20,12 +27,12 @@
 	<!-- 리스트 -->
 	<div class="container">
 		<div class="row">
-			<div>
+			<div style="margin-left:86px;">
 				<input type="hidden" id="_csrf" value="${_csrf.token}">
 				<input type="hidden" id="_csrf_header" value="${_csrf.headerName}">
 				<c:if test="${not empty masterList}">
 					<h5 style="display:inline;"><span style="position:relative; top:-10px;">전체&nbsp<input type="checkbox" name="checkAll" id="th_checkAll" onclick="checkAll();" /></span></h5>
-					<a type="button" name="deleteMaster" id="deleteMaster" class="btn btn-sm" style="color:">선택항목 삭제</a>
+					<a type="button" name="deleteMaster" id="deleteMaster" class="btn btn-sm" style="margin-left:15px;">선택항목 삭제</a>
 				</c:if>
 			</div>
 			<hr>
@@ -36,8 +43,8 @@
 					</c:if>
 					<c:forEach items="${masterList}" var="list" varStatus="status">
 						<div>
-							<ul class="post-meta" style="width:280px;">
-								<li><input type="checkbox" id="checkRow" name="checkRow" value="${list.email},${list.website},${list.websiteId}" onclick="check();" style="margin-top:20px;" /></li>
+							<ul class="post-meta" style="width:330px;">
+								<li style="width:40px; margin-left:10px;"><input type="checkbox" id="checkRow" name="checkRow" value="${list.email},${list.website},${list.websiteId}" onclick="check();" style="margin-top:20px;" /></li>
 								
 								<li id="first${status.index}" class="a" style="margin-top:10px;">
 									<c:choose>
@@ -66,7 +73,6 @@
 										  <option value="gmarket" id="opGmarket${status.index}">gmarket</option>
 										  <option value="auction" id="opAuction${status.index}">auction</option>
 										  <option value="interpark" id="opInterpark${status.index}">interpark</option>
-										  <option value="etc" id="opEtc${status.index}">직접 입력</option>
 						  		    </select>
 						  		    <input type="text" value="${list.website}" name="website${status.index}" class="c" style="width:100px;"></input>
 					  		    </li>
@@ -97,15 +103,16 @@
 					</c:forEach>
 					<div class="input-with-label" style="width:100%;" >
 						<a type="button" name="masterRegist" class="btn btn-sm" style="width:20px; padding:0 15px 0 10px; position:relative; top:10px;">&#43</a>
-						<h5 style="display:inline; margin:0 10px 0 15px;"><span style="display:inline;"></span></h5>
-						<select id="websiteType" onchange="innerSelect(this.value)" style="width:25%; display:inline;" >
-							<option value="empty">사이트 입력</option>
-							<option value="11st">11st</option>
-							<option value="gmarket">gmarket</option>
-							<option value="auction">auction</option>
-							<option value="interpark">interpark</option>
-		  		 	 	</select>
-		  		 	 	
+						<span  class="select-option" style="display:inline; margin-left:30px;">
+							<i class="ti-angle-down"></i>
+							<select id="websiteType" onchange="innerSelect(this.value)" style="width:25%; display:inline;" >
+								<option value="empty">사이트 입력</option>
+								<option value="11st">11st</option>
+								<option value="gmarket">gmarket</option>
+								<option value="auction">auction</option>
+								<option value="interpark">interpark</option>
+			  		 	 	</select>
+		  		 	 	</span>
 		  		 	 	<input type="text" id="insertWebsite" style="width:30%;">
 		  		 	 	
 		  		 	 	<h5 style="display:inline;  margin:0 10px 0 15px;""><span style="display:inline;"></span></h5>

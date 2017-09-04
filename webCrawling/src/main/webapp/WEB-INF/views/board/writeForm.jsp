@@ -1,52 +1,59 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%@include file="../include/header.jsp" %>
+<style>
+	input[type='text'], textarea {
+		background-color: #F0FFF0;
+		border: 1px solid #DCDCDC;
+	}
+</style>
 <div class="main-container">
-	<section class="page-title page-title-4 bg-secondary">
+	<section class="page-title page-title-4 bg-dark" style="height:150px;">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-6 col-md-offset-5">
+				<div class="col-md-6 col-md-offset-1">
 					<h3 class="uppercase mb0"> Q & A 글쓰기</h3>
 				</div>
 			</div>
 		</div>
 	</section>
 	<section>
-<div class="container">
-	<div class="row">
-		<div class="input-with-label text-left">
-			<span><h5>제목</h5></span> 
-				<input type='text' name='title' /><br>
+		<div class="container">
+			<div class="row">
+				<div class="input-with-label text-left" style="width:60%; position:relative; left:250px;">
+					<span><h4 style="font-weight: bolder;">제목</h4></span> 
+					<input type='text' name='title' /><br>
 			
-			<span><h5>내용</h5></span>
-				<textarea name='content' rows='5' cols='70' style="resize:none;"></textarea>
-		</div>
-		<span>
-			<c:if test="${user.email == 'comboy5419@naver.com'}">
-				<span>공지사항</span>
-				<div class="checkbox-option">
-					<div class="inner">
-						<input type= "checkbox" id="notice" name="notice" value="notice" />
+					<span><h4 style="font-weight: bolder;">내용</h4></span>
+					<textarea name='content' rows='5' cols='70' style="resize:none;"></textarea>
+				</div>
+				<div class="text-center">
+					<span>
+						<c:if test="${user.email == 'comboy5419@naver.com'}">
+						<span style="position:relative; top:10px;">공지사항</span>
+						<div class="checkbox-option text-left">
+							<div class="inner">
+								<input type= "checkbox" id="notice" name="notice" value="notice" />
+							</div>
+						</div>
+						</c:if>
+					</span>
+					<span>
+					<span style="position:relative; top:10px;">비밀글 </span>
+						<div class="checkbox-option text-left">
+							<div class="inner">
+								<input type= "checkbox" id="secret" name="secret" value="secret"/>
+							</div>
+						</div>
+					</span>
+					<div>
+						<a type='submit' class="btn btn-sm">등록</a>
+						<a name="list" class="btn btn-sm">목록</a>
 					</div>
 				</div>
-			</c:if>
-		</span>
-		<span>
-			<span>비밀글 </span>
-				<div class="checkbox-option">
-					<div class="inner">
-						<input type= "checkbox" id="secret" name="secret" value="secret"/>
-					</div>
-				</div>
-		</span>
-	
-		<div>
-			<a type='submit' class="btn btn-sm">등록</a>
-			<a name="list" class="btn btn-sm">목록</a>
+			</div>
 		</div>
-	</div>
-</div>
-</section>
+	</section>
 </div>
 	
 <script>

@@ -4,10 +4,10 @@
 <%@include file="../include/header.jsp"%>
 
 <div class="main-container">
-	<section class="page-title page-title-4 bg-secondary">
+	<section class="page-title page-title-4 bg-dark" style="height:150px;">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-6 col-md-offset-5">
+				<div class="col-md-6 col-md-offset-1">
 					<h3 class="uppercase mb0"> Q & A</h3>
 				</div>
 			</div>
@@ -16,6 +16,8 @@
 	<section>
 	<div class="container"> 
 		<div class="row">
+			<input type="hidden" id="_csrf" value="${_csrf.token}">
+			<input type="hidden" id="_csrf_header" value="${_csrf.headerName}">
 			<div class="col-sm-10 col-sm-offset-1">
 				<div class="post-snippet mb64">
 					<div class="post-title">
@@ -25,25 +27,17 @@
 					<ul class="post-meta">
 						<li>
 							<i class="ti-user"></i>
-							<span>작성자&nbsp<span id='writerId'>${detail.board.email}</span></span>
+						<span id='writerId'>${detail.board.email}</span>
 						</li>
 						<li>
 							<i class="ti-tag"></i>
-							<span>작성일
-								<span><fmt:formatDate value="${detail.board.bRegDate}" pattern="yy/MM/dd" /></span>
-							</span>
+							<span><fmt:formatDate value="${detail.board.bRegDate}" pattern="yy/MM/dd" /></span>
 						</li>
 							<c:if test="${detail.board.isNotice == 1}">
-								<li>
-									<i class="ti-tag"></i>
-									<span>공지사항</span>
-								</li>
+								<li><img src="/web/resources/img/notice.png" style="width:25px; display:inline;"></li>
 							</c:if>
 							<c:if test="${detail.board.isSecret == 1}">
-								<li>
-									<i class="ti-tag"></i>
-									<span>비밀글</span>
-								</li>
+								<li><img src="/web/resources/img/secret.png" style="width:20px; display:inline;"></li>
 							</c:if>
 					</ul><hr>
 					<p class="lead">${detail.board.bContent}</p>
@@ -57,7 +51,7 @@
 				</div>
 				<hr>
 				<div class="comments">
-					<h5 class="uppercase">답변</h5>
+					<h4 class="uppercase">답변</h4>
 					<div class="comment">
 						<c:choose>
 							<c:when test="${detail.rCount eq 0}">
@@ -103,9 +97,9 @@
 </section>
 </div>
 <script>	
-	var token = $("meta[name='_csrf']").attr("content");
-	var header = $("meta[name='_csrf_header']").attr("content");
-	 
+	// 토큰
+	var token = $("#_csrf").attr("value");
+	var header = $("#_csrf_header").attr("value");
 	$(function() {
 	    $(document).ajaxSend(function(e, xhr, options) {
 	        xhr.setRequestHeader(header, token);
@@ -186,6 +180,7 @@
 	 $("a[name='answerCancel']").click(function () {
 			$("#answerForm").hide();
 			$("#reRegisterBtn").show();
+			$("#answerText").val("");
 		 })
 	
 	// 수정 폼
@@ -218,6 +213,7 @@
 		$("#reContent").show();
 		$("#updateReContent").hide();
 		$("#reContentBtn").show();
+		$("textarea[name='reUpContent']").val("");
 	 })
 	 
 	// 삭제
