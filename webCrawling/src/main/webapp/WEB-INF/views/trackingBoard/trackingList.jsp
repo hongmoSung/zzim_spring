@@ -244,9 +244,9 @@ function handle(result){
 //스크롤 이벤트 -------------------------------------------------------------------------------------------------------
 	var page = 2;
 	$(window).scroll(function(){
-// 		console.log("스크롤  같은거  "+Math.ceil($(window).scrollTop()), $(document).height() - $(window).height());
+// 		console.log("스크롤  같은거  "+Math.ceil($(window).scrollTop()+0.01), $(document).height() - $(window).height());
 // 		console.log("스크롤 이벤트  "+$(window).scrollTop(), $(document).height() , $(window).height());
-		if(Math.ceil($(window).scrollTop()) > $(document).height() - $(window).height()){
+		if(Math.ceil($(window).scrollTop()+0.01) > $(document).height() - $(window).height()){
 			$.ajax({
 				url : getContextPath()+"/trackingBoard/scroll",
 				data:{page:page,
