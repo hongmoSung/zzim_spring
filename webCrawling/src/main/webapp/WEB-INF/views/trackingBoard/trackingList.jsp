@@ -211,17 +211,12 @@ function handle(result){
 	var template = Handlebars.compile(source); 
 	//헬퍼  pLowest 차이 표시 
 	Handlebars.registerHelper('check', function (notifyPrice, pLowest, pNo) {
-		(notifyPrice > pLowest)? $(".check"+pNo).attr('style', 'background:tomato'):'×';
-		console.log($("check14"))
 		return (notifyPrice > pLowest)? '√':'×';
 	});
 	//핸들바 템플릿에 데이터를 바인딩해서 HTML 생성
 	var html = template(result);
 	//생성된 HTML을 DOM에 주입
 	$('#sList').append(html);
-	 
-	
-	
 }
 	
 //첫 리스트 가져오기
