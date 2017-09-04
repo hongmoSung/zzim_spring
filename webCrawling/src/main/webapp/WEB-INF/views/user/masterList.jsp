@@ -1,11 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%@include file="../include/header.jsp" %>
+<style>
+	input placeholder {
+		color:#FFFAFA;
+	}
+</style>
 <div class="main-container">
 	<section class="page-title page-title-4 bg-secondary">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-6 col-md-offset-4">
+				<div class="col-md-6 col-md-offset-1">
 					<h3 class="uppercase mb0">로그인 계정 관리</h3>
 				</div>
 			</div>
@@ -14,93 +19,112 @@
 	<section>
 	<!-- 리스트 -->
 	<div class="container">
-	<div class="row">
-		<div>
-			<c:if test="${not empty masterList}">
-				<a type="button" name="deleteMaster" id="deleteMaster" class="btn btn-sm">선택항목 삭제</a>
-			</c:if>
-		</div>
-		<div class="col-md-10 col-md-offset-1">
-			<div class="post-snippet mb64">
-				<c:if test="${empty masterList}">
-						<span>&#187  관리중인 계정이 없습니다.</span>
+		<div class="row">
+			<div>
+				<input type="hidden" id="_csrf" value="${_csrf.token}">
+				<input type="hidden" id="_csrf_header" value="${_csrf.headerName}">
+				<c:if test="${not empty masterList}">
+					<h5 style="display:inline;"><span style="position:relative; top:-10px;">전체&nbsp<input type="checkbox" name="checkAll" id="th_checkAll" onclick="checkAll();" /></span></h5>
+					<a type="button" name="deleteMaster" id="deleteMaster" class="btn btn-sm" style="color:">선택항목 삭제</a>
 				</c:if>
-				<div>
-					<ul class="post-meta">
-						<li><h6>전체<input type="checkbox" name="checkAll" id="th_checkAll" onclick="checkAll();" /></h6></li>
-						<li><h6>관리 사이트</h6></li>
-						<li><h6>로그인 아이디</h6></li>
-					</ul>
-				</div>
-				<c:forEach items="${masterList}" var="list" varStatus="status">
-					<div>
-						<ul class="post-meta" style="width:280px;">
-							<li><input type="checkbox" id="checkRow" name="checkRow" value="${list.email},${list.website},${list.websiteId}" onclick="check();" /></li>
-							
-							<li id="first${status.index}" class="a">
-								<span name="website${status.index}">${list.website}</span>
-							</li>
-							<li id="website${status.index}" class="b">
-								<select id="websiteTypeUp${status.index}" onchange="innerSelectUp(this.value)" style="width:100px;" >
-									  <option value="empty${status.index}">선택</option>
-									  <option value="11st" id="op11st${status.index}">11st</option>
-									  <option value="gmarket" id="opGmarket${status.index}">gmarket</option>
-									  <option value="auction" id="opAuction${status.index}">auction</option>
-									  <option value="interpark" id="opInterpark${status.index}">interpark</option>
-									  <option value="etc" id="opEtc${status.index}">직접 입력</option>
-					  		    </select>
-					  		    <input type="text" value="${list.website}" name="website${status.index}" class="c" style="width:100px;"></input>
-				  		    </li>
-			  		    </ul>
-			  		    <ul class="post-meta" style="width:150px;">
-			  		    	<li id="second${status.index}" class="a">
-			  		    		<span name="websiteId${status.index}">${list.websiteId}</span>
-		  		    		</li>
-							<li id="websiteId${status.index}" class="b">
-								<input type="text" value="${list.websiteId}" name="websiteId${status.index}">
-							</li>
-						</ul>
-						<ul class="post-meta" style="float:right;">	
-							<li id="updateMaster${status.index}" class="a">
-								<a type="button" class="updateBtn btn btn-sm" name="updateMaster${status.index}" data-no="${status.index}">편집</a></li>
-							<li id="updateGo${status.index}" class="b">
-								<a type="button" name="updateSubmit" data-no="${status.index}" class="btn btn-sm">수정</a>
-								<a type="button" name="updateCancel" data-no="${status.index}" class="btn btn-sm">취소</a>
-							</li>
-						</ul>
+			</div>
+			<hr>
+			<div class="col-md-10 col-md-offset-1">
+				<div class="post-snippet mb64">
+					<c:if test="${empty masterList}">
+							<span>&#187  관리중인 계정이 없습니다.</span>
+					</c:if>
+					<c:forEach items="${masterList}" var="list" varStatus="status">
+						<div>
+							<ul class="post-meta" style="width:280px;">
+								<li><input type="checkbox" id="checkRow" name="checkRow" value="${list.email},${list.website},${list.websiteId}" onclick="check();" /></li>
+								
+								<li id="first${status.index}" class="a">
+									<c:choose>
+										<c:when test="${list.website == 'auction'}">
+											<img src="/web/resources/img/auction.jpg" style="width:50px; display:inline;">
+										</c:when>
+										<c:when test="${list.website == '11st'}">
+											<img src="/web/resources/img/11st.jpg" style="width:50px; display:inline;">
+										</c:when>
+										<c:when test="${list.website == 'gmarket'}">
+											<img src="/web/resources/img/gmarket.jpg" style="width:50px; display:inline;">
+										</c:when>
+										<c:when test="${list.website == 'interpark'}">
+											<img src="/web/resources/img/interpark.png" style="width:50px; display:inline;">
+										</c:when>
+										<c:otherwise>
+											<img src="/web/resources/img/etc.png" style="height:20px; width:50px; display:inline;">
+										</c:otherwise>
+									</c:choose>
+									<span name="website${status.index}">&nbsp&nbsp${list.website}</span>
+								</li>
+								<li id="website${status.index}" class="b">
+									<select id="websiteTypeUp${status.index}" onchange="innerSelectUp(this.value)" style="width:100px;" >
+										  <option value="empty${status.index}">선택</option>
+										  <option value="11st" id="op11st${status.index}">11st</option>
+										  <option value="gmarket" id="opGmarket${status.index}">gmarket</option>
+										  <option value="auction" id="opAuction${status.index}">auction</option>
+										  <option value="interpark" id="opInterpark${status.index}">interpark</option>
+										  <option value="etc" id="opEtc${status.index}">직접 입력</option>
+						  		    </select>
+						  		    <input type="text" value="${list.website}" name="website${status.index}" class="c" style="width:100px;"></input>
+					  		    </li>
+				  		    </ul>
+				  		    <ul class="post-meta" style="width:150px;">
+				  		    	<li id="second${status.index}" class="a">
+				  		    		<span name="websiteId${status.index}">ID : ${list.websiteId}</span>
+			  		    		</li>
+								<li id="websiteId${status.index}" class="b">
+									<input type="text" value="${list.websiteId}" name="websiteId${status.index}">
+								</li>
+							</ul>
+				  		    <ul class="post-meta" style="width:150px;">
+					  		    <li>
+					  		    	<span name="websitePw${status.index}" style="display:none;">${list.websitePw}</span>
+								</li>
+							</ul>
+							<ul class="post-meta" style="float:right;">	
+								<li id="updateMaster${status.index}" class="a">
+									<a type="button" class="updateBtn btn btn-sm" name="updateMaster${status.index}" data-no="${status.index}">편집</a></li>
+								<li id="updateGo${status.index}" class="b">
+									<a type="button" name="updateSubmit" data-no="${status.index}" class="btn btn-sm">수정</a>
+									<a type="button" name="updateCancel" data-no="${status.index}" class="btn btn-sm">취소</a>
+								</li>
+							</ul>
+						</div>
+					<hr>
+					</c:forEach>
+					<div class="input-with-label" style="width:100%;" >
+						<a type="button" name="masterRegist" class="btn btn-sm" style="width:20px; padding:0 15px; position:relative; top:10px;">&#43</a>
+						<h5 style="display:inline; margin:0 10px 0 15px;"><span style="display:inline;"></span></h5>
+						<select id="websiteType" onchange="innerSelect(this.value)" style="width:25%; display:inline;" >
+							<option value="empty">사이트 입력</option>
+							<option value="11st">11st</option>
+							<option value="gmarket">gmarket</option>
+							<option value="auction">auction</option>
+							<option value="interpark">interpark</option>
+		  		 	 	</select>
+		  		 	 	
+		  		 	 	<input type="text" id="insertWebsite" style="width:30%;">
+		  		 	 	
+		  		 	 	<h5 style="display:inline;  margin:0 10px 0 15px;""><span style="display:inline;"></span></h5>
+						<input type="text" name="masterId" id="masterId" style="width:25%;" placeholder="아이디">
+						
+						<h5 style="display:inline;  margin:0 10px 0 15px;""><span style="display:inline;"></span></h5>
+						<input type="password" name="masterPassword" id="masterPassword" style="width:25%;"  placeholder="비밀번호">
 					</div>
-				<hr>
-				</c:forEach>
-				<div class="input-with-label">
-					<a type="button" name="masterRegist" class="btn btn-sm">&#43</a><br>
-					<span><h5>사이트</h5></span>
-					<select id="websiteType" onchange="innerSelect(this.value)" style="width:20%;">
-						<option value="empty">선택</option>
-						<option value="11st">11st</option>
-						<option value="gmarket">gmarket</option>
-						<option value="auction">auction</option>
-						<option value="interpark">interpark</option>
-						<option value="etc">직접 입력</option>
-	  		 	 	</select>
-	  		 	 	
-	  		 	 	<input type="text" id="insertWebsite" style="width:20%;">
-	  		 	 	
-	  		 	 	<span><h5>아이디</h5></span>
-					<input type="text" name="masterId" id="masterId" style="width:20%;">
-					
-					<span><h5>비밀번호</h5></span>
-					<input type="password" name="masterPassword" id="masterPassword" style="width:20%;">
+				</div>
 			</div>
 		</div>
-	</div>
 	</div>
 </section>
 </div>
 
 <script>
 	// 토큰
-	var token = $("meta[name='_csrf']").attr("content");
-	var header = $("meta[name='_csrf_header']").attr("content");
+	var token = $("#_csrf").attr("value");
+	var header = $("#_csrf_header").attr("value");
 	$(function() {
 	    $(document).ajaxSend(function(e, xhr, options) {
 	        xhr.setRequestHeader(header, token);
@@ -194,13 +218,17 @@
 			$("#masterPassword").focus();
 		}else{
 			console.log("등록 website : " + websiteType);
+			console.log("email" + email);
+			console.log("websiteId" + websiteId);
+			console.log("websitePw" + websitePw);
+			
 			if(websiteType =='직접 입력'){
 				$.ajax({
 					url: "masterInsert",
 					type: "POST", 
 					data: {
 						email : email,
-						website : $("#insertWebsite").val(),
+						website : websiteType,
 						websiteId : websiteId,
 						websitePw : websitePw
 					}
@@ -286,7 +314,7 @@
 		var reWebsite = $("#websiteTypeUp"+dataNo+" option:selected").text();
 		var reWebsiteId = $("input[name='websiteId" + dataNo + "']").val();
 		var reWebsitePw = $("input[name='websitePw" + dataNo + "']").val();
-		
+		console.log(websitePw);
 		 $.ajax({
 				url: "masterUpdate",
 				type: "POST", 

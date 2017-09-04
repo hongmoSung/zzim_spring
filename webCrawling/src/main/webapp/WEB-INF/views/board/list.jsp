@@ -1,22 +1,34 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
 <%@include file="../include/header.jsp"%>
+<style>
+	input[type='text'] {
+		background-color: #F0FFF0;
+		border:1px solid #DCDCDC;
+	}
+	i.ti-search {
+		cursor:pointer;
+		position:relative;
+		margin-left:10px;
+		top:10px;
+		margin-top:40px;
+	}
+</style>
 <div class="main-container">
 	<section class="page-title page-title-4 bg-secondary">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-6 col-md-offset-5">
-					<h3 class="uppercase mb0"> Q & A</h3>
+				<div class="col-md-6 col-md-offset-1">
+				<h3 class="uppercase mb0">Q & A</h3>
 				</div>
 			</div>
 		</div>
 	</section>
 	<section>
 		<div class="search text-center">
-			<input type="text" id="searchName" style="width:400px; "/>
-			<i class="ti-search icon-sm" id="searchBtn" style="cursor:pointer;"></i>
+			<input type="text" id="searchName" style="width:30%; "/>
+			<i class="ti-search icon-sm" id="searchBtn" ></i>
 		</div>
 		<div class="text-center"> 
 			<a id="writeBtn" class="btn btn-sm">문의글 쓰기</a>
@@ -24,27 +36,32 @@
 		</div><hr>
 		<!-- 게시글 -->	
 		<div class="container">
-			<span style="float:right;">전체 <c:out value="${bCount}"/>개</span>
+			<h5><span>전체 <c:out value="${bCount}"/>개</span></h5><br>
 			<div class="row">
 				<div class="col-md-10 col-md-offset-1">
-					<div class="post-snippet mb64">
+					<div class="post-snippet mb64" >
 					<c:forEach items="${list}" var="board">
-							<c:choose>
-								<c:when test="${board.isNotice == 1}">
-									<span>&#62공지&#60</span>
-								</c:when>
-							</c:choose>
-							<div class="post-title">
-								<span class="label">조회수 &nbsp&nbsp${board.bHit}</span>
+							<div class="post-title" style="width:100%;">
+								<span class="label inline-block">조회수 &nbsp&nbsp${board.bHit}</span>
 								<c:choose>
 									<c:when test="${board.isSecret == 1 and user.email != 'comboy5419@naver.com' and user.email != board.email}">
-										<a style="cursor:pointer;" name="secret"><h4 class="inline-block">비밀글 입니다</h4></a>
+										<img src="/web/resources/img/secret.png" style="width:20px; display:inline;">
+										<h5 class="inline-block"><a style="cursor:pointer; color:#C0C0C0; font-weight:lighter;" name="secret">비밀글 입니다</a></h5>
 									</c:when>
 									<c:otherwise>
-										<a href="${pageContext.request.contextPath}/board/detail?bNo=${board.bNo}&pageNo=${pageResult.pageNo}" style="cursor:pointer;"><h4 class="inline-block">${board.bTitle}</h4></a>
+										<c:choose>
+											<c:when test="${board.isNotice == 1}">
+												<img src="/web/resources/img/notice.png" style="width:25px; display:inline;">
+												<h4 class="inline-block" style="width:40%; display:inline;"><a href="${pageContext.request.contextPath}/board/detail?bNo=${board.bNo}&pageNo=${pageResult.pageNo}" style="cursor:pointer; color:black;"> &nbsp ${board.bTitle}</a></h4>
+											</c:when>
+											<c:otherwise>
+												<h4 class="inline-block" style="width:40%; display:inline;"><a href="${pageContext.request.contextPath}/board/detail?bNo=${board.bNo}&pageNo=${pageResult.pageNo}" style="cursor:pointer; color:black; font-weight:bolder; " >${board.bTitle}</a></h4>
+											</c:otherwise>									
+										</c:choose>
 									</c:otherwise>
 								</c:choose>
 							</div>
+							<br>
 							<ul class="post-meta">
 								<li><i class="ti-user"></i><span>작성자&nbsp<span> ${board.email}</span></span></li>
 								<li><i class="ti-tag"></i><span>작성일<span> <fmt:formatDate value="${board.bRegDate}" pattern="yy/MM/dd" /></span></span></li>
@@ -146,7 +163,7 @@
 		
 		// 비밀글 클릭
 		$("a[name='secret']").click(function() {
-			if($("#loginId").text() == ""){
+			if("{user.email}" == ""){
 				alert("로그인 해주세요");
 				location.href = "/board/member/loginForm";
 			}else{
