@@ -15,6 +15,7 @@
 		margin-top:40px;
 	}
 </style>
+<body>
 <div class="main-container">
 	<section class="page-title page-title-4 bg-secondary">
 		<div class="container">
@@ -36,23 +37,31 @@
 		</div><hr>
 		<!-- 게시글 -->	
 		<div class="container">
-			<h5><span>전체 <c:out value="${bCount}"/>개</span></h5><br>
+			<h5><span style="font-weight:bolder;">전체 <c:out value="${bCount}"/>개</span></h5><br>
 			<div class="row">
 				<div class="col-md-10 col-md-offset-1">
 					<div class="post-snippet mb64" >
 					<c:forEach items="${list}" var="board">
-							<div class="post-title" style="width:100%;">
-								<span class="label inline-block">조회수 &nbsp&nbsp${board.bHit}</span>
+							<div class="post-title" style="width:100%;" style="display:inline;">
+<!-- 								<span class="label inline-block">조회수 &nbsp&nbsp${board.bHit}</span> -->
+								<c:choose>
+									<c:when test="${board.isNotice == 1}">
+										<img src="/web/resources/img/notice.png" style="width:25px; display:inline;">
+									</c:when>
+									<c:otherwise>
+										<span style="width:50px;">${board.bNo}&nbsp&nbsp&nbsp&nbsp</span>
+									</c:otherwise>
+								</c:choose>
 								<c:choose>
 									<c:when test="${board.isSecret == 1 and user.email != 'comboy5419@naver.com' and user.email != board.email}">
-										<img src="/web/resources/img/secret.png" style="width:20px; display:inline;">
-										<h5 class="inline-block"><a style="cursor:pointer; color:#C0C0C0; font-weight:lighter;" name="secret">비밀글 입니다</a></h5>
+<!-- 										<img src="/web/resources/img/secret.png" style="width:20px; display:inline;"> -->
+										<h5 class="inline-block"><a style="cursor:pointer; color:#C0C0C0; font-weight:lighter;" name="secret">&nbsp비밀글 입니다</a></h5>
 									</c:when>
 									<c:otherwise>
 										<c:choose>
 											<c:when test="${board.isNotice == 1}">
-												<img src="/web/resources/img/notice.png" style="width:25px; display:inline;">
-												<h4 class="inline-block" style="width:40%; display:inline;"><a href="${pageContext.request.contextPath}/board/detail?bNo=${board.bNo}&pageNo=${pageResult.pageNo}" style="cursor:pointer; color:black;"> &nbsp ${board.bTitle}</a></h4>
+<!-- 												<img src="/web/resources/img/notice.png" style="width:25px; display:inline;"> -->
+												<h4 class="inline-block" style="width:40%; display:inline;"><a href="${pageContext.request.contextPath}/board/detail?bNo=${board.bNo}&pageNo=${pageResult.pageNo}" style="cursor:pointer; color:black;"> &nbsp&nbsp ${board.bTitle}</a></h4>
 											</c:when>
 											<c:otherwise>
 												<h4 class="inline-block" style="width:40%; display:inline;"><a href="${pageContext.request.contextPath}/board/detail?bNo=${board.bNo}&pageNo=${pageResult.pageNo}" style="cursor:pointer; color:black; font-weight:bolder; " >${board.bTitle}</a></h4>
@@ -60,13 +69,19 @@
 										</c:choose>
 									</c:otherwise>
 								</c:choose>
+								<ul style="display:inline; float:right; width:10%; position:relative; top:10px;">
+									<c:if test="${board.bReply == 1}">
+										<li><img src="/web/resources/img/hook.png" style="width:30px; display:inline; position:relative; top:-10px;"></li>
+									</c:if>
+									<li style="display:inline; width:200px; display:none;"><i class="ti-comment-alt"></i> &nbsp<span>${board.bReply}</span></li>
+								</ul>
+								<ul style="display:inline; float:right; width:15%; position:relative; top:10px;">
+									<li style="display:inline; width:200px;"><i class="ti-tag"></i><span>&nbsp<fmt:formatDate value="${board.bRegDate}" pattern="yy/MM/dd" /></span></li>
+								</ul>
+								<ul style="display:inline; float:right; width:30%; position:relative; top:10px;">
+									<li style="display:inline;  width:200px;""><i class="ti-user"></i><span style="width:100px;">&nbsp ${board.email}</span></li>
+								</ul>
 							</div>
-							<br>
-							<ul class="post-meta">
-								<li><i class="ti-user"></i><span>작성자&nbsp<span> ${board.email}</span></span></li>
-								<li><i class="ti-tag"></i><span>작성일<span> <fmt:formatDate value="${board.bRegDate}" pattern="yy/MM/dd" /></span></span></li>
-								<li><i class="ti-comment-alt"></i><span>답글 여부<span>${board.bReply}</span></span></li>
-							</ul>
 							<hr>
 					</c:forEach>
 					<c:if test="${bCount eq 0}">
@@ -118,7 +133,7 @@
 	</div>
 	</section>
 </div>
-
+</body>
 	<script>
 		// 파라미터 얻기
 		var getParameters = function(paramName) {

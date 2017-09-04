@@ -37,9 +37,9 @@
 					<c:forEach items="${masterList}" var="list" varStatus="status">
 						<div>
 							<ul class="post-meta" style="width:280px;">
-								<li><input type="checkbox" id="checkRow" name="checkRow" value="${list.email},${list.website},${list.websiteId}" onclick="check();" /></li>
+								<li><input type="checkbox" id="checkRow" name="checkRow" value="${list.email},${list.website},${list.websiteId}" onclick="check();" style="margin-top:20px;" /></li>
 								
-								<li id="first${status.index}" class="a">
+								<li id="first${status.index}" class="a" style="margin-top:10px;">
 									<c:choose>
 										<c:when test="${list.website == 'auction'}">
 											<img src="/web/resources/img/auction.jpg" style="width:50px; display:inline;">
@@ -73,21 +73,21 @@
 				  		    </ul>
 				  		    <ul class="post-meta" style="width:150px;">
 				  		    	<li id="second${status.index}" class="a">
-				  		    		<span name="websiteId${status.index}">ID : ${list.websiteId}</span>
+				  		    		<span name="websiteId${status.index}" style="position:relative; bottom:5px; line-height:30px;">${list.websiteId}</span>
 			  		    		</li>
 								<li id="websiteId${status.index}" class="b">
 									<input type="text" value="${list.websiteId}" name="websiteId${status.index}">
 								</li>
 							</ul>
-				  		    <ul class="post-meta" style="width:150px;">
+				  		    <ul class="post-meta" style="width:10px;">
 					  		    <li>
 					  		    	<span name="websitePw${status.index}" style="display:none;">${list.websitePw}</span>
 								</li>
 							</ul>
 							<ul class="post-meta" style="float:right;">	
 								<li id="updateMaster${status.index}" class="a">
-									<a type="button" class="updateBtn btn btn-sm" name="updateMaster${status.index}" data-no="${status.index}">편집</a></li>
-								<li id="updateGo${status.index}" class="b">
+									<a type="button" class="updateBtn btn btn-sm" name="updateMaster${status.index}" data-no="${status.index}" style="margin-top:10px;">편집</a></li>
+								<li id="updateGo${status.index}" class="b" style="position:relative; margin-top:10px;" >
 									<a type="button" name="updateSubmit" data-no="${status.index}" class="btn btn-sm">수정</a>
 									<a type="button" name="updateCancel" data-no="${status.index}" class="btn btn-sm">취소</a>
 								</li>
@@ -96,7 +96,7 @@
 					<hr>
 					</c:forEach>
 					<div class="input-with-label" style="width:100%;" >
-						<a type="button" name="masterRegist" class="btn btn-sm" style="width:20px; padding:0 15px; position:relative; top:10px;">&#43</a>
+						<a type="button" name="masterRegist" class="btn btn-sm" style="width:20px; padding:0 15px 0 10px; position:relative; top:10px;">&#43</a>
 						<h5 style="display:inline; margin:0 10px 0 15px;"><span style="display:inline;"></span></h5>
 						<select id="websiteType" onchange="innerSelect(this.value)" style="width:25%; display:inline;" >
 							<option value="empty">사이트 입력</option>
@@ -367,7 +367,6 @@
 		
 		a.show();
 		b.hide();
-// 		c.hide();
 	})
 </script>
 
