@@ -9,7 +9,8 @@ import kr.co.web.vo.SearchVO;
 import kr.co.web.vo.TrackingBoardVO;
 
 public interface TrackingBoardMapper {
-	public List<TrackingBoardVO> selectBoard(String id) throws Exception;
+	public List<TrackingBoardVO> selectBoardCorrect(String id) throws Exception;
+	public List<TrackingBoardVO> selectBoardInCorrect(String id) throws Exception;
 	public List<TrackingBoardVO> infiniteScrollDown(TrackingBoardVO tboard) throws Exception;
 	
 	public List<Integer> priceList(int pNo)throws Exception;

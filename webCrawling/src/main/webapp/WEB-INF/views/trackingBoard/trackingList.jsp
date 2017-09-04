@@ -1,70 +1,67 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <meta charset="UTF-8">
 <%@include file="../include/header.jsp"%>
 
 <style>
 body {
-   height:100px; 
+	height: 100px;
 }
+
 .chartdiv {
-/* 	width		: 100%; */
-	height		: 400px;
-	font-size	: 12px;
-}																	
+	/* 	width		: 100%; */
+	height: 400px;
+	font-size: 12px;
+}
 </style>
 <!--  am차트 -->
 <script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
 <script src="https://www.amcharts.com/lib/3/serial.js"></script>
-<script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
+<script
+	src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
 <script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
 <!--  am차트 -->
 
 <body>
 
-        <div class="main-container">
-<section class="scroll-assist page-title page-title-4 bg-dark" >
- 
-      <div class="container">
-         <div class="row">
-            <div class="col-md-6 col-md-offset-1">
-               <h3 class="uppercase mb0">트레킹 리스트</h3>
-            </div>
-         </div>
-      </div>
-  </section>
-        <section>
-                <div class="container">
-                    <!--end of row-->
-                    <div class="row">
-                        <div class="col-sm-12">
-<!--                             <h5 class="uppercase mb40">Multiple Open</h5> -->
-                            
-					<!--    반복 돌릴 시작 부분  -->
-                            <ul id="sList" class="accordion accordion-2">
-                            </ul>
-                            <!--end of accordion-->
-                        </div>
-                    </div>
-                    <!--end of row-->
-                </div>
-                <!--end of container-->
-            </section>
-        </div>
-        
-        
-<!--         여기서  부터 스크립트 시작  -->
-<script id="entry-template" type="text/x-handlebars-template">
-        {{#list}} 
-       		 <li class="check{{pNo}}">
+	<div class="main-container">
+		<section class="scroll-assist page-title page-title-4 bg-dark">
+
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6 col-md-offset-1">
+						<h3 class="uppercase mb0">트레킹 리스트</h3>
+					</div>
+				</div>
+			</div>
+		</section>
+		<section>
+			<div class="container">
+				<div class="row"><h3 style="font-weight: bolder;">체크 리스트</h3>
+					<div class="col-sm-12" style="border: solid 1px tomato;" >
+						<ul id="correctList" class="accordion accordion-2" > </ul>
+					</div><br><br><hr><hr><br><br>
+					<div class="col-sm-12">
+						<ul id="inCorrectList" class="accordion accordion-2"> </ul>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div >
+
+
+	<!--         여기서  부터 스크립트 시작  -->
+	<script style="borde " id="entry-template" type="text/x-handlebars-template">
+        {{#each .}} 
+       		 <li class="check{{pNo}}" >
                  <div class="title" data-pNo ="{{pNo}}">
                      <table class="table cart">
                              <tr>
-                                 <td rowspan="2">
-                                         <img alt="Product" class="product-thumb" src="{{picUrl}}" />
+                                 <td rowspan="2" class="text-center" style="width:250px;">
+                                         <img alt="Product"  src="{{picUrl}}" />
                                  </td>
                                  <td colspan="3">
-                                     <span>{{pName}}</span>
+                                     <span><h4 style="font-weight: bolder;">{{pName}}</h4></span>
                                  </td>
                                  <tr>
                                      <td>
@@ -92,8 +89,8 @@ body {
                     <div class="col-sm-4 col-md-4" style="text-align: right">
                          <br>
                          <ul class="lead" >
-                             <li id="max{{pNo}}"><i class="ti-arrow-right"></i> 최고가: 500,000원</li>
-                             <li id="min{{pNo}}"><i class="ti-arrow-right"></i> 최저가: 500,000원</li>
+                             <li id="max{{pNo}}"></li>
+                             <li id="min{{pNo}}"></li>
                          </ul>
                          <div>
                          </div>
@@ -107,10 +104,10 @@ body {
                      </div>
                  </div>
              </li>
-        {{/list}}
+        {{/each}}
 </script>
 
-<script type="text/javascript">
+	<script type="text/javascript">
 // 더보기 + 차트리스트 가져오기 아코디언
 $("body").on( 'click', '.accordion li .title' , function(){
   if ($(this).closest('.accordion').hasClass('one-open')) {
@@ -204,19 +201,19 @@ $("body").on( 'click', '.accordion li .title' , function(){
   
 });
 // 핸들바 함수 
-function handle(result){
+function handle(result,target){
 	//핸들바 템플릿 가져오기
 	var source = $("#entry-template").html(); 
 	//핸들바 템플릿 컴파일
 	var template = Handlebars.compile(source); 
 	//헬퍼  pLowest 차이 표시 
 	Handlebars.registerHelper('check', function (notifyPrice, pLowest, pNo) {
-		return (notifyPrice > pLowest)? '√':'×';
+		return (notifyPrice >= pLowest)? '√':'×';
 	});
 	//핸들바 템플릿에 데이터를 바인딩해서 HTML 생성
 	var html = template(result);
 	//생성된 HTML을 DOM에 주입
-	$('#sList').append(html);
+	$(target).append(html);
 }
 	
 //첫 리스트 가져오기
@@ -224,13 +221,23 @@ function handle(result){
 	console.log(email);
   	$.ajax({
  		url : getContextPath()+"/trackingBoard/sList",
- 		data : {email : email}
+ 		data : {"email" : email}
  	}).done(function(result){
- 		if(result.list != ''){
+ 		console.log(result);
+ 		console.log(result.correctList);
+ 		console.log(result.incorrectList);
+ 		var sign = true;
+ 		if(result.correctList != ''){
  			console.log("등록된 상품이가져옴 .")
- 			handle(result);
+ 			handle(result.correctList,"#correctList");
+ 			sign = false;
  		}
- 		else{
+ 		if(result.incorrectList != ''){
+ 			console.log("등록된 상품이가져옴 .")
+ 			handle(result.incorrectList,"#inCorrectList");
+ 			sign = false;
+ 		}
+ 		if(sign){
  			console.log("등록된 상품이 없습니다.")
  			$('#sList').html("<h3>등록된 상품이 없습니다.</h3>")
  		}
@@ -239,9 +246,10 @@ function handle(result){
 //스크롤 이벤트 -------------------------------------------------------------------------------------------------------
 	var page = 2;
 	$(window).scroll(function(){
-// 		console.log("스크롤  같은거  "+Math.ceil($(window).scrollTop()+0.01), $(document).height() - $(window).height());
-// 		console.log("스크롤 이벤트  "+$(window).scrollTop(), $(document).height() , $(window).height());
+		console.log("스크롤  같은거  "+Math.ceil($(window).scrollTop()+0.01), $(document).height() - $(window).height());
+		console.log("스크롤 이벤트  "+$(window).scrollTop(), $(document).height() , $(window).height());
 		if(Math.ceil($(window).scrollTop()+0.01) > $(document).height() - $(window).height()){
+			console.log("들어오라 ")
 			$.ajax({
 				url : getContextPath()+"/trackingBoard/scroll",
 				data:{page:page,
@@ -250,9 +258,9 @@ function handle(result){
 				dataType: "json"
 			}).done(function(result){
 				if(result.list != ''){
-// 					console.log("--1실험--")
+					console.log(result)
 				page++;
-				handle(result)
+				handle(result.list , "#inCorrectList")
 				}
 				else{
 // 					$("body").scrollTop($(window).scrollTop()-20);
@@ -261,7 +269,7 @@ function handle(result){
 			})
 		}
 	})
-
+	
 	
 // 수정 클릭 
 	function update(){
@@ -293,84 +301,7 @@ $("body").on("click","#delete",function(){
 	
 })
 
-
-
-
-// 차트 코드
-/* var chartData = generatechartData();
-
-function generatechartData() {
-    var chartData = [];
-    var firstDate = new Date();
-    firstDate.setDate(firstDate.getDate() - 150);
-    var visits = 500;
-
-    for (var i = 0; i < 150; i++) {
-        // we create date objects here. In your data, you can have date strings
-        // and then set format of your dates using chart.dataDateFormat property,
-        // however when possible, use date objects, as this will speed up chart rendering.
-        var newDate = new Date(firstDate);
-        newDate.setDate(newDate.getDate() + i);
-
-        visits += Math.round((Math.random()<0.5?1:-1)*Math.random()*10);
-
-        chartData.push({
-            date: newDate,
-            visits: visits
-        });
-    }
-    return chartData;
-} */
-
-
-	/* var chart = AmCharts.makeChart("chartdiv14", {
-    "theme": "light",
-    "type": "serial",
-    "marginRight": 80,
-    "autoMarginOffset": 20,
-    "marginTop":20,
-    "dataProvider": chartData,
-    "valueAxes": [{
-        "id": "v1",
-        "axisAlpha": 0.1
-    }],
-    "graphs": [{
-        "useNegativeColorIfDown": true,
-        "balloonText": "[[category]]<br><b>value: [[value]]</b>",
-        "bullet": "round",
-        "bulletBorderAlpha": 1,
-        "bulletBorderColor": "#FFFFFF",
-        "hideBulletsCount": 50,
-        "lineThickness": 2,
-        "lineColor": "#fdd400",
-        "negativeLineColor": "#67b7dc",
-        "valueField": "visits"
-    }],
-    "chartScrollbar": {
-        "scrollbarHeight": 5,
-        "backgroundAlpha": 0.1,
-        "backgroundColor": "#868686",
-        "selectedBackgroundColor": "#67b7dc",
-        "selectedBackgroundAlpha": 1
-    },
-    "chartCursor": {
-        "valueLineEnabled": true,
-        "valueLineBalloonEnabled": true
-    },
-    "categoryField": "date",
-    "categoryAxis": {
-        "parseDates": true,
-        "axisAlpha": 0,
-        "minHorizontalGap": 60
-    },
-    "export": {
-        "enabled": true
-    }
-}); 
- */
-//chart.addListener("dataUpdated");
-
 </script>
 
-</body> 
+</body>
 <%@include file="../include/footer.jsp"%>

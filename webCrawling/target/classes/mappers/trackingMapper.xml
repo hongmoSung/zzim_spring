@@ -9,12 +9,22 @@
 		where pNo = #{pNo}
 	</select>
 
-	<select id="selectBoard" resultType="TrackingBoardVO">
+	<select id="selectBoardCorrect" resultType="TrackingBoardVO">
 		select p.*, t.notifyPrice, t.email
 		from tbl_product p 
 		inner join tbl_tracking t
 		on p.pNo = t.pNo 
-        where t.email = #{email}
+        where t.email = #{email} and t.notifyPrice >= p.pLowest
+		order by pNo desc 
+	
+	</select>
+	
+	<select id="selectBoardInCorrect" resultType="TrackingBoardVO">
+		select p.*, t.notifyPrice, t.email
+		from tbl_product p 
+		inner join tbl_tracking t
+		on p.pNo = t.pNo 
+        where t.email = #{email} and p.pLowest > t.notifyPrice
 		order by pNo desc 
 		limit 0, 10;
 	</select>
@@ -25,12 +35,11 @@
 		from tbl_product p 
 		inner join tbl_tracking t
 		on p.pNo = t.pNo 
-        where t.email = #{email}
+        where t.email = #{email} and p.pLowest > t.notifyPrice
 		order by pNo desc 
 		limit #{begin}, 10;
 	]]>
 	</select>
-
 
 	<select id="priceList" resultType="int">
 		select currPrice

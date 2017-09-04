@@ -12,7 +12,8 @@ import kr.co.web.vo.TrackingBoardVO;
 
 public interface TrackingBoardService {
 	
-	public List<TrackingBoardVO> readTrackingList(String id) throws Exception;
+	public List<TrackingBoardVO> readCorrectTrackingList(String id) throws Exception;
+	public List<TrackingBoardVO> readInCorrectTrackingList(String id) throws Exception;
 	public List<TrackingBoardVO> infiniteScrollDown(TrackingBoardVO tboard) throws Exception;
 	
 	public List<Integer> readChartList(int pNo)throws Exception;

@@ -38,7 +38,9 @@ public class TrackingBoardController {
 	@ResponseBody
 	public Map<String, Object> sList( TrackingBoardVO tboard) throws Exception {
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("list", tService.readTrackingList(tboard.getEmail()));
+		
+		map.put("correctList", tService.readCorrectTrackingList(tboard.getEmail()));
+		map.put("incorrectList", tService.readInCorrectTrackingList(tboard.getEmail()));
 		return map;
 	}
 	

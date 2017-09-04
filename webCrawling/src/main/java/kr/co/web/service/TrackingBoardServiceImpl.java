@@ -17,8 +17,12 @@ public class TrackingBoardServiceImpl implements TrackingBoardService {
 	private TrackingBoardMapper mapper;
 	
 	@Override
-	public List<TrackingBoardVO> readTrackingList(String id) throws Exception {
-		return mapper.selectBoard(id);
+	public List<TrackingBoardVO> readCorrectTrackingList(String id) throws Exception {
+		return mapper.selectBoardCorrect(id);
+	}
+	@Override
+	public List<TrackingBoardVO> readInCorrectTrackingList(String id) throws Exception {
+		return mapper.selectBoardInCorrect(id);
 	}
 
 	@Override
