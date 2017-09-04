@@ -17,7 +17,7 @@
 </style>
 <body>
 <div class="main-container">
-	<section class="page-title page-title-4 bg-secondary">
+	<section class="page-title page-title-4 bg-dark" style="height:150px;">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-6 col-md-offset-1">
@@ -26,18 +26,12 @@
 			</div>
 		</div>
 	</section>
-	<section>
-		<div class="search text-center">
-			<input type="text" id="searchName" style="width:30%; "/>
-			<i class="ti-search icon-sm" id="searchBtn" ></i>
-		</div>
-		<div class="text-center"> 
-			<a id="writeBtn" class="btn btn-sm">문의글 쓰기</a>
-			<a id="myQnA" class="btn btn-sm">나의 문의내역</a>
-		</div><hr>
+	<section style="margin-top: -50px;">
 		<!-- 게시글 -->	
 		<div class="container">
-			<h5><span style="font-weight:bolder;">전체 <c:out value="${bCount}"/>개</span></h5><br>
+			<div class="text-right"> 
+				<a id="writeBtn" class="btn btn-sm" style="width:100px; height:50px; padding: 10px 1px; ">문의글 쓰기</a>
+			</div>
 			<div class="row">
 				<div class="col-md-10 col-md-offset-1">
 					<div class="post-snippet mb64" >
@@ -69,16 +63,16 @@
 										</c:choose>
 									</c:otherwise>
 								</c:choose>
-								<ul style="display:inline; float:right; width:10%; position:relative; top:10px;">
+								<ul style="display:inline; float:right; width:10%; position:relative; top:15px;">
 									<c:if test="${board.bReply == 1}">
 										<li><img src="/web/resources/img/hook.png" style="width:30px; display:inline; position:relative; top:-10px;"></li>
 									</c:if>
 									<li style="display:inline; width:200px; display:none;"><i class="ti-comment-alt"></i> &nbsp<span>${board.bReply}</span></li>
 								</ul>
-								<ul style="display:inline; float:right; width:15%; position:relative; top:10px;">
+								<ul style="display:inline; float:right; width:15%; position:relative; top:5px;">
 									<li style="display:inline; width:200px;"><i class="ti-tag"></i><span>&nbsp<fmt:formatDate value="${board.bRegDate}" pattern="yy/MM/dd" /></span></li>
 								</ul>
-								<ul style="display:inline; float:right; width:30%; position:relative; top:10px;">
+								<ul style="display:inline; float:right; width:30%; position:relative; top:5px;">
 									<li style="display:inline;  width:200px;""><i class="ti-user"></i><span style="width:100px;">&nbsp ${board.email}</span></li>
 								</ul>
 							</div>
@@ -88,7 +82,11 @@
 							<span> &#187  검색된 게시글이 없습니다.</span>
 					</c:if>
 					</div>
-		
+			<div class="search text-center">
+				<a id="myQnA" class="btn btn-sm" style="position: relative; top:10px; ">나의 문의내역</a>
+				<input type="text" id="searchName" style="width:30%; height:30px;"/>
+				<i class="ti-search icon-sm" id="searchBtn" style="height:15px;"></i>
+			</div>
 		<!-- 페이징 -->
 		<div class="text-center">
 			<c:if test="${pageResult.bCount != 0}">
