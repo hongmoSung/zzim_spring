@@ -30,7 +30,7 @@ body {
                 <div class="container">
                     <div class="row">
                         <div class="col-sm-12 text-center">
-<!--                             <h4 class="uppercase mb80">트레킹 게시판 </h4> -->
+                            <h2 class="uppercase mb80">트레킹 리스트 </h2>
                         </div>
                     </div>
                     <!--end of row-->
@@ -74,7 +74,7 @@ body {
                                          <span>현재가격: {{pLowest}}원</span>
                                      </td>
                                      <td style="color: limegreen">
-                                         <i class="fa fa-check fa-2x" ></i>
+										<strong class="fa-2x">{{check notifyPrice pLowest}}</strong>
                                      </td>
                                      
                                  </tr>
@@ -91,8 +91,8 @@ body {
                     <div class="col-sm-4 col-md-4" style="text-align: right">
                          <br>
                          <ul class="lead" >
-                             <li><i class="ti-arrow-right"></i> 최고가: 500,000원</li>
-                             <li><i class="ti-arrow-right"></i> 최저가: 500,000원</li>
+                             <li id="max{{pNo}}"><i class="ti-arrow-right"></i> 최고가: 500,000원</li>
+                             <li id="min{{pNo}}"><i class="ti-arrow-right"></i> 최저가: 500,000원</li>
                          </ul>
                          <div>
                          </div>
@@ -110,7 +110,7 @@ body {
 </script>
 
 <script type="text/javascript">
-
+// 더보기 + 차트리스트 가져오기 아코디언
 $("body").on( 'click', '.accordion li .title' , function(){
   if ($(this).closest('.accordion').hasClass('one-open')) {
       $(this).closest('.accordion').find('li').removeClass('active');
@@ -128,14 +128,33 @@ $("body").on( 'click', '.accordion li .title' , function(){
 	  url : getContextPath()+"/trackingBoard/priceHistory",
 	  data : {"pNo":pNo}
   }).done(function(result){
+	  var priceArr = []
+	  var max = 0;
+	  var min = 0;
+	  
 	 for(var i = 0 ; i < result.length ; i++){
+		// currPrice 배열넣기 
+		 priceArr.push(result[i].currPrice); 
+		  
 		 console.log("result[i].currDate:::",result[i].currDate); 
+		// 날자값 변환
 		 var date = new Date(result[i].currDate);
 		 var timeStr = date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate() + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
 		 console.log(timeStr); 
 		 result[i].currDate = timeStr;
+		 console.log("result[i].currDate22:::",result[i].currDate); 
 	 }
+ 	// 배열 오름차순 정열
+	 priceArr.sort(function(a,b){return a-b;})
+	// max, min 값 넣기 		 
+	 max = priceArr[priceArr.length-1]
+	 min = priceArr[0]
+
+	//최소값 최대값 넣기 
+	$("#max"+pNo).html('<i class="ti-arrow-right"></i> 최고가: '+max+'원');
+	$("#min"+pNo).html('<i class="ti-arrow-right"></i> 최소가: '+min+'원');
 	 
+	//차트 만들기 
 	 var chart = AmCharts.makeChart("chartdiv"+pNo, {
 		    "theme": "light",
 		    "type": "serial",
@@ -192,7 +211,7 @@ function handle(result){
 	var template = Handlebars.compile(source); 
 	//헬퍼  pLowest 차이 표시 
 	Handlebars.registerHelper('check', function (notifyPrice, pLowest) {
-	  return (notifyPrice > pLowest)? '√':'ⓧ';
+	  return (notifyPrice > pLowest)? '√':'×';
 	});
 	//핸들바 템플릿에 데이터를 바인딩해서 HTML 생성
 	var html = template(result);
@@ -220,8 +239,9 @@ function handle(result){
 //스크롤 이벤트 -------------------------------------------------------------------------------------------------------
 	var page = 2;
 	$(window).scroll(function(){
-		console.log("스크롤 이벤 트  "+Math.round($(window).scrollTop()), $(document).height() , $(window).height());
-		if(Math.round($(window).scrollTop()) == $(document).height() - $(window).height()){
+// 		console.log("스크롤 이벤트!!!  "+Math.round($(window).scrollTop()), $(document).height() , $(window).height());
+// 		console.log("스크롤 이벤트  "+$(window).scrollTop(), $(document).height() , $(window).height());
+		if(Math.round($(window).scrollTop()) > $(document).height() - $(window).height()){
 			
 			$.ajax({
 				url : getContextPath()+"/trackingBoard/scroll",
@@ -234,9 +254,9 @@ function handle(result){
 				page++;
 				handle(result)
 				}
-				else{
-					$("body").scrollTop($(window).scrollTop()-20);
-				}
+// 				else{
+// 					$("body").scrollTop($(window).scrollTop()-20);
+// 				}
 			})
 		}
 	})
