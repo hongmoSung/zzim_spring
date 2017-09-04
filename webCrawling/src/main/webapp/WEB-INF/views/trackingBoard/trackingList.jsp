@@ -9,8 +9,8 @@ body {
 }
 .chartdiv {
 /* 	width		: 100%; */
-	height		: 500px;
-	font-size	: 11px;
+	height		: 400px;
+	font-size	: 12px;
 }																	
 </style>
 <!--  am차트 -->
@@ -22,17 +22,19 @@ body {
 
 <body>
 
-<section class="scroll-assist">
-	<div ></div>
-
         <div class="main-container">
-<!--             <section> -->
+<section class="scroll-assist page-title page-title-4 bg-dark" >
+ 
+      <div class="container">
+         <div class="row">
+            <div class="col-md-6 col-md-offset-1">
+               <h3 class="uppercase mb0">트레킹 리스트</h3>
+            </div>
+         </div>
+      </div>
+  </section>
+        <section>
                 <div class="container">
-                    <div class="row">
-                        <div class="col-sm-12 text-center">
-                            <h2 class="uppercase mb80">트레킹 리스트 </h2>
-                        </div>
-                    </div>
                     <!--end of row-->
                     <div class="row">
                         <div class="col-sm-12">
@@ -47,21 +49,19 @@ body {
                     <!--end of row-->
                 </div>
                 <!--end of container-->
-<!--             </section> -->
+            </section>
         </div>
         
         
 <!--         여기서  부터 스크립트 시작  -->
 <script id="entry-template" type="text/x-handlebars-template">
         {{#list}} 
-       		 <li>
+       		 <li class="check{{pNo}}">
                  <div class="title" data-pNo ="{{pNo}}">
                      <table class="table cart">
                              <tr>
                                  <td rowspan="2">
-                                     <a href="#">
                                          <img alt="Product" class="product-thumb" src="{{picUrl}}" />
-                                     </a>
                                  </td>
                                  <td colspan="3">
                                      <span>{{pName}}</span>
@@ -74,7 +74,8 @@ body {
                                          <span>현재가격: {{pLowest}}원</span>
                                      </td>
                                      <td style="color: limegreen">
-										<strong class="fa-2x">{{check notifyPrice pLowest}}</strong>
+										<span style="color: black">조건 확인</span><br>
+										<strong class="fa-2x">{{check notifyPrice pLowest pNo}}</strong>
                                      </td>
                                      
                                  </tr>
@@ -122,7 +123,7 @@ $("body").on( 'click', '.accordion li .title' , function(){
       setTimeout(mr_parallax.windowLoad, 500);
   }
   var pNo = $(this).attr("data-pNo");
-  console.log(pNo);
+//   console.log(pNo);
   
   $.ajax({
 	  url : getContextPath()+"/trackingBoard/priceHistory",
@@ -136,13 +137,12 @@ $("body").on( 'click', '.accordion li .title' , function(){
 		// currPrice 배열넣기 
 		 priceArr.push(result[i].currPrice); 
 		  
-		 console.log("result[i].currDate:::",result[i].currDate); 
+// 		 console.log("result[i].currDate:::",result[i].currDate); 
 		// 날자값 변환
 		 var date = new Date(result[i].currDate);
 		 var timeStr = date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate() + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
-		 console.log(timeStr); 
+// 		 console.log(timeStr); 
 		 result[i].currDate = timeStr;
-		 console.log("result[i].currDate22:::",result[i].currDate); 
 	 }
  	// 배열 오름차순 정열
 	 priceArr.sort(function(a,b){return a-b;})
@@ -210,13 +210,18 @@ function handle(result){
 	//핸들바 템플릿 컴파일
 	var template = Handlebars.compile(source); 
 	//헬퍼  pLowest 차이 표시 
-	Handlebars.registerHelper('check', function (notifyPrice, pLowest) {
-	  return (notifyPrice > pLowest)? '√':'×';
+	Handlebars.registerHelper('check', function (notifyPrice, pLowest, pNo) {
+		(notifyPrice > pLowest)? $(".check"+pNo).attr('style', 'background:tomato'):'×';
+		console.log($("check14"))
+		return (notifyPrice > pLowest)? '√':'×';
 	});
 	//핸들바 템플릿에 데이터를 바인딩해서 HTML 생성
 	var html = template(result);
 	//생성된 HTML을 DOM에 주입
 	$('#sList').append(html);
+	 
+	
+	
 }
 	
 //첫 리스트 가져오기
@@ -239,10 +244,9 @@ function handle(result){
 //스크롤 이벤트 -------------------------------------------------------------------------------------------------------
 	var page = 2;
 	$(window).scroll(function(){
-// 		console.log("스크롤 이벤트!!!  "+Math.round($(window).scrollTop()), $(document).height() , $(window).height());
+// 		console.log("스크롤  같은거  "+Math.ceil($(window).scrollTop()), $(document).height() - $(window).height());
 // 		console.log("스크롤 이벤트  "+$(window).scrollTop(), $(document).height() , $(window).height());
-		if(Math.round($(window).scrollTop()) > $(document).height() - $(window).height()){
-			
+		if(Math.ceil($(window).scrollTop()) > $(document).height() - $(window).height()){
 			$.ajax({
 				url : getContextPath()+"/trackingBoard/scroll",
 				data:{page:page,
@@ -251,12 +255,14 @@ function handle(result){
 				dataType: "json"
 			}).done(function(result){
 				if(result.list != ''){
+// 					console.log("--1실험--")
 				page++;
 				handle(result)
 				}
-// 				else{
+				else{
 // 					$("body").scrollTop($(window).scrollTop()-20);
-// 				}
+// 					console.log("--2실험--")
+				}
 			})
 		}
 	})
@@ -371,6 +377,5 @@ function generatechartData() {
 
 </script>
 
-</section>
 </body> 
 <%@include file="../include/footer.jsp"%>
