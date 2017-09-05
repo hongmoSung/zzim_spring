@@ -81,53 +81,54 @@
 							<span> &#187  검색된 게시글이 없습니다.</span>
 					</c:if>
 					</div>
-			<div class="search text-center">
-				<a id="myQnA" class="btn btn-sm" style="position: relative; top:10px; ">나의 문의내역</a>
-				<input type="text" id="searchName" style="width:30%; height:30px;"/>
-				<i class="ti-search icon-sm" id="searchBtn" style="height:15px;"></i>
+					<div class="search text-center">
+						<a id="myQnA" class="btn btn-sm" style="position: relative; top:10px; ">나의 문의내역</a>
+						<input type="text" id="searchName" style="width:30%; height:30px;"/>
+						<i class="ti-search icon-sm" id="searchBtn" style="height:15px;"></i>
+					</div>
+					<!-- 페이징 -->
+					<div class="text-center">
+						<c:if test="${pageResult.bCount != 0}">
+							<ul class="pagination">
+								<li class="<c:if test="${pageResult.prev eq false}">disabled</c:if>">
+					   			   <a href="<c:if test="${pageResult.prev eq true}">list?pageNo=1</c:if>" aria-label="Previous">
+					      			  <span aria-hidden="true">««</span>
+					   			   </a>
+					  		 	</li>
+								<li class="<c:if test="${pageResult.prev eq false}">disabled</c:if>">
+									<a href="<c:if test="${pageResult.prev eq true}">javascript:goPage(${pageResult.beginPage - 1})</c:if>"aria-label="Previous">
+									 <span aria-hidden="true">«</span>
+								</a>
+								</li>
+					
+								<c:forEach var="i" begin="${pageResult.beginPage}" end="${pageResult.endPage}">
+									<c:choose>
+										<c:when test="${pageResult.pageNo eq i}">
+											<li class="active"><a href="#1">${i}</a></li>
+										</c:when>
+										<c:otherwise>
+											<li><a href="javascript:goPage(${i})">${i}</a></li>
+										</c:otherwise>
+									</c:choose>
+								</c:forEach>
+					
+								<li class="<c:if test="${pageResult.next eq false}">disabled</c:if>">
+									<a href="<c:if test="${pageResult.next eq true}">javascript:goPage(${pageResult.endPage + 1})</c:if> "aria-label="Next"> 
+												<span aria-hidden="true">»</span>
+									</a>
+								</li>
+								<li class="<c:if test="${pageResult.next eq false}">disabled</c:if>">
+							      <a href="<c:if test="${pageResult.next eq true}">list?pageNo=${pageResult.lastPage}</c:if>" aria-label="Next">
+							        <span aria-hidden="true">»»</span>
+							      </a>
+							    </li>	
+							</ul>
+						</c:if>
+					</div>
+					<div style="height:60px;"></div>
+				</div>
 			</div>
-		<!-- 페이징 -->
-		<div class="text-center">
-			<c:if test="${pageResult.bCount != 0}">
-				<ul class="pagination">
-					<li class="<c:if test="${pageResult.prev eq false}">disabled</c:if>">
-		   			   <a href="<c:if test="${pageResult.prev eq true}">list?pageNo=1</c:if>" aria-label="Previous">
-		      			  <span aria-hidden="true">««</span>
-		   			   </a>
-		  		 	</li>
-					<li class="<c:if test="${pageResult.prev eq false}">disabled</c:if>">
-						<a href="<c:if test="${pageResult.prev eq true}">javascript:goPage(${pageResult.beginPage - 1})</c:if>"aria-label="Previous">
-						 <span aria-hidden="true">«</span>
-					</a>
-					</li>
-		
-					<c:forEach var="i" begin="${pageResult.beginPage}" end="${pageResult.endPage}">
-						<c:choose>
-							<c:when test="${pageResult.pageNo eq i}">
-								<li class="active"><a href="#1">${i}</a></li>
-							</c:when>
-							<c:otherwise>
-								<li><a href="javascript:goPage(${i})">${i}</a></li>
-							</c:otherwise>
-						</c:choose>
-					</c:forEach>
-		
-					<li class="<c:if test="${pageResult.next eq false}">disabled</c:if>">
-						<a href="<c:if test="${pageResult.next eq true}">javascript:goPage(${pageResult.endPage + 1})</c:if> "aria-label="Next"> 
-									<span aria-hidden="true">»</span>
-						</a>
-					</li>
-					<li class="<c:if test="${pageResult.next eq false}">disabled</c:if>">
-				      <a href="<c:if test="${pageResult.next eq true}">list?pageNo=${pageResult.lastPage}</c:if>" aria-label="Next">
-				        <span aria-hidden="true">»»</span>
-				      </a>
-				    </li>	
-				</ul>
-			</c:if>
 		</div>
-		</div>
-		</div>
-	</div>
 	</section>
 </div>
 </body>

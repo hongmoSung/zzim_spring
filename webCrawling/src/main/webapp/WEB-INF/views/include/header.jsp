@@ -49,16 +49,13 @@
         }
         
         footer {
-            margin-top: -10em;
         }
         
         div.main-container{
-            min-height: 90%;
+            min-height: 100%;
         }
     </style>
 </head>
-
-
 
 
 <div class="nav-container">
