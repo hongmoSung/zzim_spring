@@ -237,9 +237,8 @@
 					"websiteId" : websiteId,
 					"websitePw" : websitePw
 				}
-				
 			}).done(function(result){
-				if(result == "valid"){
+				/* if(result == "valid"){
 					$.ajax({
 						url: "masterInsert",
 						type: "post", 
@@ -259,7 +258,7 @@
 						})		
 				}else{
 					alert("이메일과 패스워드를 확인해주세요");
-				}
+				} */
 			})
 			
 		}
@@ -380,7 +379,7 @@
 		b.hide();
 	})
 	
-	$(document).ajaxStart(function () {
+/* 	$(document).ajaxStart(function () {
 	    $("body").waitMe({
 	        effect: 'win8',
 	        text: '기다려',
@@ -390,7 +389,7 @@
 	    });
 	}).ajaxStop(function () {
 	        $("body").waitMe("hide");
-	    });
+	    }); */
 </script>
 
 
