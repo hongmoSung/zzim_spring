@@ -77,6 +77,7 @@ public class UserController {
 	@RequestMapping("/masterUpdate")
 	@ResponseBody
 	public String update(UserMasterVO user) {
+		System.out.println("asdasd");
 		System.out.println(user.toString());
 		return service.updateMaster(user);
 	}

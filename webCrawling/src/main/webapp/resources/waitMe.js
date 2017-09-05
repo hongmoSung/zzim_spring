@@ -1,5 +1,5 @@
 /*
-waitMe - 1.15 [15.02.16]
+waitMe - 1.18 [23.09.16]
 Author: vadimsva
 Github: https://github.com/vadimsva/waitMe
 */
@@ -28,6 +28,8 @@ Github: https://github.com/vadimsva/waitMe
             bg: 'rgba(255,255,255,0.7)',
             color: '#000',
 						maxSize: '',
+						textPos: 'vertical',
+						fontSize: '',
             source: '',
 						onClose: function() {}
           };
@@ -51,6 +53,7 @@ Github: https://github.com/vadimsva/waitMe
               break;
             case 'orbit':
               effectElemCount = 2;
+							createSubElem = true;
               break;
             case 'roundBounce':
               effectElemCount = 12;
@@ -124,20 +127,25 @@ Github: https://github.com/vadimsva/waitMe
             effectObj = $('<div class="' + elemClass + '_progress ' + _options.effect + '" style="' + addStyle + '">' + effectElemHTML + '</div>');
           }
 
-          if (_options.text && _options.maxSize === '') {
+          if (_options.text) {
 						if ($.isArray(_options.color)) {
 							var color = _options.color[0];
 						} else {
 							var color = _options.color;
 						}
-            waitMe_text = $('<div class="' + elemClass + '_text" style="color:' + color + '">' + _options.text + '</div>');
+						if (_options.fontSize != '') {
+							var size = 'font-size:'+_options.fontSize;
+						} else {
+							var size = '';
+						}
+            waitMe_text = $('<div class="' + elemClass + '_text" style="color:' + color + ';' + size + '">' + _options.text + '</div>');
           }
 					var elemObj = elem.find('> .' + elemClass);
 
           if (elemObj) {
             elemObj.remove();
           }
-          var waitMeDivObj = $('<div class="' + elemClass + '_content"></div>');
+          var waitMeDivObj = $('<div class="' + elemClass + '_content ' + _options.textPos + '"></div>');
           waitMeDivObj.append(effectObj, waitMe_text);
           waitMeObj.append(waitMeDivObj);
           if (elem[0].tagName == 'HTML') {
@@ -147,9 +155,8 @@ Github: https://github.com/vadimsva/waitMe
 					elemObj = elem.find('> .' + elemClass);
 					var elemContentObj = elem.find('.' + elemClass + '_content');
           elemObj.css({background: _options.bg});
-					elemContentObj.css({marginTop: - elemContentObj.outerHeight() / 2 + 'px'});
 					
-					if (_options.maxSize !== '') {
+					if (_options.maxSize !== '' && _options.effect != 'none') {
 						var elemH = effectObj.outerHeight();
 						var elemW = effectObj.outerWidth();
 						var elemMax = elemH;
@@ -159,10 +166,40 @@ Github: https://github.com/vadimsva/waitMe
 							elemContentObj.css({marginTop: - elemContentObj.outerHeight() / 2 + 'px'});
 						} else {
 							if (_options.maxSize < elemMax) {
-								waitMeDivObj.css({transform: 'scale(' + _options.maxSize / elemMax + ')'});	
+								if (_options.effect == 'stretch') {
+									effectObj.css({height:_options.maxSize + 'px', width:_options.maxSize + 'px'});
+									effectObj.find('> div').css({margin: '0 5%'});
+								} else {
+									var zoom = _options.maxSize / elemMax - 0.2;
+									var offset = '-50%';
+									if (_options.effect == 'roundBounce') {
+										offset = '-75%';
+										if (_options.text) {
+											offset = '75%';	
+										}
+									} else if (_options.effect == 'win8' || _options.effect == 'timer' || _options.effect == 'orbit') {
+										offset = '-20%';
+										if (_options.text) {
+											offset = '20%';	
+										}
+									} else if (_options.effect == 'ios') {
+										offset = '-15%';
+										if (_options.text) {
+											offset = '15%';
+										}
+									}
+									if (_options.effect == 'rotation') {
+										if (_options.text) {
+											offset = '75%';	
+										}
+									}
+									effectObj.css({transform: 'scale('+zoom+') translateX('+offset+')', whiteSpace:'nowrap'});
+								}
+								
 							}
 						}
 					}
+					elemContentObj.css({marginTop: - elemContentObj.outerHeight() / 2 + 'px'});
 
 					function setElTop(getTop) {
 						elemContentObj.css({top: 'auto', transform: 'translateY(' + getTop + 'px) translateZ(0)'});

@@ -128,14 +128,11 @@
 </div>
 
 <script>
+	
 	// 토큰
 	var token = $("#_csrf").attr("value");
 	var header = $("#_csrf_header").attr("value");
-	$(function() {
-	    $(document).ajaxSend(function(e, xhr, options) {
-	        xhr.setRequestHeader(header, token);
-	    });
-	});
+	
 	
 	// hide
 	window.onload = function(){
@@ -173,37 +170,41 @@
 	}
 	
 	// 삭제
-	$("#deleteMaster").on("click", function() {
-		var chk = document.getElementsByName("checkRow");
-		var len = chk.length;    
-		var checkRow = '';      
-		var valueArray = new Array();            
 	
-		for(var i = 0; i < len; i++){
-			if(chk[i].checked == true){ 
+	$("#deleteMaster").on("click", function() {
+		$(document).ajaxSend(function(e, xhr, options) {
+			xhr.setRequestHeader(header, token);
+		});
+		var chk = document.getElementsByName("checkRow");
+		var len = chk.length;
+		var checkRow = '';
+		var valueArray = new Array();
+
+		for (var i = 0; i < len; i++) {
+			if (chk[i].checked == true) {
 				checkRow = chk[i].value;
-				valueArray.push(checkRow); 
-				}
+				valueArray.push(checkRow);
 			}
+		}
 		$.ajaxSettings.traditional = true; // 배열로 controller에 주기 위해
 		$.ajax({
-			url: "masterDelete",
-			type: "POST",
-			data: {
+			url : "masterDelete",
+			type : "POST",
+			data : {
 				'valueArray' : valueArray,
 			}
-			}).done(function (result){
-				alert("삭제 완료");
-				window.location.reload();
+		}).done(function(result) {
+			alert("삭제 완료");
+			window.location.reload();
 		});
 	})
-	
+
 	// 등록 select박스 이벤트
-	function innerSelect(value){
-		if(value == 'etc'){
-			$("#insertWebsite").show(); 
+	function innerSelect(value) {
+		if (value == 'etc') {
+			$("#insertWebsite").show();
 		}
-		if(value != 'etc'){
+		if (value != 'etc') {
 			$("#insertWebsite").hide();
 		}
 	}
@@ -212,184 +213,186 @@
 		var email = "${user.email}";
 		var websiteId = $("#masterId").val();
 		var websitePw = $("#masterPassword").val();
-		var websiteType =  $("#websiteType option:selected").text();
-	
-		if(websiteType == '선택'){
+		var websiteType = $("#websiteType option:selected").text();
+
+		if (websiteType == '선택') {
 			alert('사이트 입력할 것');
-		}else if(websiteId == ''){
+		} else if (websiteId == '') {
 			alert('아이디 입력할 것');
 			$("#masterId").focus();
-		}else if(websitePw == ''){
+		} else if (websitePw == '') {
 			alert('비밀번호 입력할 것');
 			$("#masterPassword").focus();
-		}else{
-			console.log("등록 website : " + websiteType);
-			console.log("email" + email);
-			console.log("websiteId" + websiteId);
-			console.log("websitePw" + websitePw);
-			
+		} else {
+
 			$.ajax({
 				url : "http://192.168.0.36:3003/checkEmail",
 				type : "post",
 				data : {
-					"email" : email,
-					"website" : websiteType,
-					"websiteId" : websiteId,
-					"websitePw" : websitePw
-				}
-			}).done(function(result){
-				/* if(result == "valid"){
-					$.ajax({
-						url: "masterInsert",
-						type: "post", 
-						data: {
-							email : email,
-							website : websiteType,
-							websiteId : websiteId,
-							websitePw : websitePw
-						}
-						}).done(function (result){
-							if(result =="Complete"){
-								alert(result);
-								window.location.reload();
-							}else{
-								alert("err");						
-							}
-						})		
-				}else{
-					alert("이메일과 패스워드를 확인해주세요");
-				} */
-			})
-			
-		}
-	})
-	
-	// 편집
-	$(".updateBtn").on("click", function(){
-		var dataNo = $(this).attr('data-no');
-		var website = $("span[name='website" + dataNo + "']").text();
-	  // 편집 폼 중복 방지
-	  	var a = $(".a");
-	  	var b = $(".b");
-		var c = $(".c");
-		a.show();
-		b.hide();
-		console.log(website);
-		if(website == "etc"){
-			c.show();
-		}else{
-			c.hide();
-		}
-	  	console.log("편집 website : " + website);
-	  	switch(website){
-	  		case '11st' : $("#op11st"+dataNo).attr("selected", "selected"); break;
-	  		case 'gmarket' : $("#opGmarket"+dataNo).attr("selected", "selected"); break;
-	  		case 'auction' : $("#opAuction"+dataNo).attr("selected", "selected"); break;
-	  		case 'interpark' : $("#opInterpark"+dataNo).attr("selected", "selected"); console.log("interpark편집"); break;
-	  		default : $("#opEtc"+dataNo).attr("selected", "selected"); c.show(); break;
-	  	}
-		  	
-		// 컨텐트 숨기기
-		$("#first"+dataNo).hide();
-		$("#second"+dataNo).hide();
-		$("#third"+dataNo).hide();
-		// 편집 버튼 숨기기
-		$("#updateMaster"+dataNo).hide();
-		// 입력 창 보이기
-		$("#website"+dataNo).show();
-		$("#websiteId"+dataNo).show();
-		$("#websitePw"+dataNo).show();
-		// 수정 버튼 보이기
-		$("#updateGo"+dataNo).show();
-	})
-	
-	function innerSelectUp(value){
-		console.log("편집 value : " + value);
-		var c = $(".c");
-		if(value == 'etc'){
-			c.show();
-		}
-		if(value != 'etc'){
-			c.hide();
-		}
-	}
-	
-	// 수정
-	$("a[name='updateSubmit']").on("click", function(){
-		var dataNo = $(this).attr('data-no');
-		var email = "${user.email}";
-		var website = $("span[name='website" + dataNo + "']").text();
-		var websiteId = $("span[name='websiteId" + dataNo + "']").text();
-		var websitePw = $("span[name='websitePw" + dataNo + "']").text();
-		var reWebsite = $("#websiteTypeUp"+dataNo+" option:selected").text();
-		var reWebsiteId = $("input[name='websiteId" + dataNo + "']").val();
-		var reWebsitePw = $("input[name='websitePw" + dataNo + "']").val();
-		console.log(websitePw);
-		 $.ajax({
-				url: "masterUpdate",
-				type: "POST", 
-				data: {
 					email : email,
-					website : website,
+					website : websiteType,
 					websiteId : websiteId,
-					websitePw : websitePw,
-					reWebsite : reWebsite,
-					reWebsiteId : reWebsiteId,
-					reWebsitePw : reWebsitePw
+					websitePw : websitePw
 				}
-				}).done(function (result){
-					alert(result);
-					window.location.reload();
-				})
+			}).done(function(result) {
+				alert(result.result);
+				window.location.reload();
+			});
+
+		}
 	})
-	
-	// 수정 취소
-	$("a[name='updateCancel']").on("click", function(){
-// 		window.location.reload();
+
+	// 편집
+	$(".updateBtn").on("click", function() {
+		
 		var dataNo = $(this).attr('data-no');
 		var website = $("span[name='website" + dataNo + "']").text();
-		var websiteId = $("span[name='websiteId" + dataNo + "']").text();
-		var websitePw = $("span[name='websitePw" + dataNo + "']").text();
+		// 편집 폼 중복 방지
 		var a = $(".a");
 		var b = $(".b");
 		var c = $(".c");
-		
-		console.log("수정취소 dataNO : " + dataNo);
-		console.log("수정 취소 website: " + website);
-		console.log("id : " + websiteId);
-		console.log("pw : " + websitePw);
-	
-	// 	$("input[name='website" + dataNo + "']").val(website);
-		$("input[name='websiteId" + dataNo + "']").val(websiteId);
-		$("input[name='websitePw" + dataNo + "']").val(websitePw);
-		if(website == "11st"){
-			$("#op11st"+dataNo).attr("selected", "selected");
-		}
-		console.log("선택된 옵션" + $("#websiteTypeUp"+dataNo+" option:selected").text());
-	  switch(website){
-			case '11st' : $("#op11st"+dataNo).removeAttr("selected"); console.log(1); break;
-			case 'gmarket' : $("#opGmarket"+dataNo).removeAttr("selected"); console.log(2); break;
-			case 'auction' : $("#opAuction"+dataNo).removeAttr("selected"); console.log(3); break;
-			case 'interpark' : $("#opInterpark"+dataNo).removeAttr("selected"); console.log(4); break;
-			default : $("#opEtc"+dataNo).removeAttr("selected"); console.log(5); break;
-			case '11st' : $("#op11st"+dataNo).removeAttr("selected"); break;
-		}
-		
 		a.show();
 		b.hide();
+		if (website == "etc") {
+			c.show();
+		} else {
+			c.hide();
+		}
+		switch (website) {
+		case '11st':
+			$("#op11st" + dataNo).attr("selected", "selected");
+			break;
+		case 'gmarket':
+			$("#opGmarket" + dataNo).attr("selected", "selected");
+			break;
+		case 'auction':
+			$("#opAuction" + dataNo).attr("selected", "selected");
+			break;
+		case 'interpark':
+			$("#opInterpark" + dataNo).attr("selected", "selected");
+			break;
+		default:
+			$("#opEtc" + dataNo).attr("selected", "selected");
+			c.show();
+			break;
+		}
+
+		// 컨텐트 숨기기
+		$("#first" + dataNo).hide();
+		$("#second" + dataNo).hide();
+		$("#third" + dataNo).hide();
+		// 편집 버튼 숨기기
+		$("#updateMaster" + dataNo).hide();
+		// 입력 창 보이기
+		$("#website" + dataNo).show();
+		$("#websiteId" + dataNo).show();
+		$("#websitePw" + dataNo).show();
+		// 수정 버튼 보이기
+		$("#updateGo" + dataNo).show();
 	})
-	
-/* 	$(document).ajaxStart(function () {
-	    $("body").waitMe({
-	        effect: 'win8',
-	        text: '기다려',
-	        bg: 'rgba(255,255,255,0.7)',
-	        color: '#000',
-	        source: 'img.svg'
-	    });
-	}).ajaxStop(function () {
-	        $("body").waitMe("hide");
-	    }); */
+
+	function innerSelectUp(value) {
+		var c = $(".c");
+		if (value == 'etc') {
+			c.show();
+		}
+		if (value != 'etc') {
+			c.hide();
+		}
+	}
+
+	// 수정
+	$("a[name='updateSubmit']").on("click",function() {
+				$(document).ajaxSend(function(e, xhr, options) {
+					xhr.setRequestHeader(header, token);
+				});
+				var dataNo = $(this).attr('data-no');
+				var email = "${user.email}";
+				var website = $("span[name='website" + dataNo + "']").text();
+				var websiteId = $("span[name='websiteId" + dataNo + "']")
+						.text();
+				var websitePw = $("span[name='websitePw" + dataNo + "']")
+						.text();
+				var reWebsite = $(
+						"#websiteTypeUp" + dataNo + " option:selected").text();
+				var reWebsiteId = $("input[name='websiteId" + dataNo + "']")
+						.val();
+				var reWebsitePw = $("input[name='websitePw" + dataNo + "']")
+						.val();
+				$.ajax({
+					url : "masterUpdate",
+					type : "POST",
+					data : {
+						email : email,
+						website : website,
+						websiteId : websiteId,
+						websitePw : websitePw,
+						reWebsite : reWebsite,
+						reWebsiteId : reWebsiteId,
+						reWebsitePw : reWebsitePw
+					}
+				}).done(function(result) {
+					alert(result);
+					window.location.reload();
+				})
+			})
+
+	// 수정 취소
+	$("a[name='updateCancel']").on("click",function() {
+				// 		window.location.reload();
+				var dataNo = $(this).attr('data-no');
+				var website = $("span[name='website" + dataNo + "']").text();
+				var websiteId = $("span[name='websiteId" + dataNo + "']")
+						.text();
+				var websitePw = $("span[name='websitePw" + dataNo + "']")
+						.text();
+				var a = $(".a");
+				var b = $(".b");
+				var c = $(".c");
+
+
+				// 	$("input[name='website" + dataNo + "']").val(website);
+				$("input[name='websiteId" + dataNo + "']").val(websiteId);
+				$("input[name='websitePw" + dataNo + "']").val(websitePw);
+				if (website == "11st") {
+					$("#op11st" + dataNo).attr("selected", "selected");
+				}
+				switch (website) {
+				case '11st':
+					$("#op11st" + dataNo).removeAttr("selected");
+					break;
+				case 'gmarket':
+					$("#opGmarket" + dataNo).removeAttr("selected");
+					break;
+				case 'auction':
+					$("#opAuction" + dataNo).removeAttr("selected");
+					break;
+				case 'interpark':
+					$("#opInterpark" + dataNo).removeAttr("selected");
+					break;
+				default:
+					$("#opEtc" + dataNo).removeAttr("selected");
+					break;
+				case '11st':
+					$("#op11st" + dataNo).removeAttr("selected");
+					break;
+				}
+
+				a.show();
+				b.hide();
+			})
+
+	$(document).ajaxStart(function() {
+		$("body").waitMe({
+			effect : 'win8',
+			text : '',
+			bg : 'rgba(255,255,255,0.7)',
+			color : '#000',
+			source : '/web/resources/img.svg'
+		});
+	}).ajaxStop(function() {
+		$("body").waitMe("hide");
+	});
 </script>
 
 

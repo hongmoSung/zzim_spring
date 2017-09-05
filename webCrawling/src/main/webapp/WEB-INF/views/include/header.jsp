@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!doctype html>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
@@ -38,8 +38,10 @@
     
     <script src="/web/resources/handlebars-v4.0.10.js"></script>
 	<script src="/web/resources/sb.js"></script>
-<!-- 	<script src="/web/resources/waitMe.js"></script>
-	<script src="/web/resources/waitMe.css"></script> -->
+	
+	<script src="/web/resources/waitMe.js"></script>
+	<link href="/web/resources/waitMe.css" rel="stylesheet" type="text/css" />
+	
     <script>
 		function logout(){
 			$("#logoutForm").submit();
