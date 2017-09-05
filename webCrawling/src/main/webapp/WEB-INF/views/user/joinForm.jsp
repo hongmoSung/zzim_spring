@@ -91,6 +91,8 @@
 			}
 		});
 	});
+	
+	// 가입 버튼
 	$("#joinBtn").on("click", function() {
 		var emailType = $("#emailType option:selected").text();
 
@@ -131,7 +133,7 @@
 			return false;
 		}
 		$.ajax({
-			url : getContextPath() + "/user/join",
+			url : getContextPath() + "/join",
 			type : "POST",
 			data : {
 				"email" : email,
