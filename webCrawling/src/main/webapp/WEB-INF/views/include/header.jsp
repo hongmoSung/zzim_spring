@@ -13,34 +13,34 @@
     <meta charset="utf-8">
     <title></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="/web/resources/css/font-awesome.min.css" rel="stylesheet" type="text/css" media="all">
-    <link href="/web/resources/css/themify-icons.css" rel="stylesheet" type="text/css" media="all" />
-    <link href="/web/resources/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-    <link href="/web/resources/css/flexslider.css" rel="stylesheet" type="text/css" media="all" />
-    <link href="/web/resources/css/theme-red.css" rel="stylesheet" type="text/css" media="all" />
-    <link href="/web/resources/css/custom.css" rel="stylesheet" type="text/css" media="all" />
-    <link href="/web/resources/css/lightbox.min.css" rel="stylesheet" type="text/css" media="all" />
-    <link href="/web/resources/css/ytplayer.css" rel="stylesheet" type="text/css" media="all" />
-    <link href="/web/resources/css/theme.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="/resources/css/font-awesome.min.css" rel="stylesheet" type="text/css" media="all">
+    <link href="/resources/css/themify-icons.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="/resources/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="/resources/css/flexslider.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="/resources/css/theme-red.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="/resources/css/custom.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="/resources/css/lightbox.min.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="/resources/css/ytplayer.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="/resources/css/theme.css" rel="stylesheet" type="text/css" media="all" />
     <link href='http://fonts.googleapis.com/css?family=Lato:300,400%7CRaleway:100,400,300,500,600,700%7COpen+Sans:400,500,600' rel='stylesheet' type='text/css'>
 
-	<script src="/web/resources/js/jquery.min.js"></script>
-    <script src="/web/resources/js/bootstrap.min.js"></script>
-    <script src="/web/resources/js/flexslider.min.js"></script>
-    <script src="/web/resources/js/parallax.js"></script>
-    <script src="/web/resources/js/scripts.js"></script>
+	<script src="/resources/js/jquery.min.js"></script>
+    <script src="/resources/js/bootstrap.min.js"></script>
+    <script src="/resources/js/flexslider.min.js"></script>
+    <script src="/resources/js/parallax.js"></script>
+    <script src="/resources/js/scripts.js"></script>
 
-	<script src="/web/resources/js/lightbox.min.js"></script>
-    <script src="/web/resources/js/masonry.min.js"></script>
-    <script src="/web/resources/js/ytplayer.min.js"></script>
-    <script src="/web/resources/js/countdown.min.js"></script>
-    <script src="/web/resources/js/smooth-scroll.min.js"></script>
+	<script src="/resources/js/lightbox.min.js"></script>
+    <script src="/resources/js/masonry.min.js"></script>
+    <script src="/resources/js/ytplayer.min.js"></script>
+    <script src="/resources/js/countdown.min.js"></script>
+    <script src="/resources/js/smooth-scroll.min.js"></script>
     
-    <script src="/web/resources/handlebars-v4.0.10.js"></script>
-	<script src="/web/resources/sb.js"></script>
+    <script src="/resources/handlebars-v4.0.10.js"></script>
+	<script src="/resources/sb.js"></script>
 	
-	<script src="/web/resources/waitMe.js"></script>
-	<link href="/web/resources/waitMe.css" rel="stylesheet" type="text/css" />
+	<script src="/resources/waitMe.js"></script>
+	<link href="/resources/waitMe.css" rel="stylesheet" type="text/css" />
 	
     <script>
 		function logout(){
@@ -67,8 +67,8 @@
         <div class="nav-bar">
             <div class="module left">
                 <a href="${pageContext.request.contextPath}/">
-                    <img class="logo logo-light" alt="Foundry" src="/web/resources/img/logo-light.png">
-                    <img class="logo logo-dark" alt="Foundry" src="/web/resources/img/logo-dark.png">
+                    <img class="logo logo-light" alt="Foundry" src="/resources/img/logo-light.png">
+                    <img class="logo logo-dark" alt="Foundry" src="/resources/img/logo-dark.png">
                 </a>
             </div>
             <div class="module widget-handle mobile-toggle right visible-sm visible-xs">

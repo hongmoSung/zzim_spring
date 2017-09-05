@@ -9,13 +9,13 @@
 
         <section class="cover fullscreen image-bg overlay">
             <div class="background-image-holder">
-                <img alt="image" class="background-image" src="/web/resources/img/cover8.jpg">
+                <img alt="image" class="background-image" src="/resources/img/cover8.jpg">
             </div>
 
             <div class="container v-align-transform">
                 <div class="row">
                     <div class="col-sm-12 text-center">
-                        <img alt="Pic" src="/web/resources/img/logo-light.png" class="image-small">
+                        <img alt="Pic" src="/resources/img/logo-light.png" class="image-small">
                     </div>
                 </div>
 
@@ -79,7 +79,7 @@
                     <div class="col-md-3 col-sm-4 masonry-item col-xs-12">
                         <div class="image-tile outer-title text-center">
                             <a href="#">
-                                <img alt="Pic" class="product-thumb" src="/web/resources/img/shop-product-1.jpg" />
+                                <img alt="Pic" class="product-thumb" src="/resources/img/shop-product-1.jpg" />
                             </a>
                             <div class="title">
                                 <h5 class="mb0">Adrian
@@ -92,7 +92,7 @@
                     <div class="col-md-3 col-sm-4 masonry-item col-xs-12">
                         <div class="image-tile outer-title text-center">
                             <a href="#">
-                                <img alt="Pic" class="product-thumb" src="/web/resources/img/shop-product-2.jpg" />
+                                <img alt="Pic" class="product-thumb" src="/resources/img/shop-product-2.jpg" />
                             </a>
                             <div class="title">
                                 <h5 class="mb0">Stanley
@@ -106,7 +106,7 @@
                         <div class="image-tile outer-title text-center">
                             <a href="#">
                                 <span class="label">Sale</span>
-                                <img alt="Pic" class="product-thumb" src="/web/resources/img/shop-product-4.jpg" />
+                                <img alt="Pic" class="product-thumb" src="/resources/img/shop-product-4.jpg" />
                             </a>
                             <div class="title">
                                 <h5 class="mb0">Logan
@@ -119,7 +119,7 @@
                     <div class="col-md-3 col-sm-4 masonry-item col-xs-12">
                         <div class="image-tile outer-title text-center">
                             <a href="#">
-                                <img alt="Pic" class="product-thumb" src="/web/resources/img/shop-product-7.jpg" />
+                                <img alt="Pic" class="product-thumb" src="/resources/img/shop-product-7.jpg" />
                             </a>
                             <div class="title">
                                 <h5 class="mb0">Vladimir
@@ -132,7 +132,7 @@
                     <div class="col-md-3 col-sm-4 masonry-item col-xs-12">
                         <div class="image-tile outer-title text-center">
                             <a href="#">
-                                <img alt="Pic" class="product-thumb" src="/web/resources/img/shop-product-8.jpg" />
+                                <img alt="Pic" class="product-thumb" src="/resources/img/shop-product-8.jpg" />
                             </a>
                             <div class="title">
                                 <h5 class="mb0">Nathan
@@ -145,7 +145,7 @@
                     <div class="col-md-3 col-sm-4 masonry-item col-xs-12">
                         <div class="image-tile outer-title text-center">
                             <a href="#">
-                                <img alt="Pic" class="product-thumb" src="/web/resources/img/shop-product-5.jpg" />
+                                <img alt="Pic" class="product-thumb" src="/resources/img/shop-product-5.jpg" />
                             </a>
                             <div class="title">
                                 <h5 class="mb0">Nicholas
@@ -159,7 +159,7 @@
                         <div class="image-tile outer-title text-center">
                             <a href="#">
                                 <span class="label">Hot</span>
-                                <img alt="Pic" class="product-thumb" src="/web/resources/img/shop-product-9.jpg" />
+                                <img alt="Pic" class="product-thumb" src="/resources/img/shop-product-9.jpg" />
                             </a>
                             <div class="title">
                                 <h5 class="mb0">Bobby
@@ -172,7 +172,7 @@
                     <div class="col-md-3 col-sm-4 masonry-item col-xs-12">
                         <div class="image-tile outer-title text-center">
                             <a href="#">
-                                <img alt="Pic" class="product-thumb" src="/web/resources/img/shop-product-13.jpg" />
+                                <img alt="Pic" class="product-thumb" src="/resources/img/shop-product-13.jpg" />
                             </a>
                             <div class="title">
                                 <h5 class="mb0">Bradley
@@ -185,7 +185,7 @@
                     <div class="col-md-3 col-sm-4 masonry-item col-xs-12">
                         <div class="image-tile outer-title text-center">
                             <a href="#">
-                                <img alt="Pic" class="product-thumb" src="/web/resources/img/shop-product-11.jpg" />
+                                <img alt="Pic" class="product-thumb" src="/resources/img/shop-product-11.jpg" />
                             </a>
                             <div class="title">
                                 <h5 class="mb0">Mack
