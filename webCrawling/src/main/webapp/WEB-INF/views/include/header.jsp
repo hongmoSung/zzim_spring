@@ -43,6 +43,19 @@
 			$("#logoutForm").submit();
 		}
 	</script>
+	    <style>
+        body, html {
+          height: 100%;
+        }
+        
+        footer {
+            margin-top: -10em;
+        }
+        
+        div.main-container{
+            min-height: 90%;
+        }
+    </style>
 </head>
 
 

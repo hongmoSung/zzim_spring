@@ -1,4 +1,4 @@
-<footer class="footer-2 bg-dark text-center-xs">
+<footer class="footer-2 bg-dark text-center-xs" style="margin-top: -10em;">
     <div class="container">
         <div class="row">
             <div class="col-sm-4">
