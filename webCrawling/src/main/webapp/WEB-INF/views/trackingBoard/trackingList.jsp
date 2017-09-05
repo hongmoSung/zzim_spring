@@ -122,7 +122,7 @@ $("body").on( 'click', '.accordion li .title' , function(){
 //   console.log(pNo);
   
   $.ajax({
-	  url : getContextPath()+"/trackingBoard/priceHistory",
+	  url : getContextPath()+"/priceHistory",
 	  data : {"pNo":pNo}
   }).done(function(result){
 	  var priceArr = []
@@ -227,7 +227,7 @@ function handle(result,target){
 	var email = "${user.email}";
 	console.log(email);
   	$.ajax({
- 		url : getContextPath()+"/trackingBoard/sList",
+ 		url : getContextPath()+"/sList",
  		data : {"email" : email}
  	}).done(function(result){
  		var sign = true;
@@ -250,9 +250,9 @@ function handle(result,target){
 // 		console.log("스크롤  같은거  "+Math.ceil($(window).scrollTop()+0.01), $(document).height() - $(window).height());
 // 		console.log("스크롤 이벤트  "+$(window).scrollTop(), $(document).height() , $(window).height());
 		if(Math.ceil($(window).scrollTop()+0.01) > $(document).height() - $(window).height()){
-			console.log("들어오라 ")
+// 			console.log("들어오라 ")
 			$.ajax({
-				url : getContextPath()+"/trackingBoard/scroll",
+				url : getContextPath()+"/scroll",
 				data:{page:page,
 						email:	'${user.email}'
 				},
@@ -277,13 +277,13 @@ $("body").on("click","#update",function(){
 	var pNo = $(this).attr('data-pNo');
 		if($("#notify"+pNo).val() != '' ){
 			$.ajax({
-				url:getContextPath()+"/trackingBoard/priceUpdate",
+				url:getContextPath()+"/priceUpdate",
 				data:{'pNo':pNo,
 					notifyPrice:$("#notify"+pNo).val()}
 			}).done(function(result){
 				if(result == 1){
 					alert("수정됨")
-					location.href = getContextPath()+"/trackingBoard/trackingList"
+					location.href = getContextPath()+"/trackingList"
 				}
 			})
 		}// if 끝
@@ -296,11 +296,11 @@ $("body").on("click","#update",function(){
 //삭제 
 $("body").on("click","#delete",function(){
 	$.ajax({
-		url:getContextPath()+"/trackingBoard/delete",
+		url:getContextPath()+"/delete",
 		data:{pNo:$(this).attr('data-pNo')}
 	}).done(function(result){
 		alert("삭제 되었습니다.")	
-		location.href = getContextPath()+"/trackingBoard/trackingList"
+		location.href = getContextPath()+"/trackingList"
 	})
 })
 
