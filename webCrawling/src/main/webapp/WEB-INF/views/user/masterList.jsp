@@ -228,35 +228,40 @@
 			console.log("websiteId" + websiteId);
 			console.log("websitePw" + websitePw);
 			
-			if(websiteType =='직접 입력'){
-				$.ajax({
-					url: "masterInsert",
-					type: "POST", 
-					data: {
-						email : email,
-						website : websiteType,
-						websiteId : websiteId,
-						websitePw : websitePw
-					}
-					}).done(function (result){
-						alert(result);
-						window.location.reload();
-					})
-			} else {
-				$.ajax({
-					url: "masterInsert",
-					type: "POST", 
-					data: {
-						email : email,
-						website : websiteType,
-						websiteId : websiteId,
-						websitePw : websitePw
-					}
-					}).done(function (result){
-						alert(result);
-						window.location.reload();
-					})
-			}
+			$.ajax({
+				url : "http://192.168.0.36:3003/checkEmail",
+				type : "post",
+				data : {
+					"email" : email,
+					"website" : websiteType,
+					"websiteId" : websiteId,
+					"websitePw" : websitePw
+				}
+				
+			}).done(function(result){
+				if(result == "valid"){
+					$.ajax({
+						url: "masterInsert",
+						type: "post", 
+						data: {
+							email : email,
+							website : websiteType,
+							websiteId : websiteId,
+							websitePw : websitePw
+						}
+						}).done(function (result){
+							if(result =="Complete"){
+								alert(result);
+								window.location.reload();
+							}else{
+								alert("err");						
+							}
+						})		
+				}else{
+					alert("이메일과 패스워드를 확인해주세요");
+				}
+			})
+			
 		}
 	})
 	
@@ -374,6 +379,18 @@
 		a.show();
 		b.hide();
 	})
+	
+	$(document).ajaxStart(function () {
+	    $("body").waitMe({
+	        effect: 'win8',
+	        text: '기다려',
+	        bg: 'rgba(255,255,255,0.7)',
+	        color: '#000',
+	        source: 'img.svg'
+	    });
+	}).ajaxStop(function () {
+	        $("body").waitMe("hide");
+	    });
 </script>
 
 

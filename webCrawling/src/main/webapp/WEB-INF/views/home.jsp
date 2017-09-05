@@ -12,7 +12,6 @@
                 <img alt="image" class="background-image" src="/web/resources/img/cover8.jpg">
             </div>
 
-
             <div class="container v-align-transform">
                 <div class="row">
                     <div class="col-sm-12 text-center">
