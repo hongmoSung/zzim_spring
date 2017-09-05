@@ -32,8 +32,9 @@
 						<input type="submit" id="loginBtn" value="로그인"/>
 					</form>
 					<p class="mb0">
-						<a href="${pageContext.request.contextPath}/joinForm" >아직 회원이 아니세요?</a>
+						<a href="${pageContext.request.contextPath}/user/joinForm" >아직 회원이 아니세요?</a>
 					</p>
+					
 				</div>
 			</div>
 		</div>
