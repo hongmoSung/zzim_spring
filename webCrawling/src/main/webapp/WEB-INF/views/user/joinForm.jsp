@@ -76,7 +76,7 @@
 			return false;
 		}
 		$.ajax({
-			url : getContextPath()+"/user/emailCheck",
+			url : getContextPath()+"/emailCheck",
 			data : {
 				"email" : email
 			}
@@ -139,7 +139,7 @@
 			}
 		}).done(function(result) {
 			alert("회원가입 성공");
-			location.href =  getContextPath() + "/user/loginForm";
+			location.href =  getContextPath() + "/loginForm";
 		});
 	});
 </script>

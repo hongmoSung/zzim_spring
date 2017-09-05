@@ -97,7 +97,7 @@
 			alert("내용 입력 할 것");
 		} else {
 			$.ajax({
-				url : getContextPath()+"/board/write",
+				url : getContextPath()+"/write",
 				data : {
 					"bTitle" : bTitle,
 					"bContent" : bContent,
@@ -107,7 +107,7 @@
 				}
 			}).done(function(result) {
 				alert(result);
-				location.href = getContextPath()+"/board/list?pageNo=" + param;
+				location.href = getContextPath()+"/list?pageNo=" + param;
 			});
 		}
 	})
@@ -118,10 +118,10 @@
 				var sName = getParameters('searchName');
 				var pageNo = getParameters('pageNo');
 				if (sName != undefined) {
-					location.href = getContextPath()+"/board/list?pageNo=" + pageNo
+					location.href = getContextPath()+"/list?pageNo=" + pageNo
 							+ "&searchName=" + sName;
 				} else {
-					location.href = getContextPath()+"/board/list?pageNo=" + pageNo;
+					location.href = getContextPath()+"/list?pageNo=" + pageNo;
 				}
 			});
 </script>

@@ -33,10 +33,10 @@
 							<span><fmt:formatDate value="${detail.board.bRegDate}" pattern="yy/MM/dd" /></span>
 						</li>
 							<c:if test="${detail.board.isNotice == 1}">
-								<li><img src="/web/resources/img/notice.png" style="width:25px; display:inline;"></li>
+								<li><img src="/resources/img/notice.png" style="width:25px; display:inline;"></li>
 							</c:if>
 							<c:if test="${detail.board.isSecret == 1}">
-								<li><img src="/web/resources/img/secret.png" style="width:20px; display:inline;"></li>
+								<li><img src="/resources/img/secret.png" style="width:20px; display:inline;"></li>
 							</c:if>
 					</ul><hr>
 					<p class="lead">${detail.board.bContent}</p>
@@ -125,20 +125,20 @@
 	// 수정
 	$("a[name='update']").click(function () {
 		var pageNo = getParameters('pageNo');
-		location.href=getContextPath()+"/board/updateForm?bNo=" + getParameters('bNo') + "&pageNo=" + pageNo;
+		location.href = getContextPath()+"/updateForm?bNo=" + getParameters('bNo') + "&pageNo=" + pageNo;
 	});
 		
 	// 삭제
 	$("a[name='delete']").on("click", function () {
 		$.ajax({
-			url: getContextPath()+"/board/delete",
+			url: getContextPath()+"/delete",
 			data: {
 				"bNo": getParameters('bNo')
 			},
 		})
 		.done(function (result) {
 			alert(result);
-			location.href=getContextPath()+"/board/list";
+			location.href=getContextPath()+"/list";
 		});
 	});
 		
@@ -147,10 +147,10 @@
 		var sName = getParameters('searchName');
 		var pageNo = getParameters('pageNo');
 		if(sName != undefined){
-			location.href = getContextPath()+"/board/list?pageNo=" + pageNo + "&searchName=" + sName;
+			location.href = getContextPath()+"/list?pageNo=" + pageNo + "&searchName=" + sName;
 		}
 		else {
-			location.href = getContextPath()+"/board/list?pageNo=" + pageNo;
+			location.href = getContextPath()+"/list?pageNo=" + pageNo;
 		}
 	});
 	
@@ -163,7 +163,7 @@
 	// 입력
 	$("a[name='answerSubmit']").click(function(){
 		$.ajax({
-			url: getContextPath()+"/board/commentRegist",
+			url: getContextPath()+"/commentRegist",
 			type: "POST",
 			data: {
 				bNo: getParameters('bNo'),
@@ -194,7 +194,7 @@
  		var reUpContent = $("textarea[name='reUpContent']").val();
  		var rNo = $("#rNo").text();
 		$.ajax({
-				url: getContextPath()+"/board/commentUpdate",
+				url: getContextPath()+"/commentUpdate",
 				type: "POST", 
 				data: {
 					bNo : getParameters('bNo'),
@@ -219,7 +219,7 @@
 	 $("a[name='reDelete']").click(function () {
 		 var rNo = $("#rNo").text();
 		 $.ajax({
-			 url:getContextPath()+"/board/commentDelete",
+			 url:getContextPath()+"/commentDelete",
 			 data:{
 				bNo : getParameters('bNo'),
 				rNo : rNo

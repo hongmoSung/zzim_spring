@@ -88,7 +88,7 @@
 				alert("내용을 입력할 것");
 			} else {
 				$.ajax({
-					url : getContextPath()+"/board/update",
+					url : getContextPath()+"/update",
 					data : {
 						'bNo' : bNo,
 						'bTitle' : bTitle,
@@ -98,7 +98,7 @@
 					}
 				}).done(function(result) {
 					alert(result);
-					location.href = getContextPath()+"/board/detail?bNo=" + bNo + "&pageNo=" +  getParameters('pageNo');
+					location.href = getContextPath()+"/detail?bNo=" + bNo + "&pageNo=" +  getParameters('pageNo');
 					});
 			}
 		})
@@ -107,10 +107,10 @@
 			var sName = getParameters('searchName');
 			var pageNo = getParameters('pageNo');
 			if(sName != undefined){
-				location.href = getContextPath()+"/board/list?pageNo=" + pageNo + "&searchName=" + sName;
+				location.href = getContextPath()+"/list?pageNo=" + pageNo + "&searchName=" + sName;
 			}
 			else {
-				location.href = getContextPath()+"/board/list?pageNo=" + pageNo;
+				location.href = getContextPath()+"/list?pageNo=" + pageNo;
 			}
 		});
 		
@@ -118,14 +118,10 @@
 			var isSecret = $("#isSecret").text();
 			var isNotice = $("#isNotice").text();
 			if(isSecret == 1){
-				console.log(isSecret);
-				console.log($("#secretChk").attr("class"));
 				$("#secretChk").attr("class", "checkbox-option checked");
-				console.log($("#secretChk").attr("class"));
 				$("input #secret").attr("checked", true);
 			}
 			if(isNotice == 1){
-				console.log(isNotice);
 				$("#noticeChk").attr("class", "checkbox-option checked");
 				$("input #notice").attr("checked", true);
 			}

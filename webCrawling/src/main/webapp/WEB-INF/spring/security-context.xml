@@ -31,14 +31,20 @@
 <!-- 	<beans:bean id="loginService" class="kr.co.web.service.LoginService"> -->
 <!--    	</beans:bean> -->
 	
-	<jdbc-user-service data-source-ref="dataSource" id="loginService"
-	users-by-username-query="select email, password , enabled from tbl_user where email=?"
+<!-- 	<jdbc-user-service data-source-ref="dataSource" id="loginService" -->
+<!-- 	users-by-username-query="select email, password , enabled from tbl_user where email=?" -->
+<!-- 	authorities-by-username-query="select email as username ,authority as authority from tbl_user where email=?"/> -->
+
+	<jdbc-user-service data-source-ref="dataSource"
+	users-by-username-query="select email, AES_DECRYPT(UNHEX(password), 'aes'), enabled from tbl_user where email=?"
 	authorities-by-username-query="select email as username ,authority as authority from tbl_user where email=?"/>
 	
-	<authentication-manager>
-		<authentication-provider user-service-ref="loginService">
-			<password-encoder base64="true" hash="bcrypt" />
-		</authentication-provider> 
-	</authentication-manager>
+<!-- 	SELECT email, AES_DECRYPT(UNHEX(password), 'aes') as pw FROM tbl_user where email = 'test5'; -->
+	
+<!-- 	<authentication-manager> -->
+<!-- 		<authentication-provider user-service-ref="loginService"> -->
+<!-- 			<password-encoder base64="true" hash="bcrypt" /> -->
+<!-- 		</authentication-provider>  -->
+<!-- 	</authentication-manager> -->
 	
 </beans:beans>

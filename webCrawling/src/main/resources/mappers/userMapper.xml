@@ -8,8 +8,9 @@
 		insert into tbl_user
 		(email, password)
 		values
-		(#{email}, #{password})
+		(#{email}, HEX(AES_ENCRYPT(#{password},'aes')))
 	</insert>
+	
 	
 	<select id="selectEmail" resultType="String">
 		select email

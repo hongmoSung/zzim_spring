@@ -39,7 +39,7 @@
 <!-- 								<span class="label inline-block">조회수 &nbsp&nbsp${board.bHit}</span> -->
 								<c:choose>
 									<c:when test="${board.isNotice == 1}">
-										<img src="/web/resources/img/notice.png" style="width:25px; display:inline;">
+										<img src="/resources/img/notice.png" style="width:25px; display:inline;">
 									</c:when>
 									<c:otherwise>
 										<span style="width:50px;">${board.bNo}&nbsp&nbsp&nbsp&nbsp</span>
@@ -47,13 +47,12 @@
 								</c:choose>
 								<c:choose>
 									<c:when test="${board.isSecret == 1 and user.email != 'comboy5419@naver.com' and user.email != board.email}">
-										<img src="/web/resources/img/secret.png" style="width:20px; display:inline;">
+										<img src="/resources/img/secret.png" style="width:20px; display:inline;">
 										<h5 class="inline-block"><a style="cursor:pointer; color:#C0C0C0; font-weight:lighter;" name="secret">&nbsp비밀글 입니다</a></h5>
 									</c:when>
 									<c:otherwise>
 										<c:choose>
 											<c:when test="${board.isNotice == 1}">
-<!-- 												<img src="/web/resources/img/notice.png" style="width:25px; display:inline;"> -->
 												<h4 class="inline-block" style="width:40%; display:inline;"><a href="${pageContext.request.contextPath}/board/detail?bNo=${board.bNo}&pageNo=${pageResult.pageNo}" style="cursor:pointer; color:black;"> &nbsp&nbsp ${board.bTitle}</a></h4>
 											</c:when>
 											<c:otherwise>
@@ -64,7 +63,7 @@
 								</c:choose>
 								<ul style="display:inline; float:right; width:10%; position:relative; top:15px;">
 									<c:if test="${board.bReply == 1}">
-										<li><img src="/web/resources/img/hook.png" style="width:30px; display:inline; position:relative; top:-10px;"></li>
+										<li><img src="/resources/img/hook.png" style="width:30px; display:inline; position:relative; top:-10px;"></li>
 									</c:if>
 									<li style="display:inline; width:200px; display:none;"><i class="ti-comment-alt"></i> &nbsp<span>${board.bReply}</span></li>
 								</ul>
@@ -157,7 +156,7 @@
 		// 검색
 		$("#searchBtn").on("click", function () {
 			var sName = $("#searchName").val();
-			location.href = getContextPath()+"/board/list?searchName=" + sName;
+			location.href = getContextPath()+"/list?searchName=" + sName;
 			return false;
 		});
 		
@@ -170,7 +169,7 @@
 		
 		// 나의 문의
 		$("#myQnA").click(function() {
-			location.href =getContextPath()+"/board/list?email=${user.email}";
+			location.href =getContextPath()+"/list?email=${user.email}";
 			return false;
 		});
 		
@@ -178,7 +177,7 @@
 		$("a[name='secret']").click(function() {
 			if("{user.email}" == ""){
 				alert("로그인 해주세요");
-				location.href = "/board/member/loginForm";
+				location.href = "/user/loginForm";
 			}else{
 				alert("비밀글은 본인만 확인할 수 있습니다.")
 			}
@@ -192,9 +191,9 @@
 			
 			if (param == undefined) {param = 1;}
 			if (sName != undefined){
-				location.href = getContextPath()+"/board/writeForm?pageNo=" + param + "&searchName=" + sName;
+				location.href = getContextPath()+"/writeForm?pageNo=" + param + "&searchName=" + sName;
 			}else{
-				location.href = getContextPath()+"/board/writeForm?pageNo=" + param;
+				location.href = getContextPath()+"/writeForm?pageNo=" + param;
 			}
 		});
 		

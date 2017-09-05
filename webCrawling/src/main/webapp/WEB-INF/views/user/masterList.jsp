@@ -65,7 +65,7 @@
                            </c:choose>
                            &nbsp&nbsp&nbsp&nbsp<span name="website${status.index}">${list.website}</span>
                         </li>
-                        <li id="website${status.index}" class="b">
+                        <li id="website${status.index}" class="b" style="display:none;">
                            <select id="websiteTypeUp${status.index}" style="width:100px;" >
                                 <option value="empty${status.index}" id="empty${status.index}">선택</option>
                                 <option value="11st" id="op11st${status.index}">11st</option>
@@ -79,7 +79,7 @@
                            <li id="second${status.index}" class="a">
                               <span name="websiteId${status.index}" style="position:relative; bottom:5px; line-height:30px;">${list.websiteId}</span>
                            </li>
-                        <li id="websiteId${status.index}" class="b">
+                        <li id="websiteId${status.index}" class="b" style="display:none;">
                            <input type="text" value="${list.websiteId}" name="websiteId${status.index}">
                         </li>
                      </ul>
@@ -87,14 +87,14 @@
                            <li id="third${status.index}" style="display:none;">
                               <span name="websitePw${status.index}" style="position:relative; bottom:5px; line-height:30px;">${list.websitePw}</span>
                            </li>
-                           <li id="websitePw${status.index}" class="b">
-                              <input type="text" value="${list.websitePw}" name="websitePw${status.index}">
+                           <li id="websitePw${status.index}" class="b" style="display:none;">
+                              <input type="password" value="${list.websitePw}" name="websitePw${status.index}">
                         </li>
                      </ul>
                      <ul class="post-meta" style="float:right; margin-right:-80px;">
                         <li id="updateMaster${status.index}" class="a">
                            <a type="button" class="updateBtn btn btn-sm" name="updateMaster${status.index}" data-no="${status.index}" style="margin-top:10px;">편집</a></li>
-                        <li id="updateGo${status.index}" class="b" style="position:relative; margin-top:10px;" >
+                        <li id="updateGo${status.index}" class="b" style="position:relative; margin-top:10px; display:none;" >
                            <a type="button" name="updateSubmit" data-no="${status.index}" class="btn btn-sm">수정</a>
                            <a type="button" name="updateCancel" data-no="${status.index}" class="btn btn-sm">취소</a>
                         </li>
