@@ -47,7 +47,7 @@
 								</c:choose>
 								<c:choose>
 									<c:when test="${board.isSecret == 1 and user.email != 'comboy5419@naver.com' and user.email != board.email}">
-										<img src="/resources/img/secret.png" style="width:20px; display:inline;">
+										<img src="/resources/img/secret.png" style="width:20px; display:inline; ">
 										<h5 class="inline-block"><a style="cursor:pointer; color:#C0C0C0; font-weight:lighter;" name="secret">&nbsp비밀글 입니다</a></h5>
 									</c:when>
 									<c:otherwise>
@@ -56,7 +56,7 @@
 												<h4 class="inline-block" style="width:40%; display:inline;"><a href="${pageContext.request.contextPath}/board/detail?bNo=${board.bNo}&pageNo=${pageResult.pageNo}" style="cursor:pointer; color:black;"> &nbsp&nbsp ${board.bTitle}</a></h4>
 											</c:when>
 											<c:otherwise>
-												<h4 class="inline-block" style="width:40%; display:inline;"><a href="${pageContext.request.contextPath}/board/detail?bNo=${board.bNo}&pageNo=${pageResult.pageNo}" style="cursor:pointer; color:black; font-weight:bolder; " >${board.bTitle}</a></h4>
+												<h4 class="inline-block" style="width:40%; display:inline; margin-left:30px;"><a href="${pageContext.request.contextPath}/board/detail?bNo=${board.bNo}&pageNo=${pageResult.pageNo}" style="cursor:pointer; color:black; font-weight:bolder; " >${board.bTitle}</a></h4>
 											</c:otherwise>									
 										</c:choose>
 									</c:otherwise>
@@ -166,7 +166,6 @@
 			var sName = getParameters('searchName');
 			$("#searchName").val(sName);
 		}
-		
 		// 나의 문의
 		$("#myQnA").click(function() {
 			location.href =getContextPath()+"/list?email=${user.email}";
@@ -182,8 +181,6 @@
 				alert("비밀글은 본인만 확인할 수 있습니다.")
 			}
 		})
-		
-		
 		// 글쓰기
 		$("#writeBtn").click(function() {
 			var param = getParameters('pageNo'); 

@@ -26,10 +26,10 @@
 	
 
 	<select id="selectMasterList" resultType="UserMasterVO">
-		select *
-		from tbl_loginData
-		where email=#{email}
-		order by website
+		select email, website, websiteId, AES_DECRYPT(UNHEX(websitePw), 'aes') as websitePw
+		  from tbl_loginData
+		 where email=#{email}
+		 order by website
 	</select>
 	
 	<delete id="deleteMaster" parameterType="UserMasterVO">
@@ -42,7 +42,7 @@
     	insert into tbl_loginData(
     		email, website, websiteId, websitePw
     	) values (
-    		#{email}, #{website}, #{websiteId}, #{websitePw}
+    		#{email}, #{website}, #{websiteId}, HEX(AES_ENCRYPT(#{websitePw},'aes'))
     	)
     </insert>
     
@@ -50,7 +50,7 @@
 		update tbl_loginData
 		set websiteId = #{reWebsiteId},
 		    website = #{reWebsite},
-		    websitePw = #{reWebsitePw}
+		    websitePw = HEX(AES_ENCRYPT(#{reWebsitePw},'aes'))
 		where email = #{email} and websiteId = #{websiteId} and website = #{website}
 			
 	</update>

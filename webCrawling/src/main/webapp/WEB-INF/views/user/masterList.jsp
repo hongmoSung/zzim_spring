@@ -106,7 +106,7 @@
                   <a type="button" name="masterRegist" class="btn btn-sm" style="width:20px; padding:0 15px 0 10px; position:relative; top:10px;">&#43</a>
                   <span  class="select-option" style="display:inline; margin-left:30px;">
                      <i class="ti-angle-down"></i>
-                     <select id="websiteType"  style="width:20%; display:inline;" >
+                     <select id="websiteType"  style="width:20%; display:inline;">
                         <option value="empty">사이트 입력</option>
                         <option value="11st">11st</option>
                         <option value="gmarket">gmarket</option>
