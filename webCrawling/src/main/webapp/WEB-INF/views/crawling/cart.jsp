@@ -30,7 +30,7 @@
 <div class="container feature boxed bordered"
 	style="box-shadow: 5px 5px 10px -1px lightgrey">
 	<div class="feature text-center">
-		<img class="product-thumb" src="/web/resources/img/logo/{{shop}}.png" />
+		<img class="product-thumb" src="/resources/img/logo/{{shop}}.png" />
 	</div>
 	<div class="row ">
 		<div class="col-md-12 col-md-offset-0 col-sm-12 col-sm-offset-0">
