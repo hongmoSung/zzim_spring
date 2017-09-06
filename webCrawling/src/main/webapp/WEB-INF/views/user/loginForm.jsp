@@ -20,10 +20,6 @@
 				<div class="feature bordered text-center">
 					<h2 class="uppercase">LOGIN</h2>
 					<hr>
-					<c:if test="${param.error != null }">
-			        	<h3>Username/Password not corrrect</h3>
-			        	<h3>Reason : ${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message }</h3>
-					</c:if>
 					<c:url var="loginUrl" value="/login" />
 					<form method="POST" action="${loginUrl}" id="loginForm" class="text-center">
 						<input type="text" class="mb0" id="email" placeholder="이메일 " name="username">
@@ -43,6 +39,11 @@
 </body>
 	<script>
 		$(document).ready(function(){
+			var error = "${param.error}";
+			console.log(error);
+			if (error == 1){
+				alert("아이디와 패스워드를 확인해주세요.");
+			}
 			$("#loginBtn").on("click",function(){
 				if($("#email").val()== ""){
 					alert("로그인 이메일을 입력해주세요");

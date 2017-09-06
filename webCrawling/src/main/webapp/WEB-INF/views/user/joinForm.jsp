@@ -44,8 +44,6 @@
 <script>
 	var token = $("#_csrf").attr('value');
 	var header = $("#_csrf_header").attr("value");
-	 console.log(token);
-	 console.log(header);
 	$(function() {
 	    $(document).ajaxSend(function(e, xhr, options) {
 	        xhr.setRequestHeader(header, token);

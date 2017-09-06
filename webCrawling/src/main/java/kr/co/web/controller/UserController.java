@@ -1,5 +1,7 @@
 package kr.co.web.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.apache.http.HttpResponse;
@@ -56,9 +58,14 @@ public class UserController {
 	}
 
 	// 계정 관리 리스트
+	@ResponseBody
+	@RequestMapping("/makeMasterList")
+	public List<UserMasterVO> list(String email) {
+		return service.masterList(email);
+	}
+	
 	@RequestMapping("/masterList")
-	public void list(String email, Model model) {
-		model.addAttribute("masterList", service.masterList(email));
+	public void list() {
 	}
 
 	@RequestMapping("/masterDelete")
