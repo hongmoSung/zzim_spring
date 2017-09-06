@@ -102,7 +102,7 @@
 								<span name="websitePw{{@index}}" value="" style="position: relative; bottom: 5px; line-height: 30px;"></span>
 							</li>
 							<li id="websitePw{{@index}}" class="b" style="display:none;">
-								<input type="text" value="" name="websitePw{{@index}}">
+								<input type="password" value="" name="websitePw{{@index}}">
 							</li>
 						</ul>
 						<ul class="post-meta" style="float: right; margin-right: -80px;">
