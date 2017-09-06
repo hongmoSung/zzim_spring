@@ -61,10 +61,10 @@
     </style>
     
     
-    
     <!-- FCM설정 -->
 	<script src="https://www.gstatic.com/firebasejs/4.3.0/firebase.js"></script>
 	<script>
+	   
 	  // Initialize Firebase
 	  var config = {
 	    apiKey: "AIzaSyC9xgu1p5RvwAehO_wmdL6VF5uXzFoB_8c",
@@ -85,48 +85,7 @@
 	        console.log('onMessage:', payload);
 	        alert(payload.notification.body);
 	    });
-	      
-	    function isTokenSentToServer() {
-		    	return window.localStorage.getItem('sentToServer');
-	    }
 	    
-	    function setTokenSentToServer(sent) {
-		    	window.localStorage.setItem('sentToServer', sent ? true : false);
-	    }
-	    
-	    if('${user.email}' != ''){
-	    		//console.log("퍼미션 요청 if문 들어");
-
-	    		messaging.requestPermission()
-			 .then(function(){
-			     //alert('Have permission! 콘솔에서 토큰 확인!');
-			     return messaging.getToken();
-			 })
-			 .then(function(token){
-			     // 여기에서 flag가 false면 서버로 보내서 저장하기(by ajax)
-			     // true라면, 그냥 끝? 아님 그냥 콘솔에 찍어주기
-			     console.log(token);
-			     console.log('${user.email}');
-			    
-			     
-			     /* 
-				if(!isTokenSentToServer()){
-				     $.ajax({
-							url : getContextPath()+"/trackingBoard/scroll",
-							data:{page: page,
-								  email:	'${user.email}'
-							}
-							//dataType: "json"
-						})
-				}			     
- */
-			 })
-			 .catch(function(err){
-			     //alert('Error occured! Check console');
-			     console.log(err);
-			 });	 
-	    	
-	    }
 	</script>
     
 </head>

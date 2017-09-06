@@ -2,7 +2,81 @@
 <%@include file="include/header.jsp"%>
 
 <html lang="ko">
-
+<script>
+	function isTokenSentToServer() {
+	    	return window.localStorage.getItem('sentToServer');
+	}
+	
+	function setTokenSentToServer(sent) {
+	    	window.localStorage.setItem('sentToServer', sent);
+	}
+	
+	function sendTokenToServer(currentToken) {
+		
+	}
+	
+	
+	if('${user.email}' != ''){
+			//console.log("퍼미션 요청 if문 들어");
+	
+			messaging.requestPermission()
+		 .then(function(){
+		     //alert('Have permission! 콘솔에서 토큰 확인!');
+		     return messaging.getToken();
+		 })
+		 .then(function(token){
+		     // 여기에서 flag가 false면 서버로 보내서 저장하기(by ajax)
+		     // true라면, 그냥 끝? 아님 그냥 콘솔에 찍어주기
+		     //console.log(token);
+		     //console.log('${user.email}');
+		    
+			$(document).ajaxSend(function(e, xhr, options) {
+		        xhr.setRequestHeader('${_csrf.headerName}', '${_csrf.token}');
+		     });
+				
+			     
+			if(!isTokenSentToServer()){
+				//console.log('토큰 저장 로직 들어옴 ');
+				
+				$(document).ajaxSend(function(e, xhr, options) {
+		            xhr.setRequestHeader('${_csrf.headerName}', '${_csrf.token}');
+		         });
+				
+			     $.ajax({
+			    	 		type:"POST",
+						url: getContextPath() + "/mobile/saveToken",
+						data:{token: token,
+							  email:	'${user.email}'}
+						//dataType: "json"
+					}).done(function(result) {
+						setTokenSentToServer(true);
+						//console.log('마무리. 토큰테이블이랑 window.localStorage.getItem()해보자 ')
+					});
+			     
+			}	
+			
+		 })
+		 .catch(function(err){
+		     //alert('Error occured! Check console');
+		     console.log(err);
+		 });	 
+		
+	}
+	
+	
+	messaging.onTokenRefresh(function() {
+	    messaging.getToken()
+	    .then(function(refreshedToken) {
+	    	
+		    console.log('토큰 onRefresh 로직 들어옴 ');
+	    		localStorage.removeItem('sentToServer');
+	      
+	    })
+	    .catch(function(err) {
+	      console.log('Unable to retrieve refreshed token ', err);
+	    });
+	  });
+</script>
 <body>
 
     <div class="main-container">

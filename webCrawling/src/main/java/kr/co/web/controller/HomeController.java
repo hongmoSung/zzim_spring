@@ -18,31 +18,22 @@ public class HomeController {
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home( Model model) {
-
 		return "home";
 	}
 
-	
-//	@RequestMapping(value = "/firebase-messaging-sw.js", method = RequestMethod.GET)
-//	public String sw() {
-//		
-//		return "redirect:firebase-messaging-sw.js";
-//	}
-	
 	
 	   
 	@RequestMapping("/firebase-messaging-sw.js")
 	@ResponseBody
 	public String serviceWoker(HttpServletRequest request) throws Exception {
-		System.out.println("서비스워커 찾기 들어옴?");
+//		System.out.println("서비스워커 찾기 들어옴?");
 //		Set pathSet = request.getSession().getServletContext().getResourcePaths("/");
 //		System.out.println(pathSet);	
 		
 		String path = request.getSession().getServletContext().getRealPath("/resources/firebase-messaging-sw.js");
 //		String path = "/Users/jeongukjo/Dropbox/workspace/bit/FINAL/zzim_spring/webCrawling/src/main/webapp/resources/firebase-messaging-sw.js";
-		System.out.println(path);
-//		String path="C:\\Users\\bit\\Desktop\\soscanner\\soscanner\\src\\main\\webapp\\resources\\firebase-messaging-sw.js";
-//		
+//		System.out.println(path);
+
 		StringBuilder sb = new StringBuilder();
 		String strLine;
 
