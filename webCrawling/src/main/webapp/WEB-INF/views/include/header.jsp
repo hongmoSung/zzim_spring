@@ -81,8 +81,9 @@
 	    
 	    
 	    messaging.onMessage(function(payload){
-	        alert('알림 도착! payload는 콘솔 확인');
-	        console.log('onMessage:', payload); 
+	        // alert('알림 도착! payload는 콘솔 확인');
+	        console.log('onMessage:', payload);
+	        alert(payload.notification.body);
 	    });
 	      
 	    function isTokenSentToServer() {
@@ -98,13 +99,12 @@
 
 	    		messaging.requestPermission()
 			 .then(function(){
-			     alert('Have permission! 콘솔에서 토큰 확인!');
+			     //alert('Have permission! 콘솔에서 토큰 확인!');
 			     return messaging.getToken();
 			 })
 			 .then(function(token){
 			     // 여기에서 flag가 false면 서버로 보내서 저장하기(by ajax)
 			     // true라면, 그냥 끝? 아님 그냥 콘솔에 찍어주기
-			//     alert(token);
 			     console.log(token);
 			     console.log('${user.email}');
 			    
@@ -122,7 +122,7 @@
  */
 			 })
 			 .catch(function(err){
-			     alert('Error occured! Check console');
+			     //alert('Error occured! Check console');
 			     console.log(err);
 			 });	 
 	    	
