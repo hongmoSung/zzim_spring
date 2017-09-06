@@ -39,12 +39,13 @@ public class HomeController {
 //		System.out.println(pathSet);	
 		
 		String path = request.getSession().getServletContext().getRealPath("/resources/firebase-messaging-sw.js");
+//		String path = "/Users/jeongukjo/Dropbox/workspace/bit/FINAL/zzim_spring/webCrawling/src/main/webapp/resources/firebase-messaging-sw.js";
 		System.out.println(path);
 //		String path="C:\\Users\\bit\\Desktop\\soscanner\\soscanner\\src\\main\\webapp\\resources\\firebase-messaging-sw.js";
 //		
 		StringBuilder sb = new StringBuilder();
 		String strLine;
-//	    
+
 		BufferedReader br = new BufferedReader(new FileReader(path));
 		while((strLine = br.readLine())!= null) {
 			sb.append(strLine);
