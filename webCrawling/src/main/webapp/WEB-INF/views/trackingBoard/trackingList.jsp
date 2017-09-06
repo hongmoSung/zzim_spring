@@ -8,6 +8,15 @@
 	height: 400px;
 	font-size: 12px;
 }
+#tooltip{
+	visibility: hidden;
+	background-color: tomato;
+}
+
+#ic:hover #tooltip{
+	visibility: visible;
+}
+
 </style>
 <!--  am차트 -->
 <script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
@@ -35,7 +44,8 @@
 				<div id="sList" class="row">
 					<h3 style="font-weight: bolder;">Check List</h3>
 						<div class="col-sm-12" " >
-							<ul id="correctList" class="accordion " style="box-shadow: 5px 5px 10px 2px lightgrey"> </ul>
+<!-- 							style="box-shadow: 5px 5px 10px 2px lightgrey;" -->
+							<ul id="correctList" class="accordion"  > </ul>
 						</div><br>
 					<h3 style="font-weight: bolder;">Uncheck List</h3>
 						<div class="col-sm-12" >
@@ -50,56 +60,59 @@
 <!-- <span style="color: black">조건 확인</span><br> -->
 <!-- <strong class="fa-2x">{{check notifyPrice pLowest pNo}}</strong> -->
 <!-- </td> -->
+
+<!-- border: 1px solid; margin-top: 10px; border-collapse:separate; -->
 	<!--         여기서  부터 스크립트 시작  -->
-	<script  id="entry-template" type="text/x-handlebars-template">
+	<script   id="entry-template" type="text/x-handlebars-template">
         {{#each .}} 
-       		 <li class="check{{pNo}}" >
+       		 <li class="check{{pNo}}  " style="border: 1px solid; border-radius: 15px; margin-top: 10px; "  >
                  <div class="title" data-pNo ="{{pNo}}">
-                     <table class="table cart">
+                     <table class=" cart">
                              <tr>
-                                 <td rowspan="2" class="text-center col-md-2" >
-                                         <img alt="Product" class="product-thumb" src="{{picUrl}}" />
+                                 <td rowspan="2" class="text-center " >
+                                         <img alt="Product" class="product-thumb" style="margin-bottom:-20px;" src="{{picUrl}}" />
                                  </td>
-                                 <th colspan="3"  class="col-md-6">
-                                     <h5 style="font-weight: bolder;">{{pName}}</h5>
+                                 <th colspan="3"  class="col-md-9">
+                                     <h5 style="margin-top:20px; ; font-size: 1.8em; ">{{pName}}</h5>
                                  </th>
 							 </tr>
 
                              <tr>
 									<td class="col-md-2">
-                                     <span><i class="fa fa-krw" aria-hidden="true"></i> : {{notifyPrice}}원</span>
+                                     	<span style="font-size:1.2em"><i id="ic" class="fa fa-krw" aria-hidden="true"><span id="tooltip">희망가</span></i> : {{notifyPrice}}원</span>
                                  	</td>
                                      <td >
-                                         <span><i class="fa fa-money" aria-hidden="true"></i> :  {{pLowest}}원</span>
+                                         <span style="font-size:1.2em"><i class="fa fa-money" aria-hidden="true"></i>현재가 :  {{pLowest}}원</span>
                                      </td>
 									 <td class="col-md-2">
-                                     	<a class="btn btn-sm btn-filled"  href="{{pUrl}}" >구매하기</a>
+                                     	<a class="btn btn-dm btn-filled" style="margin-bottom:-10px;"  href="{{pUrl}}" >구매하기</a>
                                  	</td> 
                                      
                              </tr>
                      </table>
                  </div>
-                 
+
                  <div class="content">
+                 <hr style="width:95%;" class="center">
                      
                      <div id="chartdiv{{pNo}}"  class="col-sm-8 col-md-8 chartdiv">
                       	차트    
                      </div>
                 
-                    <div class="col-sm-4 col-md-4" style="text-align: right">
+                    <div class="col-sm-4 col-md-4" style="text-align: center; margin-top:50px;">
                          <br>
-                         <ul class="lead" >
-                             <li id="max{{pNo}}"></li>
-                             <li id="min{{pNo}}"></li>
+                         <ul class="lead " >
+                             <li style="font-size:1em;" class="text-center " id="max{{pNo}}"></li>
+                             <li style="font-size:1em;" class="text-center " id="min{{pNo}}"></li>
                          </ul>
                          <div>
                          </div>
                          
                          <input id="notify{{pNo}}" class="mb10 " type="text" placeholder="{{notifyPrice}}원" style="margin-bottom: 8px;height: 30px;text-align: right;padding-right: 10px;width: auto;">
                          <br>
-                         <a id="update" data-pNo="{{pNo}}" class="btn btn-sm btn-rounded" style="text-align: right; margin-bottom: 1px;">희망가 수정하기</a>
+                         <a id="update" data-pNo="{{pNo}}" class="btn btn-md btn-rounded" style="text-align: right; margin-bottom: 1px;">희망가 수정하기</a>
                          <br><br>
-                         <a id="delete" data-pNo="{{pNo}}" class="btn btn-sm btn-filled"  style="background: red; border: none;">삭제하기</a>
+                         <a id="delete" data-pNo="{{pNo}}" class="btn btn-md btn-filled"  style="background: red; border: none;">삭제하기</a>
                      </div>
                  </div>
              </li>
@@ -148,11 +161,11 @@ $("body").on( 'click', '.accordion li .title' , function(){
 
 	//최소값 최대값 넣기 
 	if(result != ''){
-		$("#max"+pNo).html('<i class="ti-arrow-right"></i> 최고가: '+max+'원');
-		$("#min"+pNo).html('<i class="ti-arrow-right"></i> 최소가: '+min+'원');
+		$("#max"+pNo).html('<i class="fa fa-level-up" aria-hidden="true"></i> 최고가 :  '+max+'원');
+		$("#min"+pNo).html('<i class="fa fa-level-down" aria-hidden="true"></i> 최저가 :  '+min+'원');
 	}else{
-		$("#max"+pNo).html('<i class="ti-arrow-right"></i> 최고가: 0원');
-		$("#min"+pNo).html('<i class="ti-arrow-right"></i> 최소가: 0원');
+		$("#max"+pNo).html('<i class="fa fa-level-up" aria-hidden="true"></i> 최고가 :  0원');
+		$("#min"+pNo).html('<i class="fa fa-level-down" aria-hidden="true"></i> 최저가 :  0원');
 	}
 	 
 	//차트 만들기 
@@ -242,6 +255,9 @@ function handle(result,target){
  		if(sign){
  			$('#sList').html("<h3>등록된 상품이 없습니다.</h3>")
  		}
+ 		if(result.correctList == ''){
+ 			$('#correctList').html("<h4>만족 된 상품이 없습니다.</h4>")
+		}
  	}) 
 
 //스크롤 이벤트 -------------------------------------------------------------------------------------------------------
