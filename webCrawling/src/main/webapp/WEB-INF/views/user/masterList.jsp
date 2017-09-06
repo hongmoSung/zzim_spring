@@ -129,7 +129,7 @@
 		var parameters = (url.slice(url.indexOf('?') + 1, url.length))
 				.split('&');
 		for (var i = 0; i < parameters.length; i++) {
-			var varName = parameters[i].split('=')[0];
+			var varName = parameters[i].split('=')[0];   
 			if (varName.toUpperCase() == paramName.toUpperCase()) {
 				returnValue = parameters[i].split('=')[1];
 				return decodeURIComponent(returnValue);
@@ -152,26 +152,28 @@
 	}
 	function makeUpList(result) {
 		for(var i = 0; i < result.length; i++){
+			var img = $("#img"+i);
+			websiteTypeUp = $("#websiteTypeUp"+i);
 			var website = $("span[name='website" + i + "']");
 			var websitePw = $("span[name='websitePw" + i + "']");
 		    var websitePwVal = $("input[name='websitePw" + i + "']");
 		   
 		    switch(result[i].website){
 	          case '11st' : 
-	        	 $("#img"+i).attr("src", "/resources/img/11st.jpg");
-	             $("#websiteTypeUp"+i).val('11st').attr("selected", "selected");
+	        	 img.attr("src", "/resources/img/11st.jpg");
+	             websiteTypeUp.val('11st').attr("selected", "selected");
 	             break;
 	           case 'gmarket' :
-	        	   $("#img"+i).attr("src", "/resources/img/gmarket.jpg");
-	              $("#websiteTypeUp"+i).val('gmarket').attr("selected", "selected"); 
+	        	  img.attr("src", "/resources/img/gmarket.jpg");
+	        	  websiteTypeUp.val('gmarket').attr("selected", "selected"); 
 	              break;
 	           case 'auction' : 
-	        	   $("#img"+i).attr("src", "/resources/img/auction.jpg");
-	              $("#websiteTypeUp"+i).val('auction').attr("selected", "selected"); 
+	        	   img.attr("src", "/resources/img/auction.jpg");
+	        	   websiteTypeUp.val('auction').attr("selected", "selected"); 
 	              break;
 	           case 'interpark' : 
-	        	   $("#img"+i).attr("src", "/resources/img/interpark.jpg");
-	              $("#websiteTypeUp"+i).val('interpark').attr("selected", "selected"); 
+	        	   img.attr("src", "/resources/img/interpark.png");
+	        	   websiteTypeUp.val('interpark').attr("selected", "selected"); 
 	              break;
 	       }
 			websitePw.val(result[i].websitePw);
@@ -200,17 +202,18 @@
    
    // 개별 체크시 전체 체크 해제
    function check(){
-      var chk = $("#th_checkAll").is(":checked");
+      var chkAlll =  $("#th_checkAll");
+      var chk = chkAll.is(":checked");
       var arrcheck = document.getElementsByName("checkRow");
       var j = 0;
       if(chk){
-         $("#th_checkAll").attr("checked", false);
+    	  chkAll.attr("checked", false);
       }
       for (i = 0; i < arrcheck.length; i++) {
          if(arrcheck.item(i).checked) {
             j++;
             if(j == arrcheck.length){
-               $("#th_checkAll").attr("checked", true);
+            	chkAll.attr("checked", true);
             }
          }
       }
@@ -286,14 +289,10 @@
 
    // 편집
   function updateForm(index) {
-	   console.log(index);
 	  var email = "${user.email}";
       var website = $("span[name='website" + index + "']");
       var websitePw = $("span[name='websitePw" + index + "']");
       var websitePwVal = $("input[name='websitePw" + index + "']");
-      
-      console.log("websitePw : " + websitePw.val());
-      console.log("websitePwVal : " + websitePwVal.val());
       
       // 편집 폼 중복 방지
       var a = $(".a");
