@@ -131,7 +131,7 @@
                       	차트    
                      </div>
                 
-                    <div class="col-sm-3 col-md-3 " data-pNo="{{pNo}}" style="text-align: right ; margin:60px 0px 0px 0px; background: #ececec; border-radius: 15px;">
+                    <div class="col-sm-3 col-md-3 " data-pNo="{{pNo}}" style="text-align: right ; margin:10px 0px 0px 0px; background: #ececec; border-radius: 15px;">
                          <br>
 							<table class="table text-center">
 								<thead>
@@ -148,6 +148,10 @@
 									<tr>
 										<td>최저가</td>
 										<td><li style="font-size:0.8em;" class=" ic" id="min{{pNo}}"></li></td>
+									</tr>
+									<tr>
+										<td>평균가</td>
+										<td><li style="font-size:0.8em;" class=" ic" id="aver{{pNo}}"></li></td>
 									</tr>
 								</tbody>
 							</table>
@@ -194,12 +198,14 @@ $("body").on( 'click', '.accordion li .title' , function(){
 	  data : {"pNo":pNo}
   }).done(function(result){
 	  var priceArr = []
+	  var average = 0;
 	  var max = 0;
 	  var min = 0;
 	  
 	 for(var i = 0 ; i < result.length ; i++){
 		// currPrice 배열넣기 
 		 priceArr.push(result[i].currPrice); 
+		 average +=result[i].currPrice;
 		  
 // 		 console.log("result[i].currDate:::",result[i].currDate); 
 		// 날자값 변환
@@ -218,9 +224,11 @@ $("body").on( 'click', '.accordion li .title' , function(){
 	if(result != ''){
 		$("#max"+pNo).html('  '+max+'원');
 		$("#min"+pNo).html('  '+min+'원');
+		$("#aver"+pNo).html('  '+Math.round(average / result.length)+'원');
 	}else{
 		$("#max"+pNo).html('  -원');
 		$("#min"+pNo).html('  -원');
+		$("#aver"+pNo).html('  -원');
 	}
 	 
 	//차트 만들기 
