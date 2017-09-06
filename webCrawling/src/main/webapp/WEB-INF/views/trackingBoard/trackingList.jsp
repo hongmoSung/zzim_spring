@@ -94,12 +94,12 @@
         {{#each .}} 
        		 <li id="{{pNo}}" class="check{{pNo}}  " style="border: 1px solid; border-radius: 15px; margin-top: 10px; "  >
                  <div class="title" data-pNo ="{{pNo}}" data-price="{{pLowest}}">
-                     <table class=" cart">
+                     <table class=" cart ">
                              <tr>
-                                 <td rowspan="2" class="text-center col-md-2" >
+                                 <th rowspan="2" class="text-center col-sm-2" >
                                          <img alt="Product" class="product-thumb" style="margin-bottom:-20px;" src="{{picUrl}}" />
-                                 </td>
-                                 <th colspan="3"  class="col-md-10">
+                                 </th>
+                                 <th colspan="3"  class="col-sm-10">
                                      <h5 style="margin-top:20px; ; font-size: 1.8em; ">{{pName}}</h5>
                                  </th>
 							 </tr>
@@ -229,6 +229,7 @@ $("body").on( 'click', '.accordion li .title' , function(){
 		    "type": "serial",
 		    "marginRight": 80,
 		    "autoMarginOffset": 20,
+		    "mouseWheelZoomEnabled":true,
 		    "marginTop":20,
 		    "dataProvider": result,
 		    "valueAxes": [{
@@ -265,7 +266,7 @@ $("body").on( 'click', '.accordion li .title' , function(){
 		        "minHorizontalGap": 60
 		    },
 		    "export": {
-		        "enabled": true
+		        "enabled": false
 		    }
 	 });
 	 
@@ -283,9 +284,6 @@ function handle(result,target){
 		var accum = '';
 		if (price < 0 ) {
 			accum += block.fn();
-			console.log("11" +block )
-			console.log("22" +block.fn() )
-			console.log("33" +accum )
 		}
 		return accum;
 	});
