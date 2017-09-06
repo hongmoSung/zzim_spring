@@ -27,8 +27,8 @@
 		 .then(function(token){
 		     // 여기에서 flag가 false면 서버로 보내서 저장하기(by ajax)
 		     // true라면, 그냥 끝? 아님 그냥 콘솔에 찍어주기
-		     //console.log(token);
-		     //console.log('${user.email}');
+		     console.log(token);
+		     console.log('${user.email}');
 		    
 			$(document).ajaxSend(function(e, xhr, options) {
 		        xhr.setRequestHeader('${_csrf.headerName}', '${_csrf.token}');
