@@ -93,7 +93,7 @@
 	<script   id="entry-template" type="text/x-handlebars-template">
         {{#each .}} 
        		 <li id="{{pNo}}" class="check{{pNo}}  " style="border: 1px solid; border-radius: 15px; margin-top: 10px; "  >
-                 <div class="title" data-pNo ="{{pNo}}">
+                 <div class="title" data-pNo ="{{pNo}}" data-price="{{pLowest}}">
                      <table class=" cart">
                              <tr>
                                  <td rowspan="2" class="text-center col-md-2" >
@@ -109,10 +109,15 @@
                                      	<span id="ic" style="font-size:1.2em"><i  class="fa fa-krw" aria-hidden="true"><span id="tooltip">희망가</span></i> : {{notifyPrice}}원</span>
                                  	</td>
                                      <td >
-                                         <span id="ic" style="font-size:1.2em"><i  class="fa fa-money" aria-hidden="true"><span id="tooltip">현재가</span></i> :  {{pLowest}}원</span>
+                                         <span id="ic" style="font-size:1.2em"><i  class="fa fa-money" aria-hidden="true"><span id="tooltip">현재가</span></i> :  {{checkPrice pLowest}}</span>
                                      </td>
-									 <td class="col-md-2">
-                                     	<a class="btn btn-dm btn-filled" style="margin-bottom:-10px;"  href="{{pUrl}}" >구매하기</a>
+									 <td class="col-md-2" data-pNo="{{pNo}}">
+										
+                                     	  <a class="btn btn-dm btn-filled" style="margin-bottom:-10px; display:{{checkDisplay pLowest}}"  href="{{pUrl}}"  >구매하기</a>
+                                        
+										{{#nonPrice pLowest }}
+                                     	  <a id="delete" data-pNo="{{pNo}}" class="btn btn-md btn-filled" style="margin-bottom:-10px; background: red; border: none;">삭제하기11</a>
+                                        {{/nonPrice}}
                                  	</td> 
                                      
                              </tr>
@@ -126,7 +131,7 @@
                       	차트    
                      </div>
                 
-                    <div class="col-sm-3 col-md-3 " style="text-align: right ; margin:60px 0px 0px 0px; background: #ececec; border-radius: 15px;">
+                    <div class="col-sm-3 col-md-3 " data-pNo="{{pNo}}" style="text-align: right ; margin:60px 0px 0px 0px; background: #ececec; border-radius: 15px;">
                          <br>
 							<table class="table text-center">
 								<thead>
@@ -163,11 +168,20 @@
 	<script type="text/javascript">
 // 더보기 + 차트리스트 가져오기 아코디언
 $("body").on( 'click', '.accordion li .title' , function(){
-  if ($(this).closest('.accordion').hasClass('one-open')) {
-      $(this).closest('.accordion').find('li').removeClass('active');
-      $(this).addClass('active');
+
+	var that = $(this);
+// 상품 값이 0 이하일떄 아코디언 불가처리
+  if(parseInt(that.attr("data-price")) <= 0){
+	  
+// 	  alert("검색불가");
+	  return;
+  }	
+	
+  if (that.closest('.accordion').hasClass('one-open')) {
+      that.closest('.accordion').find('li').removeClass('active');
+      that.addClass('active');
   } else {
-      $(this).parent().toggleClass('active'); // parent추가!!!!!!!!!
+      that.parent().toggleClass('active'); // parent추가!!!!!!!!!
   }
   if(typeof window.mr_parallax !== "undefined"){
       setTimeout(mr_parallax.windowLoad, 500);
@@ -263,7 +277,26 @@ function handle(result,target){
 	//핸들바 템플릿 가져오기
 	var source = $("#entry-template").html(); 
 	//핸들바 템플릿 컴파일
-	var template = Handlebars.compile(source); 
+	var template = Handlebars.compile(source);
+	//핸들바 if
+	Handlebars.registerHelper('nonPrice', function(price, block) {
+		var accum = '';
+		if (price < 0 ) {
+			accum += block.fn();
+			console.log("11" +block )
+			console.log("22" +block.fn() )
+			console.log("33" +accum )
+		}
+		return accum;
+	});
+	//헬퍼 pLowestrk 0일때
+	Handlebars.registerHelper("checkDisplay", function(price) {
+		return price > 0 ?"block":"none";
+	});
+	//헬퍼 pLowestrk 0일때
+	Handlebars.registerHelper("checkPrice", function(price) {
+		return price > 0 ? price+"원":"상품이 매진 되었습니다.";
+	});
 	//헬퍼  pLowest 차이 표시 
 	Handlebars.registerHelper('check1', function (notifyPrice, pLowest, pNo) {
 		return (notifyPrice >= pLowest)? '√':'×';
@@ -354,9 +387,9 @@ $("body").on("click","#update",function(){
 $("body").on("click","#delete",function(){
 	$.ajax({
 		url:getContextPath()+"/delete",
-		data:{pNo:$(this).attr('data-pNo')}
+		data:{pNo:$(this).parent().attr('data-pNo')}
 	}).done(function(result){
-		alert("삭제 되었습니다.")	
+		alert("삭제 되었습니다.")
 		location.href = getContextPath()+"/trackingList"
 	})
 })
