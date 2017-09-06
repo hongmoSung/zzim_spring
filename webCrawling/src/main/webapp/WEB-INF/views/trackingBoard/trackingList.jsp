@@ -8,13 +8,35 @@
 	height: 400px;
 	font-size: 12px;
 }
+
 #tooltip{
 	visibility: hidden;
-	background-color: tomato;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+   
+    bottom: 150%;
+    left: 50%;
+    margin-left: -60px;
 }
 
-#ic:hover #tooltip{
+#ic:hover #tooltip, .ic:hover #tooltip{
 	visibility: visible;
+}
+
+#tooltip::after {
+    content: " ";
+    position: absolute;
+    top: 100%; /* At the bottom of the tooltip */
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: black transparent transparent transparent;
 }
 
 </style>
@@ -49,7 +71,7 @@
 						</div><br>
 					<h3 style="font-weight: bolder;">Uncheck List</h3>
 						<div class="col-sm-12" >
-							<ul id="inCorrectList" class="accordion " style="box-shadow: 5px 5px 10px 2px lightgrey" > </ul>
+							<ul id="inCorrectList" class="accordion accordion " style="box-shadow: 5px 5px 10px 2px lightgrey" > </ul>
 						</div>
 				</div>
 			</div>
@@ -62,27 +84,32 @@
 <!-- </td> -->
 
 <!-- border: 1px solid; margin-top: 10px; border-collapse:separate; -->
+<!-- 최고 최저가 li 태크 -->
+<!--  <ul class="lead " > -->
+<!--     <li style="font-size:0.8em;" class=" ic" id="max{{pNo}}"></li> -->
+<!--     <li style="font-size:0.8em;" class=" ic" id="min{{pNo}}"></li> -->
+<!-- </ul> -->
 	<!--         여기서  부터 스크립트 시작  -->
 	<script   id="entry-template" type="text/x-handlebars-template">
         {{#each .}} 
-       		 <li class="check{{pNo}}  " style="border: 1px solid; border-radius: 15px; margin-top: 10px; "  >
+       		 <li id="{{pNo}}" class="check{{pNo}}  " style="border: 1px solid; border-radius: 15px; margin-top: 10px; "  >
                  <div class="title" data-pNo ="{{pNo}}">
                      <table class=" cart">
                              <tr>
-                                 <td rowspan="2" class="text-center " >
+                                 <td rowspan="2" class="text-center col-md-2" >
                                          <img alt="Product" class="product-thumb" style="margin-bottom:-20px;" src="{{picUrl}}" />
                                  </td>
-                                 <th colspan="3"  class="col-md-9">
+                                 <th colspan="3"  class="col-md-10">
                                      <h5 style="margin-top:20px; ; font-size: 1.8em; ">{{pName}}</h5>
                                  </th>
 							 </tr>
 
                              <tr>
 									<td class="col-md-2">
-                                     	<span style="font-size:1.2em"><i id="ic" class="fa fa-krw" aria-hidden="true"><span id="tooltip">희망가</span></i> : {{notifyPrice}}원</span>
+                                     	<span id="ic" style="font-size:1.2em"><i  class="fa fa-krw" aria-hidden="true"><span id="tooltip">희망가</span></i> : {{notifyPrice}}원</span>
                                  	</td>
                                      <td >
-                                         <span style="font-size:1.2em"><i class="fa fa-money" aria-hidden="true"></i>현재가 :  {{pLowest}}원</span>
+                                         <span id="ic" style="font-size:1.2em"><i  class="fa fa-money" aria-hidden="true"><span id="tooltip">현재가</span></i> :  {{pLowest}}원</span>
                                      </td>
 									 <td class="col-md-2">
                                      	<a class="btn btn-dm btn-filled" style="margin-bottom:-10px;"  href="{{pUrl}}" >구매하기</a>
@@ -92,27 +119,41 @@
                      </table>
                  </div>
 
-                 <div class="content">
+                 <div class="content" ">
                  <hr style="width:95%;" class="center">
                      
-                     <div id="chartdiv{{pNo}}"  class="col-sm-8 col-md-8 chartdiv">
+                     <div id="chartdiv{{pNo}}"  class="col-sm-9 col-md-9 chartdiv">
                       	차트    
                      </div>
                 
-                    <div class="col-sm-4 col-md-4" style="text-align: center; margin-top:50px;">
+                    <div class="col-sm-3 col-md-3 " style="text-align: right ; margin:60px 0px 0px 0px; background: #ececec; border-radius: 15px;">
                          <br>
-                         <ul class="lead " >
-                             <li style="font-size:1em;" class="text-center " id="max{{pNo}}"></li>
-                             <li style="font-size:1em;" class="text-center " id="min{{pNo}}"></li>
-                         </ul>
-                         <div>
-                         </div>
+							<table class="table text-center">
+								<thead>
+									<tr>
+										<th>유형</th>
+										<th>가격</th>
+									</tr>
+								</thead>
+								<tbody style="text-align:left;">
+									<tr>
+										<td>최고가</td>
+										<td><li style="font-size:0.8em;" class=" ic" id="max{{pNo}}"></li></td>
+									</tr>
+									<tr>
+										<td>최저가</td>
+										<td><li style="font-size:0.8em;" class=" ic" id="min{{pNo}}"></li></td>
+									</tr>
+								</tbody>
+							</table>
+							
+                        
                          
                          <input id="notify{{pNo}}" class="mb10 " type="text" placeholder="{{notifyPrice}}원" style="margin-bottom: 8px;height: 30px;text-align: right;padding-right: 10px;width: auto;">
                          <br>
-                         <a id="update" data-pNo="{{pNo}}" class="btn btn-md btn-rounded" style="text-align: right; margin-bottom: 1px;">희망가 수정하기</a>
-                         <br><br>
-                         <a id="delete" data-pNo="{{pNo}}" class="btn btn-md btn-filled"  style="background: red; border: none;">삭제하기</a>
+                         <a id="update" data-pNo="{{pNo}}" class="btn btn-md btn-rounded" style=" margin-right: 0px; ">희망가 수정하기</a>
+							<br>
+                         <a id="delete" data-pNo="{{pNo}}" class="btn btn-md btn-filled" style=" background: red; border: none;">삭제하기</a>
                      </div>
                  </div>
              </li>
@@ -161,11 +202,11 @@ $("body").on( 'click', '.accordion li .title' , function(){
 
 	//최소값 최대값 넣기 
 	if(result != ''){
-		$("#max"+pNo).html('<i class="fa fa-level-up" aria-hidden="true"></i> 최고가 :  '+max+'원');
-		$("#min"+pNo).html('<i class="fa fa-level-down" aria-hidden="true"></i> 최저가 :  '+min+'원');
+		$("#max"+pNo).html('  '+max+'원');
+		$("#min"+pNo).html('  '+min+'원');
 	}else{
-		$("#max"+pNo).html('<i class="fa fa-level-up" aria-hidden="true"></i> 최고가 :  0원');
-		$("#min"+pNo).html('<i class="fa fa-level-down" aria-hidden="true"></i> 최저가 :  0원');
+		$("#max"+pNo).html('  -원');
+		$("#min"+pNo).html('  -원');
 	}
 	 
 	//차트 만들기 
