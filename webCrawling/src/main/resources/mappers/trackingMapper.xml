@@ -8,12 +8,13 @@
 	<select id="selectPriceHistory" resultType="priceHistoryVO">
 <!-- 		select * from tbl_price_history -->
 <!-- 		where pNo = #{pNo} -->
-		
-	select *
+
+		select *
 		from
 		tbl_price_history
 		where pNo = #{pNo}
-        and currDate like concat('%','14:','%') or currDate like concat('%','16:','%')  ; 
+        and (currDate like concat('%',' 15:','%') 
+        or currDate like concat('%',' 16:','%'))  ; 
 	</select>
 
 	<select id="selectBoardCorrect" resultType="TrackingBoardVO">
