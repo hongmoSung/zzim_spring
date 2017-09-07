@@ -30,11 +30,6 @@
 		     console.log(token);
 		     console.log('${user.email}');
 		    
-			$(document).ajaxSend(function(e, xhr, options) {
-		        xhr.setRequestHeader('${_csrf.headerName}', '${_csrf.token}');
-		     });
-				
-			     
 			if(!isTokenSentToServer()){
 				//console.log('토큰 저장 로직 들어옴 ');
 				
