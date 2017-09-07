@@ -197,13 +197,14 @@ $("body").on( 'click', '.accordion li .title' , function(){
 	  url : getContextPath()+"/priceHistory",
 	  data : {"pNo":pNo}
   }).done(function(result){
-	  console.dir("result  "+result);
+// 	  console.dir("result  "+result[0].currPrice);
 	  var priceArr = []
 	  var average = 0;
 	  var max = 0;
 	  var min = 0;
 	  
 	 for(var i = 0 ; i < result.length ; i++){
+// 	  console.log("result1111  "+result[i].currPrice);
 		// currPrice 배열넣기 
 		 priceArr.push(result[i].currPrice); 
 		 average +=result[i].currPrice;
@@ -278,9 +279,6 @@ $("body").on( 'click', '.accordion li .title' , function(){
 		        "enabled": false
 		    }
 	 });
-	 chart.addListener("rendered", zoomChart);
-
-	 zoomChart();
 	 
   });
   
@@ -327,6 +325,7 @@ function handle(result,target){
  		url : getContextPath()+"/sList",
  		data : {"email" : email}
  	}).done(function(result){
+ 		console.log("에작스 완료")
  		var sign = true;
  		if(result.correctList != ''){
  			handle(result.correctList,"#correctList");

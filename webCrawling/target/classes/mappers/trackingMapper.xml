@@ -14,7 +14,8 @@
 		tbl_price_history
 		where pNo = #{pNo}
         and (currDate like concat('%',' 15:','%') 
-        or currDate like concat('%',' 16:','%'))  ; 
+        or currDate like concat('%',' 16:','%'))  
+        order by currDate  
 	</select>
 
 	<select id="selectBoardCorrect" resultType="TrackingBoardVO">
