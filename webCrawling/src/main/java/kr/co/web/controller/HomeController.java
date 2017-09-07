@@ -21,12 +21,10 @@ public class HomeController {
 		return "home";
 	}
 
-	
-	   
 	@RequestMapping("/firebase-messaging-sw.js")
 	@ResponseBody
 	public String serviceWoker(HttpServletRequest request) throws Exception {
-//		System.out.println("서비스워커 찾기 들어옴?");
+//		System.out.println("�꽌鍮꾩뒪�썙而� 李얘린 �뱾�뼱�샂?");
 //		Set pathSet = request.getSession().getServletContext().getResourcePaths("/");
 //		System.out.println(pathSet);	
 		

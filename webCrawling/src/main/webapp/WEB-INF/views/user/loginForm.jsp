@@ -56,6 +56,11 @@
 					$("#loginForm").submit();
 				}
 			});
+			
+			
 		});
+		
+		
+		
 	</script>
 <%@ include file="../include/footer.jsp"%>
