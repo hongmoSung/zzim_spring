@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="../include/header.jsp" %>
-<link href="styles/ihover.css" rel="stylesheet">
-
 <style>
    input placeholder {
       color:#FFFAFA;
@@ -13,48 +11,32 @@
    i.ti-angle-down{
       margin-top: -15px;
    }
-   [data-tooltip-text]:hover{
-   	position:relative;
-   }
-   [data-tooltip-text]:hover:after{
-   	content: attr(data-tooltip-text);
-   	
-   	position:absolute;
-   	bottom: 100%;
-   	left:0;
-   	
-   	background-color: rgba(0,0,0,0);
-   	color:#ffffff;
-   	font-size:12px;
-   	
-   	z-index:9999;
-   }
    
-/*    #tooltip{ */
-/* 	visibility: hidden; */
-/*     width: 120px; */
-/*     background-color: black; */
-/*     color: #fff; */
-/*     text-align: center; */
-/*     border-radius: 6px; */
-/*     padding: 5px 5px; */
+   #tooltip{
+	visibility: hidden;
+	margin :0 0 0 30px;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 5px;
 
-/*     bottom: 50%; */
-/* 	} */
+    bottom: 100%;
+	}
 
-/*  	.imgTag:hover #tooltip {  */
-/*  		visibility: visible;  */
-/*  	}  */
-	
-/* 	#tooltip::after { */
-/* 	    content: " "; */
-/* 	    top: 100%; /* At the bottom of the tooltip */ */
-/* 	    left: 50%; */
-/* 	    margin-left: -5px; */
-/* 	    border-width: 5px; */
-/* 	    border-style: solid; */
-/* 	    border-color: black transparent transparent transparent; */
-/* 	} */
+ 	.imgTag:hover #tooltip { 
+ 		visibility: visible; 
+ 	} 
+	#tooltip::after {
+	    content: " ";
+	    top: 100%; /* At the bottom of the tooltip */
+	    left: 50%;
+	    margin-left: -5px;
+	    border-width: 5px;
+	    border-style: solid;
+	    border-color: black transparent transparent transparent;
+	}
 </style>
 <body>
 <div class="main-container">
@@ -76,12 +58,16 @@
             <input type="hidden" id="_csrf_header" value="${_csrf.headerName}">
 <!--                <a type="button" name="deleteMaster" id="deleteMaster" class="btn btn-sm" style="margin-left:15px;">선택항목 삭제</a> -->
          </div>
-         <a type="button" id="insertForm" class="btn btn-sm" style="float:right;">등록</a>
-         <hr>
+         <div>
+         	<span style="margin-left: 170px; font-weight:bold; font-size:17px;">사이트</span>
+        	<span style="margin-left: 130px; font-weight:bold; font-size:17px;">아이디</span>
+	        <a type="button" id="insertForm" class="btn btn-sm" style="float:right; position:relative; right:80px;">등록</a>
+	        <hr>
+         </div>
          <div class="col-md-10 col-md-offset-1">
             <div class="post-snippet mb64">
 				<div class="input-with-label" style="width:100%; display:none;">
-           			<span  class="select-option" style="display:inline; ">
+           			<span class="select-option" style="display:inline; ">
               		 	<i class="ti-angle-down"></i>
                		 	<select id="websiteType"  style="width:20%; display:inline; margin-left:20px;">
                				<option value="empty">사이트 입력</option>
@@ -116,7 +102,7 @@
 							<ul class="post-meta text-center" style="width: 200px;">
 								<li id="first{{@index}}"style="" class="imgTag" >
 									<a id="imgTag{{@index}}" target="_blank">
-										<img id="img{{@index}}" src="" style="margin-left:10px;" data-tooltip-text="사이트로 이동">
+										<img id="img{{@index}}" src="" style="margin-left:10px;" >
 									</a>
 									<span name="website{{@index}}" style="display:none;">{{website}}</span>
 								</li>
@@ -239,7 +225,6 @@
 	
 	// 등록 취소
 	$("a[name='masterCancel']").on("click", function(){
-		console.log("afag");
 		$(".input-with-label").hide();
 		$("#insertForm").show();
 	})
