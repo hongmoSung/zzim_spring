@@ -70,8 +70,8 @@ public class UserController {
 
 	@RequestMapping("/masterDelete")
 	@ResponseBody
-	public void list(String[] valueArray) {
-		service.deleteMaster(valueArray);
+	public String list(UserMasterVO user) {
+		return service.deleteMaster(user);
 	}
 
 	@RequestMapping("/masterInsert")
@@ -84,7 +84,6 @@ public class UserController {
 	@RequestMapping("/masterUpdate")
 	@ResponseBody
 	public String update(UserMasterVO user) {
-		System.out.println("asdasd");
 		System.out.println(user.toString());
 		return service.updateMaster(user);
 	}

@@ -9,7 +9,7 @@
     	select count(*)
           from tbl_board 
 	         where (((#{email} = "null") AND (bTitle like concat('%', #{searchName}, '%') or bContent like concat('%', #{searchName}, '%')))
- 								     or (email like concat('%', #{email}, '%')))
+ 								          or (email like concat('%', #{email}, '%')))
     </select> 
 
 	<select id="selectBoardList" resultType="boardVO" parameterType="SearchVO">

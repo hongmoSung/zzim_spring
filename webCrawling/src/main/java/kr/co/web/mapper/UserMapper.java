@@ -18,7 +18,7 @@ public interface UserMapper {
 	// 개인 페이지
 	public List<UserMasterVO> selectMasterList(String email);
 
-	public void deleteMaster(UserMasterVO userMaster);
+	public int deleteMaster(UserMasterVO userMaster);
 
 	public int insertMaster(UserMasterVO userMaster);
 

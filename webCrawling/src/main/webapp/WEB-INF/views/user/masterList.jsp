@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="../include/header.jsp" %>
+<link href="styles/ihover.css" rel="stylesheet">
+
 <style>
    input placeholder {
       color:#FFFAFA;
@@ -11,6 +13,48 @@
    i.ti-angle-down{
       margin-top: -15px;
    }
+   [data-tooltip-text]:hover{
+   	position:relative;
+   }
+   [data-tooltip-text]:hover:after{
+   	content: attr(data-tooltip-text);
+   	
+   	position:absolute;
+   	bottom: 100%;
+   	left:0;
+   	
+   	background-color: rgba(0,0,0,0);
+   	color:#ffffff;
+   	font-size:12px;
+   	
+   	z-index:9999;
+   }
+   
+/*    #tooltip{ */
+/* 	visibility: hidden; */
+/*     width: 120px; */
+/*     background-color: black; */
+/*     color: #fff; */
+/*     text-align: center; */
+/*     border-radius: 6px; */
+/*     padding: 5px 5px; */
+
+/*     bottom: 50%; */
+/* 	} */
+
+/*  	.imgTag:hover #tooltip {  */
+/*  		visibility: visible;  */
+/*  	}  */
+	
+/* 	#tooltip::after { */
+/* 	    content: " "; */
+/* 	    top: 100%; /* At the bottom of the tooltip */ */
+/* 	    left: 50%; */
+/* 	    margin-left: -5px; */
+/* 	    border-width: 5px; */
+/* 	    border-style: solid; */
+/* 	    border-color: black transparent transparent transparent; */
+/* 	} */
 </style>
 <body>
 <div class="main-container">
@@ -30,36 +74,35 @@
          <div style="margin-left:86px;">
             <input type="hidden" id="_csrf" value="${_csrf.token}">
             <input type="hidden" id="_csrf_header" value="${_csrf.headerName}">
-			<div id="deleteChkBtn" style="display:none;">
-               <h5 style="display:inline;"><span style="position:relative; top:-10px;">전체&nbsp<input type="checkbox" name="checkAll" id="th_checkAll" onclick="checkAll();" /></span></h5>
-               <a type="button" name="deleteMaster" id="deleteMaster" class="btn btn-sm" style="margin-left:15px;">선택항목 삭제</a>
-			</div>
+<!--                <a type="button" name="deleteMaster" id="deleteMaster" class="btn btn-sm" style="margin-left:15px;">선택항목 삭제</a> -->
          </div>
+         <a type="button" id="insertForm" class="btn btn-sm" style="float:right;">등록</a>
          <hr>
-         
          <div class="col-md-10 col-md-offset-1">
             <div class="post-snippet mb64">
-				<span id="emptyComment"></span>
-            	<div id="listTable"></div>
-               
-            	<div class="input-with-label" style="width:100%;">
-                  <a type="button" name="masterRegist" class="btn btn-sm" style="width:20px; padding:0 15px 0 10px; position:relative; top:10px;">&#43</a>
-                  <span  class="select-option" style="display:inline; margin-left:30px;">
-                     <i class="ti-angle-down"></i>
-                     <select id="websiteType"  style="width:20%; display:inline;">
-                        <option value="empty">사이트 입력</option>
-                        <option value="11st">11st</option>
-                        <option value="gmarket">gmarket</option>
-                        <option value="auction">auction</option>
-                        <option value="interpark">interpark</option>
-                     </select>
-                  </span>
-                  <h5 style="display:inline;  margin:0 10px 0 15px;""><span style="display:inline;"></span></h5>
-             	  <input type="text" name="masterId" id="masterId" style="width:25%;" placeholder="아이디">
+				<div class="input-with-label" style="width:100%; display:none;">
+           			<span  class="select-option" style="display:inline; ">
+              		 	<i class="ti-angle-down"></i>
+               		 	<select id="websiteType"  style="width:20%; display:inline; margin-left:20px;">
+               				<option value="empty">사이트 입력</option>
+               				<option value="11st">11st</option>
+                  			<option value="gmarket">gmarket</option>
+                  			<option value="auction">auction</option>
+                  			<option value="interpark">interpark</option>
+              			</select>
+                	</span>
+               		<h5 style="display:inline;  margin:0 10px 0 15px;""><span style="display:inline;"></span></h5>
+          	  		<input type="text" name="masterId" id="masterId" style="width:20%;" placeholder="아이디">
                   
-                  <h5 style="display:inline;  margin:0 10px 0 15px;""><span style="display:inline;"></span></h5>
-                  <input type="password" name="masterPassword" id="masterPassword" style="width:25%;"  placeholder="비밀번호">
-               </div>
+               		<h5 style="display:inline;  margin:0 10px 0 15px;""><span style="display:inline;"></span></h5>
+               		<input type="password" name="masterPassword" id="masterPassword" style="width:25%;"  placeholder="비밀번호">
+              		<a type="button" name="masterCancel" class="btn btn-sm" style="float:right; margin-top:10px; margin-right:15px; padding: 0 10px;">취소</a>
+              		<a type="button" name="masterRegist" class="btn btn-sm" style="float:right; margin-top:10px; margin-right:5px; padding: 0 10px;">등록</a>
+              		<br>
+              		<hr>
+            	</div>
+           		<span id="emptyComment"></span>
+            	<div id="listTable"></div>
             </div>
          </div>
       </div>
@@ -68,54 +111,31 @@
 </div>
 </body>
 			<script id="list-template" type="text/x-handlebars-template">
-				{{#each .}}
-						<ul class="post-meta" style="width: 250px;">
-							<li style="width: 40px; margin-left: 10px;"><input
-								type="checkbox" id="checkRow{{@index}}" name="checkRow"
-								value="{{email}},{{website}},{{websiteId}}"
-								onclick="check();" style="margin-top: 20px;" /></li>
-
-							<li id="first{{@index}}" class="a" style="margin-top: 10px;">
-								 <img id="img{{@index}}" src="/resources/img/auction.jpg" style="width:50px; display:inline;">
-								&nbsp&nbsp&nbsp&nbsp<span name="website{{@index}}">{{website}}</span>
-							</li>
-							<li id="website{{@index}}" class="b" style="display:none;">
-								<select id="websiteTypeUp{{@index}}" style="width: 100px;">
-									<option value="empty{{@index}}" id="empty{{@index}}">선택</option>
-									<option value="11st" id="op11st{{@index}}">11st</option>
-									<option value="gmarket" id="opGmarket{{@index}}">gmarket</option>
-									<option value="auction" id="opAuction{{@index}}">auction</option>
-									<option value="interpark" id="opInterpark{{@index}}">interpark</option>
-								</select>
-							</li>
-						</ul>
-						<ul class="post-meta" style="width: 150px;">
-							<li id="second{{@index}}" class="a">
-								<span name="websiteId{{@index}}" style="position: relative; bottom: 5px; line-height: 30px;">{{websiteId}}</span>
-							</li>
-							<li id="websiteId{{@index}}" class="b" style="display:none;">
-								<input type="text" value="{{websiteId}}" name="websiteId{{@index}}">
-							</li>
-						</ul>
-						<ul class="post-meta" style="width: 150px; margin-left: 60px;">
-							<li id="third{{@index}}" style="display:none;">
-								<span name="websitePw{{@index}}" value="" style="position: relative; bottom: 5px; line-height: 30px;"></span>
-							</li>
-							<li id="websitePw{{@index}}" class="b" style="display:none;">
-								<input type="password" value="" name="websitePw{{@index}}">
-							</li>
-						</ul>
-						<ul class="post-meta" style="float: right; margin-right: -80px;">
-							<li id="updateMaster{{@index}}" class="a">
-								<a type="button" class="updateBtn btn btn-sm" name="updateMaster{{@index}}" data-no="{{@index}}" onclick="updateForm({{@index}});" style="margin-top: 10px;">편집</a></li>
-							<li id="updateGo{{@index}}" class="b" style="position: relative; margin-top: 10px; display: none;">
-								<a type="button" onclick="updateSubmit({{@index}});" class="btn btn-sm">수정</a>
-								<a type="button" onclick="updateCancel({{@index}});" class="btn btn-sm">취소</a>
-							</li>
-						</ul>
+					{{#each .}}	
+						<div style="height:95px;">
+							<ul class="post-meta text-center" style="width: 200px;">
+								<li id="first{{@index}}"style="" class="imgTag" >
+									<a id="imgTag{{@index}}" target="_blank">
+										<img id="img{{@index}}" src="" style="margin-left:10px;" data-tooltip-text="사이트로 이동">
+									</a>
+									<span name="website{{@index}}" style="display:none;">{{website}}</span>
+								</li>
+							</ul>
+							<ul class="post-meta" name="11st{{@index}}" style="width: 100px; margin: 0 0 30px 50px;">
+								<li id="second{{@index}}">
+									<span name="websiteId{{@index}}" style=" font-size:20px;">{{websiteId}}</span>
+								</li>
+							</ul>
+							<ul class="post-meta" style="float:right; margin-top:20px;">
+								<li id="updateGo{{@index}}">
+									<a name="findId{{@index}}" style="position: relative; bottom:10px; padding:0 10px;" >아이디 찾기</a>
+									<a name="findPw{{@index}}" style="position: relative; bottom:10px; padding:0 10px; margin-right:10px;" >비밀번호 찾기</a>
+									<a type="button" onclick="deleteSubmit({{@index}});" class="btn btn-sm" >삭제</a>
+								</li>
+							</ul>
+						</div>
 						<hr>
-						<br>
-						{{/each}}
+					{{/each}}
 			</script>
 <script>
    // 토큰
@@ -157,21 +177,41 @@
 			var website = $("span[name='website" + i + "']");
 			var websitePw = $("span[name='websitePw" + i + "']");
 		    var websitePwVal = $("input[name='websitePw" + i + "']");
+		    var st = $("ul[name='11st" + i + "']");
+		    var first = $("#first"+i);
+		    var findId = $("a[name='findId" + i + "']");
+		    var findPw = $("a[name='findPw" + i + "']");
+		    var imgTag = $("#imgTag" + i);
 		   
 		    switch(result[i].website){
 	          case '11st' : 
 	        	 img.attr("src", "/resources/img/11st.jpg");
-	             websiteTypeUp.val('11st').attr("selected", "selected");
+	        	 img.attr("style", "margin:0 0 20px 40px;");
+	        	 first.attr("style", "position:relative; bottom:10px;");
+	        	 st.attr("style", "margin: 0 0 50px 50px; position:relative; bottom:20px;");
+				 findId.attr("href", "https://www.11st.co.kr/register/searchIDForm.tmall");
+	        	 findPw.attr("href", "https://www.11st.co.kr/register/searchPWDForm.tmall");
+	        	 imgTag.attr("href", "http://www.11st.co.kr");
+	        	 websiteTypeUp.val('11st').attr("selected", "selected");
 	             break;
 	           case 'gmarket' :
+	        	  findId.attr("href", "https://member.gmarket.co.kr/challenge/neo_member/find_id.asp");
+	        	  findPw.attr("href", "https://member.gmarket.co.kr/challenge/neo_member/find_password.asp");
+		          imgTag.attr("href", "http://www.gmarket.co.kr/");
 	        	  img.attr("src", "/resources/img/gmarket.jpg");
 	        	  websiteTypeUp.val('gmarket').attr("selected", "selected"); 
 	              break;
 	           case 'auction' : 
+	        	   findId.attr("href", "https://memberssl.auction.co.kr/membership/IDPW/FindID.aspx?url=http://www.auction.co.kr/?redirect=1");
+	        	   findPw.attr("href", "https://memberssl.auction.co.kr/membership/IDPW/ResetPassword.aspx?url=https://memberssl.auction.co.kr/Membership/IDPW/ResetPassword.aspx?url=http://www.auction.co.kr/?redirect=1");
+		           imgTag.attr("href", "http://www.auction.co.kr");
 	        	   img.attr("src", "/resources/img/auction.jpg");
 	        	   websiteTypeUp.val('auction').attr("selected", "selected"); 
 	              break;
 	           case 'interpark' : 
+	        	   findId.attr("href", "https://incorp.interpark.com/member/matchid.do?_method=initialPopUp");
+	        	   findPw.attr("href", "https://incorp.interpark.com/member/matchpwd.do?_method=initialPopUp");
+		           imgTag.attr("href", "http://www.interpark.co.kr");
 	        	   img.attr("src", "/resources/img/interpark.png");
 	        	   websiteTypeUp.val('interpark').attr("selected", "selected"); 
 	              break;
@@ -180,7 +220,6 @@
 			websitePwVal.val(result[i].websitePw);
 		}
 	}
-	
 	function detail() {
 		var email = "${user.email}";
 		$.ajax({
@@ -191,76 +230,35 @@
 		}).done(makeList);
 	}
 	detail();
-   // 전체 체크/해제
-   function checkAll() {
-      var param = $("#th_checkAll").is(":checked");
-      var arrcheck = document.getElementsByName("checkRow");
-      for (i = 0; i < arrcheck.length; i++) {
-         arrcheck.item(i).checked = param;
-      }
-   }
    
-   // 개별 체크시 전체 체크 해제
-   function check(){
-      var chkAlll =  $("#th_checkAll");
-      var chk = chkAll.is(":checked");
-      var arrcheck = document.getElementsByName("checkRow");
-      var j = 0;
-      if(chk){
-    	  chkAll.attr("checked", false);
-      }
-      for (i = 0; i < arrcheck.length; i++) {
-         if(arrcheck.item(i).checked) {
-            j++;
-            if(j == arrcheck.length){
-            	chkAll.attr("checked", true);
-            }
-         }
-      }
-   }
+	// 등록 폼 
+	$("#insertForm").on("click", function() {
+		$(".input-with-label").show();
+		$("#insertForm").hide();
+	})
+	
+	// 등록 취소
+	$("a[name='masterCancel']").on("click", function(){
+		console.log("afag");
+		$(".input-with-label").hide();
+		$("#insertForm").show();
+	})
+	
    
-   // 삭제
-   $("#deleteMaster").on("click", function() {
-      $(document).ajaxSend(function(e, xhr, options) {
-         xhr.setRequestHeader(header, token);
-      });
-      var chk = document.getElementsByName("checkRow");
-      var len = chk.length;
-      var checkRow = '';
-      var valueArray = new Array();
-
-      for (var i = 0; i < len; i++) {
-         if (chk[i].checked == true) {
-            checkRow = chk[i].value;
-            valueArray.push(checkRow);
-         }
-      }
-      $.ajaxSettings.traditional = true; // 배열로 controller에 주기 위해
-      $.ajax({
-         url : "masterDelete",
-         type : "POST",
-         data : {
-            'valueArray' : valueArray,
-         }
-      }).done(function(result) {
-         alert("삭제 완료");
-         window.location.reload();
-      });
-   })
 
    // 등록
    $("a[name='masterRegist']").on("click", function() {
 	   //등록 토큰
-	  /*  $(document).ajaxSend(function(e, xhr, options) {
-           xhr.setRequestHeader(header, token);
-        }); */
+// 	  $(document).ajaxSend(function(e, xhr, options) {
+//            xhr.setRequestHeader(header, token);
+//         }); 
 	   
       var email = "${user.email}";
+      var websiteType = $("#websiteType option:selected").text();
       var websiteId = $("#masterId").val();
       var websitePw = $("#masterPassword").val();
-      var websiteType = $("#websiteType option:selected").text();
 
-      if (websiteType == '선택') {
+      if (websiteType == '사이트 입력') {
          alert('사이트 입력할 것');
       } else if (websiteId == '') {
          alert('아이디 입력할 것');
@@ -268,11 +266,10 @@
       } else if (websitePw == '') {
          alert('비밀번호 입력할 것');
          $("#masterPassword").focus();
-         
       }else{
     	  $.ajax({
  				url : "http://192.168.0.36:3003/checkEmail",
-//				url : "/user/masterInsert",
+// 				url : "/user/masterInsert",
 				type : "post",
 				data : {
 					email : email,
@@ -282,131 +279,35 @@
 				}
 			}).done(function(result) {
 				alert(result.result);
+// 				alert(result);
 				window.location.reload();
 			});
       }
    })
+   
+   // 삭제
+  	function deleteSubmit(index) {
+      $(document).ajaxSend(function(e, xhr, options) {
+         xhr.setRequestHeader(header, token);
+      });
+      var email = "${user.email}";
+      var website = $("span[name='website" + index + "']").text();
+      var websiteId = $("span[name='websiteId" + index + "']").text();
 
-   // 편집
-  function updateForm(index) {
-	  var email = "${user.email}";
-      var website = $("span[name='website" + index + "']");
-      var websitePw = $("span[name='websitePw" + index + "']");
-      var websitePwVal = $("input[name='websitePw" + index + "']");
-      
-      // 편집 폼 중복 방지
-      var a = $(".a");
-      var b = $(".b");
-      a.show();
-      b.hide();
-        switch(website){
-           case '11st' : $("#op11st"+index).attr("selected", "selected"); break;
-           case 'gmarket' : $("#opGmarket"+index).attr("selected", "selected"); break;
-           case 'auction' : $("#opAuction"+index).attr("selected", "selected"); break;
-           case 'interpark' : $("#opInterpark"+index).attr("selected", "selected"); break;
-        }
-
-      // 컨텐트 숨기기
-      $("#first" + index).hide();
-      $("#second" + index).hide();
-      $("#third" + index).hide();
-      // 편집 버튼 숨기기
-      $("#updateMaster" + index).hide();
-      // 입력 창 보이기
-      $("#website" + index).show();
-      $("#websiteId" + index).show();
-      $("#websitePw" + index).show();
-      // 수정 버튼 보이기
-      $("#updateGo" + index).show();
+      $.ajax({
+         url : "masterDelete",
+         type : "POST",
+         data : {
+            email : email,
+            website : website,
+            websiteId : websiteId
+         }
+      }).done(function(result) {
+         alert(result);
+         window.location.reload();
+      });
    }
-// 수정
- function updateSubmit(index) {
-         $(document).ajaxSend(function(e, xhr, options) {
-            xhr.setRequestHeader(header, token);
-         });
-         var email = "${user.email}";
-         var website = $("span[name='website" + index + "']").text();
-         var websiteId = $("span[name='websiteId" + index + "']")
-               .text();
-         var websitePw = $("span[name='websitePw" + index + "']")
-               .text();
-         var reWebsite = $(
-               "#websiteTypeUp" + index + " option:selected").text();
-         var reWebsiteId = $("input[name='websiteId" + index + "']")
-               .val();
-         var reWebsitePw = $("input[name='websitePw" + index + "']")
-               .val();
-         $.ajax({
-            url : "masterUpdate",
-            type : "POST",
-            data : {
-               email : email,
-               website : website,
-               websiteId : websiteId,
-               websitePw : websitePw,
-               reWebsite : reWebsite,
-               reWebsiteId : reWebsiteId,
-               reWebsitePw : reWebsitePw
-            }
-         }).done(function(result) {
-            alert(result);
-            window.location.reload();
-         })
-      }
-
-   // 수정 취소
-  function updateCancel(index) {
-         var website = $("span[name='website" + index + "']").text();
-         var websiteId = $("span[name='websiteId" + index + "']").text();
-         var websitePw = $("span[name='websitePw" + index + "']").val();
-         var a = $(".a");
-         var b = $(".b");
-
-         // 수정창 입력값 초기화
-         $("input[name='websiteId" + index + "']").val(websiteId);
-         $("input[name='websitePw" + index + "']").val(websitePw);
-
-         if (website == "11st") {
-            $("#op11st" + index).attr("selected", "selected");
-         }
-         switch (website) {
-         case '11st':
-            $("#op11st" + index).removeAttr("selected");
-            break;
-         case 'gmarket':
-            $("#opGmarket" + index).removeAttr("selected");
-            break;
-         case 'auction':
-            $("#opAuction" + index).removeAttr("selected");
-            break;
-         case 'interpark':
-            $("#opInterpark" + index).removeAttr("selected");
-            break;
-         default:
-            $("#opEtc" + index).removeAttr("selected");
-            break;
-         case '11st':
-            $("#op11st" + index).removeAttr("selected");
-            break;
-         }
-         switch(website){
-          case '11st' : 
-             $("#websiteTypeUp"+index).val('11st').attr("selected", "selected");
-             break;
-           case 'gmarket' : 
-              $("#websiteTypeUp"+index).val('gmarket').attr("selected", "selected"); 
-              break;
-           case 'auction' : 
-              $("#websiteTypeUp"+index).val('auction').attr("selected", "selected"); 
-              break;
-           case 'interpark' : 
-              $("#websiteTypeUp"+index).val('interpark').attr("selected", "selected"); 
-              break;
-       }
-
-         a.show();
-         b.hide();
-      }
+	
    $(document).ajaxStart(function() {
       $("body").waitMe({
          effect : 'win8',

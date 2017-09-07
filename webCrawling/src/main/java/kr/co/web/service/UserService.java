@@ -14,7 +14,7 @@ public interface UserService {
 	
 	public List<UserMasterVO> masterList(String email);
 
-	public void deleteMaster(String[] valueArray);
+	public String deleteMaster(UserMasterVO user);
 
 	public String writeMaster(UserMasterVO user);
 
