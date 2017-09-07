@@ -30,10 +30,10 @@ public class TrackingBoardServiceImpl implements TrackingBoardService {
 		return mapper.infiniteScrollDown(tboard);
 	}
 
-	@Override
-	public List<Integer> readChartList(int pNo) throws Exception {
-		return mapper.priceList(pNo);
-	}
+//	@Override
+//	public List<Integer> readChartList(int pNo) throws Exception {
+//		return mapper.priceList(pNo);
+//	}
 
 	@Override
 	public int priceUpdate(TrackingBoardVO tboard) throws Exception {

@@ -13,7 +13,7 @@ public interface TrackingBoardMapper {
 	public List<TrackingBoardVO> selectBoardInCorrect(String id) throws Exception;
 	public List<TrackingBoardVO> infiniteScrollDown(TrackingBoardVO tboard) throws Exception;
 	
-	public List<Integer> priceList(int pNo)throws Exception;
+//	public List<Integer> priceList(int pNo)throws Exception;
 	public int priceUpdate(TrackingBoardVO tboard)throws Exception;
 	public int delete(int pNo) throws Exception;
 	public List<PriceHistoryVO> selectPriceHistory(int pNo);

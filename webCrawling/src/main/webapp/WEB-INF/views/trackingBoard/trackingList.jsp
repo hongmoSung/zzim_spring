@@ -50,7 +50,7 @@
 
 <body>
 
-	<div class="main-container">
+	<div class="main-container" style="margin-bottom:50px;">
 		<section class="scroll-assist page-title page-title-4 bg-dark">
 
 			<div class="container">
@@ -61,7 +61,7 @@
 				</div>
 			</div>
 		</section>
-		<section>
+		<section style="margin-top: -50px;" >
 			<div class="container">
 				<div id="sList" class="row">
 					<h3 style="font-weight: bolder;">Check List</h3>
@@ -113,7 +113,7 @@
                                      </td>
 									 <td class="col-md-2" data-pNo="{{pNo}}">
 										
-                                     	  <a class="btn btn-dm btn-filled" style="margin-bottom:-10px; display:{{checkDisplay pLowest}}"  href="{{pUrl}}"  >구매하기</a>
+                                     	  <a class="btn btn-dm btn-filled" style="margin-bottom:-10px; display:{{checkDisplay pLowest}}"  href="{{pUrl}}" target="_blank" >구매하기</a>
                                         
 										{{#nonPrice pLowest }}
                                      	  <a id="delete" data-pNo="{{pNo}}" class="btn btn-md btn-filled" style="margin-bottom:-10px; background: red; border: none;">삭제하기11</a>
@@ -197,6 +197,7 @@ $("body").on( 'click', '.accordion li .title' , function(){
 	  url : getContextPath()+"/priceHistory",
 	  data : {"pNo":pNo}
   }).done(function(result){
+	  console.dir("result  "+result);
 	  var priceArr = []
 	  var average = 0;
 	  var max = 0;
@@ -226,9 +227,9 @@ $("body").on( 'click', '.accordion li .title' , function(){
 		$("#min"+pNo).html('  '+min+'원');
 		$("#aver"+pNo).html('  '+Math.round(average / result.length)+'원');
 	}else{
-		$("#max"+pNo).html('  -원');
-		$("#min"+pNo).html('  -원');
-		$("#aver"+pNo).html('  -원');
+		$("#max"+pNo).html('  - 원');
+		$("#min"+pNo).html('  - 원');
+		$("#aver"+pNo).html('  - 원');
 	}
 	 
 	//차트 만들기 
@@ -277,6 +278,9 @@ $("body").on( 'click', '.accordion li .title' , function(){
 		        "enabled": false
 		    }
 	 });
+	 chart.addListener("rendered", zoomChart);
+
+	 zoomChart();
 	 
   });
   

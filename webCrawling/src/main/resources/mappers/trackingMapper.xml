@@ -4,9 +4,16 @@
 
 <mapper namespace="kr.co.web.mapper.TrackingBoardMapper">
 
+	
 	<select id="selectPriceHistory" resultType="priceHistoryVO">
-		select * from tbl_price_history
-		where pNo = #{pNo}
+<!-- 		select * from tbl_price_history -->
+<!-- 		where pNo = #{pNo} -->
+		
+	select *
+		from
+		tbl_price_history
+		where pNo = 14
+        and currDate like concat('%','14:','%') or currDate like concat('%','16:','%')  ; 
 	</select>
 
 	<select id="selectBoardCorrect" resultType="TrackingBoardVO">

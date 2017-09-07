@@ -37,6 +37,7 @@ public class TrackingBoardController {
 	@RequestMapping("/sList")
 	@ResponseBody
 	public Map<String, Object> sList( TrackingBoardVO tboard) throws Exception {
+		System.out.println("11");
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		map.put("correctList", tService.readCorrectTrackingList(tboard.getEmail()));
@@ -52,15 +53,16 @@ public class TrackingBoardController {
 		return map;
 	}
 	
-	@RequestMapping("/chart")
-	@ResponseBody
-	public List<Integer> chartt(TrackingBoardVO tboard) throws Exception {
-		return tService.readChartList(tboard.getpNo());
-	}
+//	@RequestMapping("/chart")
+//	@ResponseBody
+//	public List<Integer> chartt(TrackingBoardVO tboard) throws Exception {
+//		return tService.readChartList(tboard.getpNo());
+//	}
 //	
 	@RequestMapping("/priceUpdate")
 	@ResponseBody
 	public int priceUpdate(TrackingBoardVO tboard) throws Exception {
+		
 		return tService.priceUpdate(tboard);
 	}
 
@@ -73,7 +75,6 @@ public class TrackingBoardController {
 	@RequestMapping("/priceHistory")
 	@ResponseBody
 	public List<PriceHistoryVO> priceHistory(int pNo){
-		
 		return tService.getChartData(pNo);
 	}
 }

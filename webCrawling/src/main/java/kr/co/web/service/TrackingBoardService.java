@@ -16,7 +16,7 @@ public interface TrackingBoardService {
 	public List<TrackingBoardVO> readInCorrectTrackingList(String id) throws Exception;
 	public List<TrackingBoardVO> infiniteScrollDown(TrackingBoardVO tboard) throws Exception;
 	
-	public List<Integer> readChartList(int pNo)throws Exception;
+//	public List<Integer> readChartList(int pNo)throws Exception;
 	public int priceUpdate(TrackingBoardVO tboard)throws Exception;
 	public int deleteTracking(int pNo) throws Exception;
 	public List<PriceHistoryVO> getChartData(int pNo);
