@@ -2,21 +2,17 @@ package kr.co.web.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.http.HttpResponse;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.web.csrf.CsrfToken;
+import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kr.co.web.vo.LoginDTO;
 import kr.co.web.service.UserService;
@@ -29,11 +25,18 @@ public class UserController {
 
 	@Autowired
 	private UserService service;
-	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
-
+	
 	@RequestMapping("/joinForm")
 	public void joinForm() {
 	}
+	
+	@ResponseBody
+	@RequestMapping(value="/getToken", method = RequestMethod.GET )
+	public Object getToken(HttpSession session , HttpServletRequest request) {
+		CsrfToken token =  new HttpSessionCsrfTokenRepository().loadToken(request);
+		return token;
+	}
+	
 
 	@RequestMapping(value = "/join", method = RequestMethod.POST)
 	public String join(UserVO user) {
@@ -45,7 +48,6 @@ public class UserController {
 	public void login(LoginDTO login, @ModelAttribute("error") String error, @ModelAttribute("logout") String logout) {
 	}
 	
-	// 메일 중복 확인
 	@RequestMapping("/emailCheck")
 	@ResponseBody
 	public String emailCheck(String email) {
@@ -57,7 +59,6 @@ public class UserController {
 		}
 	}
 
-	// 계정 관리 리스트
 	@ResponseBody
 	@RequestMapping("/makeMasterList")
 	public List<UserMasterVO> list(String email) {

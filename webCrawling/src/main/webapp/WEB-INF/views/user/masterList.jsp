@@ -234,9 +234,7 @@
    // 등록
    $("a[name='masterRegist']").on("click", function() {
 	   //등록 토큰
-// 	  $(document).ajaxSend(function(e, xhr, options) {
-//            xhr.setRequestHeader(header, token);
-//         }); 
+
 	   
       var email = "${user.email}";
       var websiteType = $("#websiteType option:selected").text();

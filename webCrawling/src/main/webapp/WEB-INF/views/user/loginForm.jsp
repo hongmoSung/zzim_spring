@@ -20,19 +20,22 @@
 				<div class="feature bordered text-center">
 					<h2 class="uppercase">LOGIN</h2>
 					<hr>
-					<c:url var="loginUrl" value="/login" />
-					<form method="POST" action="${loginUrl}" id="loginForm" class="text-center">
+					<form method="POST" action="/login" id="loginForm" class="text-center">
 						<input type="text" class="mb0" id="email" placeholder="이메일 " name="username">
 						<input type="password" class="mb0" id="password" placeholder="비밀번호 " name="password" >
-						<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
+						<input type="hidden" id="token">
 						<input type="submit" id="loginBtn" value="로그인"/>
 					</form>
 					<p class="mb0">
 						<a href="${pageContext.request.contextPath}/user/joinForm" >아직 회원이 아니세요?</a>
 					</p>
 				</div>
+				
 			</div>
 		</div>
+		<button id="asdasd">asdasd</button>
+		
+		
 	</section>
 </div>
 </body>
@@ -54,8 +57,24 @@
 					return false;
 				}else{
 					$("#loginForm").submit();
+					
 				}
 			});
+			
+			function getToken(){
+				$.ajax({
+					url : "/user/getToken"
+				}).done(function(result){
+					var token = result.token;
+					var parameterName = result.parameterName;
+					var headerName = result.headerName;
+					
+					$("#token").attr("name",parameterName);
+					$("#token").attr("value",token);
+				})
+			};
+		
+			getToken();
 			
 			
 		});

@@ -127,7 +127,7 @@
 		var email = '${user.email}';
 
 		$.ajax({
-			url : "http://192.168.0.36:3003/cart",
+			url : "https://zzim-node.zz.am:3003/cart",
 			type : "post",
 			data : {
 				"email" : email

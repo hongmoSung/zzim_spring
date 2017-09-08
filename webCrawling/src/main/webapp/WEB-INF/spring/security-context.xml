@@ -8,6 +8,7 @@
 	<http auto-config="true" >
 		<intercept-url pattern="/" access="permitAll"/>
 		<intercept-url pattern="/user/join" access="permitAll"/>
+		<intercept-url pattern="/user/getToken" access="permitAll"/>
 		<intercept-url pattern="/user/loginForm" access="permitAll"/>
 		<intercept-url pattern="/user/joinForm" access="permitAll"/>
 		<intercept-url pattern="/user/emailCheck" access="permitAll"/>
@@ -28,8 +29,6 @@
 		<beans:property name="defaultUrl" value="/"/>
 	</beans:bean>
 	
-<!-- 	<beans:bean id="loginService" class="kr.co.web.service.LoginService"> -->
-<!--    	</beans:bean> -->
 	
 <!-- 	<jdbc-user-service data-source-ref="dataSource" id="loginService" -->
 <!-- 	users-by-username-query="select email, password , enabled from tbl_user where email=?" -->
@@ -39,7 +38,6 @@
 	users-by-username-query="select email, AES_DECRYPT(UNHEX(password), 'aes'), enabled from tbl_user where email=?"
 	authorities-by-username-query="select email as username ,authority as authority from tbl_user where email=?"/>
 	
-<!-- 	SELECT email, AES_DECRYPT(UNHEX(password), 'aes') as pw FROM tbl_user where email = 'test5'; -->
 	
 <!-- 	<authentication-manager> -->
 <!-- 		<authentication-provider user-service-ref="loginService"> -->
