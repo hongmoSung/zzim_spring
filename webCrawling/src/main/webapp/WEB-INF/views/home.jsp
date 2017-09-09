@@ -72,6 +72,7 @@
 	    });
 	  });
 	
+<<<<<<< HEAD
 	function recent(){
 		$.ajax({
 			url: getContextPath() +"/home/recent"
@@ -101,6 +102,68 @@
 
 	
 	
+=======
+	var email = "${user.email}";
+	function sendUrl() {
+		var url = $('input[name="url"]').val();
+		console.log(url);
+		console.log(email);
+		
+		$.ajax({
+			url : "http://192.168.0.25:3003/track",
+			type : "post",
+			data : {
+				"url" : url
+			}
+		}).done(function(result) {
+			console.log(result);
+			if(!result.err) {
+				$("#myModal").modal();
+				$("#picUrl").attr('src', result.picUrl);
+				$("p#pName").text(result.pName);
+				$("p#pLowest").text(result.pLowest);
+				$("p#crawlingUrl").text(result.crawlingUrl);
+			} else {
+				alert('err!');
+			}
+		});
+		
+		return false;
+	}
+	
+	function sendPrice() {
+		var notifyPrice = $('input[name="notifyPrice"]').val();
+		var pName = $("p#pName").text();
+		var crawlingUrl = $("p#crawlingUrl").text();
+		
+		if(notifyPrice == "") {
+		    alert("알림가격을 입력해주세요");
+		    return;
+		  }
+
+		if(isNaN(notifyPrice)){
+			alert("알림가격은 숫자만 입력 가능합니다.");
+		    return;
+		};
+		  
+		$.ajax({
+			url : "http://192.168.0.25:3003/addDB",
+			type : "post",
+			data : {
+				'pName': pName,
+			    'notifyPrice': notifyPrice,
+			    'crawlingUrl': crawlingUrl,
+			    'email': email
+			}
+		})
+		.done(function(result) {
+			alert(result.msg);
+			console.log(result.msg);
+		});
+		
+		return false;
+	}
+>>>>>>> 53faec31153716f663738138a67925136cef73ea
 </script>
 <body>
 
@@ -125,10 +188,9 @@
                         <div class="feature bordered text-center">
                             <h3 class="uppercase">start tracking</h3>
                             <br>
-                            <form class="halves form-newsletter" data-success="Thanks for your submission, we will be in touch shortly." data-error="Please fill all fields correctly.">
-                                <input class="mb16 validate-required validate-email signup-email-field" type="text" placeholder="URL을 입력하세요" name="email">
+                            <form class="halves form-newsletter" onsubmit="javascript:sendUrl();" data-success="Thanks for your submission, we will be in touch shortly." data-error="Please fill all fields correctly.">
+                                <input class="mb16 validate-required validate-email signup-email-field" type="text" placeholder="URL을 입력하세요" name="url">
                                 <button class="mb16" type="submit">Notify Me</button>
-
                             </form>
                             <br><br><br>
                             <p>
@@ -301,6 +363,35 @@
         </section>
 
     </div>
+    
+    <div class="modal fade" id="myModal" role="dialog">
+	    <div class="modal-dialog">
+	    
+	      <!-- Modal content-->
+	      <div class="modal-content">
+	        <div class="modal-header">
+	          <button type="button" class="close" data-dismiss="modal">×</button>
+	          <h4 class="modal-title">Modal Header</h4>
+	        </div>
+	        <div class="modal-body">
+	          <img id="picUrl" class="product-thumb" src="" />
+	          <p id="pName"></p>
+	          <p id="pLowest"></p>
+	          <p id="crawlingUrl"></p>
+	          <form class="halves form-newsletter" onsubmit="javascript:sendPrice();">
+		          <input class="mb16 validate-required validate-email signup-email-field" type="text" placeholder="알림가격을 입력하세요" name="notifyPrice">
+	              <button class="mb16" type="submit">tracking!!</button>
+              </form>
+	        </div>
+	        <div class="modal-footer">
+	          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	        </div>
+	      </div>
+	      
+	    </div>
+  	</div>
+
+
 
 </body>
 
