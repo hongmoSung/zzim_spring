@@ -396,7 +396,8 @@ $("body").on("click","#update",function(){
 $("body").on("click","#delete",function(){
 	$.ajax({
 		url:getContextPath()+"/delete",
-		data:{pNo:$(this).parent().attr('data-pNo')}
+		data:{pNo:$(this).parent().attr('data-pNo'),
+			email:email}
 	}).done(function(result){
 		alert("삭제 되었습니다.")
 		location.href = getContextPath()+"/trackingList"

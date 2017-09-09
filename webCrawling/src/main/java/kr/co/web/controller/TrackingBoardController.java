@@ -37,7 +37,7 @@ public class TrackingBoardController {
 	@RequestMapping("/sList")
 	@ResponseBody
 	public Map<String, Object> sList( TrackingBoardVO tboard) throws Exception {
-		System.out.println("11");
+		System.out.println("11 �����");
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		map.put("correctList", tService.readCorrectTrackingList(tboard.getEmail()));
@@ -69,7 +69,7 @@ public class TrackingBoardController {
 	@RequestMapping("/delete")
 	@ResponseBody
 	public int delete(TrackingBoardVO tboard) throws Exception {
-		return tService.deleteTracking(tboard.getpNo());
+		return tService.deleteTracking(tboard);
 	}
 	
 	@RequestMapping("/priceHistory")

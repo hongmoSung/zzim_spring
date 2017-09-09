@@ -41,8 +41,8 @@ public class TrackingBoardServiceImpl implements TrackingBoardService {
 	}
 	
 	@Override
-	public int deleteTracking(int pNo) throws Exception {
-		return mapper.delete(pNo);
+	public int deleteTracking(TrackingBoardVO tboard) throws Exception {
+		return mapper.delete(tboard);
 	}
 
 	public List<PriceHistoryVO> getChartData(int pNo) {

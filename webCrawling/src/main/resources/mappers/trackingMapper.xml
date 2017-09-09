@@ -9,13 +9,18 @@
 <!-- 		select * from tbl_price_history -->
 <!-- 		where pNo = #{pNo} -->
 
-		select *
-		from
-		tbl_price_history
+<!-- 		select * -->
+<!-- 		from -->
+<!-- 		tbl_price_history -->
+<!-- 		where pNo = #{pNo} -->
+<!--         and (currDate like concat('%',' 15:','%')  -->
+<!--         or currDate like concat('%',' 16:','%'))   -->
+<!--         order by currDate   -->
+        
+        select pNo , min(currPrice) currPrice, currDate 
+		from tbl_price_history
 		where pNo = #{pNo}
-        and (currDate like concat('%',' 15:','%') 
-        or currDate like concat('%',' 16:','%'))  
-        order by currDate  
+		group by date(currDate)
 	</select>
 
 	<select id="selectBoardCorrect" resultType="TrackingBoardVO">
@@ -51,10 +56,10 @@
 	</select>
 
 	<select id="priceList" resultType="int">
-		select currPrice
-		from
-		tbl_price_history
-		where pNo = #{pNo}
+<!-- 		select currPrice -->
+<!-- 		from -->
+<!-- 		tbl_price_history -->
+<!-- 		where pNo = #{pNo} -->
 	</select>
 
 	<update id="priceUpdate">
@@ -64,8 +69,9 @@
 	</update>
 
 	<delete id="delete" >
-		delete from tbl_product
+		delete from tbl_tracking
 		where pNo = #{pNo}
+		and email = #{email}
 	</delete>
 
 
