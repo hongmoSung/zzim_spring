@@ -72,37 +72,6 @@
 	    });
 	  });
 	
-<<<<<<< HEAD
-	function recent(){
-		$.ajax({
-			url: getContextPath() +"/home/recent"
-		}).done(function (result) {
-			console.log(result);
-		})
-	}
-	function rank(){
-		$.ajax({
-			url: getContextPath() +"/home/rank"
-		}).done(function (result) {
-			console.log(result);
-		})
-	}
-	function down() {
-		$.ajax({
-			url: getContextPath() +"/home/drop"
-		}).done(function (result) {
-			console.log(result);
-		})
-	}
-	recent();
-	down();
-	rank();
-	
-	
-
-	
-	
-=======
 	var email = "${user.email}";
 	function sendUrl() {
 		var url = $('input[name="url"]').val();
@@ -163,7 +132,33 @@
 		
 		return false;
 	}
->>>>>>> 53faec31153716f663738138a67925136cef73ea
+	
+	function recent(){
+		$.ajax({
+			url: getContextPath() +"/home/recent"
+		}).done(function (result) {
+			console.log(result);
+		})
+	}
+	function rank(){
+		$.ajax({
+			url: getContextPath() +"/home/rank"
+		}).done(function (result) {
+			console.log(result);
+		})
+	}
+	function down() {
+		$.ajax({
+			url: getContextPath() +"/home/drop"
+		}).done(function (result) {
+			console.log(result);
+		})
+	}
+	recent();
+	down();
+	rank();
+	
+	
 </script>
 <body>
 
