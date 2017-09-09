@@ -26,7 +26,6 @@ public class HomeServiceImpl implements HomeService{
 
 	@Override
 	public List<TrackingBoardVO> selectDown() {
-		System.out.println(hMapper.selectDown());
 		return hMapper.selectDown();
 	}
 

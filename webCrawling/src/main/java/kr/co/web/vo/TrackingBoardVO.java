@@ -15,7 +15,25 @@ public class TrackingBoardVO {
 	private String email ; // 희망가
 	private Double dRate;
 	private Double pAvg;
+	private int cPNo;
+	private String rPLowest;
 	
+	public String getrPLowest() {
+		return rPLowest;
+	}
+
+	public void setrPLowest(String rPLowest) {
+		this.rPLowest = rPLowest;
+	}
+
+	public int getcPNo() {
+		return cPNo;
+	}
+
+	public void setcPNo(int cPNo) {
+		this.cPNo = cPNo;
+	}
+
 	public Double getdRate() {
 		return dRate;
 	}
@@ -102,7 +120,8 @@ public class TrackingBoardVO {
 	public String toString() {
 		return "TrackingBoardVO [page=" + page + ", pNo=" + pNo + ", pName=" + pName + ", pUrl=" + pUrl + ", pLowest="
 				+ pLowest + ", picUrl=" + picUrl + ", crawlingUrl=" + crawlingUrl + ", currPrice=" + currPrice
-				+ ", notifyPrice=" + notifyPrice + ", email=" + email + ", dRate=" + dRate + ", pAvg=" + pAvg + "]";
+				+ ", notifyPrice=" + notifyPrice + ", email=" + email + ", dRate=" + dRate + ", pAvg=" + pAvg
+				+ ", cPNo=" + cPNo + ", rPLowest=" + rPLowest + "]";
 	}
 	
 }

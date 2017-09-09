@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="include/header.jsp"%>
 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 <html lang="ko">
 <script>
 	function isTokenSentToServer() {
@@ -136,27 +140,36 @@
 	function recent(){
 		$.ajax({
 			url: getContextPath() +"/home/recent"
-		}).done(function (result) {
-			console.log(result);
-		})
+		}).done(makeDown);
 	}
 	function rank(){
 		$.ajax({
 			url: getContextPath() +"/home/rank"
-		}).done(function (result) {
-			console.log(result);
-		})
+		}).done(makeDown);
 	}
 	function down() {
 		$.ajax({
 			url: getContextPath() +"/home/drop"
-		}).done(function (result) {
-			console.log(result);
-		})
+		}).done(makeDown);
 	}
-	recent();
+	function makeDown(result) {
+		var source = $("#list-template").html();
+		var template = Handlebars.compile(source);
+		
+		Handlebars.registerHelper('checkDrop', function (dRate, cPNo) {
+			var msg = "";
+			if(dRate != null){
+				msg = " - " + dRate + "%";
+			}else if(cPNo != 0){
+				msg = "등록 수 : " + cPNo + "회";
+			}
+			return msg;
+		});
+		
+		var html = template(result);
+		$("#listTable").html(html);
+	}
 	down();
-	rank();
 	
 	
 </script>
@@ -208,149 +221,36 @@
         <section>
             <div class="container">
                 <div class="row">
-                    <div class="col-md-2 col-sm-4">
-                        <div class="select-option">
-                            <i class="ti-angle-down"></i>
-                            <select>
-                                    <option selected value="Default">Sort By</option>
-                                    <option value="Small">Highest Price</option>
-                                    <option value="Medium">Lowest Price</option>
-                                    <option value="Larger">Newest Items</option>
-                                </select>
-                        </div>
-                        <!--end select-->
-                    </div>
-                    <div class="col-md-10 text-right">
-                        <span class="input-lh">Displaying 8 of 8 results</span>
+                    <div>
+                    	<ul class="nav nav-tabs" >
+							<li class="active"><a data-toggle="tab" onclick="down();">가격 하락율</a></li>
+						    <li><a data-toggle="tab" onclick="recent();">최신 등록</a></li>
+						    <li><a data-toggle="tab" onclick="rank();">등록 횟수</a></li>
+						</ul>
                     </div>
                 </div>
+                <br>
                 <!--end of row-->
-                <div class="row">
-                    <div class="col-sm-12">
-                        <hr>
-                    </div>
-                </div>
-                <!--end of row-->
-                <div class="row masonry">
-                    <div class="col-md-3 col-sm-4 masonry-item col-xs-12">
-                        <div class="image-tile outer-title text-center">
-                            <a href="#">
-                                <img alt="Pic" class="product-thumb" src="/resources/img/shop-product-1.jpg" />
-                            </a>
-                            <div class="title">
-                                <h5 class="mb0">Adrian
-                                    <br /> LambsWool Cap</h5>
-                                <span class="display-block mb16">$49.95</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!--end three col-->
-                    <div class="col-md-3 col-sm-4 masonry-item col-xs-12">
-                        <div class="image-tile outer-title text-center">
-                            <a href="#">
-                                <img alt="Pic" class="product-thumb" src="/resources/img/shop-product-2.jpg" />
-                            </a>
-                            <div class="title">
-                                <h5 class="mb0">Stanley
-                                    <br /> Leather Wallet</h5>
-                                <span class="display-block mb16">$69.95</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!--end three col-->
-                    <div class="col-md-3 col-sm-4 masonry-item col-xs-12">
-                        <div class="image-tile outer-title text-center">
-                            <a href="#">
-                                <span class="label">Sale</span>
-                                <img alt="Pic" class="product-thumb" src="/resources/img/shop-product-4.jpg" />
-                            </a>
-                            <div class="title">
-                                <h5 class="mb0">Logan
-                                    <br /> Canvas Backpack</h5>
-                                <span class="display-block mb16">$119.95</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!--end three col-->
-                    <div class="col-md-3 col-sm-4 masonry-item col-xs-12">
-                        <div class="image-tile outer-title text-center">
-                            <a href="#">
-                                <img alt="Pic" class="product-thumb" src="/resources/img/shop-product-7.jpg" />
-                            </a>
-                            <div class="title">
-                                <h5 class="mb0">Vladimir
-                                    <br />Stainless Flask</h5>
-                                <span class="display-block mb16">$49.95</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!--end three col-->
-                    <div class="col-md-3 col-sm-4 masonry-item col-xs-12">
-                        <div class="image-tile outer-title text-center">
-                            <a href="#">
-                                <img alt="Pic" class="product-thumb" src="/resources/img/shop-product-8.jpg" />
-                            </a>
-                            <div class="title">
-                                <h5 class="mb0">Nathan
-                                    <br /> Cashmere Beanie</h5>
-                                <span class="display-block mb16">$45.00</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!--end three col-->
-                    <div class="col-md-3 col-sm-4 masonry-item col-xs-12">
-                        <div class="image-tile outer-title text-center">
-                            <a href="#">
-                                <img alt="Pic" class="product-thumb" src="/resources/img/shop-product-5.jpg" />
-                            </a>
-                            <div class="title">
-                                <h5 class="mb0">Nicholas
-                                    <br /> Dune Shades</h5>
-                                <span class="display-block mb16">$79.95</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!--end three col-->
-                    <div class="col-md-3 col-sm-4 masonry-item col-xs-12">
-                        <div class="image-tile outer-title text-center">
-                            <a href="#">
-                                <span class="label">Hot</span>
-                                <img alt="Pic" class="product-thumb" src="/resources/img/shop-product-9.jpg" />
-                            </a>
-                            <div class="title">
-                                <h5 class="mb0">Bobby
-                                    <br />Shaving Brush</h5>
-                                <span class="display-block mb16">$27.95</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!--end three col-->
-                    <div class="col-md-3 col-sm-4 masonry-item col-xs-12">
-                        <div class="image-tile outer-title text-center">
-                            <a href="#">
-                                <img alt="Pic" class="product-thumb" src="/resources/img/shop-product-13.jpg" />
-                            </a>
-                            <div class="title">
-                                <h5 class="mb0">Bradley
-                                    <br /> Leather Journal</h5>
-                                <span class="display-block mb16">$29.95</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!--end three col-->
-                    <div class="col-md-3 col-sm-4 masonry-item col-xs-12">
-                        <div class="image-tile outer-title text-center">
-                            <a href="#">
-                                <img alt="Pic" class="product-thumb" src="/resources/img/shop-product-11.jpg" />
-                            </a>
-                            <div class="title">
-                                <h5 class="mb0">Mack
-                                    <br /> Steel Canteen</h5>
-                                <span class="display-block mb16">$34.95</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!--end three col-->
+                <div class="row masonry text-center" >
+               		<div id="listTable"></div>
+                <!-- =========================================================================================== -->
+                <script id="list-template" type="text/x-handlebars-template">
+					{{#each.}}
+	                    <div class="col-md-3 col-sm-4 masonry-item col-xs-12">
+    	                    <div class="image-tile outer-title text-center">
+        	                    <a href="{{pUrl}}">
+            	                    <img src="{{picUrl}}" class="product-thumb"/>
+                	            </a>
+                    	        <div class="title">
+                        	        <h5 class="mb0">{{pName}}
+                            	        <br />{{checkDrop dRate cPNo}}</h5>
+                                	<span class="display-block mb16">{{rPLowest}}원</span>
+                	            </div>
+            	            </div>
+         	           </div>
+					{{/each}}
+				</script>
+                <!-- =========================================================================================== -->
                 </div>
                 <!--end of row-->
             </div>
