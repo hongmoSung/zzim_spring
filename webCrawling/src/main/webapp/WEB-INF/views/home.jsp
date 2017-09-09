@@ -71,6 +71,36 @@
 	      console.log('Unable to retrieve refreshed token ', err);
 	    });
 	  });
+	
+	function recent(){
+		$.ajax({
+			url: getContextPath() +"/home/recent"
+		}).done(function (result) {
+			console.log(result);
+		})
+	}
+	function rank(){
+		$.ajax({
+			url: getContextPath() +"/home/rank"
+		}).done(function (result) {
+			console.log(result);
+		})
+	}
+	function down() {
+		$.ajax({
+			url: getContextPath() +"/home/drop"
+		}).done(function (result) {
+			console.log(result);
+		})
+	}
+	recent();
+	down();
+	rank();
+	
+	
+
+	
+	
 </script>
 <body>
 

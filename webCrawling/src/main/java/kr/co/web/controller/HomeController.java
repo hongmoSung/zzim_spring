@@ -3,18 +3,26 @@ package kr.co.web.controller;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.util.List;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import kr.co.web.service.HomeService;
+import kr.co.web.vo.TrackingBoardVO;
+
 @Controller
 public class HomeController {
+	
+	@Autowired
+	private HomeService hService;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home( Model model) {
@@ -44,5 +52,23 @@ public class HomeController {
 	    
 		return sb.toString();
 	}	
+	
+	@RequestMapping("/home/recent")
+	@ResponseBody
+	public List<TrackingBoardVO> recentProduct() throws Exception {
+		return hService.recentProduct();
+	}
+	
+	@RequestMapping("/home/rank")
+	@ResponseBody
+	public List<TrackingBoardVO> tRank() throws Exception {
+		return hService.trackingRank();
+	}
+	
+	@RequestMapping("/home/drop")
+	@ResponseBody
+	public List<TrackingBoardVO> drop() throws Exception{
+		return hService.selectDown();
+	} 
 
 }

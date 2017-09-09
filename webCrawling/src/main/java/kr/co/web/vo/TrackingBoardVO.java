@@ -3,10 +3,7 @@ package kr.co.web.vo;
 import java.util.Date;
 
 public class TrackingBoardVO {
-	
-	
 	private int page;
-	
 	private int pNo;
 	private String pName;
 	private String pUrl;
@@ -16,8 +13,25 @@ public class TrackingBoardVO {
 	private String currPrice ; // 현제가(그래프)
 	private String notifyPrice ; // 희망가
 	private String email ; // 희망가
+	private Double dRate;
+	private Double pAvg;
 	
-	
+	public Double getdRate() {
+		return dRate;
+	}
+
+	public void setdRate(Double dRate) {
+		this.dRate = dRate;
+	}
+
+	public Double getpAvg() {
+		return pAvg;
+	}
+
+	public void setpAvg(Double pAvg) {
+		this.pAvg = pAvg;
+	}
+
 	public int getBegin() {
 		return (page -1) * 10 ;
 	}
@@ -83,13 +97,12 @@ public class TrackingBoardVO {
 	public void setCrawlingUrl(String crawlingUrl) {
 		this.crawlingUrl = crawlingUrl;
 	}
-	
-	
-	
-	
-	
-	
 
-	
+	@Override
+	public String toString() {
+		return "TrackingBoardVO [page=" + page + ", pNo=" + pNo + ", pName=" + pName + ", pUrl=" + pUrl + ", pLowest="
+				+ pLowest + ", picUrl=" + picUrl + ", crawlingUrl=" + crawlingUrl + ", currPrice=" + currPrice
+				+ ", notifyPrice=" + notifyPrice + ", email=" + email + ", dRate=" + dRate + ", pAvg=" + pAvg + "]";
+	}
 	
 }
