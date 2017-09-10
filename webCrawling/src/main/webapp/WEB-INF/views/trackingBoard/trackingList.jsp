@@ -109,7 +109,7 @@
                                      	<span id="ic" style="font-size:1.2em"><i  class="fa fa-krw" aria-hidden="true"><span id="tooltip">희망가</span></i> : {{notifyPrice}}원</span>
                                  	</td>
                                      <td >
-                                         <span id="ic" style="font-size:1.2em"><i  class="fa fa-money" aria-hidden="true"><span id="tooltip">현재가</span></i> :  {{checkPrice pLowest}}</span>
+                                         <span id="ic" style="font-size:1.2em"><i  class="fa fa-money" aria-hidden="true"><span id="tooltip">현재가</span></i> :  {{checkPrice pLowest rPLowest}}</span>
                                      </td>
 									 <td class="col-md-2" data-pNo="{{pNo}}">
 										
@@ -197,16 +197,16 @@ $("body").on( 'click', '.accordion li .title' , function(){
 	  url : getContextPath()+"/priceHistory",
 	  data : {"pNo":pNo}
   }).done(function(result){
-// 	  console.dir("result  "+result[0].currPrice);
+	  console.dir("result  "+result[0].currPrice);
 	  var priceArr = []
 	  var average = 0;
 	  var max = 0;
 	  var min = 0;
 	  
 	 for(var i = 0 ; i < result.length ; i++){
-// 	  console.log("result1111  "+result[i].currPrice);
+	  console.log("result1111  "+result[i].currPrice);
 		// currPrice 배열넣기 
-		 priceArr.push(result[i].currPrice); 
+		 priceArr.push(result[i].acurrPrice); 
 		 average +=result[i].currPrice;
 		  
 // 		 console.log("result[i].currDate:::",result[i].currDate); 
@@ -226,7 +226,7 @@ $("body").on( 'click', '.accordion li .title' , function(){
 	if(result != ''){
 		$("#max"+pNo).html('  '+max+'원');
 		$("#min"+pNo).html('  '+min+'원');
-		$("#aver"+pNo).html('  '+Math.round(average / result.length)+'원');
+		$("#aver"+pNo).html('  '+Math.round(average / result.length).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+'원');
 	}else{
 		$("#max"+pNo).html('  - 원');
 		$("#min"+pNo).html('  - 원');
@@ -302,8 +302,8 @@ function handle(result,target){
 		return price > 0 ?"block":"none";
 	});
 	//헬퍼 pLowestrk 0일때
-	Handlebars.registerHelper("checkPrice", function(price) {
-		return price > 0 ? price+"원":"상품이 매진 되었습니다.";
+	Handlebars.registerHelper("checkPrice", function(price,  rprice) {
+		return price > 0 ? rprice+"원":"상품이 매진 되었습니다.";
 	});
 	//헬퍼  pLowest 차이 표시 
 	Handlebars.registerHelper('check1', function (notifyPrice, pLowest, pNo) {

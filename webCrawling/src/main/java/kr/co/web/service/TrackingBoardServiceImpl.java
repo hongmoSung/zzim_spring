@@ -46,6 +46,7 @@ public class TrackingBoardServiceImpl implements TrackingBoardService {
 	}
 
 	public List<PriceHistoryVO> getChartData(int pNo) {
+		
 		return mapper.selectPriceHistory(pNo);
 		
 	}

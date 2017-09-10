@@ -17,14 +17,14 @@
 <!--         or currDate like concat('%',' 16:','%'))   -->
 <!--         order by currDate   -->
         
-        select pNo , min(currPrice) currPrice, currDate 
+        select pNo ,min(currPrice) currPrice, format(min(currPrice), 0) AcurrPrice, currDate 
 		from tbl_price_history
 		where pNo = #{pNo}
 		group by date(currDate)
 	</select>
 
 	<select id="selectBoardCorrect" resultType="TrackingBoardVO">
-		select p.*, t.notifyPrice, t.email
+		select p.*,format(p.pLowest, 0) rPLowest, format(t.notifyPrice, 0) notifyPrice, t.email
 		from tbl_product p 
 		inner join tbl_tracking t
 		on p.pNo = t.pNo 
@@ -34,7 +34,7 @@
 	</select>
 	
 	<select id="selectBoardInCorrect" resultType="TrackingBoardVO">
-		select p.*, t.notifyPrice, t.email
+		select p.*,format(p.pLowest, 0) rPLowest, format(t.notifyPrice, 0) notifyPrice, t.email
 		from tbl_product p 
 		inner join tbl_tracking t
 		on p.pNo = t.pNo 
