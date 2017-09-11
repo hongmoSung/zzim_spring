@@ -83,7 +83,7 @@
                   
                		<h5 style="display:inline;  margin:0 10px 0 15px;""><span style="display:inline;"></span></h5>
                		<input type="password" name="masterPassword" id="masterPassword" style="width:25%;"  placeholder="비밀번호">
-              		<a type="button" name="masterCancel" class="btn btn-sm" style="float:right; margin-top:10px; margin-right:15px; padding: 0 10px;">취소</a>
+              		<a type="button" name="masterCancel" class="btn btn-sm" style="float:right; margin-top:10px; margin-right:15px; padding: 0 10px; ">취소</a>
               		<a type="button" name="masterRegist" class="btn btn-sm" style="float:right; margin-top:10px; margin-right:5px; padding: 0 10px;">등록</a>
               		<br>
               		<hr>
@@ -115,8 +115,8 @@
 							</ul>
 							<ul class="post-meta" style="float:right; margin-top:20px;">
 								<li id="updateGo{{@index}}">
-									<a name="findId{{@index}}" target="_blank" style="position: relative; bottom:10px; padding:0 10px;" >아이디 찾기</a>
-									<a name="findPw{{@index}}" target="_blank" style="position: relative; bottom:10px; padding:0 10px; margin-right:10px;" >비밀번호 찾기</a>
+									<a name="findId{{@index}}" target="_blank" style="position: relative; bottom:10px; padding:0 10px; text-decoration:underline;" >아이디 찾기</a>
+									<a name="findPw{{@index}}" target="_blank" style="position: relative; bottom:10px; padding:0 10px; margin-right:10px; text-decoration:underline;" >비밀번호 찾기</a>
 									<a type="button" onclick="deleteSubmit({{@index}});" class="btn btn-filled btn-sm" style="background-color:#F34242; border-color:#F34242;">삭제</a>
 								</li>
 							</ul>

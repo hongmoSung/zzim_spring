@@ -190,28 +190,29 @@
 
     <div class="main-container">
 
-        <section class="cover fullscreen image-bg overlay">
+        <section class="image-bg cover overlay" style="height:650px; ">
             <div class="background-image-holder">
-                <img alt="image" class="background-image" src="/resources/img/cover8.jpg">
+                <img alt="image" class="background-image" src="/resources/img/main_back.jpg">
+                
             </div>
 
-            <div class="container v-align-transform">
+            <div class="container v-align-transform" style="margin-top:-30px;">
                 <div class="row">
-                    <div class="col-sm-12 text-center">
-                        <img alt="Pic" src="/resources/img/logo-light.png" class="image-small">
+                    <div class="col-sm-12 text-center" >
+                        <img alt="Pic" src="/resources/img/main_zzim.png" class="image-md" style="margin-bottom:-50px;">
                     </div>
                 </div>
 
                 <br><br><br>
 
                 <div class="row">
-                    <div class="col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1">
-                        <div class="feature bordered text-center">
+                    <div class="col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1" >
+                        <div class="feature bordered text-center" style="background-color:rgba( 0, 0, 0, 0.6 );">
                             <h3 class="uppercase">start tracking</h3>
                             <br>
                             <form class="halves form-newsletter" onsubmit="javascript:sendUrl();" data-success="Thanks for your submission, we will be in touch shortly." data-error="Please fill all fields correctly.">
                                 <input class="mb16 validate-required validate-email signup-email-field" type="text" placeholder="URL을 입력하세요" name="url">
-                                <button class="mb16" type="submit">Notify Me</button>
+                                <button class="mb16 btn-fiiled" type="submit" style="background-color:#47b475; color:white;">Notify Me</button>
                             </form>
                             <br><br><br><br>
                             <p>

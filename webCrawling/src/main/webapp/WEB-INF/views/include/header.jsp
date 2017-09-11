@@ -97,7 +97,7 @@
             <div class="module left">
                 <a href="${pageContext.request.contextPath}/">
                     <img class="logo logo-light" alt="Foundry" src="/resources/img/logo-light.png">
-                    <img class="logo logo-dark" alt="Foundry" src="/resources/img/logo-dark.png">
+                    <img class="logo logo-dark" alt="Foundry" src="/resources/img/header_zzim.png">
                 </a>
             </div>
             <div class="module widget-handle mobile-toggle right visible-sm visible-xs">
