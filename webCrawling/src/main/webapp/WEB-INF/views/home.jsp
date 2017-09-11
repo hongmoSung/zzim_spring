@@ -165,6 +165,14 @@
 			}
 			return msg;
 		});
+		Handlebars.registerHelper('emailcheck', function (option) {
+			if(email != ''){
+				return option.fn(this);
+			}
+			else {
+			    return option.inverse(this);
+			  }
+		});
 		
 		var html = template(result);
 		$("#listTable").html(html);
@@ -238,9 +246,15 @@
 					{{#each.}}
 	                    <div class="col-md-3 col-sm-4 masonry-item col-xs-12">
     	                    <div class="image-tile outer-title text-center">
-        	                    <a href="{{pUrl}}">
-            	                    <img src="{{picUrl}}" class="product-thumb"/>
-                	            </a>
+        	                    {{#emailcheck}}
+        	                    	<a href="{{pUrl}}">
+            	                	    <img src="{{picUrl}}" class="product-thumb"/>
+                	           		</a>	
+								{{else}}
+        	                    	<a href="/user/loginForm">
+            	                   		 <img src="{{picUrl}}" class="product-thumb"/>
+                	            	</a>
+								{{/emailcheck}}
                     	        <div class="title">
                         	        <h5 class="mb0">{{pName}}
                             	        <br />{{checkDrop dRate cPNo}}</h5>
