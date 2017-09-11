@@ -7,6 +7,9 @@
 
 	<http auto-config="true" >
 		<intercept-url pattern="/" access="permitAll"/>
+		<intercept-url pattern="/home/recent" access="permitAll"/>
+		<intercept-url pattern="/home/rank" access="permitAll"/>
+		<intercept-url pattern="/home/drop" access="permitAll"/>
 		<intercept-url pattern="/user/join" access="permitAll"/>
 		<intercept-url pattern="/user/getToken" access="permitAll"/>
 		<intercept-url pattern="/user/loginForm" access="permitAll"/>
