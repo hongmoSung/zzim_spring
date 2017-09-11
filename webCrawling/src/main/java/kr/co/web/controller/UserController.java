@@ -26,6 +26,7 @@ public class UserController {
 	@Autowired
 	private UserService service;
 	
+	
 	@RequestMapping("/joinForm")
 	public void joinForm() {
 	}
@@ -33,7 +34,9 @@ public class UserController {
 	@ResponseBody
 	@RequestMapping(value="/getToken", method = RequestMethod.GET )
 	public Object getToken(HttpSession session , HttpServletRequest request) {
+		System.out.println(request);
 		CsrfToken token =  new HttpSessionCsrfTokenRepository().loadToken(request);
+		System.out.println(token);
 		return token;
 	}
 	

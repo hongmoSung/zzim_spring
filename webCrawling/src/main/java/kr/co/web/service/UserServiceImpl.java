@@ -1,15 +1,11 @@
 package kr.co.web.service;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
-import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.co.web.mapper.UserMapper;
-import kr.co.web.vo.LoginDTO;
 import kr.co.web.vo.UserMasterVO;
 import kr.co.web.vo.UserVO;
 

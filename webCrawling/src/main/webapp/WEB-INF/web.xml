@@ -71,7 +71,7 @@
 	</filter>
 	<filter-mapping>
 		<filter-name>CORSFilter</filter-name>
-		<url-pattern>/*</url-pattern>
+		<url-pattern>/user/*</url-pattern>
 	</filter-mapping>
 	
 

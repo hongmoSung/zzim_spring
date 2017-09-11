@@ -36,6 +36,8 @@
 				<input type="password" id="password2" placeholder="비밀번호 확인" style="width:80%;"><br>
 				<input id="joinBtn" type="submit" value="회원가입">
 			</div>
+			
+			
 		</div>
 	</div>
 </div>
