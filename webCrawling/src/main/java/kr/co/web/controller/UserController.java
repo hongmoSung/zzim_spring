@@ -33,7 +33,7 @@ public class UserController {
 	@ResponseBody
 	@RequestMapping(value="/getToken", method = RequestMethod.GET )
 	public Object getToken(HttpSession session , HttpServletRequest request) {
-		CsrfToken token =  new HttpSessionCsrfTokenRepository().generateToken(request);
+		CsrfToken token =  new HttpSessionCsrfTokenRepository().loadToken(request);
 		return token;
 	}
 	
