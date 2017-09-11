@@ -159,9 +159,14 @@
 		Handlebars.registerHelper('checkDrop', function (dRate, cPNo) {
 			var msg = "";
 			if(dRate != null){
-				msg = " - " + dRate + "%";
+				if (dRate < 0){
+					msg = " ( + " + dRate + "% )";
+				}
+				else{
+					msg = " ( - " + dRate + "% )";
+				}
 			}else if(cPNo != 0){
-				msg = "등록 수 : " + cPNo + "회";
+				msg = " ( " + cPNo + "회 )";
 			}
 			return msg;
 		});
@@ -247,7 +252,7 @@
 	                    <div class="col-md-3 col-sm-4 masonry-item col-xs-12">
     	                    <div class="image-tile outer-title text-center">
         	                    {{#emailcheck}}
-        	                    	<a href="{{pUrl}}">
+        	                    	<a href="{{pUrl}}" target="_blank">
             	                	    <img src="{{picUrl}}" class="product-thumb"/>
                 	           		</a>	
 								{{else}}
@@ -256,9 +261,8 @@
                 	            	</a>
 								{{/emailcheck}}
                     	        <div class="title">
-                        	        <h5 class="mb0">{{pName}}
-                            	        <br />{{checkDrop dRate cPNo}}</h5>
-                                	<span class="display-block mb16">{{rPLowest}}원</span>
+                        	        <h5 class="mb0">{{pName}}</h5><br>
+                                	<span class="display-block mb16">{{rPLowest}}원<span style="color:red;" class="dRateColor">{{checkDrop dRate cPNo}}</span></span>
                 	            </div>
             	            </div>
          	           </div>

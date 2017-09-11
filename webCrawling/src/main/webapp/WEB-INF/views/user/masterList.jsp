@@ -37,6 +37,7 @@
 	    border-style: solid;
 	    border-color: black transparent transparent transparent;
 	}
+	
 </style>
 <body>
 <div class="main-container">
@@ -59,9 +60,9 @@
 <!--                <a type="button" name="deleteMaster" id="deleteMaster" class="btn btn-sm" style="margin-left:15px;">선택항목 삭제</a> -->
          </div>
          <div>
-         	<span style="margin-left: 170px; font-weight:bold; font-size:17px;">사이트</span>
-        	<span style="margin-left: 130px; font-weight:bold; font-size:17px;">아이디</span>
-	        <a type="button" id="insertForm" class="btn btn-sm" style="float:right; position:relative; right:80px;">등록</a>
+         	<span style="margin-left: 180px; font-weight:bold; font-size:17px;">사이트</span>
+        	<span style="margin-left: 140px; font-weight:bold; font-size:17px;">아이디</span>
+	        <a type="button" id="insertForm" class="btn btn-sm btn-filled" style="float:right; position:relative; right:138px;">등록</a>
 	        <hr>
          </div>
          <div class="col-md-10 col-md-offset-1">
@@ -99,24 +100,24 @@
 			<script id="list-template" type="text/x-handlebars-template">
 					{{#each .}}	
 						<div style="height:95px;">
-							<ul class="post-meta text-center" style="width: 200px;">
+							<ul class="post-meta text-center" style="width: 20%; margin-bottom:20px; margin-left:30px;">
 								<li id="first{{@index}}"style="" class="imgTag" >
 									<a id="imgTag{{@index}}" target="_blank">
-										<img id="img{{@index}}" src="" style="margin-left:10px;" >
+										<img id="img{{@index}}" src="" style="margin-left:10px;  width:100px;" >
 									</a>
 									<span name="website{{@index}}" style="display:none;">{{website}}</span>
 								</li>
 							</ul>
-							<ul class="post-meta" name="11st{{@index}}" style="width: 100px; margin: 0 0 30px 50px;">
+							<ul class="post-meta" name="11st{{@index}}" style="width: 100px; margin: 20px 0 30px 50px;">
 								<li id="second{{@index}}">
 									<span name="websiteId{{@index}}" style=" font-size:20px;">{{websiteId}}</span>
 								</li>
 							</ul>
 							<ul class="post-meta" style="float:right; margin-top:20px;">
 								<li id="updateGo{{@index}}">
-									<a name="findId{{@index}}" style="position: relative; bottom:10px; padding:0 10px;" >아이디 찾기</a>
-									<a name="findPw{{@index}}" style="position: relative; bottom:10px; padding:0 10px; margin-right:10px;" >비밀번호 찾기</a>
-									<a type="button" onclick="deleteSubmit({{@index}});" class="btn btn-sm" >삭제</a>
+									<a name="findId{{@index}}" target="_blank" style="position: relative; bottom:10px; padding:0 10px;" >아이디 찾기</a>
+									<a name="findPw{{@index}}" target="_blank" style="position: relative; bottom:10px; padding:0 10px; margin-right:10px;" >비밀번호 찾기</a>
+									<a type="button" onclick="deleteSubmit({{@index}});" class="btn btn-filled btn-sm" style="background-color:#F34242; border-color:#F34242;">삭제</a>
 								</li>
 							</ul>
 						</div>
@@ -163,42 +164,45 @@
 			var website = $("span[name='website" + i + "']");
 			var websitePw = $("span[name='websitePw" + i + "']");
 		    var websitePwVal = $("input[name='websitePw" + i + "']");
-		    var st = $("ul[name='11st" + i + "']");
-		    var first = $("#first"+i);
 		    var findId = $("a[name='findId" + i + "']");
 		    var findPw = $("a[name='findPw" + i + "']");
 		    var imgTag = $("#imgTag" + i);
 		   
 		    switch(result[i].website){
 	          case '11st' : 
-	        	 img.attr("src", "/resources/img/11st.jpg");
-	        	 img.attr("style", "margin:0 0 20px 40px;");
-	        	 first.attr("style", "position:relative; bottom:10px;");
-	        	 st.attr("style", "margin: 0 0 50px 50px; position:relative; bottom:20px;");
+	        	 img.attr("src", "/resources/img/11st.gif");
+	        	 imgTag.attr("href", "http://www.11st.co.kr");
+	        	 
 				 findId.attr("href", "https://www.11st.co.kr/register/searchIDForm.tmall");
 	        	 findPw.attr("href", "https://www.11st.co.kr/register/searchPWDForm.tmall");
-	        	 imgTag.attr("href", "http://www.11st.co.kr");
+
 	        	 websiteTypeUp.val('11st').attr("selected", "selected");
 	             break;
 	           case 'gmarket' :
-	        	  findId.attr("href", "https://member.gmarket.co.kr/challenge/neo_member/find_id.asp");
-	        	  findPw.attr("href", "https://member.gmarket.co.kr/challenge/neo_member/find_password.asp");
+	        	  img.attr("src", "/resources/img/gmarket.gif");
 		          imgTag.attr("href", "http://www.gmarket.co.kr/");
-	        	  img.attr("src", "/resources/img/gmarket.jpg");
+
+		          findId.attr("href", "https://member.gmarket.co.kr/challenge/neo_member/find_id.asp");
+	        	  findPw.attr("href", "https://member.gmarket.co.kr/challenge/neo_member/find_password.asp");
+	        	  
 	        	  websiteTypeUp.val('gmarket').attr("selected", "selected"); 
 	              break;
 	           case 'auction' : 
+		           imgTag.attr("href", "http://www.auction.co.kr");
+	        	   img.attr("src", "/resources/img/auction.gif");
+
 	        	   findId.attr("href", "https://memberssl.auction.co.kr/membership/IDPW/FindID.aspx?url=http://www.auction.co.kr/?redirect=1");
 	        	   findPw.attr("href", "https://memberssl.auction.co.kr/membership/IDPW/ResetPassword.aspx?url=https://memberssl.auction.co.kr/Membership/IDPW/ResetPassword.aspx?url=http://www.auction.co.kr/?redirect=1");
-		           imgTag.attr("href", "http://www.auction.co.kr");
-	        	   img.attr("src", "/resources/img/auction.jpg");
+	        	   
 	        	   websiteTypeUp.val('auction').attr("selected", "selected"); 
 	              break;
 	           case 'interpark' : 
-	        	   findId.attr("href", "https://incorp.interpark.com/member/matchid.do?_method=initialPopUp");
-	        	   findPw.attr("href", "https://incorp.interpark.com/member/matchpwd.do?_method=initialPopUp");
+	        	   img.attr("src", "/resources/img/interpark.gif");
 		           imgTag.attr("href", "http://www.interpark.co.kr");
-	        	   img.attr("src", "/resources/img/interpark.png");
+
+		           findId.attr("href", "https://incorp.interpark.com/member/matchid.do?_method=initialPopUp");
+	        	   findPw.attr("href", "https://incorp.interpark.com/member/matchpwd.do?_method=initialPopUp");
+	        	   
 	        	   websiteTypeUp.val('interpark').attr("selected", "selected"); 
 	              break;
 	       }
@@ -234,7 +238,9 @@
    // 등록
    $("a[name='masterRegist']").on("click", function() {
 	   //등록 토큰
-
+	   $(document).ajaxSend(function(e, xhr, options) {
+         xhr.setRequestHeader(header, token);
+      });
 	   
       var email = "${user.email}";
       var websiteType = $("#websiteType option:selected").text();
@@ -251,8 +257,8 @@
          $("#masterPassword").focus();
       }else{
     	  $.ajax({
- 				url : "http://192.168.0.36:3003/checkEmail",
-// 				url : "/user/masterInsert",
+//  				url : "http://192.168.0.36:3003/checkEmail",
+				url : "/user/masterInsert",
 				type : "post",
 				data : {
 					email : email,
@@ -261,8 +267,8 @@
 					websitePw : websitePw
 				}
 			}).done(function(result) {
-				alert(result.result);
-// 				alert(result);
+// 				alert(result.result);
+				alert(result);
 				window.location.reload();
 			});
       }
