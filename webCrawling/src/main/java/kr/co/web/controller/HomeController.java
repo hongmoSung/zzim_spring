@@ -28,6 +28,11 @@ public class HomeController {
 	public String home( Model model) {
 		return "home";
 	}
+	
+	@RequestMapping("/favicon.ico")
+	public String favicon() {
+		return "redirect:/";
+	}
 
 	@RequestMapping("/firebase-messaging-sw.js")
 	@ResponseBody
