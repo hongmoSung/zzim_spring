@@ -93,8 +93,8 @@
 			if(!result.err) {
 				$("#myModal").modal();
 				$("#picUrl").attr('src', result.picUrl);
-				$("p#pName").text(result.pName);
-				$("p#pLowest").text(result.pLowest);
+				$("#pName").text(result.pName);
+				$("p#pLowest").text('현재 최저가 : ' + result.pLowest + ' 원');
 				$("p#crawlingUrl").text(result.crawlingUrl);
 			} else {
 				alert('err!');
@@ -106,7 +106,7 @@
 	
 	function sendPrice() {
 		var notifyPrice = $('input[name="notifyPrice"]').val();
-		var pName = $("p#pName").text();
+		var pName = $("#pName").text();
 		var crawlingUrl = $("p#crawlingUrl").text();
 		
 		if(notifyPrice == "") {
@@ -200,7 +200,7 @@
                                 <input class="mb16 validate-required validate-email signup-email-field" type="text" placeholder="URL을 입력하세요" name="url">
                                 <button class="mb16" type="submit">Notify Me</button>
                             </form>
-                            <br><br><br>
+                            <br><br><br><br>
                             <p>
                                 해당 상품이 원하는 가격에 도달하면 알려드립니다 !
                             </p>
@@ -266,13 +266,14 @@
 	      <div class="modal-content">
 	        <div class="modal-header">
 	          <button type="button" class="close" data-dismiss="modal">×</button>
-	          <h4 class="modal-title">Modal Header</h4>
+	          <h4 class="modal-title" id="pName">Modal Header</h4>
 	        </div>
 	        <div class="modal-body">
-	          <img id="picUrl" class="product-thumb" src="" />
-	          <p id="pName"></p>
-	          <p id="pLowest"></p>
-	          <p id="crawlingUrl"></p>
+	        	<div class="image-tile outer-title text-center">
+		          <img id="picUrl" class="product-thumb" src="" />
+		          <p id="pLowest"></p>
+		          <p id="crawlingUrl" style="display: none;"></p>
+	          	</div>
 	          <form class="halves form-newsletter" onsubmit="javascript:sendPrice();">
 		          <input class="mb16 validate-required validate-email signup-email-field" type="text" placeholder="알림가격을 입력하세요" name="notifyPrice">
 	              <button class="mb16" type="submit">tracking!!</button>
