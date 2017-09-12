@@ -30,16 +30,6 @@ public class UserController {
 	@RequestMapping("/joinForm")
 	public void joinForm() {
 	}
-	
-	@ResponseBody
-	@RequestMapping(value="/getToken", method = RequestMethod.GET )
-	public Object getToken(HttpSession session , HttpServletRequest request) {
-		System.out.println(request);
-		CsrfToken token =  new HttpSessionCsrfTokenRepository().loadToken(request);
-		System.out.println(token);
-		return token;
-	}
-	
 
 	@RequestMapping(value = "/join", method = RequestMethod.POST)
 	public String join(UserVO user) {

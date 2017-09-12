@@ -24,6 +24,8 @@
 						<input type="text" class="mb0" id="email" placeholder="이메일 " name="username">
 						<input type="password" class="mb0" id="password" placeholder="비밀번호 " name="password" >
 						<input type="hidden" id="token">
+						<input type="hidden" name="_csrf" value="${_csrf.token}">
+						<input type="hidden" name="_csrf_header" value="${_csrf.headerName}">
 						<input type="submit" id="loginBtn" value="로그인"/>
 					</form>
 					<p class="mb0">
