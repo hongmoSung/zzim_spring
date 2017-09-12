@@ -223,7 +223,6 @@
                 </div>
             </div>
         </section>
-
         <section>
             <div class="container">
                 <div class="row">
@@ -267,7 +266,7 @@
             </div>
             <!--end of container-->
         </section>
-
+		<div style="height:50px;"></div>
     </div>
     
     <div class="modal fade" id="myModal" role="dialog">
@@ -297,16 +296,8 @@
 	      
 	    </div>
   	</div>
-
-
-
 </body>
-
-
-
 </html>
-
-
 
 <%@include file="include/footer.jsp"%>
 

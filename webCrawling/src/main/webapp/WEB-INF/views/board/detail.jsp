@@ -3,11 +3,21 @@
 <%@include file="../include/header.jsp"%>
 
 <div class="main-container">
-	<section class="page-title page-title-4 bg-dark" style="height:150px;">
-		<div class="container">
+	<section class="image-bg cover overlay page-title page-title-4"  style="height:250px;">
+		<div class="background-image-holder">
+			<img alt="image" class="background-image" src="/resources/img/qna_back.jpg" style="height:250px;">
+		</div>
+		<div class="container">	
 			<div class="row">
 				<div class="col-md-6 col-md-offset-1">
-					<h3 class="uppercase mb0"> Q & A</h3>
+				<h2 class="uppercase mb0" style="font-weight:bolder;">Q & A</h2>
+				</div>
+				<div class="col-md-4 text-right">
+					<ol class="breadcrumb breadcrumb-2">
+						<li><a href="${pageContext.request.contextPath}/home">Home</a></li>
+						<li><a href="${pageContext.request.contextPath}/board/list">Q & A</a></li>
+						<li class="active">Q&A글 보기</li>
+					</ol>
 				</div>
 			</div>
 		</div>

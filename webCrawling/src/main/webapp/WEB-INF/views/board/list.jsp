@@ -16,11 +16,20 @@
 </style>
 <body>
 <div class="main-container">
-	<section class="page-title page-title-4 bg-dark" style="height:150px;">
-		<div class="container">
+	<section class="image-bg cover overlay page-title page-title-4"  style="height:250px;">
+		<div class="background-image-holder">
+			<img alt="image" class="background-image" src="/resources/img/qna_back.jpg" style="height:250px;">
+		</div>
+		<div class="container">	
 			<div class="row">
 				<div class="col-md-6 col-md-offset-1">
-				<h3 class="uppercase mb0">Q & A</h3>
+					<h2 class="uppercase mb0" style="font-weight:bolder;">Q & A</h2>
+				</div>
+				<div class="col-md-4 text-right">
+					<ol class="breadcrumb breadcrumb-2">
+						<li><a href="${pageContext.request.contextPath}/">Home</a></li>
+						<li class="active">Q & A</li>
+					</ol>
 				</div>
 			</div>
 		</div>
@@ -34,6 +43,18 @@
 			<div class="row">
 				<div class="col-md-10 col-md-offset-1">
 					<div class="post-snippet mb64" >
+						<div class="post-title" style="width:100%;" style="display:inline;">
+							<ul style="display:inline; width:15%; margin-left: 60px;">
+								<li style="display:inline;"><span style="font-weight:bold;">제목</span></li>
+							</ul>
+							<ul style="display:inline; width:15%; margin-left: 340px;">
+								<li style="display:inline;"><span style="font-weight:bold;">글쓴이</span></li>
+							</ul>
+							<ul style="display:inline; width:15%; margin-left: 240px;">
+								<li style="display:inline;"><span style="font-weight:bold;">등록일</span></li>
+							</ul>
+						</div>
+					<hr>
 					<c:forEach items="${list}" var="board">
 							<div class="post-title" style="width:100%;" style="display:inline;">
 <!-- 								<span class="label inline-block">조회수 &nbsp&nbsp${board.bHit}</span> -->
@@ -53,10 +74,10 @@
 									<c:otherwise>
 										<c:choose>
 											<c:when test="${board.isNotice == 1}">
-												<h4 class="inline-block" style="width:40%; display:inline;"><a href="${pageContext.request.contextPath}/board/detail?bNo=${board.bNo}&pageNo=${pageResult.pageNo}" style="cursor:pointer; color:black;"> &nbsp&nbsp ${board.bTitle}</a></h4>
+												<h4 class="inline-block" style="width:40%; display:inline;"><a href="${pageContext.request.contextPath}/board/detail?bNo=${board.bNo}&pageNo=${pageResult.pageNo}" style="cursor:pointer; color:black; font-size:30px;"> &nbsp&nbsp ${board.bTitle}</a></h4>
 											</c:when>
 											<c:otherwise>
-												<h4 class="inline-block" style="width:40%; display:inline; margin-left:30px;"><a href="${pageContext.request.contextPath}/board/detail?bNo=${board.bNo}&pageNo=${pageResult.pageNo}" style="cursor:pointer; color:black; font-weight:bolder; " >${board.bTitle}</a></h4>
+												<h4 class="inline-block" style="width:40%; display:inline; margin-left:30px;"><a href="${pageContext.request.contextPath}/board/detail?bNo=${board.bNo}&pageNo=${pageResult.pageNo}" style="cursor:pointer; color:black; font-weight:bolder; font-size:18px;" >${board.bTitle}</a></h4>
 											</c:otherwise>									
 										</c:choose>
 									</c:otherwise>

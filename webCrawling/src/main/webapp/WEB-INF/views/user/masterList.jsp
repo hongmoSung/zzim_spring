@@ -41,15 +41,24 @@
 </style>
 <body>
 <div class="main-container">
-   <section class="page-title page-title-4 bg-dark" style="height:150px;">
-      <div class="container">
-         <div class="row">
-            <div class="col-md-6 col-md-offset-1">
-               <h3 class="uppercase mb0">로그인 계정 관리</h3>
-            </div>
-         </div>
-      </div>
-   </section>
+	<section class="image-bg cover overlay page-title page-title-4"  style="height:250px;">
+		<div class="background-image-holder">
+			<img alt="image" class="background-image" src="/resources/img/marster_back.jpg" style="height:250px;">
+		</div>
+		<div class="container">	
+			<div class="row">
+				<div class="col-md-6 col-md-offset-1">
+				<h2 class="uppercase mb0" style="font-weight:bolder;">로그인 계정 관리</h2>
+				</div>
+				<div class="col-md-4 text-center" style="margin-left:25px;">
+					<ol class="breadcrumb breadcrumb-2">
+						<li><a href="${pageContext.request.contextPath}/">Home</a></li>
+						<li class="active">로그인 계정 관리</li>
+					</ol>
+				</div>
+			</div>
+		</div>
+	</section>
    <section>
    <!-- 리스트 -->
    <div class="container">
@@ -61,13 +70,13 @@
          </div>
          <div>
          	<span style="margin-left: 180px; font-weight:bold; font-size:17px;">사이트</span>
-        	<span style="margin-left: 140px; font-weight:bold; font-size:17px;">아이디</span>
-	        <a type="button" id="insertForm" class="btn btn-sm btn-filled" style="float:right; position:relative; right:138px;">등록</a>
-	        <hr>
+        	<span style="margin-left: 145px; font-weight:bolder; font-size:17px;">아이디</span>
+	        <a type="button" id="insertForm" class="btn btn-sm btn-filled" style="float:right; position:relative; right:138px; bottom:10px;">등록</a>
          </div>
          <div class="col-md-10 col-md-offset-1">
             <div class="post-snippet mb64">
 				<div class="input-with-label" style="width:100%; display:none;">
+					<hr>
            			<span class="select-option" style="display:inline; ">
               		 	<i class="ti-angle-down"></i>
                		 	<select id="websiteType"  style="width:20%; display:inline; margin-left:20px;">
@@ -86,7 +95,6 @@
               		<a type="button" name="masterCancel" class="btn btn-sm" style="float:right; margin-top:10px; margin-right:15px; padding: 0 10px; ">취소</a>
               		<a type="button" name="masterRegist" class="btn btn-sm" style="float:right; margin-top:10px; margin-right:5px; padding: 0 10px;">등록</a>
               		<br>
-              		<hr>
             	</div>
            		<span id="emptyComment"></span>
             	<div id="listTable"></div>
@@ -98,8 +106,9 @@
 </div>
 </body>
 			<script id="list-template" type="text/x-handlebars-template">
+					<hr>
 					{{#each .}}	
-						<div style="height:95px;">
+						<div style="height:70px;">
 							<ul class="post-meta text-center" style="width: 20%; margin-bottom:20px; margin-left:30px;">
 								<li id="first{{@index}}"style="" class="imgTag" >
 									<a id="imgTag{{@index}}" target="_blank">
@@ -238,9 +247,9 @@
    // 등록
    $("a[name='masterRegist']").on("click", function() {
 	   //등록 토큰
-	   $(document).ajaxSend(function(e, xhr, options) {
-         xhr.setRequestHeader(header, token);
-      });
+// 	   $(document).ajaxSend(function(e, xhr, options) {
+//          xhr.setRequestHeader(header, token);
+//       });
 	   
       var email = "${user.email}";
       var websiteType = $("#websiteType option:selected").text();
@@ -257,8 +266,8 @@
          $("#masterPassword").focus();
       }else{
     	  $.ajax({
-//  				url : "http://192.168.0.36:3003/checkEmail",
-				url : "/user/masterInsert",
+ 				url : "http://192.168.0.36:3003/checkEmail",
+// 				url : "/user/masterInsert",
 				type : "post",
 				data : {
 					email : email,
