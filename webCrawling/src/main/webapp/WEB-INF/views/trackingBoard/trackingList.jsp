@@ -93,8 +93,8 @@
 	<script   id="entry-template" type="text/x-handlebars-template">
         {{#each .}} 
        		 <li id="{{pNo}}" class="check{{pNo}}  " style="border: 1px solid; border-radius: 15px; margin-top: 10px; "  >
-                 <div class="title" data-pNo ="{{pNo}}" data-price="{{pLowest}}" style="width:100%">
-                     <table class=" cart ">
+                 <div class="title " data-pNo ="{{pNo}}" data-price="{{pLowest}}" style="width:100%">
+                     <table class=" cart " style="width:100%">
                              <tr>
                                  <th rowspan="2" class="text-center col-sm-2" >
                                          <img alt="Product" class="product-thumb" style="margin-bottom:-20px;" src="{{picUrl}}" />
@@ -105,10 +105,10 @@
 							 </tr>
 
                              <tr>
-									<td class="col-md-2">
+									<td class="col-md-4">
                                      	<span id="ic" style="font-size:1.2em"><i  class="fa fa-krw" aria-hidden="true"><span id="tooltip">희망가</span></i> : {{notifyPrice}}원</span>
                                  	</td>
-                                     <td >
+                                     <td class="col-md-4" >
                                          <span id="ic" style="font-size:1.2em"><i  class="fa fa-money" aria-hidden="true"><span id="tooltip">현재가</span></i> :  {{checkPrice pLowest rPLowest}}</span>
                                      </td>
 									 <td class="col-md-2" data-pNo="{{pNo}}">
@@ -127,11 +127,11 @@
                  <div class="content" ">
                  <hr >
                      
-                     <div id="chartdiv{{pNo}}"  class="col-sm-9 col-md-9 chartdiv">
+                     <div id="chartdiv{{pNo}}"  class="col-sm-8 col-md-8 chartdiv">
                       	차트    
                      </div>
                 
-                    <div class="col-sm-3 col-md-3 " data-pNo="{{pNo}}" style="text-align: right ; margin:10px 0px 0px 0px; background: #ececec; border-radius: 15px;">
+                    <div class="col-sm-3 col-md-3 " data-pNo="{{pNo}}" style="text-align: center ; margin:10px 0px 0px 35px; background: #ececec; border-radius: 15px;">
                          <br>
 							<table class="table text-center">
 								<thead>
@@ -157,12 +157,12 @@
 							</table>
 							
                         
-                         
                          <i  class="fa fa-krw" aria-hidden="true"></i><input id="notify{{pNo}}" class="mb10 " type="text" placeholder="{{notifyPrice}}원" style="margin-bottom: 8px;height: 30px;text-align: right;padding-right: 10px;width: auto;">
                          <br>
                          <a id="update" data-pNo="{{pNo}}" class="btn btn-md btn-rounded" style=" margin-right: 0px; ">희망가 수정하기</a>
 							<br>
                          <a id="delete" data-pNo="{{pNo}}" class="btn btn-md btn-filled" style=" background: red; border: none;">삭제하기</a>
+                         
                      </div>
                  </div>
              </li>
@@ -204,7 +204,7 @@ $("body").on( 'click', '.accordion li .title' , function(){
 	  var min = 0;
 	  
 	 for(var i = 0 ; i < result.length ; i++){
-	  console.log("result1111  "+result[i].currPrice);
+// 	  console.log("result1111  "+result[i].currPrice);
 		// currPrice 배열넣기 
 		 priceArr.push(result[i].acurrPrice); 
 		 average +=result[i].currPrice;
@@ -380,10 +380,8 @@ $("body").on("click","#update",function(){
 				data:{'pNo':pNo,
 					notifyPrice:$("#notify"+pNo).val()}
 			}).done(function(result){
-				if(result == 1){
-					alert("수정됨")
+					alert("수정되었습니다.")
 					location.href = getContextPath()+"/trackingList"
-				}
 			})
 		}// if 끝
 		else{
