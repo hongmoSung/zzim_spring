@@ -71,7 +71,7 @@
 						</div><br>
 					<h3 style="font-weight: bolder;">Uncheck List</h3>
 						<div class="col-sm-12" >
-							<ul id="inCorrectList" class="accordion accordion " style="box-shadow: 5px 5px 10px 2px lightgrey" > </ul>
+							<ul id="inCorrectList" class="accordion  "  > </ul>
 						</div>
 				</div>
 			</div>
@@ -93,7 +93,7 @@
 	<script   id="entry-template" type="text/x-handlebars-template">
         {{#each .}} 
        		 <li id="{{pNo}}" class="check{{pNo}}  " style="border: 1px solid; border-radius: 15px; margin-top: 10px; "  >
-                 <div class="title" data-pNo ="{{pNo}}" data-price="{{pLowest}}">
+                 <div class="title" data-pNo ="{{pNo}}" data-price="{{pLowest}}" style="width:100%">
                      <table class=" cart ">
                              <tr>
                                  <th rowspan="2" class="text-center col-sm-2" >
@@ -125,7 +125,7 @@
                  </div>
 
                  <div class="content" ">
-                 <hr style="width:95%;" class="center">
+                 <hr >
                      
                      <div id="chartdiv{{pNo}}"  class="col-sm-9 col-md-9 chartdiv">
                       	차트    
@@ -158,7 +158,7 @@
 							
                         
                          
-                         <input id="notify{{pNo}}" class="mb10 " type="text" placeholder="{{notifyPrice}}원" style="margin-bottom: 8px;height: 30px;text-align: right;padding-right: 10px;width: auto;">
+                         <i  class="fa fa-krw" aria-hidden="true"></i><input id="notify{{pNo}}" class="mb10 " type="text" placeholder="{{notifyPrice}}원" style="margin-bottom: 8px;height: 30px;text-align: right;padding-right: 10px;width: auto;">
                          <br>
                          <a id="update" data-pNo="{{pNo}}" class="btn btn-md btn-rounded" style=" margin-right: 0px; ">희망가 수정하기</a>
 							<br>
@@ -336,7 +336,7 @@ function handle(result,target){
  			sign = false;
  		}
  		if(sign){
- 			$('#sList').html("<h3>등록된 상품이 없습니다.</h3>")
+ 			$('#sList').html("<h2 style='text-align: center;margin-top: 80px;'>등록된 상품이 없습니다.</h2>")
  		}
  		if(result.correctList == ''){
  			$('#correctList').html("<h4>만족 된 상품이 없습니다.</h4>")
