@@ -92,55 +92,56 @@
 	<!--         여기서  부터 스크립트 시작  -->
 	<script   id="entry-template" type="text/x-handlebars-template">
         {{#each .}} 
-       		 <li id="{{pNo}}" class="check{{pNo}}  " style="border: 1px solid; border-radius: 15px; margin-top: 10px; "  >
-                 <div class="title " data-pNo ="{{pNo}}" data-price="{{pLowest}}" style="width:100%">
+       		 <li id="{{pNo}}" class="check{{pNo}} col-sm-12 col-md-12 " style="border: 1px solid; border-radius: 15px; margin-top: 10px; "  >
+                 <div class="title col-sm-12 col-md-12" data-pNo ="{{pNo}}" data-price="{{pLowest}}" style="width:100%">
                      <table class=" cart " style="width:100%">
                              <tr>
-                                 <th rowspan="2" class="text-center col-sm-2" >
+                                 <th rowspan="2" class="text-center col-md-2" >
                                          <img alt="Product" class="product-thumb" style="margin-bottom:-20px;" src="{{picUrl}}" />
                                  </th>
-                                 <th colspan="3"  class="col-sm-10">
+                                 <th colspan="3"  class="col-md-10">
                                      <h5 style="margin-top:20px; ; font-size: 1.8em; ">{{pName}}</h5>
                                  </th>
 							 </tr>
 
                              <tr>
-									<td class="col-md-4">
+									<td class="col-md-3">
                                      	<span id="ic" style="font-size:1.2em"><i  class="fa fa-krw" aria-hidden="true"><span id="tooltip">희망가</span></i> : {{notifyPrice}}원</span>
                                  	</td>
-                                     <td class="col-md-4" >
+                                     <td class="col-md-3" >
                                          <span id="ic" style="font-size:1.2em"><i  class="fa fa-money" aria-hidden="true"><span id="tooltip">현재가</span></i> :  {{checkPrice pLowest rPLowest}}</span>
                                      </td>
-									 <td class="col-md-2" data-pNo="{{pNo}}">
-										
+									 <td class="col-md-4" data-pNo="{{pNo}}">
+										<div style="text-align: center ;">
                                      	  <a class="btn btn-dm btn-filled" style="margin-bottom:-10px; display:{{checkDisplay pLowest}}"  href="{{pUrl}}" target="_blank" >구매하기</a>
                                         
 										{{#nonPrice pLowest }}
                                      	  <a id="delete" data-pNo="{{pNo}}" class="btn btn-md btn-filled" style="margin-bottom:-10px; background: red; border: none;">삭제하기11</a>
                                         {{/nonPrice}}
                                  	</td> 
+										</div>
                                      
                              </tr>
                      </table>
                  </div>
 
-                 <div class="content" ">
+                 <div class="content col-sm-12 col-md-12" >
                  <hr >
                      
                      <div id="chartdiv{{pNo}}"  class="col-sm-8 col-md-8 chartdiv">
                       	차트    
                      </div>
                 
-                    <div class="col-sm-3 col-md-3 " data-pNo="{{pNo}}" style="text-align: center ; margin:10px 0px 0px 35px; background: #ececec; border-radius: 15px;">
+                    <div class="col-sm-4 col-md-4 " data-pNo="{{pNo}}" style="text-align: center ; margin:10px 0px 0px 0px; background: #ececec; ">
                          <br>
-							<table class="table text-center">
+							<table class="table" style="text-align: center ;">
 								<thead>
 									<tr>
-										<th>유형</th>
-										<th>가격</th>
+										<th style="text-align: center ;">유형</th>
+										<th style="text-align: center ;">가격</th>
 									</tr>
 								</thead>
-								<tbody style="text-align:left;">
+								<tbody >
 									<tr>
 										<td>최고가</td>
 										<td><li style="font-size:0.8em;" class=" ic" id="max{{pNo}}"></li></td>
@@ -299,7 +300,7 @@ function handle(result,target){
 	});
 	//헬퍼 pLowestrk 0일때
 	Handlebars.registerHelper("checkDisplay", function(price) {
-		return price > 0 ?"block":"none";
+		return price > 0 ?"":"none";
 	});
 	//헬퍼 pLowestrk 0일때
 	Handlebars.registerHelper("checkPrice", function(price,  rprice) {
