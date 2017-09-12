@@ -33,8 +33,6 @@
 				
 			</div>
 		</div>
-		<button id="asdasd">asdasd</button>
-		
 		
 	</section>
 </div>
