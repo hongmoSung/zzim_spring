@@ -33,7 +33,6 @@ public class HomeController {
 		return "redirect:/";
 	}
 	
-	
 
 	@RequestMapping("/firebase-messaging-sw.js")
 	@ResponseBody

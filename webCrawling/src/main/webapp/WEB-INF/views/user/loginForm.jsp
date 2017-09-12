@@ -61,25 +61,7 @@
 				}
 			});
 			
-			function getToken(){
-				$.ajax({
-					url : "/user/getToken"
-				}).done(function(result){
-					var token = result.token;
-					var parameterName = result.parameterName;
-					var headerName = result.headerName;
-					console.log(token);
-					console.log(parameterName);
-					$("#token").attr("name",parameterName);
-					$("#token").attr("value",token);
-				})
-			};
-		
-			getToken();
-			
-			
 		});
-		
 		
 		
 	</script>

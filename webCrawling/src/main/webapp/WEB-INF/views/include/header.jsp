@@ -138,7 +138,7 @@
                 </div>
                 <form action="${pageContext.request.contextPath }/logout" method="post" id="logoutForm">
 					<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
-				</form>
+				</form> 
             </div>
 
         </div>
