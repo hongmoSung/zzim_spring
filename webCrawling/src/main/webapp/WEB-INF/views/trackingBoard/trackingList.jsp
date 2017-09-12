@@ -64,13 +64,12 @@
 		<section style="margin-top: -50px;" >
 			<div class="container">
 				<div id="sList" class="row">
-					<h3 style="font-weight: bolder;">Check List</h3>
+					<h3 style="font-weight: bolder;">Conditions Met</h3>
 						<div class="col-sm-12" " >
 <!-- 							style="box-shadow: 5px 5px 10px 2px lightgrey;" -->
 							<ul id="correctList" class="accordion"  > </ul>
 						</div><br>
-					<h3 style="font-weight: bolder;">Uncheck List</h3>
-						<div class="col-sm-12" >
+						<div class="col-sm-12" style="margin-top:60px;" >
 							<ul id="inCorrectList" class="accordion  "  > </ul>
 						</div>
 				</div>
@@ -99,7 +98,7 @@
                                  <th rowspan="2" class="text-center col-md-2" >
                                          <img alt="Product" class="product-thumb" style="margin-bottom:-20px;" src="{{picUrl}}" />
                                  </th>
-                                 <th colspan="3"  class="col-md-10">
+                                 <th colspan="3"  class="col-md-6">
                                      <h5 style="margin-top:20px; ; font-size: 1.8em; ">{{pName}}</h5>
                                  </th>
 							 </tr>
