@@ -127,8 +127,8 @@
                 	<ul class="menu">
                		<sec:authorize access="hasRole('ROLE_USER')"> 
 				<%-- <sec:authentication property="name"/> --%>
-			   			<li><a href="javascript:logout()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
 			    		<li><a href="${pageContext.request.contextPath}/user/masterList?email=${user.email}"><span class="glyphicon glyphicon-user"></span>Account</a></li>
+			   			<li><a href="javascript:logout()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
 					</sec:authorize>	   
 					<sec:authorize access="!hasRole('ROLE_USER')">
 			    		<li><a href="${pageContext.request.contextPath}/user/joinForm"><span class="glyphicon glyphicon-user"></span> Join</a></li>
