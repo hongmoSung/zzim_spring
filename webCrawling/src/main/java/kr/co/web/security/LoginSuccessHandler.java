@@ -66,6 +66,10 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler{
 		user.setEmail(authentication.getName());
 		session.setAttribute("user", user);
 		
+		System.out.println("시큐리티 들어옴. 로그인 처리");
+		UserVO test = (UserVO)session.getAttribute("user");
+		System.out.println(test.getEmail());
+	/////////////////////////////////////////////////
 		clearAuthenticationAttribute(request);
 		
 		int intRedirectStrategy = decideRedirectStrategy(request, response);
@@ -109,7 +113,6 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler{
 	}
 	
 	private void useSessionUrl(HttpServletRequest request, HttpServletResponse response) throws IOException{
-		System.out.println("왜 안되");
 		SavedRequest savedRequest = requestCache.getRequest(request, response);
 		String targetUrl = savedRequest.getRedirectUrl();
 		System.out.println(targetUrl);
@@ -123,6 +126,8 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler{
 	
 	private void useDefaultUrl(HttpServletRequest request, HttpServletResponse response) throws IOException{
 		redirectStrategy.sendRedirect(request, response, defaultUrl);
+//		redirectStrategy.sendRedirect(request, response, "index.html");
+//		response.sendRedirect("index.html");
 	}
 	
 	private int decideRedirectStrategy(HttpServletRequest request, HttpServletResponse response) {

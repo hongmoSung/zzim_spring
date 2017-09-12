@@ -17,9 +17,17 @@ public class MobileController {
 	
 	@ResponseBody
 	@RequestMapping("/saveToken")
-	public void saveToken( MobileVO vo) {
-		//System.out.println("컨트롤러 들어옴 ::: \n" + vo.getEmail() + "\n" + vo.getToken());
+	public void saveToken(MobileVO vo) {
+		System.out.println("토큰저장 컨트롤러 들어옴 ::: \n" + vo.getEmail() + "\n" + vo.getToken());
 		service.saveToken(vo);
+	}
+
+	@ResponseBody
+	@RequestMapping("/login")
+	public String login(MobileVO vo) {
+		System.out.println("로그인 컨트롤러 들어옴 ::: \n"  + vo.getEmail() + "\n" + vo.getPassword());
+//		service.saveToken(vo);
+		return "success";
 	}
 	
 	
