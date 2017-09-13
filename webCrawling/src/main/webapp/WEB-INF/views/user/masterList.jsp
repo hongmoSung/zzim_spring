@@ -96,7 +96,8 @@
               		<a type="button" name="masterRegist" class="btn btn-sm" style="float:right; margin-top:10px; margin-right:5px; padding: 0 10px;">등록</a>
               		<br>
             	</div>
-           		<span id="emptyComment"></span>
+           		<div id="emptyComment" style="text-align:center; font-weight:bold; font-size: 15px;"></div><br>
+           		
             	<div id="listTable"></div>
             </div>
          </div>
@@ -124,13 +125,13 @@
 							</ul>
 							<ul class="post-meta" style="float:right; margin-top:20px;">
 								<li id="updateGo{{@index}}">
-									<a name="findId{{@index}}" target="_blank" style="position: relative; bottom:10px; padding:0 10px; text-decoration:underline;" >아이디 찾기</a>
-									<a name="findPw{{@index}}" target="_blank" style="position: relative; bottom:10px; padding:0 10px; margin-right:10px; text-decoration:underline;" >비밀번호 찾기</a>
+									<a name="findId{{@index}}" target="_blank" style="position: relative; bottom:10px; padding:0 10px; text-decoration:underline; color: black;" >아이디 찾기</a>
+									<a name="findPw{{@index}}" target="_blank" style="position: relative; bottom:10px; padding:0 10px; margin-right:10px; text-decoration:underline; color: black;" >비밀번호 찾기</a>
 									<a type="button" onclick="deleteSubmit({{@index}});" class="btn btn-filled btn-sm" style="background-color:#F34242; border-color:#F34242;">삭제</a>
 								</li>
 							</ul>
 						</div>
-						<hr>
+					<hr>
 					{{/each}}
 			</script>
 <script>
@@ -160,7 +161,7 @@
 		var html = template(result);
 		$("#listTable").html(html);
 		if(result.length == 0){
-			$("#emptyComment").html("&#187  관리중인 계정이 없습니다.");
+			$("#emptyComment").html("<hr> &#187  관리중인 계정이 없습니다.");
 		}else{
 			$("#deleteChkBtn").show();
 		}
