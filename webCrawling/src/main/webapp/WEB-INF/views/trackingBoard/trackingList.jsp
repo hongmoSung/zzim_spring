@@ -51,12 +51,21 @@
 <body>
 
 	<div class="main-container" style="margin-bottom:50px;">
-		<section class="scroll-assist page-title page-title-4 bg-dark">
-
-			<div class="container">
+		<section class="image-bg cover overlay page-title page-title-4"  style="height:250px;">
+			<div class="background-image-holder">
+	<!-- 			<img alt="image" class="background-image" src="/resources/img/trkList_back.jpg" style="height:250px;"> -->
+				<img alt="image" class="background-image" src="/resources/img/trkList_test2.png" style="height:250px;">
+			</div>
+			<div class="container">	
 				<div class="row">
 					<div class="col-md-6 col-md-offset-1">
-						<h3 class="uppercase mb0">Tracking List</h3>
+						<h2 class="uppercase mb0" style="font-weight:bolder;">Tracking List</h2>
+					</div>
+					<div class="col-md-4 text-right">
+						<ol class="breadcrumb breadcrumb-2">
+							<li><a href="${pageContext.request.contextPath}/">Home</a></li>
+							<li class="active">Tracking List</li>
+						</ol>
 					</div>
 				</div>
 			</div>

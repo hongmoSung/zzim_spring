@@ -50,7 +50,7 @@
 				<div class="col-md-6 col-md-offset-1">
 				<h2 class="uppercase mb0" style="font-weight:bolder;">로그인 계정 관리</h2>
 				</div>
-				<div class="col-md-4 text-center" style="margin-left:25px;">
+				<div class="col-md-4 text-right" style="margin-left:25px;">
 					<ol class="breadcrumb breadcrumb-2">
 						<li><a href="${pageContext.request.contextPath}/">Home</a></li>
 						<li class="active">로그인 계정 관리</li>

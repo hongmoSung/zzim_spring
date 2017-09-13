@@ -5,16 +5,20 @@
 <body class="scroll-assist">
 
 	<div class="main-container">
-		<section class="page-title page-title-4 bg-dark">
-			<div class="container">
+		<section class="image-bg cover overlay page-title page-title-4"  style="height:250px;">
+			<div class="background-image-holder">
+	<!-- 			<img alt="image" class="background-image" src="/resources/img/trkList_back.jpg" style="height:250px;"> -->
+				<img alt="image" class="background-image" src="/resources/img/trkList_test.png" style="height:250px;">
+			</div>
+			<div class="container">	
 				<div class="row">
-					<div class="col-md-6">
-						<h3 class="uppercase mb0">메타 장바구니</h3>
+					<div class="col-md-6 col-md-offset-1">
+						<h2 class="uppercase mb0" style="font-weight:bolder;">Meta Cart</h2>
 					</div>
-					<div class="col-md-6 text-right">
+					<div class="col-md-4 text-right">
 						<ol class="breadcrumb breadcrumb-2">
-							<li><a href="index.html">Home</a></li>
-							<li class="active">Meta cart</li>
+							<li><a href="${pageContext.request.contextPath}/">Home</a></li>
+							<li class="active">Meta Cart</li>
 						</ol>
 					</div>
 				</div>
