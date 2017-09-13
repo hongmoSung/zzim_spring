@@ -105,10 +105,10 @@
 
                              <tr>
 									<td class="col-md-3">
-                                     	<span id="ic" style="font-size:1.2em"><i  class="fa fa-krw" aria-hidden="true"><span id="tooltip">희망가</span></i> : {{notifyPrice}}원</span>
+                                     	<span id="ic" style="font-size:1.2em"><i  class="fa fa-cart-arrow-down" aria-hidden="true"><span id="tooltip">희망가</span></i> : {{notifyPrice}}원</span>
                                  	</td>
                                      <td class="col-md-3" >
-                                         <span id="ic" style="font-size:1.2em"><i  class="fa fa-money" aria-hidden="true"><span id="tooltip">현재가</span></i> :  {{checkPrice pLowest rPLowest}}</span>
+                                         <span id="ic" style="font-size:1.2em"><i  class="fa fa-krw" aria-hidden="true"><span id="tooltip">현재가</span></i> :  {{checkPrice pLowest rPLowest}}</span>
                                      </td>
 									 <td class="col-md-4" data-pNo="{{pNo}}">
 										<div style="text-align: center ;">
@@ -157,7 +157,7 @@
 							</table>
 							
                         
-                         <i  class="fa fa-krw" aria-hidden="true"></i><input id="notify{{pNo}}" class="mb10 " type="text" placeholder="{{notifyPrice}}원" style="margin-bottom: 8px;height: 30px;text-align: right;padding-right: 10px;width: auto;">
+                         <input id="notify{{pNo}}" class="mb10 " type="text" placeholder="{{notifyPrice}}원" style="margin-bottom: 8px;height: 30px;text-align: right;padding-right: 10px;width: auto;">
                          <br>
                          <a id="update" data-pNo="{{pNo}}" class="btn btn-md btn-rounded" style=" margin-right: 0px; ">희망가 수정하기</a>
 							<br>
@@ -374,15 +374,21 @@ function handle(result,target){
 // 수정 클릭 
 $("body").on("click","#update",function(){
 	var pNo = $(this).attr('data-pNo');
-		if($("#notify"+pNo).val() != '' ){
-			$.ajax({
-				url:getContextPath()+"/priceUpdate",
-				data:{'pNo':pNo,
-					notifyPrice:$("#notify"+pNo).val()}
-			}).done(function(result){
-					alert("수정되었습니다.")
-					location.href = getContextPath()+"/trackingList"
-			})
+	var update = $("#notify"+pNo).val();
+		if(update != '' ){
+			if(isNaN(update)){
+				alert("숫자로 입력해주세요")
+			}else{
+				$.ajax({
+					url:getContextPath()+"/priceUpdate",
+					data:{'pNo':pNo,
+						notifyPrice:update}
+				}).done(function(result){
+						alert("수정되었습니다.")
+						location.href = getContextPath()+"/trackingList"
+				})
+			}
+			
 		}// if 끝
 		else{
 			alert("수정 값을 입력해주세요");
