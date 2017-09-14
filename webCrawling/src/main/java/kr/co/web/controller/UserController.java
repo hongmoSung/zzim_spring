@@ -2,18 +2,13 @@ package kr.co.web.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.web.csrf.CsrfToken;
-import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import kr.co.web.vo.LoginDTO;
 import kr.co.web.service.UserService;
 import kr.co.web.vo.UserMasterVO;
@@ -25,7 +20,6 @@ public class UserController {
 
 	@Autowired
 	private UserService service;
-	
 	
 	@RequestMapping("/joinForm")
 	public void joinForm() {

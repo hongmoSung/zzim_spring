@@ -24,8 +24,8 @@
 						<input type="text" class="mb0" id="email" placeholder="이메일 " name="username">
 						<input type="password" class="mb0" id="password" placeholder="비밀번호 " name="password" >
 						<input type="hidden" id="token">
-						<input type="hidden" name="_csrf" value="${_csrf.token}">
-						<input type="hidden" name="_csrf_header" value="${_csrf.headerName}">
+						<input type="hidden" id="_csrf_token" name="_csrf" value="${_csrf.token}">
+						<input type="hidden" id="_csrf_token_header" name="_csrf_header" value="${_csrf.headerName}">
 						<input type="submit" id="loginBtn" value="로그인"/>
 					</form>
 					<p class="mb0">
@@ -35,34 +35,53 @@
 				
 			</div>
 		</div>
-		
+		<button id="a">aaaa</button>
 	</section>
 </div>
 </body>
 	<script>
-		$(document).ready(function(){
-			var error = "${param.error}";
-			console.log(error);
-			if (error == 1){
-				alert("아이디와 패스워드를 확인해주세요.");
-			}
-			$("#loginBtn").on("click",function(){
-				if($("#email").val()== ""){
-					alert("로그인 이메일을 입력해주세요");
-					$("#email").focus();
-					return false;
-				}else if($("#password").val()== ""){
-					alert("패스워드를 입력해주세요");
-					$("#password").focus();
-					return false;
-				}else{
-					$("#loginForm").submit();
-					
-				}
-			});
-			
+
+	
+		$(document).ajaxSend(function(e, xhr, options) {
+			xhr.setRequestHeader($("#_csrf_token_header").val(), $("#_csrf_token").val());
 		});
 		
 		
+		$(document).ready(function() {
+			var error = "${param.error}";
+			console.log(error);
+			if (error == 1) {
+				alert("아이디와 패스워드를 확인해주세요.");
+			}
+			$("#loginBtn").on("click", function() {
+				if ($("#email").val() == "") {
+					alert("로그인 이메일을 입력해주세요");
+					$("#email").focus();
+					return false;
+				} else if ($("#password").val() == "") {
+					alert("패스워드를 입력해주세요");
+					$("#password").focus();
+					return false;
+				} else {
+					$("#loginForm").submit();
+				}
+			});
+
+			$("#a").on("click", function() {
+				$.ajax({
+					url : "/login",
+					type : "post",
+					data : {
+						"username" : $("#email").val(),
+						"password" : $("#password").val(),
+						"mobile" : "true"
+					}
+
+				}).done(function(result) {
+					console.log(result);
+				});
+			});
+
+		});
 	</script>
 <%@ include file="../include/footer.jsp"%>

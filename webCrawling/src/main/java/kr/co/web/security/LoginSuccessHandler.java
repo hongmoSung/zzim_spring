@@ -2,6 +2,7 @@ package kr.co.web.security;
 
 
 import java.io.IOException;
+import java.io.OutputStream;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -66,7 +67,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler{
 		user.setEmail(authentication.getName());
 		session.setAttribute("user", user);
 		
-		System.out.println("시큐리티 들어옴. 로그인 처리");
+		System.out.println("�떆�걧由ы떚 �뱾�뼱�샂. 濡쒓렇�씤 泥섎━");
 		UserVO test = (UserVO)session.getAttribute("user");
 		System.out.println(test.getEmail());
 	/////////////////////////////////////////////////
@@ -116,7 +117,12 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler{
 		SavedRequest savedRequest = requestCache.getRequest(request, response);
 		String targetUrl = savedRequest.getRedirectUrl();
 		System.out.println(targetUrl);
-		redirectStrategy.sendRedirect(request, response, targetUrl);
+		
+		if(request.getParameter("mobile") != null) {
+			redirectStrategy.sendRedirect(request, response, "/loginResponse");
+		}else {
+			redirectStrategy.sendRedirect(request, response, targetUrl);
+		}
 	}
 	
 	private void userRefererUrl(HttpServletRequest request, HttpServletResponse response) throws IOException{
@@ -125,9 +131,13 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler{
 	}
 	
 	private void useDefaultUrl(HttpServletRequest request, HttpServletResponse response) throws IOException{
-		redirectStrategy.sendRedirect(request, response, defaultUrl);
-//		redirectStrategy.sendRedirect(request, response, "index.html");
-//		response.sendRedirect("index.html");
+		if(request.getParameter("mobile") != null) {
+			redirectStrategy.sendRedirect(request, response, "/loginResponse");
+		}else {
+			redirectStrategy.sendRedirect(request, response, defaultUrl);
+		}
+		
+		
 	}
 	
 	private int decideRedirectStrategy(HttpServletRequest request, HttpServletResponse response) {

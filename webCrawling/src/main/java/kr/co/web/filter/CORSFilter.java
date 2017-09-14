@@ -24,8 +24,6 @@ public class CORSFilter implements Filter {
 		response.setHeader("Access-Control-Expose-Headers", "Location");
 
 		chain.doFilter(req, res);
-		
-		System.out.println("filter µé¾î¿È...");
 
 	}
 

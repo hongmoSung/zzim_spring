@@ -33,6 +33,12 @@ public class HomeController {
 		return "redirect:/";
 	}
 	
+	@ResponseBody
+	@RequestMapping("/loginResponse")
+	public String loginAjax() {
+		return "true";
+	}
+	
 
 	@RequestMapping("/firebase-messaging-sw.js")
 	@ResponseBody

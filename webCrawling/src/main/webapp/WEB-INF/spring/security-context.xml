@@ -24,7 +24,7 @@
 		/>
 		
 		<logout invalidate-session="true" logout-url="/logout" logout-success-url="/user/loginForm?logout"/>
-		<csrf/>
+		<!-- <csrf/> -->
 	</http>
 	
 	<beans:bean id="LoginSuccessHandler" class="kr.co.web.security.LoginSuccessHandler">
