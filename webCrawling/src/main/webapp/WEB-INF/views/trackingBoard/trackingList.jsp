@@ -179,6 +179,97 @@
 </script>
 
 	<script type="text/javascript">
+	
+	function showChart(pNo) {
+		  $.ajax({
+			  url : getContextPath()+"/priceHistory",
+			  data : {"pNo":pNo}
+		  }).done(function(result){
+			  console.dir("result  "+result[0].currPrice);
+			  var priceArr = []
+			  var average = 0;
+			  var max = 0;
+			  var min = 0;
+			  
+			 for(var i = 0 ; i < result.length ; i++){
+//		 	  console.log("result1111  "+result[i].currPrice);
+				// currPrice 배열넣기 
+				 priceArr.push(result[i].acurrPrice); 
+				 average +=result[i].currPrice;
+				  
+//		 		 console.log("result[i].currDate:::",result[i].currDate); 
+				// 날자값 변환
+				 var date = new Date(result[i].currDate);
+				 var timeStr = date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate() + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+//		 		 console.log(timeStr); 
+				 result[i].currDate = timeStr;
+			 }
+		 	// 배열 오름차순 정열
+			 priceArr.sort(function(a,b){return a-b;})
+			// max, min 값 넣기 		 
+			 max = priceArr[priceArr.length-1]
+			 min = priceArr[0]
+
+			//최소값 최대값 넣기 
+			if(result != ''){
+				$("#max"+pNo).html('  '+max+'원');
+				$("#min"+pNo).html('  '+min+'원');
+				$("#aver"+pNo).html('  '+Math.round(average / result.length).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+'원');
+			}else{
+				$("#max"+pNo).html('  - 원');
+				$("#min"+pNo).html('  - 원');
+				$("#aver"+pNo).html('  - 원');
+			}
+			 
+			//차트 만들기 
+			 var chart = AmCharts.makeChart("chartdiv"+pNo, {
+				    "theme": "light",
+				    "type": "serial",
+				    "marginRight": 80,
+				    "autoMarginOffset": 20,
+				    "mouseWheelZoomEnabled":true,
+				    "marginTop":20,
+				    "dataProvider": result,
+				    "valueAxes": [{
+				        "id": "v1",
+				        "axisAlpha": 0.1
+				    }],
+				    "graphs": [{
+				        "useNegativeColorIfDown": true,
+				        "balloonText": "[[category]]<br><b>value: [[value]]</b>",
+				        "bullet": "round",
+				        "bulletBorderAlpha": 1,
+				        "bulletBorderColor": "#FFFFFF",
+				        "hideBulletsCount": 50,
+				        "lineThickness": 2,
+				        "lineColor": "#fdd400",
+				        "negativeLineColor": "#67b7dc",
+				        "valueField": "currPrice"
+				    }],
+				    "chartScrollbar": {
+				        "scrollbarHeight": 5,
+				        "backgroundAlpha": 0.1,
+				        "backgroundColor": "#868686",
+				        "selectedBackgroundColor": "#67b7dc",
+				        "selectedBackgroundAlpha": 1
+				    },
+				    "chartCursor": {
+				        "valueLineEnabled": true,
+				        "valueLineBalloonEnabled": true
+				    },
+				    "categoryField": "currDate",
+				    "categoryAxis": {
+				        "parseDates": true,
+				        "axisAlpha": 0,
+				        "minHorizontalGap": 60
+				    },
+				    "export": {
+				        "enabled": false
+				    }
+			 });
+			 
+		  });
+	}
 // 더보기 + 차트리스트 가져오기 아코디언
 $("body").on( 'click', '.accordion li .title' , function(){
 
@@ -202,7 +293,9 @@ $("body").on( 'click', '.accordion li .title' , function(){
   var pNo = $(this).attr("data-pNo");
 //   console.log(pNo);
   
-  $.ajax({
+  
+  showChart(pNo);
+/*   $.ajax({
 	  url : getContextPath()+"/priceHistory",
 	  data : {"pNo":pNo}
   }).done(function(result){
@@ -289,7 +382,7 @@ $("body").on( 'click', '.accordion li .title' , function(){
 		    }
 	 });
 	 
-  });
+  }); */
   
 });
 // 핸들바 함수 
@@ -350,6 +443,22 @@ function handle(result,target){
  		if(result.correctList == ''){
  			$('#correctList').html("<h4>만족 된 상품이 없습니다.</h4>")
 		}
+ 		
+ 		
+ 		
+ 		
+ 		var addr = document.location.href;
+ 		var sharpIndex = addr.indexOf("#");
+ 		
+ 		if(sharpIndex != -1){
+ 			var pNo = addr.substring(sharpIndex + 1)
+ 			console.log(pNo);
+	 		location.href = '#'+pNo;
+
+ 			$('#'+pNo).addClass("active");
+ 			//$(pNo).trigger("click");
+ 			showChart(pNo);
+ 		}
  	}) 
 
 //스크롤 이벤트 -------------------------------------------------------------------------------------------------------
