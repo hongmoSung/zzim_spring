@@ -350,7 +350,7 @@ function handle(result,target){
  		if(sign){
  			$('#sList').html("<h2 style='text-align: center;margin-top: 80px;'>등록된 상품이 없습니다.</h2>")
  		}
- 		if(result.correctList == ''){
+ 		if(result.correctList == '' && result.inCorrectList == ''){
  			$('#correctList').html("<h4>만족 된 상품이 없습니다.</h4>")
 		}
  		
