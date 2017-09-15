@@ -92,7 +92,7 @@
 									<li style="display:inline; width:200px;"><i class="ti-tag"></i><span>&nbsp<fmt:formatDate value="${board.bRegDate}" pattern="yy/MM/dd" /></span></li>
 								</ul>
 								<ul style="display:inline; float:right; width:30%; position:relative; top:5px;">
-									<li style="display:inline;  width:200px;""><i class="ti-user"></i><span style="width:100px;">&nbsp ${board.email}</span></li>
+									<li style="display:inline;  width:200px;"><i class="ti-user"></i><span style="width:100px;">&nbsp ${board.email}</span></li>
 								</ul>
 							</div>
 							<hr>

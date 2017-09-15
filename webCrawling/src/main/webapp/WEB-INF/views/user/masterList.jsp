@@ -248,9 +248,9 @@
    // 등록
    $("a[name='masterRegist']").on("click", function() {
 	   //등록 토큰
-// 	   $(document).ajaxSend(function(e, xhr, options) {
-//          xhr.setRequestHeader(header, token);
-//       });
+	   $(document).ajaxSend(function(e, xhr, options) {
+         xhr.setRequestHeader(header, token);
+      });
 	   
       var email = "${user.email}";
       var websiteType = $("#websiteType option:selected").text();
@@ -267,8 +267,8 @@
          $("#masterPassword").focus();
       }else{
     	  $.ajax({
- 				url : "http://192.168.0.36:3003/checkEmail",
-// 				url : "/user/masterInsert",
+//  				url : "http://192.168.0.36:3003/checkEmail",
+				url : "/user/masterInsert",
 				type : "post",
 				data : {
 					email : email,

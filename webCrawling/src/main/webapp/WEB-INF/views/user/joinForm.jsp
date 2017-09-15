@@ -13,27 +13,28 @@
 <section>
 <div class="container">
 	<div class="row">
-		<div class="col-sm-6 col-sm-offset-3">
+		<div class="col-md-4 col-md-offset-4">
 			<div class="feature bordered text-center">
-				<h2 class="uppercase">SIGN UP</h2>
+				<h2 class="uppercase">JOIN</h2>
 				<hr>
 				<input type="hidden" id="_csrf" value="${_csrf.token}">
 				<input type="hidden" id="_csrf_header" value="${_csrf.headerName}">
-				<input type="text" id="email" placeholder="이메일" name="email" style="width:35%;"> @  
+				<input type="text" id="email" placeholder="이메일" name="email" style="width:40%;"> @  
 				<span class="select-option">
 					<i class="ti-angle-down"></i>
-					<select id="emailType" onchange="innerSelect(this.value);" style="width:40%;" >
+					<select id="emailType" onchange="innerSelect(this.value);" style="width:50%;" >
 						<option value="empty">선택</option>
 						<option value="naver">naver.com</option>
 						<option value="daum">daum.net</option>
+						<option value="gmail">gmail.com</option>
 						<option value="etc">직접입력</option>
 					</select> 
 				</span>
-				<input type="text" id="insertEmail" style="display:none; width:80%;"></input>
+				<input type="text" id="insertEmail" style="display:none; width:90%;"></input>
 				<br>
 				<a id="idCheckBtn" class="btn btn-sm" >중복 확인</a>
-				<input type="password" id="password" placeholder="비밀번호" name="password" style="width:80%;"><br> 
-				<input type="password" id="password2" placeholder="비밀번호 확인" style="width:80%;"><br>
+				<input type="password" id="password" placeholder="비밀번호" name="password" style="width:90%;"><br> 
+				<input type="password" id="password2" placeholder="비밀번호 확인" style="width:90%;"><br>
 				<input id="joinBtn" type="submit" value="회원가입">
 			</div>
 		</div>

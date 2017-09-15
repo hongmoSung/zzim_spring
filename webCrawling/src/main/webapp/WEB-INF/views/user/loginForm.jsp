@@ -2,11 +2,12 @@
 <%@ include file="../include/header.jsp"%>
 <%@ page session="true" %>
 <style>
-	input[type='text'], select, input[type='password'] {
+	input[type='text'], input[type='password'] {
 		background-color: #F0FFF0;
+		width:90%;
 	}
-	input[type='text'] {
-		border-bottom: 1px solid #DCDCDC;
+	input[type='submit'] {
+		width:90%;
 	}
 	a {
 		color:#708090;
@@ -16,13 +17,13 @@
 <div class="main-container">
 	<section>
 		<div class="row">
-			<div class="col-md-4 col-md-offset-4" >
+			<div style="width:20%; margin:auto;">
 				<div class="feature bordered text-center">
 					<h2 class="uppercase">LOGIN</h2>
 					<hr>
 					<form method="POST" action="/login" id="loginForm" class="text-center">
-						<input type="text" class="mb0" id="email" placeholder="이메일 " name="username">
-						<input type="password" class="mb0" id="password" placeholder="비밀번호 " name="password" >
+						<input type="text" class="mb5" id="email" placeholder="이메일 " name="username" autocomplete="off">
+						<input type="password" class="mb5" id="password" placeholder="비밀번호 " name="password"  >
 						<input type="hidden" id="token">
 						<input type="hidden" id="_csrf_token" name="_csrf" value="${_csrf.token}">
 						<input type="hidden" id="_csrf_token_header" name="_csrf_header" value="${_csrf.headerName}">
@@ -35,7 +36,6 @@
 				
 			</div>
 		</div>
-		<button id="a">aaaa</button>
 	</section>
 </div>
 </body>
