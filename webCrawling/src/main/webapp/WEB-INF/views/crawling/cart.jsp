@@ -24,7 +24,7 @@
 				</div>
 			</div>
 		</section>
-		<section id="cartSection">
+		<section id="cartSection" style="margin-bottom: 50px;">
 		</section>
 	</div>
 </body>

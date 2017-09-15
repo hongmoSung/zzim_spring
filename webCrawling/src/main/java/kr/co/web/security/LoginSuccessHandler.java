@@ -67,10 +67,6 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler{
 		user.setEmail(authentication.getName());
 		session.setAttribute("user", user);
 		
-		System.out.println("�떆�걧由ы떚 �뱾�뼱�샂. 濡쒓렇�씤 泥섎━");
-		UserVO test = (UserVO)session.getAttribute("user");
-		System.out.println(test.getEmail());
-	/////////////////////////////////////////////////
 		clearAuthenticationAttribute(request);
 		
 		int intRedirectStrategy = decideRedirectStrategy(request, response);

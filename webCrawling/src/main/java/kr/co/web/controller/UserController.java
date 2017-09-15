@@ -2,6 +2,7 @@ package kr.co.web.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,6 +24,12 @@ public class UserController {
 	
 	@RequestMapping("/joinForm")
 	public void joinForm() {
+	}
+	
+	@ResponseBody
+	@RequestMapping("/loginCheck")
+	public Object loginCheck(HttpSession session) {
+		return session.getAttribute("user");
 	}
 
 	@RequestMapping(value = "/join", method = RequestMethod.POST)

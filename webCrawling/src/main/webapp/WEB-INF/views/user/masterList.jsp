@@ -248,9 +248,9 @@
    // 등록
    $("a[name='masterRegist']").on("click", function() {
 	   //등록 토큰
-	   $(document).ajaxSend(function(e, xhr, options) {
-         xhr.setRequestHeader(header, token);
-      });
+// 	   $(document).ajaxSend(function(e, xhr, options) {
+//          xhr.setRequestHeader(header, token);
+//       });
 	   
       var email = "${user.email}";
       var websiteType = $("#websiteType option:selected").text();
@@ -267,8 +267,8 @@
          $("#masterPassword").focus();
       }else{
     	  $.ajax({
-//  				url : "http://192.168.0.36:3003/checkEmail",
-				url : "/user/masterInsert",
+ 				url : "https://zzim-node.zz.am:3003/checkEmail",
+// 				url : "/user/masterInsert",
 				type : "post",
 				data : {
 					email : email,
@@ -277,8 +277,11 @@
 					websitePw : websitePw
 				}
 			}).done(function(result) {
-// 				alert(result.result);
-				alert(result);
+				if(result.result == "success"){
+	 				alert("등록되었습니다.");
+				}else if(result.result == "err"){
+					alert("아이디와 패스워드를 확인해주세요.");
+				}
 				window.location.reload();
 			});
       }

@@ -3,7 +3,7 @@
 <%@ page session="true" %>
 <style>
 	input[type='text'], input[type='password'] {
-		background-color: #F0FFF0;
+		background-color: #ccffcc;
 		width:90%;
 	}
 	input[type='submit'] {
@@ -17,7 +17,7 @@
 <div class="main-container">
 	<section>
 		<div class="row">
-			<div style="width:20%; margin:auto;">
+			<div style="width:25%; margin:auto;">
 				<div class="feature bordered text-center">
 					<h2 class="uppercase">LOGIN</h2>
 					<hr>

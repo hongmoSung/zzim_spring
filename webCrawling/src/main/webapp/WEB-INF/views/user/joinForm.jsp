@@ -3,7 +3,7 @@
 <%@ include file="../include/header.jsp"%>
 <style>
 	input[type='text'], select, input[type='password'] {
-		background-color: #F0FFF0;
+		background-color: #ccffcc;
 		border-style: 1px black;
 	}
 	i.ti-angle-down{
@@ -11,7 +11,7 @@
 	}
 </style>
 <section>
-<div class="container">
+<div class="main-container">
 	<div class="row">
 		<div class="col-md-4 col-md-offset-4">
 			<div class="feature bordered text-center">
@@ -19,10 +19,10 @@
 				<hr>
 				<input type="hidden" id="_csrf" value="${_csrf.token}">
 				<input type="hidden" id="_csrf_header" value="${_csrf.headerName}">
-				<input type="text" id="email" placeholder="이메일" name="email" style="width:40%;"> @  
+				<input type="text" id="email" placeholder="이메일" name="email" style="width:43%;"> @  
 				<span class="select-option">
 					<i class="ti-angle-down"></i>
-					<select id="emailType" onchange="innerSelect(this.value);" style="width:50%;" >
+					<select id="emailType" onchange="innerSelect(this.value);" style="width:43%;" >
 						<option value="empty">선택</option>
 						<option value="naver">naver.com</option>
 						<option value="daum">daum.net</option>
@@ -35,7 +35,7 @@
 				<a id="idCheckBtn" class="btn btn-sm" >중복 확인</a>
 				<input type="password" id="password" placeholder="비밀번호" name="password" style="width:90%;"><br> 
 				<input type="password" id="password2" placeholder="비밀번호 확인" style="width:90%;"><br>
-				<input id="joinBtn" type="submit" value="회원가입">
+				<input id="joinBtn" type="submit" value="회원가입" style="width:90%">
 			</div>
 		</div>
 	</div>

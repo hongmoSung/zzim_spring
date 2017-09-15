@@ -10,6 +10,7 @@
 		<intercept-url pattern="/favicon.ico" access="permitAll"/>
 		<intercept-url pattern="/home/*" access="permitAll"/>
 		<intercept-url pattern="/user/join" access="permitAll"/>
+		<intercept-url pattern="/user/loginCheck" access="permitAll"/>
 		<intercept-url pattern="/user/loginForm" access="permitAll"/>
 		<intercept-url pattern="/user/joinForm" access="permitAll"/>
 		<intercept-url pattern="/user/emailCheck" access="permitAll"/>
