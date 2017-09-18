@@ -38,6 +38,12 @@ public class HomeController {
 	public String loginAjax() {
 		return "true";
 	}
+
+	@ResponseBody
+	@RequestMapping("/logoutResponse")
+	public String logoutAjax() {
+		return "true";
+	}
 	
 
 	@RequestMapping("/firebase-messaging-sw.js")
