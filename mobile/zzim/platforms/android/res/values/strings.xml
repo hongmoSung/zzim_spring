@@ -1,9 +1,0 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
-    <string name="app_name">ZZIM</string>
-    <string name="launcher_name">@string/app_name</string>
-    <string name="activity_name">@string/launcher_name</string>
-    
-    <string name="google_app_id">1:948220968110:android:7f5f0a7771b41d64</string>
-    <string name="google_api_key">AIzaSyANCIbnSolmRuDOxWpKvbuWMqNL4rxQ_H8</string>
-</resources>
