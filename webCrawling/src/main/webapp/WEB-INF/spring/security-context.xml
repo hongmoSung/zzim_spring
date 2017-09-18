@@ -21,14 +21,14 @@
  		<form-login
  			login-page="/user/loginForm"
  			authentication-failure-url="/user/loginForm?error=1"
- 			authentication-success-handler-ref="/user/loginForm?error=1"
+ 			authentication-success-handler-ref="LoginSuccessHandler"
  			default-target-url="/"
  		/>
 		
 		<logout 
 			invalidate-session="true" 
 			logout-url="/logout" 
-			success-handler-ref=""
+			success-handler-ref="LogoutSuccessHandler"
 		/>
 		<!-- <csrf/> -->
 	</http>
@@ -36,8 +36,8 @@
 	<beans:bean id="LoginSuccessHandler" class="kr.co.web.security.LoginSuccessHandler">
 		<beans:property name="defaultUrl" value="/"/>
 	</beans:bean>
+	
 	<beans:bean id="LogoutSuccessHandler" class="kr.co.web.security.LogoutSuccessHandler">
-		<beans:property name="defaultUrl" value="/user/loginForm?logout"/>
 	</beans:bean>
 	
 	
