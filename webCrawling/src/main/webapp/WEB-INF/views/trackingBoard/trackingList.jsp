@@ -43,8 +43,7 @@
 <!--  am차트 -->
 <script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
 <script src="https://www.amcharts.com/lib/3/serial.js"></script>
-<script
-	src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
+<script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
 <script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
 <!--  am차트 -->
 
@@ -53,7 +52,7 @@
 	<div class="main-container" style="margin-bottom:50px;">
 		<section class="image-bg cover overlay page-title page-title-4"  style="height:250px;">
 			<div class="background-image-holder">
-	<!-- 			<img alt="image" class="background-image" src="/resources/img/trkList_back.jpg" style="height:250px;"> -->
+<!-- 				<img alt="image" class="background-image" src="/resources/img/trkList_back.jpg" style="height:250px;"> -->
 				<img alt="image" class="background-image" src="/resources/img/trkList_test2.png" style="height:250px;">
 			</div>
 			<div class="container">	
@@ -86,17 +85,6 @@
 		</section>
 	</div >
 
-<!-- <td style="color: limegreen"> -->
-<!-- <span style="color: black">조건 확인</span><br> -->
-<!-- <strong class="fa-2x">{{check notifyPrice pLowest pNo}}</strong> -->
-<!-- </td> -->
-
-<!-- border: 1px solid; margin-top: 10px; border-collapse:separate; -->
-<!-- 최고 최저가 li 태크 -->
-<!--  <ul class="lead " > -->
-<!--     <li style="font-size:0.8em;" class=" ic" id="max{{pNo}}"></li> -->
-<!--     <li style="font-size:0.8em;" class=" ic" id="min{{pNo}}"></li> -->
-<!-- </ul> -->
 	<!--         여기서  부터 스크립트 시작  -->
 	<script   id="entry-template" type="text/x-handlebars-template">
         {{#each .}} 
@@ -166,7 +154,7 @@
 							</table>
 							
                         
-                         <input id="notify{{pNo}}" class="mb10 " type="text" placeholder="{{notifyPrice}}원" style="margin-bottom: 8px;height: 30px;text-align: right;padding-right: 10px;width: auto;">
+                         <input id="notify{{pNo}}" class="mb10 " type="text" value="{{notifyPrice}}" style="margin-bottom: 8px;height: 30px;text-align: right;padding-right: 10px;width: auto;">원
                          <br>
                          <a id="update" data-pNo="{{pNo}}" class="btn btn-md btn-rounded" style=" margin-right: 0px; ">희망가 수정하기</a>
 							<br>
@@ -186,7 +174,6 @@ $("body").on( 'click', '.accordion li .title' , function(){
 	var that = $(this);
 // 상품 값이 0 이하일떄 아코디언 불가처리
   if(parseInt(that.attr("data-price")) <= 0){
-	  
 // 	  alert("검색불가");
 	  return;
   }	
@@ -201,7 +188,6 @@ $("body").on( 'click', '.accordion li .title' , function(){
       setTimeout(mr_parallax.windowLoad, 500);
   }
   var pNo = $(this).attr("data-pNo");
-//   console.log(pNo);
   
   
   //showChart(pNo);
@@ -209,14 +195,12 @@ $("body").on( 'click', '.accordion li .title' , function(){
 	  url : getContextPath()+"/priceHistory",
 	  data : {"pNo":pNo}
   }).done(function(result){
-	  console.dir("result  "+result[0].currPrice);
 	  var priceArr = []
 	  var average = 0;
 	  var max = 0;
 	  var min = 0;
 	  
 	 for(var i = 0 ; i < result.length ; i++){
-// 	  console.log("result1111  "+result[i].currPrice);
 		// currPrice 배열넣기 
 		 priceArr.push(result[i].acurrPrice); 
 		 average +=result[i].currPrice;
@@ -317,13 +301,6 @@ function handle(result,target){
 	Handlebars.registerHelper("checkPrice", function(price,  rprice) {
 		return price > 0 ? rprice+"원":"상품이 매진 되었습니다.";
 	});
-	//헬퍼  pLowest 차이 표시 
-	Handlebars.registerHelper('check1', function (notifyPrice, pLowest, pNo) {
-		return (notifyPrice >= pLowest)? '√':'×';
-	});
-	Handlebars.registerHelper('check2', function (notifyPrice, pLowest, pNo) {
-		return (notifyPrice - pLowest);
-	});
 	//핸들바 템플릿에 데이터를 바인딩해서 HTML 생성
 	var html = template(result);
 	//생성된 HTML을 DOM에 주입
@@ -332,12 +309,10 @@ function handle(result,target){
 	
 //첫 리스트 가져오기
 	var email = "${user.email}";
-	console.log(email);
   	$.ajax({
  		url : getContextPath()+"/sList",
  		data : {"email" : email}
  	}).done(function(result){
- 		console.log("에작스 완료")
  		var sign = true;
  		if(result.correctList != ''){
  			handle(result.correctList,"#correctList");
@@ -355,8 +330,6 @@ function handle(result,target){
 		}
  		
  		
- 		
- 		
  		var addr = document.location.href;
  		var sharpIndex = addr.indexOf("#");
  		
@@ -371,10 +344,7 @@ function handle(result,target){
 //스크롤 이벤트 -------------------------------------------------------------------------------------------------------
 	var page = 2;
 	$(window).scroll(function(){
-// 		console.log("스크롤  같은거  "+Math.ceil($(window).scrollTop()+0.01), $(document).height() - $(window).height());
-// 		console.log("스크롤 이벤트  "+$(window).scrollTop(), $(document).height() , $(window).height());
 		if(Math.ceil($(window).scrollTop()+0.01) > $(document).height() - $(window).height()){
-// 			console.log("들어오라 ")
 			$.ajax({
 				url : getContextPath()+"/scroll",
 				data:{page:page,
@@ -388,8 +358,6 @@ function handle(result,target){
 				handle(result.list , "#inCorrectList")
 				}
 				else{
-// 					$("body").scrollTop($(window).scrollTop()-20);
-// 					console.log("--2실험--")
 				}
 			})
 		}

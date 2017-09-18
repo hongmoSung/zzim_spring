@@ -6,21 +6,13 @@
 
 	
 	<select id="selectPriceHistory" resultType="priceHistoryVO">
-<!-- 		select * from tbl_price_history -->
-<!-- 		where pNo = #{pNo} -->
-
-<!-- 		select * -->
-<!-- 		from -->
-<!-- 		tbl_price_history -->
-<!-- 		where pNo = #{pNo} -->
-<!--         and (currDate like concat('%',' 15:','%')  -->
-<!--         or currDate like concat('%',' 16:','%'))   -->
-<!--         order by currDate   -->
-        
-        select pNo ,min(currPrice) currPrice, format(min(currPrice), 0) AcurrPrice, currDate 
-		from tbl_price_history
-		where pNo = #{pNo}
-		group by date(currDate)
+       
+        select a.pNo , a.currPrice, a.currPrice AcurrPrice,  b.currDate
+		from tbl_price_history a, (select max(currDate) as currDate
+								from tbl_price_history
+								where pNo = #{pNo} 
+								group by date(currDate)) b
+		where a.pNo = #{pNo} and a.currDate = b.currDate 
 	</select>
 
 	<select id="selectBoardCorrect" resultType="TrackingBoardVO">
