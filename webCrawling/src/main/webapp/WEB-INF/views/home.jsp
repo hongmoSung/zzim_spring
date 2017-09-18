@@ -83,7 +83,7 @@
 		console.log(email);
 		
 		$.ajax({
-			url : "http://192.168.0.25:3003/track",
+			url : "https://zzim-node.zz.am:3003/track",
 			type : "post",
 			data : {
 				"url" : url
@@ -120,7 +120,7 @@
 		};
 		  
 		$.ajax({
-			url : "http://192.168.0.25:3003/addDB",
+			url : "https://zzim-node.zz.am:3003/addDB",
 			type : "post",
 			data : {
 				'pName': pName,
