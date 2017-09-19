@@ -4,6 +4,8 @@ public class MobileVO {
 	private String token;
 	private String email;
 	private String password;
+	private String device;
+	
 	
 	public String getToken() {
 		return token;
@@ -22,6 +24,12 @@ public class MobileVO {
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	public String getDevice() {
+		return device;
+	}
+	public void setDevice(String device) {
+		this.device = device;
 	}
 	
 	
