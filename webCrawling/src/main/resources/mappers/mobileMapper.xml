@@ -5,8 +5,8 @@
 <mapper namespace="kr.co.web.mapper.MobileMapper">
 
 	<insert id="insertToken">
-		INSERT INTO tbl_token (`token`, `email`) 
-					   VALUES (#{token}, #{email})
+		INSERT INTO tbl_token (token, email, device) 
+					   VALUES (#{token}, #{email}, #{device})
 	</insert>	
 
 </mapper>
