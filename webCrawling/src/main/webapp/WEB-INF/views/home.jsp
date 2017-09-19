@@ -1,12 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="include/header.jsp"%>
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
 <html lang="ko">
 <script>
+	$(document).ajaxStart(function () {
+	    $("body").waitMe({
+	        effect: 'win8',
+	        text: '기다려',
+	        bg: 'rgba(255,255,255,0.7)',
+	        color: '#000',
+	        source: '/resources/img.svg'
+	    });
+	})
+	.ajaxStop(function () {
+	    $("body").waitMe("hide");
+	});
 	function isTokenSentToServer() {
 	    	return window.localStorage.getItem('sentToServer');
 	}
@@ -77,13 +85,14 @@
 	  });
 	
 	var email = "${user.email}";
+	console.log('email..................', email);
 	function sendUrl() {
 		var url = $('input[name="url"]').val();
 		console.log(url);
 		console.log(email);
 		
 		$.ajax({
-			url : "https://zzim-node.zz.am:3003/track",
+			url : "http://localhost:3003/track",
 			type : "post",
 			data : {
 				"url" : url
@@ -120,7 +129,7 @@
 		};
 		  
 		$.ajax({
-			url : "https://zzim-node.zz.am:3003/addDB",
+			url : "http://localhost:3003/addDB",
 			type : "post",
 			data : {
 				'pName': pName,
@@ -183,8 +192,6 @@
 		$("#listTable").html(html);
 	}
 	down();
-	
-	
 </script>
 <body>
 

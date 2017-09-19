@@ -38,10 +38,9 @@
     
     <script src="/resources/handlebars-v4.0.10.js"></script>
 	<script src="/resources/sb.js"></script>
-	
-	<script src="/resources/waitMe.js"></script>
-	<link href="/resources/waitMe.css" rel="stylesheet" type="text/css" />
-	
+	<script src="/resources/js/waitMe.js"></script>
+	<link href="/resources/css/waitMe.css" rel="stylesheet" type="text/css" media="all" />
+    
     <script>
 		function logout(){
 			$("#logoutForm").submit();
