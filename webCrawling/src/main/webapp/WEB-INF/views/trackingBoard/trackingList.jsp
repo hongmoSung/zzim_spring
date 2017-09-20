@@ -72,15 +72,15 @@
 		<section style="margin-top: -50px;" >
 			<div class="container">
 				<div id="sList" class="row">
-					<h3 style="font-weight: bolder;">Conditions Met</h3>
 						<div class="col-sm-12" " >
 <!-- 							style="box-shadow: 5px 5px 10px 2px lightgrey;" -->
-							<ul id="correctList" class="accordion"  > </ul>
+							<ul id="correctList" class="accordion"   > </ul>
 						</div><br>
 						<div class="col-sm-12" style="margin-top:60px;" >
 							<ul id="inCorrectList" class="accordion  "  > </ul>
 						</div>
 				</div>
+				<div style="height:50px;"></div>
 			</div>
 		</section>
 	</div >
@@ -244,15 +244,15 @@ $("body").on( 'click', '.accordion li .title' , function(){
 		    }],
 		    "graphs": [{
 		        "useNegativeColorIfDown": true,
-		        "balloonText": "[[category]]<br><b>value: [[value]]</b>",
 		        "bullet": "round",
 		        "bulletBorderAlpha": 1,
 		        "bulletBorderColor": "#FFFFFF",
 		        "hideBulletsCount": 50,
 		        "lineThickness": 2,
-		        "lineColor": "#fdd400",
-		        "negativeLineColor": "#67b7dc",
-		        "valueField": "currPrice"
+		        "lineColor": "#67b7dc",
+		        "negativeLineColor": "#fdd400",
+		        "valueField": "currPrice",
+		        "balloonText": "<span style='font-size:10px;'>[[value]]원</span>"
 		    }],
 		    "chartScrollbar": {
 		        "scrollbarHeight": 5,
@@ -275,6 +275,7 @@ $("body").on( 'click', '.accordion li .title' , function(){
 		        "enabled": false
 		    }
 	 });
+	$("a[title='JavaScript charts']").remove();
 	 
   });
   
@@ -329,6 +330,7 @@ function handle(result,target){
  			$('#correctList').html("<h4>만족 된 상품이 없습니다.</h4>")
 		}
  		
+ 		$("#correctList > li").attr("style","border: 1px solid #47b475; border-radius: 15px;  margin-top: 10px; ")
  		
  		var addr = document.location.href;
  		var sharpIndex = addr.indexOf("#");
