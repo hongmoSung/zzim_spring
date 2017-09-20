@@ -34,7 +34,7 @@
 <div class="container feature boxed bordered"
 	style="box-shadow: 5px 5px 10px -1px lightgrey">
 	<div class="feature text-center">
-		<img class="product-thumb" src="/resources/img/logo/{{shop}}.png" />
+		<a href="{{mall}}"><img class="product-thumb" src="/resources/img/logo/{{shop}}.png" /></a>
 	</div>
 	<div class="row ">
 		<div class="col-md-12 col-md-offset-0 col-sm-12 col-sm-offset-0">
@@ -148,6 +148,7 @@
 
 						var elevenObj = resultObj['11st'];
 						elevenObj['shop'] = "11";
+						elevenObj['mall'] = "https://login.11st.co.kr/login/Login.tmall?returnURL=http%3A%2F%2Fbuy.11st.co.kr%2Fcart%2FCartAction.tmall%3Fmethod%3DgetCartList&xfrom=";
 						var html = template(elevenObj);
 						$("#cartSection").append(html);
 
@@ -156,6 +157,7 @@
 
 						var gmarketObj = resultObj['gmarket'];
 						gmarketObj['shop'] = "gm";
+						gmarketObj['mall'] = "http://escrow.gmarket.co.kr/ko/cart";
 						var html = template(gmarketObj);
 						$("#cartSection").append(html);
 					}
@@ -163,6 +165,7 @@
 
 						var auctionObj = resultObj['auction'];
 						auctionObj['shop'] = "ac";
+						auctionObj['mall'] = "http://buy.auction.co.kr/buy/A2014/Cart/Cart.aspx";
 						var html = template(auctionObj);
 						$("#cartSection").append(html);
 					}
@@ -170,6 +173,7 @@
 
 						var interparkObj = resultObj['interpark'];
 						interparkObj['shop'] = "int";
+						interparkObj['mall'] = "http://www.interpark.com/order/cartlist.do?_method=cartList&logintgt=cart&wid1=kang&wid2=cartlist&wid3=02";
 						var html = template(interparkObj);
 						$("#cartSection").append(html);
 					}

@@ -90,9 +90,10 @@
 		var url = $('input[name="url"]').val();
 		console.log(url);
 		console.log(email);
-		
+
 		$.ajax({
-			url : "http://localhost:3003/track",
+			url : "https://zzim-node.zz.am:3003/track",
+// 			url : "http://localhost:3003/track",
 			type : "post",
 			data : {
 				"url" : url
@@ -138,7 +139,8 @@
 			};
 			  
 			 $.ajax({
-				url : "http://localhost:3003/addDB",
+				url : "https://zzim-node.zz.am:3003/addDB",
+// 				url : "http://localhost:3003/addDB",
 				type : "post",
 				data : {
 					'pName': pName,
@@ -171,7 +173,8 @@
 			    return;
 			  }
 			 $.ajax({
-				url : "http://localhost:3003/reSearch",
+				url : "https://zzim-node.zz.am:3003/reSearch",
+// 				url : "http://localhost:3003/reSearch",
 				type : "post",
 				data : {
 					'pName': pName
