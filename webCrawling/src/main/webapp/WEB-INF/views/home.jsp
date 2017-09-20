@@ -6,7 +6,7 @@
 	$(document).ajaxStart(function () {
 	    $("body").waitMe({
 	        effect: 'win8',
-	        text: '기다려',
+	        /* text: '기다려', */
 	        bg: 'rgba(255,255,255,0.7)',
 	        color: '#000',
 	        source: '/resources/img.svg'
@@ -99,14 +99,17 @@
 			}
 		}).done(function(result) {
 			console.log(result);
-			if(!result.err) {
+			if(result) {
 				$("#myModal").modal();
 				$("#picUrl").attr('src', result.picUrl);
 				$("#pName").text(result.pName);
 				$("p#pLowest").html('현재 최저가 : <span id="pLowest">' + result.pLowest + '</span> 원');
 				$("p#crawlingUrl").text(result.crawlingUrl);
 			} else {
-				alert('err!');
+				alert('죄송합니다. url과 일치하는 상품을  찾지못했습니다.');
+				$('#information').text('정확한 상품명을 입력해주세요.');
+				$('#pNameForm').css('display', 'block');
+				$('#urlForm').css('display', 'none');
 			}
 		});
 		
@@ -114,14 +117,16 @@
 	}
 	
 	function sendPrice() {
-		console.log('1');
-		console.log('2');
 			var notifyPrice = $('input[name="notifyPrice"]').val();
 			var pName = $("#pName").text();
 			var crawlingUrl = $("p#crawlingUrl").text();
 			var pLowest = $('span#pLowest').text().trim().replace(/,/gi, '');
 			console.log('notifyPrice:::::::::::', notifyPrice);
 			console.log('pLowest:::::::::::', pLowest);
+			if(email == "") {
+				alert('로그인이 필요한 서비스 입니다.');
+				return;
+			}
 			if(notifyPrice == "") {
 			    alert("알림가격을 입력해주세요");
 			    return;
@@ -146,6 +151,45 @@
 			.done(function(result) {
 				alert(result.msg);
 				console.log(result.msg);
+				if(result.result) {
+					$('#myModal').modal('hide');
+				}
+			}); 
+			
+			return false;
+	}
+	
+	function sendPname() {
+			var pName = $("input[name='pName']").val();
+			console.log('pName:::::::::::', pName);
+			if(email == "") {
+				alert('로그인이 필요한 서비스 입니다.');
+				return;
+			}
+			if(pName == "") {
+			    alert("알림가격을 입력해주세요");
+			    return;
+			  }
+			 $.ajax({
+				url : "http://localhost:3003/reSearch",
+				type : "post",
+				data : {
+					'pName': pName
+				}
+			})
+			.done(function(result) {
+				if (!result || result.picUrl == '') {
+					alert('재조회 실패');
+				} else {
+					alert('조회 성공');
+					$("#myModal").modal();
+					$("#picUrl").attr('src', result.picUrl);
+					$("#pName").text(result.pName);
+					$("p#pLowest").html('현재 최저가 : <span id="pLowest">' + result.pLowest + '</span> 원');
+					$("p#crawlingUrl").text(result.crawlingUrl);
+					$('#pNameForm').css('display', 'none');
+					$('#urlForm').css('display', 'block');
+				}
 			}); 
 			
 			return false;
@@ -225,6 +269,11 @@
                             <form id="urlForm" class="halves form-newsletter" onsubmit="javascript:sendUrl();" data-success="Thanks for your submission, we will be in touch shortly." data-error="Please fill all fields correctly.">
                                 <input class="mb16 validate-required validate-email signup-email-field" type="text" placeholder="URL을 입력하세요" name="url">
                                 <button id="urlBtn" class="mb16 btn-fiiled" type="submit" style="background-color:#47b475; color:white;">Notify Me</button>
+                            </form>
+                            <form style="display: none;" id="pNameForm" class="halves form-newsletter" onsubmit="javascript:sendPname();" data-success="Thanks for your submission, we will be in touch shortly." data-error="Please fill all fields correctly.">
+                                <p id="information"></p>
+                                <input class="mb16 validate-required validate-email signup-email-field" type="text" placeholder="상품명을 입력하세요" name="pName">
+                                <button id="pName" class="mb16 btn-fiiled" type="submit" style="background-color:#47b475; color:white;">Notify Me</button>
                             </form>
                             <br><br><br><br>
                             <p>
