@@ -273,7 +273,7 @@
                             <form style="display: none;" id="pNameForm" class="halves form-newsletter" onsubmit="javascript:sendPname();" data-success="Thanks for your submission, we will be in touch shortly." data-error="Please fill all fields correctly.">
                                 <p id="information"></p>
                                 <input class="mb16 validate-required validate-email signup-email-field" type="text" placeholder="상품명을 입력하세요" name="pName">
-                                <button id="pName" class="mb16 btn-fiiled" type="submit" style="background-color:#47b475; color:white;">Notify Me</button>
+                                <button class="mb16 btn-fiiled" type="submit" style="background-color:#47b475; color:white;">Notify Me</button>
                             </form>
                             <br><br><br><br>
                             <p>
