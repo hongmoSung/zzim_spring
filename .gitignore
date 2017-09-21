@@ -87,3 +87,9 @@ hs_err_pid*
 # End of https://www.gitignore.io/api/java,eclipse
 
 bit-cinema/build/
+zzim(mobile)/.bithoundrc
+zzim(mobile)/config_backup.xml
+zzim(mobile)/CONTRIBUTING.md
+zzim(mobile)/google-services.json
+zzim(mobile)/package.json
+zzim(mobile)/README.md

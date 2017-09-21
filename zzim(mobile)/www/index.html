@@ -1,0 +1,512 @@
+<!doctype html>
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--####################################################################################-->
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript">
+        app.initialize();
+    </script>
+<!--    <meta http-equiv="Content-Security-Policy" content="default-src *; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data:">-->
+<!--####################################################################################-->
+    
+    <link href="resources/css/font-awesome.min.css" rel="stylesheet" type="text/css" media="all">
+    <link href="resources/css/themify-icons.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="resources/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="resources/css/flexslider.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="resources/css/theme-red.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="resources/css/custom.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="resources/css/lightbox.min.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="resources/css/ytplayer.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="resources/css/theme.css" rel="stylesheet" type="text/css" media="all" />
+    <link href='http://fonts.googleapis.com/css?family=Lato:300,400%7CRaleway:100,400,300,500,600,700%7COpen+Sans:400,500,600' rel='stylesheet' type='text/css'>
+    
+	<script src="resources/js/jquery.min.js"></script>
+<!--	<script src="resources/js/jquery-3.2.1.min.js"></script>-->
+    <script src="resources/js/bootstrap.min.js"></script>
+    <script src="resources/js/flexslider.min.js"></script>
+    <script src="resources/js/parallax.js"></script>
+    <script src="resources/js/scripts.js"></script>
+
+	<script src="resources/js/lightbox.min.js"></script>
+    <script src="resources/js/masonry.min.js"></script>
+    <script src="resources/js/ytplayer.min.js"></script>
+    <script src="resources/js/countdown.min.js"></script>
+    <script src="resources/js/smooth-scroll.min.js"></script>
+    
+    <script src="resources/handlebars-v4.0.10.js"></script>
+	<script src="resources/sb.js"></script>
+	
+	<script src="resources/waitMe.js"></script>
+	<link href="resources/waitMe.css" rel="stylesheet" type="text/css" />
+	
+	    <style>
+        body, html {
+          height: 100%;
+        }
+        
+        footer {
+        }
+        
+        div.main-container{
+            min-height: 100%;
+        }
+    </style>
+    
+    
+    <!-- FCM설정 -->
+	<script src="https://www.gstatic.com/firebasejs/4.3.0/firebase.js"></script>
+	<script>
+	   
+	  // Initialize Firebase
+	  var config = {
+	    apiKey: "AIzaSyC9xgu1p5RvwAehO_wmdL6VF5uXzFoB_8c",
+	    authDomain: "zzim-521a0.firebaseapp.com",
+	    databaseURL: "https://zzim-521a0.firebaseio.com",
+	    projectId: "zzim-521a0",
+	    storageBucket: "zzim-521a0.appspot.com",
+	    messagingSenderId: "948220968110"
+	  };
+	  firebase.initializeApp(config);
+	  
+	    
+//	    const messaging = firebase.messaging();
+//	    
+//	    messaging.onMessage(function(payload){
+//	        // alert('알림 도착! payload는 콘솔 확인');
+//	        console.log('onMessage:', payload);
+//	        alert(payload.notification.body);
+//	    });
+//	    
+	</script>
+    
+</head>
+
+<html lang="ko">
+
+
+<div class="nav-container">
+    <nav>
+        <div class="nav-bar">
+            <div class="module left">
+                <a href="index.html">
+                    <img class="logo logo-light" alt="Foundry" src="resources/img/logo-light.png">
+                    <img class="logo logo-dark" alt="Foundry" src="resources/img/header_zzim.png">
+                </a>
+            </div>
+            <div class="module widget-handle mobile-toggle right visible-sm visible-xs">
+                <i class="ti-menu"></i>
+            </div>
+            <div class="module-group right">
+
+                <div class="module left">
+                    <ul class="menu">
+                        <li>
+                            <a href='javascript:window.location="index.html"'>Home</a>
+                        </li>
+                        
+                        <li>
+                            <a href="javascript:void(0)" id="goTracking">트레킹 리스트</a>
+                        </li>
+
+                        <li>
+                            <a href="javascript:void(0)" id="goCart">메타 장바구니</a>
+                        </li>
+
+                        <li>
+                            <a href="javascript:void(0)" onclick="alert('준비중입니다')">Q & A</a>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+                <div class="module widget-handle left">
+                	<ul class="menu" id="loginMenu">
+			    		<li><a id="join"><span class="glyphicon glyphicon-user"></span> Join</a></li>
+			    		<li><a id="loginForm"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                    </ul>
+                </div>
+                <form action="http://192.168.0.11:9080/logout" method="post" id="logoutForm">
+					<input id="logoutToken" type="hidden" name="_csrf" >
+				</form>
+            </div>
+
+        </div>
+    </nav>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<div id="body">
+    <body>
+
+    <div class="main-container">
+
+        <section class="image-bg cover overlay" style="height:650px; ">
+            <div class="background-image-holder">
+                <img alt="image" class="background-image" src="resources/img/main_back.jpg">
+                
+            </div>
+
+            <div class="container v-align-transform" style="margin-top:-30px;">
+                <div class="row">
+                    <div class="col-sm-12 text-center" >
+                        <img alt="Pic" src="resources/img/main_zzim.png" class="image-md">
+                    </div>
+                </div>
+
+                <br><br><br>
+
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1" >
+                        <div class="feature bordered text-center" style="background-color:rgba( 0, 0, 0, 0.6 );">
+                            <h3 class="uppercase">start tracking</h3>
+                            <br>
+                            <form class="halves form-newsletter" onsubmit="javascript:sendUrl();" data-success="Thanks for your submission, we will be in touch shortly." data-error="Please fill all fields correctly.">
+                                <input class="mb16 validate-required validate-email signup-email-field" type="text" placeholder="URL을 입력하세요" name="url">
+                                <button class="mb16 btn-fiiled" type="submit" style="background-color:#47b475; color:white;">Notify Me</button>
+                            </form>
+                            <br><br><br><br>
+                            <p>
+                                해당 상품이 원하는 가격에 도달하면 알려드립니다 !
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section>
+            <div class="container">
+                <div class="row">
+                    <div>
+                    	<ul class="nav nav-tabs" >
+							<li class="active"><a data-toggle="tab" onclick="down();" style="cursor:pointer;">가격 하락율</a></li>
+						    <li><a data-toggle="tab" onclick="recent();" style="cursor:pointer;" >최신 등록</a></li>
+						    <li><a data-toggle="tab" onclick="rank();" style="cursor:pointer;">등록 횟수</a></li>
+						</ul>
+                    </div>
+                </div>
+                <br>
+                <!--end of row-->
+                <div class="row masonry text-center" >
+               		<div id="listTable"></div>
+                <!-- =========================================================================================== -->
+                <script id="list-template" type="text/x-handlebars-template">
+					{{#each.}}
+	                    <div class="col-md-3 col-sm-4 masonry-item col-xs-12">
+    	                    <div class="image-tile outer-title text-center">
+        	                    {{#emailcheck}}
+        	                    	<a href="{{pUrl}}" target="_blank">
+            	                	    <img src="{{picUrl}}" class="product-thumb"/>
+                	           		</a>	
+								{{else}}
+        	                    	<a href="/user/loginForm">
+            	                   		 <img src="{{picUrl}}" class="product-thumb"/>
+                	            	</a>
+								{{/emailcheck}}
+                    	        <div class="title">
+                        	        <h5 class="mb0">{{pName}}</h5><br>
+                                	<span class="display-block mb16">{{rPLowest}}원<span style="color:red;" class="dRateColor">{{checkDrop dRate cPNo}}</span></span>
+                	            </div>
+            	            </div>
+         	           </div>
+					{{/each}}
+				</script>
+                <!-- =========================================================================================== -->
+                </div>
+                <!--end of row-->
+            </div>
+            <!--end of container-->
+        </section>
+		<div style="height:50px;"></div>
+    </div>
+    
+    <div class="modal fade" id="myModal" role="dialog">
+	    <div class="modal-dialog">
+	    
+	      <!-- Modal content-->
+	      <div class="modal-content">
+	        <div class="modal-header">
+	          <button type="button" class="close" data-dismiss="modal">×</button>
+	          <h4 class="modal-title" id="pName">Modal Header</h4>
+	        </div>
+	        <div class="modal-body">
+	        	<div class="image-tile outer-title text-center">
+		          <img id="picUrl" class="product-thumb" src="" />
+		          <p id="pLowest"></p>
+		          <p id="crawlingUrl" style="display: none;"></p>
+	          	</div>
+	          <form class="halves form-newsletter" onsubmit="javascript:sendPrice();">
+		          <input class="mb16 validate-required validate-email signup-email-field" type="text" placeholder="알림가격을 입력하세요" name="notifyPrice">
+	              <button class="mb16" type="submit">tracking!!</button>
+              </form>
+	        </div>
+	        <div class="modal-footer">
+	          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	        </div>
+	      </div>
+	      
+	    </div>
+  	</div>
+</body>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<input type="hidden" id="token">
+
+<script>
+    $("body").on("click", ".openLink", function(){
+        window.open($(this).data("link"), '_system');
+    });
+    
+     
+    $('.module-group li a').on('click', function(){
+//        alert($(this).attr('id') + '클릭!');
+       $('nav .nav-bar').removeClass("nav-open"); 
+    });
+    
+    $('nav').on('click', '.module-group li a', function(){
+       $('nav .nav-bar').removeClass("nav-open"); 
+    });
+    
+    
+    setTimeout(function(){
+      if($("#token").attr("value") == undefined){
+          alert('시큐리티 토큰 발급 실패!');
+      }
+        
+//        isLogin()
+//            .then(function(){
+//                getFcmToken();
+//            })
+//            .then(function(result){
+//                saveToken(result);
+//            })
+        
+        isLogin(function(err, result) {
+            if(result){
+                getFcmToken(function(err, result){
+                    if(result){
+                        saveToken(result);
+                    }
+                });
+            }
+        })
+    },1000);
+    
+    
+    $.get("http://192.168.0.11:9080/user/joinForm", function(data){
+        var token = $(data).find("#_csrf").val();
+        
+        $("#token").attr("value", token);
+        $("#logoutToken").attr("value", $("#token").attr("value"));
+        
+        console.log('시큐리티 token얻기 로직 끝. 값 =========>', token);
+
+    });
+    
+    
+    
+    
+    function isLogin(callback){
+//        return new Promise(function(resolve, reject){
+            $.ajax ({
+                type: 'post',
+                url:'http://192.168.0.11:9080/mobile/isLogin',
+                beforeSend: function (xhr){
+                    xhr.setRequestHeader("X-CSRF-TOKEN", $("#token").attr("value"));
+                },
+                success:function(result){
+                    if(result){
+                        console.log("로그인한 아이디!===========>", result);
+                        window.localStorage.setItem('userId', result);
+//                        resolve(result);
+                        
+                        $('#loginMenu').html('<li><a href="javascript:goAccount();"><span class="glyphicon glyphicon-user"></span> Account</a></li><li><a href="javascript:logout();" id="logoutBtn"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>');
+                                             
+                        callback(null, result);
+                        return;
+                    }
+                    
+                    console.log("로그인한 아이디!===========> 로그인 안됨");
+                    callback(null, result);
+
+                }
+            });
+//        });
+    }
+
+    
+    function logout(){
+//         $("#logoutBtn").on("click", function() {
+				$.ajax({
+					url : "http://192.168.0.11:9080/logout",
+					type : "post",
+                    beforeSend: function (xhr){
+                        xhr.setRequestHeader("X-CSRF-TOKEN", $("#token").attr("value"));
+                    },
+					data : {
+//						"username" : $("#email").val(),
+//						"password" : $("#password").val(),
+						"mobile" : "true"
+					}
+
+				}).done(function(result) {
+					console.log(result);
+                    alert('로그아웃 성공!');
+//                    isLogin();
+                    window.localStorage.removeItem('userId');
+                    window.location="index.html";
+				});
+//			});
+    }
+    
+    
+    function getFcmToken(callback){
+//        return new Promise(function(resolve, reject){
+            
+            window.FirebasePlugin.getToken(function(result) {
+                console.log('FirebasePlugin.getToken결과========>', result);
+//                resolve(result);
+                callback(null, result);
+            }, function(error) {
+                console.error(error);
+            });
+            
+//        });
+    }
+    
+    
+    function saveToken(token){
+        var userId = window.localStorage.getItem('userId');
+        console.log('saveToken안에서 받은 토큰값=============>', token);
+        
+        if(userId != null && window.localStorage.getItem('sentToServer') == null){
+            console.log('토큰 저장 로직 본격 시작! 저장할 토큰값=======>', token);
+            
+            $.ajax({
+                type:"POST",
+                url: "http://192.168.0.11:9080/mobile/saveToken",
+                beforeSend: function (xhr){
+                    xhr.setRequestHeader("X-CSRF-TOKEN", $("#token").attr("value"));
+                },
+                data:{token: token,
+                      email: userId,
+                      device: '2'}
+            }).done(function(result) {
+                console.log('토큰 저장 완료, localStorage랑 DB확인!');
+                window.localStorage.setItem('sentToServer', 'true');
+            });
+        } else{
+            console.log('토큰 저장 로직 안들어옴. 로컬스토리지에 아이디 값이 없거나, sentToServer값이 있음')
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>페이지 링크    
+    history.pushState({}, '', '');
+    
+    
+    window.onpopstate = function(event) {
+//        alert("location: " + document.location + ", state: " + JSON.stringify(event.state));
+        loadStateContent(event.state);
+    };
+    
+    function loadStateContent(state) {
+        if(state.page){
+            $('#body').load(state.page);
+        } else {
+            window.location="index.html";
+        }
+//        con.innerHTML = "복구된 " + state.page + "번째 페이지 " + "hello " + state.name;
+    }
+
+//    $('#body').load("./home.html");
+    
+    $('#join').on('click', function(){
+        history.pushState({page:"./join.html"}, '', '');
+        $('#body').load("./join.html");
+    });
+    
+    
+    $('#loginForm').on('click', function(){
+        history.pushState({page:"./loginForm.html"}, '', '');
+        $('#body').load("./loginForm.html");
+    });
+    
+    
+    function goAccount(){
+        history.pushState({page:"./masterList.html"}, '', '');
+        $('#body').load("./masterList.html");
+    }
+    
+   
+    function goTracking(pNo){
+        if(window.localStorage.getItem('userId')){
+            history.pushState({page:"./tracking.html"}, '', '');
+            $('#body').load("./tracking.html");
+            
+            if(pNo){
+                setTimeout(function(){
+                    location.href = '#'+pNo;
+                    $('#' + pNo + '>div').trigger("click");
+                }, 1000);
+            }
+        } else {
+            $('#body').load("./loginForm.html");
+        }
+    }
+    
+    
+    $('#goTracking').on('click', function(){
+        if(window.localStorage.getItem('userId')){
+             goTracking();
+        } else {
+            $('#body').load("./loginForm.html");
+        }
+    });
+    
+    $('#goCart').on('click', function(){
+//            $('#body').load("./metaCart.html");
+        if(window.localStorage.getItem('userId')){
+            history.pushState({page:"./metaCart.html"}, '', '');
+            $('#body').load("./metaCart.html");
+        } else {
+            $('#body').load("./loginForm.html");
+        }
+    });
+    
+</script>
