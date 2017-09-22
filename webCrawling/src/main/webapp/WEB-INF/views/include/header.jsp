@@ -47,6 +47,10 @@
 		}
 	</script>
 	    <style>
+	    		#listTable > div:nth-child(1) > div {margin-bottom:0px;}
+
+        .masonry-item { padding:0px; }
+        
         body, html {
           height: 100%;
         }
