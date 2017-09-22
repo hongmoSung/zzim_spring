@@ -305,7 +305,7 @@
                 <!-- =========================================================================================== -->
                 <script id="list-template" type="text/x-handlebars-template">
 					{{#each.}}
-	                    <div class="col-md-3 col-sm-4 masonry-item col-xs-12">
+	                    <div class="col-md-3">
     	                    <div class="image-tile outer-title text-center">
         	                    {{#emailcheck}}
         	                    	<a href="{{pUrl}}" target="_blank">
@@ -317,7 +317,7 @@
                 	            	</a>
 								{{/emailcheck}}
                     	        <div class="title">
-                        	        <h5 class="mb0">{{pName}}</h5><br>
+                        	        <h5 class="mb0" style='height:24px; overflow:unset;'>{{pName}}</h5><br>
                                 	<span class="display-block mb16">{{rPLowest}}원<span style="color:red;" class="dRateColor">{{checkDrop dRate cPNo}}</span></span>
                 	            </div>
             	            </div>
@@ -340,7 +340,7 @@
 	      <div class="modal-content">
 	        <div class="modal-header">
 	          <button type="button" class="close" data-dismiss="modal">×</button>
-	          <h4 class="modal-title" id="pName">Modal Header</h4>
+	          <h4 class="modal-title" id="pName" >Modal Header</h4>
 	        </div>
 	        <div class="modal-body">
 	        	<div class="image-tile outer-title text-center">
