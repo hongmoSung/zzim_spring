@@ -6,16 +6,16 @@
 	<!-- 드랍율 -->
 	<select id="selectDown" resultType="TrackingBoardVO">
 	<![CDATA[
-		select p.*, format(p.pLowest, 0) rPLowest, (sumPrice/pNum) as pAvg , format( (1-(p.pLowest/(sumPrice/Pnum)))*100 , 2) as dRate
+			select p.*, format(p.pLowest, 0) rPLowest, format( (1-(p.pLowest/maxPrice))*100 , 2) as dRate
 		  from tbl_product p inner join (
-							  			  select pNo, sum(currPrice) sumPrice, count(currPrice) pNum
+							  			  select pNo, max(currPrice) maxPrice
 										    from tbl_price_history
 											group by pNo
 										) sumP
 									  on sumP.pNo = p.pNo
 		 group by pNo
 		 order by dRate desc
-		 limit 8;
+		 limit 8
     ]]>
 	</select>
 	
@@ -36,7 +36,7 @@
  		  					  	 limit 8) s , (select pNo, count(pNo) cPNo
 												  from tbl_tracking
 												 group by pNo) c
-		 where m.pNo = s.pNo and m.pNo = c.pNo;
+		 where m.pNo = s.pNo and m.pNo = c.pNo
 	</select>
 	
 	<!-- 최근 등록된 제품 -->
