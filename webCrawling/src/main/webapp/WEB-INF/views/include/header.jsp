@@ -22,7 +22,7 @@
     <link href="/resources/css/lightbox.min.css" rel="stylesheet" type="text/css" media="all" />
     <link href="/resources/css/ytplayer.css" rel="stylesheet" type="text/css" media="all" />
     <link href="/resources/css/theme.css" rel="stylesheet" type="text/css" media="all" />
-    <link href='http://fonts.googleapis.com/css?family=Lato:300,400%7CRaleway:100,400,300,500,600,700%7COpen+Sans:400,500,600' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Lato:300,400%7CRaleway:100,400,300,500,600,700%7COpen+Sans:400,500,600' rel='stylesheet' type='text/css'>
 
 	<script src="/resources/js/jquery.min.js"></script>
     <script src="/resources/js/bootstrap.min.js"></script>
@@ -107,11 +107,11 @@
                 <div class="module left">
                     <ul class="menu">
                         <li>
-                            <a href="${pageContext.request.contextPath}/trackingBoard/trackingList">트레킹 리스트</a>
+                            <a href="${pageContext.request.contextPath}/trackingBoard/trackingList">Tracking List</a>
                         </li>
 
                         <li>
-                            <a href="${pageContext.request.contextPath}/crawling/cart">메타 장바구니</a>
+                            <a href="${pageContext.request.contextPath}/crawling/cart">Meta Cart</a>
                         </li>
 
                         <li>

@@ -41,7 +41,7 @@
 			<table class="table cart mb48">
 				<thead>
 					<tr>
-						<th width="10%">상품</th>
+						<th width="10%" style="text-align:center;">상품</th>
 						<th width="60%">&nbsp;</th>
 						<th>수량</th>
 						<th>가격</th>
@@ -52,7 +52,7 @@
 				{{# each .}}
 					<tr>
 						<td width="10%"><a href="{{cLink}}"> <img alt="Product" class="product-thumb" src="{{cPic}}" width="80" height="80"/></a></td>
-						<td width="60%"><a href="{{cLink}}"> <span>{{#makeName cName}}{{/makeName}}</span> </a></td>
+						<td width="60%"><a href="{{cLink}}"> <span style="font-size : 1.2em;">{{#makeName cName}}{{/makeName}}</span> </a></td>
 						<td><span>{{#makeCount cCount}}{{/makeCount}}</span></td>
 						<td><span>{{#makePrice cPrice}}{{/makePrice}}</span></td>
 						<td><span>{{#makeDelivery cDelivery}}{{/makeDelivery}}</span></td>

@@ -48,12 +48,12 @@
 		<div class="container">	
 			<div class="row">
 				<div class="col-md-6 col-md-offset-1">
-				<h2 class="uppercase mb0" style="font-weight:bolder;">로그인 계정 관리</h2>
+				<h2 class="uppercase mb0" style="font-weight:bolder;">Account</h2>
 				</div>
 				<div class="col-md-4 text-right" style="margin-left:25px;">
 					<ol class="breadcrumb breadcrumb-2">
 						<li><a href="${pageContext.request.contextPath}/">Home</a></li>
-						<li class="active">로그인 계정 관리</li>
+						<li class="active">Account</li>
 					</ol>
 				</div>
 			</div>
@@ -69,7 +69,7 @@
 <!--                <a type="button" name="deleteMaster" id="deleteMaster" class="btn btn-sm" style="margin-left:15px;">선택항목 삭제</a> -->
          </div>
          <div>
-         	<span style="margin-left: 180px; font-weight:bold; font-size:17px;">사이트</span>
+         	<span style="margin-left: 180px; font-weight:bold; font-size:17px;">쇼핑몰</span>
         	<span style="margin-left: 145px; font-weight:bolder; font-size:17px;">아이디</span>
 	        <a type="button" id="insertForm" class="btn btn-sm btn-filled" style="float:right; position:relative; right:138px; bottom:10px;">등록</a>
          </div>
