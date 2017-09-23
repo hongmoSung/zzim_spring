@@ -13,6 +13,7 @@
 								where pNo = #{pNo} 
 								group by date(currDate)) b
 		where a.pNo = #{pNo} and a.currDate = b.currDate 
+		order by b.currDate;
 	</select>
 
 	<select id="selectBoardCorrect" resultType="TrackingBoardVO">

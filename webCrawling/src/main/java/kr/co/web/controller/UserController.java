@@ -29,7 +29,7 @@ public class UserController {
 	@ResponseBody
 	@RequestMapping("/loginCheck")
 	public Object loginCheck(HttpSession session) {
-		return session.getAttribute("user");
+		return session.getAttribute("user");  
 	}
 
 	@RequestMapping(value = "/join", method = RequestMethod.POST)
