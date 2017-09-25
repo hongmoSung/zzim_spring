@@ -3,6 +3,7 @@
 
 <html lang="ko">
 <script>
+
 	$(document).ajaxStart(function () {
 	    $("body").waitMe({
 	        effect: 'win8',
@@ -53,7 +54,9 @@
 			    	 		type:"POST",
 						url: getContextPath() + "/mobile/saveToken",
 						data:{token: token,
-							  email:	'${user.email}'}
+							  email:	'${user.email}',
+							  device: '1'  
+							}
 						//dataType: "json"
 					}).done(function(result) {
 						setTokenSentToServer(true);

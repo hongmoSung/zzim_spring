@@ -1,18 +1,17 @@
 package kr.co.web.controller;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
 import kr.co.web.service.MobileService;
 import kr.co.web.vo.MobileVO;
 import kr.co.web.vo.UserVO;
 
-@RestController
+@Controller
 @RequestMapping("/mobile")
 public class MobileController {
 	
