@@ -95,8 +95,8 @@
 		console.log(email);
 
 		$.ajax({
-			url : "https://zzim-node.zz.am:3003/track",
-// 			url : "http://localhost:3003/track",
+// 			url : "https://zzim-node.zz.am:3003/track",
+			url : "http://localhost:3003/track",
 			type : "post",
 			data : {
 				"url" : url
@@ -112,8 +112,7 @@
 			} else {
 				alert('죄송합니다. url과 일치하는 상품을  찾지못했습니다.');
 				$('#information').text('정확한 상품명을 입력해주세요.');
-				$('#pNameForm').css('display', 'block');
-				$('#urlForm').css('display', 'none');
+				$("#myModal2").modal();
 			}
 		});
 		
@@ -142,8 +141,8 @@
 			};
 			  
 			 $.ajax({
-				url : "https://zzim-node.zz.am:3003/addDB",
-// 				url : "http://localhost:3003/addDB",
+// 				url : "https://zzim-node.zz.am:3003/addDB",
+				url : "http://localhost:3003/addDB",
 				type : "post",
 				data : {
 					'pName': pName,
@@ -176,8 +175,8 @@
 			    return;
 			  }
 			 $.ajax({
-				url : "https://zzim-node.zz.am:3003/reSearch",
-// 				url : "http://localhost:3003/reSearch",
+// 				url : "https://zzim-node.zz.am:3003/reSearch",
+				url : "http://localhost:3003/reSearch",
 				type : "post",
 				data : {
 					'pName': pName
@@ -188,13 +187,14 @@
 					alert('재조회 실패');
 				} else {
 					alert('조회 성공');
+					$("#myModal2").modal('hide');
 					$("#myModal").modal();
 					$("#picUrl").attr('src', result.picUrl);
 					$("#pName").text(result.pName);
 					$("p#pLowest").html('현재 최저가 : <span id="pLowest">' + result.pLowest + '</span> 원');
 					$("p#crawlingUrl").text(result.crawlingUrl);
 					$('#pNameForm').css('display', 'none');
-					$('#urlForm').css('display', 'block');
+// 					$('#urlForm').css('display', 'block');
 				}
 			}); 
 			
@@ -276,11 +276,6 @@
                                 <input class="mb16 validate-required validate-email signup-email-field" type="text" placeholder="URL을 입력하세요" name="url">
                                 <button id="urlBtn" class="mb16 btn-fiiled" type="submit" style="background-color:#47b475; color:white;">Notify Me</button>
                             </form>
-                            <form style="display: none;" id="pNameForm" class="halves form-newsletter" onsubmit="javascript:sendPname();" data-success="Thanks for your submission, we will be in touch shortly." data-error="Please fill all fields correctly.">
-                                <p id="information"></p>
-                                <input class="mb16 validate-required validate-email signup-email-field" type="text" placeholder="상품명을 입력하세요" name="pName">
-                                <button class="mb16 btn-fiiled" type="submit" style="background-color:#47b475; color:white;">Notify Me</button>
-                            </form>
                             <br><br><br><br>
                             <p>
                                 해당 상품이 원하는 가격에 도달하면 알려드립니다 !
@@ -354,6 +349,35 @@
 	          <form id="addDbForm" class="halves form-newsletter" onsubmit="javascript:sendPrice();">
 		          <input class="mb16 validate-required validate-email signup-email-field" type="text" placeholder="알림가격을 입력하세요" name="notifyPrice">
 	              <button class="mb16" type="submit" id="addDbBtn">tracking!!</button>
+              </form>
+	        </div>
+	        <div class="modal-footer">
+	          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	        </div>
+	      </div>
+	      
+	    </div>
+  	</div>
+  	
+    <div class="modal fade" id="myModal2" role="dialog">
+	    <div class="modal-dialog">
+	    
+	      <!-- Modal content-->
+	      <div class="modal-content">
+	        <div class="modal-header">
+	          <button type="button" class="close" data-dismiss="modal">×</button>
+	          <h4 class="modal-title" id="pName" >상품을 찾지 못했습니다.</h4>
+	        </div>
+	        <div class="modal-body">
+	        	<div class="image-tile outer-title text-center">
+		          <img id="picUrl" class="product-thumb" src="" />
+		          <p id="pLowest"></p>
+		          <p id="crawlingUrl" style="display: none;"></p>
+	          	</div>
+	          <form id="pNameForm" class="halves form-newsletter" onsubmit="javascript:sendPname();" data-success="Thanks for your submission, we will be in touch shortly." data-error="Please fill all fields correctly.">
+                  <h4 style="text-align: center;"><p id="information"></p></h4>
+                  <input class="mb16 validate-required validate-email signup-email-field" type="text" placeholder="상품명을 입력하세요" name="pName">
+                  <button class="mb16 btn-fiiled" type="submit" style="background-color:#47b475; color:white;">Notify Me</button>
               </form>
 	        </div>
 	        <div class="modal-footer">
