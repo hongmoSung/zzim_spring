@@ -103,7 +103,7 @@
 				var regNumber = /^[0-9]*$/;
 
 				if (regNumber.test(lastCh)) {
-					return cPrice + "원";
+					return cPrice.replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "원";
 				} else {
 					return cPrice;
 				}
