@@ -290,9 +290,9 @@
                 <div class="row">
                     <div>
                     	<ul class="nav nav-tabs" >
-							<li class="active"><a data-toggle="tab" onclick="down();" style="cursor:pointer;">가격 하락순</a></li>
-						    <li><a data-toggle="tab" onclick="recent();" style="cursor:pointer;" >최신 순</a></li>
-						    <li><a data-toggle="tab" onclick="rank();" style="cursor:pointer;">인기 순</a></li>
+							<li class="active"><a data-toggle="tab" onclick="down();" style="cursor:pointer;">하락율</a></li>
+						    <li><a data-toggle="tab" onclick="recent();" style="cursor:pointer;" >최신</a></li>
+						    <li><a data-toggle="tab" onclick="rank();" style="cursor:pointer;">인기</a></li>
 						</ul>
                     </div>
                 </div>
