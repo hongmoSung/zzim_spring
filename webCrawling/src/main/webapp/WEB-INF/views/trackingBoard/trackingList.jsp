@@ -306,6 +306,8 @@ function handle(result,target){
 	var html = template(result);
 	//생성된 HTML을 DOM에 주입
 	$(target).append(html);
+	
+	
 }
 	
 //첫 리스트 가져오기
@@ -367,6 +369,10 @@ function handle(result,target){
 	
 	
 // 수정 클릭 
+	$("body").on("click","input",function(){
+		$(this).val("");
+	})
+	
 $("body").on("click","#update",function(){
 	var pNo = $(this).attr('data-pNo');
 	var update = $("#notify"+pNo).val();
