@@ -220,8 +220,8 @@ $("body").on( 'click', '.accordion li .title' , function(){
 
 	//최소값 최대값 넣기 
 	if(result != ''){
-		$("#max"+pNo).html('  '+max+'원');
-		$("#min"+pNo).html('  '+min+'원');
+		$("#max"+pNo).html('  '+max.replace(/\B(?=(\d{3})+(?!\d))/g, ",")+'원');
+		$("#min"+pNo).html('  '+min.replace(/\B(?=(\d{3})+(?!\d))/g, ",")+'원');
 		$("#aver"+pNo).html('  '+Math.round(average / result.length).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+'원');
 	}else{
 		$("#max"+pNo).html('  - 원');
